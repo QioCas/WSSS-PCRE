@@ -1,0 +1,19 @@
+{
+  "image": "2008_002971",
+  "pixels": 149500,
+  "present_ids": [
+    0,
+    15
+  ],
+  "raw_crf_disagreement_pixels": 4651,
+  "raw_teacher": {
+    "foreground": 17290,
+    "background": 130690,
+    "ignore": 1520
+  },
+  "crf_teacher": {
+    "foreground": 14284,
+    "background": 134508,
+    "ignore": 708
+  }
+}

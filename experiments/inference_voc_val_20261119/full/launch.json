@@ -1,0 +1,18 @@
+{
+  "pid": 1809182,
+  "command": [
+    "/opt/tljh/user/bin/python",
+    "-u",
+    "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/tools/infer_voc_checkpoint_pair.py",
+    "--output-dir",
+    "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/inference_voc_val_20261119/full",
+    "--crf-workers",
+    "4",
+    "--gpu-memory-gib",
+    "8"
+  ],
+  "cwd": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE",
+  "runner_sha256": "64004ec1f81e985e1d36d676fb59cfaeda40657df1dfe0d63ba0d361b2f11c8e",
+  "densecrf_dependency_path": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_inference",
+  "densecrf_distribution": "pydensecrf2==1.1"
+}

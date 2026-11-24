@@ -1,0 +1,18 @@
+{
+  "confidence_sum": 212868.828125,
+  "agreement_sum": 216166.5,
+  "vote_histogram": [
+    0,
+    1,
+    427,
+    3868,
+    13264,
+    10156,
+    196784
+  ],
+  "image": "2008_008080",
+  "pixels": 224500,
+  "foreground": 39695,
+  "background": 161614,
+  "ignore": 23191
+}

@@ -1,0 +1,10 @@
+{
+  "mode": "A3_negative_learning",
+  "partial_evaluation": false,
+  "raw": 72.58875224875777,
+  "crf": 72.83270573713781,
+  "delta_vs_baseline_pp": {
+    "raw": -1.2007357851859246,
+    "crf": -1.3915779961607644
+  }
+}

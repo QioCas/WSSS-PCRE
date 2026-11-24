@@ -1,0 +1,127 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{"stage": "density_targets", "completed": 100, "total": 10582, "seconds": 3.999225850973744}
+{"stage": "density_targets", "completed": 200, "total": 10582, "seconds": 7.679044615011662}
+{"stage": "density_targets", "completed": 300, "total": 10582, "seconds": 11.253209522983525}
+{"stage": "density_targets", "completed": 400, "total": 10582, "seconds": 14.886131747975014}
+{"stage": "density_targets", "completed": 500, "total": 10582, "seconds": 18.56711186299799}
+{"stage": "density_targets", "completed": 600, "total": 10582, "seconds": 22.277855438005645}
+{"stage": "density_targets", "completed": 700, "total": 10582, "seconds": 25.975394334003795}
+{"stage": "density_targets", "completed": 800, "total": 10582, "seconds": 29.596401683986187}
+{"stage": "density_targets", "completed": 900, "total": 10582, "seconds": 33.32904116198188}
+{"stage": "density_targets", "completed": 1000, "total": 10582, "seconds": 37.03367395198438}
+{"stage": "density_targets", "completed": 1100, "total": 10582, "seconds": 40.731912940973416}
+{"stage": "density_targets", "completed": 1200, "total": 10582, "seconds": 44.45201719598845}
+{"stage": "density_targets", "completed": 1300, "total": 10582, "seconds": 48.24667636799859}
+{"stage": "density_targets", "completed": 1400, "total": 10582, "seconds": 52.122974874975625}
+{"stage": "density_targets", "completed": 1500, "total": 10582, "seconds": 56.00358390097972}
+{"stage": "density_targets", "completed": 1600, "total": 10582, "seconds": 59.88942495698575}
+{"stage": "density_targets", "completed": 1700, "total": 10582, "seconds": 63.7746490429854}
+{"stage": "density_targets", "completed": 1800, "total": 10582, "seconds": 67.65040496102301}
+{"stage": "density_targets", "completed": 1900, "total": 10582, "seconds": 71.54232291999506}
+{"stage": "density_targets", "completed": 2000, "total": 10582, "seconds": 75.38129562098766}
+{"stage": "density_targets", "completed": 2100, "total": 10582, "seconds": 79.28104430198437}
+{"stage": "density_targets", "completed": 2200, "total": 10582, "seconds": 83.17572045500856}
+{"stage": "density_targets", "completed": 2300, "total": 10582, "seconds": 86.98971033201087}
+{"stage": "density_targets", "completed": 2400, "total": 10582, "seconds": 90.86985867202748}
+{"stage": "density_targets", "completed": 2500, "total": 10582, "seconds": 94.71480712702032}
+{"stage": "density_targets", "completed": 2600, "total": 10582, "seconds": 98.58773901598761}
+{"stage": "density_targets", "completed": 2700, "total": 10582, "seconds": 102.45015545201022}
+{"stage": "density_targets", "completed": 2800, "total": 10582, "seconds": 106.31359477498336}
+{"stage": "density_targets", "completed": 2900, "total": 10582, "seconds": 110.14785152400145}
+{"stage": "density_targets", "completed": 3000, "total": 10582, "seconds": 113.99371738202171}
+{"stage": "density_targets", "completed": 3100, "total": 10582, "seconds": 117.87633875501342}
+{"stage": "density_targets", "completed": 3200, "total": 10582, "seconds": 121.74363047198858}
+{"stage": "density_targets", "completed": 3300, "total": 10582, "seconds": 125.58473517699167}
+{"stage": "density_targets", "completed": 3400, "total": 10582, "seconds": 129.13475537399063}
+{"stage": "density_targets", "completed": 3500, "total": 10582, "seconds": 132.84131609101314}
+{"stage": "density_targets", "completed": 3600, "total": 10582, "seconds": 136.5478011490195}
+{"stage": "density_targets", "completed": 3700, "total": 10582, "seconds": 140.16146892198594}
+{"stage": "density_targets", "completed": 3800, "total": 10582, "seconds": 143.83303979301127}
+{"stage": "density_targets", "completed": 3900, "total": 10582, "seconds": 147.55951862299116}
+{"stage": "density_targets", "completed": 4000, "total": 10582, "seconds": 151.22306288499385}
+{"stage": "density_targets", "completed": 4100, "total": 10582, "seconds": 154.45502526999917}
+{"stage": "density_targets", "completed": 4200, "total": 10582, "seconds": 158.20276507502422}
+{"stage": "density_targets", "completed": 4300, "total": 10582, "seconds": 161.91924738499802}
+{"stage": "density_targets", "completed": 4400, "total": 10582, "seconds": 165.65076929400675}
+{"stage": "density_targets", "completed": 4500, "total": 10582, "seconds": 169.3570892889984}
+{"stage": "density_targets", "completed": 4600, "total": 10582, "seconds": 173.09068627702072}
+{"stage": "density_targets", "completed": 4700, "total": 10582, "seconds": 176.7476722120191}
+{"stage": "density_targets", "completed": 4800, "total": 10582, "seconds": 180.50068327697227}
+{"stage": "density_targets", "completed": 4900, "total": 10582, "seconds": 183.9332757940283}
+{"stage": "density_targets", "completed": 5000, "total": 10582, "seconds": 187.26246768800775}
+{"stage": "density_targets", "completed": 5100, "total": 10582, "seconds": 190.6207484229817}
+{"stage": "density_targets", "completed": 5200, "total": 10582, "seconds": 194.06863759702537}
+{"stage": "density_targets", "completed": 5300, "total": 10582, "seconds": 197.5204969330225}
+{"stage": "density_targets", "completed": 5400, "total": 10582, "seconds": 200.9388640190009}
+{"stage": "density_targets", "completed": 5500, "total": 10582, "seconds": 204.37059469899395}
+{"stage": "density_targets", "completed": 5600, "total": 10582, "seconds": 207.81948019599076}
+{"stage": "density_targets", "completed": 5700, "total": 10582, "seconds": 211.19539011700545}
+{"stage": "density_targets", "completed": 5800, "total": 10582, "seconds": 214.60743474197807}
+{"stage": "density_targets", "completed": 5900, "total": 10582, "seconds": 218.0908791340189}
+{"stage": "density_targets", "completed": 6000, "total": 10582, "seconds": 221.5507004740066}
+{"stage": "density_targets", "completed": 6100, "total": 10582, "seconds": 225.05775503598852}
+{"stage": "density_targets", "completed": 6200, "total": 10582, "seconds": 228.57473879202735}
+{"stage": "density_targets", "completed": 6300, "total": 10582, "seconds": 231.99020847299835}
+{"stage": "density_targets", "completed": 6400, "total": 10582, "seconds": 235.46361818601144}
+{"stage": "density_targets", "completed": 6500, "total": 10582, "seconds": 238.87920118001057}
+{"stage": "density_targets", "completed": 6600, "total": 10582, "seconds": 242.35151122300886}
+{"stage": "density_targets", "completed": 6700, "total": 10582, "seconds": 245.97813073097495}
+{"stage": "density_targets", "completed": 6800, "total": 10582, "seconds": 249.50382470799377}
+{"stage": "density_targets", "completed": 6900, "total": 10582, "seconds": 252.89564632502152}
+{"stage": "density_targets", "completed": 7000, "total": 10582, "seconds": 256.51944926101714}
+{"stage": "density_targets", "completed": 7100, "total": 10582, "seconds": 260.04818083700957}
+{"stage": "density_targets", "completed": 7200, "total": 10582, "seconds": 263.23285226302687}
+{"stage": "density_targets", "completed": 7300, "total": 10582, "seconds": 265.98493074497674}
+{"stage": "density_targets", "completed": 7400, "total": 10582, "seconds": 269.82300110399956}
+{"stage": "density_targets", "completed": 7500, "total": 10582, "seconds": 273.5165576710133}
+{"stage": "density_targets", "completed": 7600, "total": 10582, "seconds": 277.25853496202035}
+{"stage": "density_targets", "completed": 7700, "total": 10582, "seconds": 281.01572212198516}
+{"stage": "density_targets", "completed": 7800, "total": 10582, "seconds": 284.81808753102086}
+{"stage": "density_targets", "completed": 7900, "total": 10582, "seconds": 288.5133844370139}
+{"stage": "density_targets", "completed": 8000, "total": 10582, "seconds": 292.1769689240027}
+{"stage": "density_targets", "completed": 8100, "total": 10582, "seconds": 295.70222815702436}
+{"stage": "density_targets", "completed": 8200, "total": 10582, "seconds": 299.33082715497585}
+{"stage": "density_targets", "completed": 8300, "total": 10582, "seconds": 303.05796888598707}
+{"stage": "density_targets", "completed": 8400, "total": 10582, "seconds": 306.78433866100386}
+{"stage": "density_targets", "completed": 8500, "total": 10582, "seconds": 310.42928604700137}
+{"stage": "density_targets", "completed": 8600, "total": 10582, "seconds": 314.09674168599304}
+{"stage": "density_targets", "completed": 8700, "total": 10582, "seconds": 317.7510928459815}
+{"stage": "density_targets", "completed": 8800, "total": 10582, "seconds": 321.46659382700454}
+{"stage": "density_targets", "completed": 8900, "total": 10582, "seconds": 325.13269555801526}
+{"stage": "density_targets", "completed": 9000, "total": 10582, "seconds": 328.85049268999137}
+{"stage": "density_targets", "completed": 9100, "total": 10582, "seconds": 332.48618853400694}
+{"stage": "density_targets", "completed": 9200, "total": 10582, "seconds": 336.21640183601994}
+{"stage": "density_targets", "completed": 9300, "total": 10582, "seconds": 339.9164881699835}
+{"stage": "density_targets", "completed": 9400, "total": 10582, "seconds": 343.5939904570114}
+{"stage": "density_targets", "completed": 9500, "total": 10582, "seconds": 347.3267133110203}
+{"stage": "density_targets", "completed": 9600, "total": 10582, "seconds": 351.0432930730167}
+{"stage": "density_targets", "completed": 9700, "total": 10582, "seconds": 354.6667125370004}
+{"stage": "density_targets", "completed": 9800, "total": 10582, "seconds": 358.43376560602337}
+{"stage": "density_targets", "completed": 9900, "total": 10582, "seconds": 362.1224159609992}
+{"stage": "density_targets", "completed": 10000, "total": 10582, "seconds": 365.8512181760161}
+{"stage": "density_targets", "completed": 10100, "total": 10582, "seconds": 369.59144152898807}
+{"stage": "density_targets", "completed": 10200, "total": 10582, "seconds": 373.34414467500756}
+{"stage": "density_targets", "completed": 10300, "total": 10582, "seconds": 377.0843005629722}
+{"stage": "density_targets", "completed": 10400, "total": 10582, "seconds": 380.81557954498567}
+{"stage": "density_targets", "completed": 10500, "total": 10582, "seconds": 384.54322214901913}
+{"stage": "density_targets", "completed": 10582, "total": 10582, "seconds": 387.53171996498713}
+{"images": 10582, "partial_cache": false, "pixels": 1896135177, "removed_pixels": 21938405, "removed_fraction_total": 0.011570063815128514, "removed_fraction_foreground": 0.042845097481929294, "foreground": 0.2584739901167922, "ignore": 0.07634017171129144, "training_pixel_gt_read": false, "external_prior": false, "removed_per_class": [0, 666850, 362194, 669838, 538187, 253738, 557431, 1691856, 2776822, 639626, 341248, 558382, 1688406, 752111, 962429, 6169744, 465288, 246198, 765088, 1120656, 712313]}

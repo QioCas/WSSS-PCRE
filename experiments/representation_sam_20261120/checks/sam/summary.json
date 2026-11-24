@@ -1,0 +1,17 @@
+{
+  "images": 4,
+  "pixels": 703000,
+  "partial_cache": true,
+  "training_pixel_gt_read": false,
+  "external_segmentation_prior": true,
+  "foreground": 0.2531194879089616,
+  "background": 0.6773911806543386,
+  "ignore": 0.06948933143669986,
+  "attempted_proposals": 5,
+  "accepted_proposals": 4,
+  "changed_pixels": 11368,
+  "added_foreground": 4464,
+  "trimmed_foreground": 770,
+  "foreground_class_reassignments": 0,
+  "changed_fraction": 0.016170697012802274
+}

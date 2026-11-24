@@ -1,0 +1,14 @@
+{
+  "stage": "completed",
+  "description": "Processed 1449/1449 images (Current Gain: +1.48%)",
+  "progress": {
+    "processed": 1449,
+    "total": 1449,
+    "elapsed_seconds": 98.61175632476807,
+    "baseline_crf_miou": 74.22428373329858,
+    "hmp_nep_refined_miou": 75.70484997793024,
+    "delta_pp": 1.4805662446316536,
+    "refined_components": 2230,
+    "total_components": 3156
+  }
+}

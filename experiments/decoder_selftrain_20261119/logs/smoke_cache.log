@@ -1,0 +1,37 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{
+  "raw_teacher": {
+    "foreground": 0.2743371266002845,
+    "background": 0.7079032716927454,
+    "ignore": 0.017759601706970128
+  },
+  "crf_teacher": {
+    "foreground": 0.27579658605974394,
+    "background": 0.7225604551920342,
+    "ignore": 0.001642958748221906
+  },
+  "images": 4,
+  "pixels": 703000,
+  "partial_cache": true,
+  "training_pixel_gt_read": false,
+  "elapsed_seconds": 2.932935905002523
+}

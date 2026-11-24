@@ -1,0 +1,17 @@
+{
+  "changed_pixels": 3681,
+  "added_foreground": 1917,
+  "trimmed_foreground": 21,
+  "new_ignore": 1721,
+  "foreground_class_reassignments": 0,
+  "attempted_proposals": 1,
+  "accepted_proposals": 1,
+  "sam_quality_scores": [
+    0.9885252714157104
+  ],
+  "image": "2008_001188",
+  "pixels": 166500,
+  "foreground": 22454,
+  "background": 140519,
+  "ignore": 3527
+}

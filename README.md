@@ -1,154 +1,168 @@
-# Weakly Supervised Semantic Segmentation via Progressive Confidence Region Expansion
+# WSSS-PCRE: Nghiên cứu & Cải tiến Phân đoạn Ngữ nghĩa Giám sát Yếu (Weakly Supervised Semantic Segmentation)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
-[![CVPR](https://img.shields.io/badge/CVPR-2025-blue.svg)](https://openaccess.thecvf.com/content/CVPR2025/html/Xu_Weakly_Supervised_Semantic_Segmentation_via_Progressive_Confidence_Region_Expansion_CVPR_2025_paper.html)
-
-This repository contains the official PyTorch implementation for the paper: **Weakly Supervised Semantic Segmentation via Progressive Confidence Region Expansion**.
-
-## 📖 Introduction
-Weakly supervised semantic segmentation (WSSS) has garnered considerable attention due to its effective reduction of annotation costs. Most approaches utilize Class Activation Maps (CAM) to produce pseudo-labels, thereby localizing target regions using only image-level annotations. However, the prevalent methods relying on vision transformers (ViT) encounter an "over-expansion" issue, i.e., CAM incorrectly expands high activation value from the target object to the background regions, as it is difficult to learn pixel-level local intrinsic inductive bias in ViT from weak supervisions. To solve this problem, we propose a Progressive Confidence Region Expansion (PCRE) framework for WSSS, it gradually learns a faithful mask over the target region and utilizes this mask to correct the confusion in CAM. PCRE has two key components: Confidence Region Mask Expansion (CRME) and Class-Prototype Enhancement (CPE). CRME progressively expands the mask in the small region with the highest confidence, eventually encompassing the entire target, thereby avoiding unintended CPE aims to enhance mask generation in CRME by leveraging the similarity between the learned, dataset-level class prototypes and patch features as supervision to optimize the mask output from CRME. Extensive experiments demonstrate that our method outperforms the existing single-stage and multi-stage approaches on the PASCAL VOC and MS COCO benchmark datasets.
-
-<p align="center">
-  <img src="overview.png" alt="PCRE Framework" width="80%">
-</p>
+Dự án này kế thừa mã nguồn chính thức của bài báo CVPR 2025: **"Weakly Supervised Semantic Segmentation via Progressive Confidence Region Expansion" (PCRE)**. Thư mục này được sử dụng làm môi trường nghiên cứu thực nghiệm chuyên sâu, tái lập baseline, và phát triển các phương pháp đột phá mới nhằm nâng cao độ chính xác phân đoạn ngữ nghĩa từ nhãn mức ảnh (image-level tags) kết hợp với các mô hình nền tảng (**Foundation Models**) tiên tiến như **SAM (Segment Anything Model)** và **CLIP**.
 
 ---
 
-## 📊 Main Results
+## 1. Thư mục này có gì? (Cấu trúc Repository)
 
-Here we report the performance of our PCRE method on the PASCAL VOC 2012 and MS COCO 2014 datasets.
-
-| Dataset | Backbone | Val mIoU | Test mIoU | Visualization |
-| :---: | :---: | :---: | :---: | :---: |
-| PASCAL VOC | ViT-B | 75.5 | 75.9 | [Weights](https://drive.google.com/drive/folders/12DxyZ8m7SeuoCmoisURi55_u5_IVq41P) \| [Vis](https://drive.google.com/drive/folders/12DxyZ8m7SeuoCmoisURi55_u5_IVq41P) |
-| MS COCO | ViT-B | 47.2 | -- | [Weights](https://drive.google.com/drive/folders/12DxyZ8m7SeuoCmoisURi55_u5_IVq41P) \| [Vis_Part](https://drive.google.com/drive/folders/12DxyZ8m7SeuoCmoisURi55_u5_IVq41P) |
+```text
+WSSS-PCRE/
+├── configs/              # Cấu hình thực nghiệm (JSON) cho baseline, adaptive, ablation
+├── dataset/              # Chứa dữ liệu thực tế hoặc symlink tới VOCdevkit/VOC2012
+├── datasets/             # Metadata danh sách ảnh, nhãn one-hot (train_aug.txt, val.txt, cls_labels_onehot.npy)
+│   ├── voc/              # Split và nhãn cho PASCAL VOC 2012 (20 lớp + nền)
+│   └── coco/             # Split và nhãn cho MS COCO 2014 (80 lớp + nền)
+├── engine/               # Module xây dựng mạng nơ-ron, optimizer, scheduler và validation engine
+│   ├── build_network.py  # Xây dựng backbone ViT-B và các nhánh dự đoán CAM/Segmentation
+│   └── validatation_engine.py # Đánh giá mIoU, Confusion Matrix, CAM mIoU trên tập Val
+├── experiments/          # Toàn bộ kết quả thực nghiệm, checkpoints, logs và báo cáo chi tiết
+│   ├── coco_baseline/    # Baseline đầy đủ 80.000 iters trên MS COCO 2014
+│   ├── pcre_sat_*/       # Baseline PCRE và các thực nghiệm Self-Adaptive Thresholding (FreeMatch)
+│   ├── pcre_repair_*/    # Tinh chỉnh ngưỡng thích nghi consensus & ensemble
+│   ├── decoder_selftrain_*/ # Huấn luyện tự giám sát decoder (Teacher-Student) với backbone đóng băng
+│   ├── representation_sam_*/ # Huấn luyện tính bất biến biểu diễn (Consistency) & SAM pseudo-label
+│   ├── precision_residual_*/ # Residual Head & Negative Prototype Filtering
+│   ├── sam_cam_refinement_*/ # Phương pháp SCSR: Tinh lọc hậu xử lý bằng SAM Consensus
+│   ├── hmp_nep_refinement_*/ # Phương pháp HMP-NEP: SAM đa điểm xương sống + Bảo vệ phi xói mòn
+│   ├── gtbf_camr_refinement_*/ # Phương pháp GTBF-CAMR: Phân nhánh hình học 3 nhóm + Lọc biên màu
+│   ├── csl_softmask_training_*/ # Huấn luyện phân tầng độ tin cậy với soft mask
+│   ├── peft_csl_training_*/  # Tinh chỉnh tham số hiệu quả PEFT (LoRA) kết hợp CSL
+│   ├── peft_csl_gtbf_synergy_*/ # Phối hợp mô hình PEFT-CSL và hậu xử lý GTBF
+│   ├── sam_advanced_prompting_*/ # SAM Advanced Prompting (Negative points + Multi-mask disambiguation)
+│   ├── sam_clip_synergy_*/   # Kết hợp SAM + Zero-shot CLIP xác thực chống đồng xuất hiện
+│   ├── voc_sam_pcre/     # Huấn luyện toàn diện End-to-End PCRE với giám sát SAM (20.000 iters)
+│   ├── voc_sam_pcre_v2/  # Khung nâng cấp tích hợp SAT-CR và SBF-Distill
+│   ├── voc_sam_sat_cr/   # Thực nghiệm độc lập Stage 1: SAM-Affinity Token Contrastive
+│   └── voc_sam_sbf_distill/ # Thực nghiệm độc lập Stage 2: SAM Boundary-Focal Distillation
+├── model/                # Định nghĩa kiến trúc: ViT backbone, PAR (Pixel Affinity Refinement), CRME, CPE, Loss
+├── pretrained/           # Thư mục chứa trọng số pretrained ImageNet ViT-B_16
+├── scripts/              # Tập lệnh Python thực thi huấn luyện, supervisor hàng đợi GPU và chẩn đoán
+├── tests/                # Bộ kiểm thử đơn vị tự động (Unit tests) bảo đảm tính toàn vẹn thuật toán
+├── tools/                # Công cụ suy luận độc lập (infer_seg_voc.py) và tiền xử lý
+├── utils/                # Tiện ích toán học, xử lý ảnh (imutils), CAM (camutils), SAM (sam_innovations)
+├── train.sh              # Kịch bản khởi chạy huấn luyện mặc định của tác giả gốc
+├── train_coco.sh         # Kịch bản phân tán 4 GPU cho COCO
+├── train_voc_sam_pcre.sh # Kịch bản huấn luyện PCRE tích hợp SAM pseudo-labels
+├── train_voc_sam_pcre_v2.sh # Kịch bản huấn luyện đầy đủ Paradigm 2 (SAT-CR + SBF-Distill)
+├── train_voc_sam_sat_cr.sh  # Kịch bản huấn luyện riêng nhánh SAT-CR
+└── train_voc_sam_sbf_distill.sh # Kịch bản huấn luyện riêng nhánh SBF-Distill
+```
 
 ---
 
-## 🛠️ Environment Setup
+## 2. Thư mục này đang làm gì?
 
-Clone the repository and install the required dependencies:
+Thư mục này đang thực hiện một chuỗi nghiên cứu và thử nghiệm có hệ thống gồm các mục tiêu chính:
 
+1. **Tái lập và thiết lập Baseline chuẩn (Benchmarking):**
+   - Chạy lại mô hình PCRE chính quy từ bài báo CVPR 2025 trên **Pascal VOC 2012** (20.000 iterations) để làm chuẩn đối chứng tuyệt đối (74.22% CRF mIoU).
+   - Chạy đầy đủ baseline trên tập dữ liệu quy mô lớn **MS COCO 2014** (80.000 iterations trên 4 GPU).
+2. **Nghiên cứu Can thiệp ở Bước Huấn Luyện (Training-Time Innovations):**
+   - Giải quyết vấn đề rò rỉ vùng kích hoạt của CAM sang nền bằng cách cải tiến cơ chế tạo nhãn giả (pseudo-label generation), áp dụng ngưỡng thích nghi (SAT), tự huấn luyện decoder (Teacher-Student self-training), phân tầng độ tin cậy (CSL), chèn PEFT/LoRA vào ViT backbone, và nhúng mặt nạ hình học từ SAM trực tiếp vào hàm mất mát (Token Contrastive Regularization & Boundary-Focal Distillation).
+3. **Nghiên cứu Can thiệp ở Bước Kiểm Thử / Hậu Xử Lý (Test-Time / Post-Processing Refinement):**
+   - Khai thác sức mạnh Zero-Shot của **Segment Anything Model (SAM)** và **CLIP** để tinh chỉnh đường biên và phân định ngữ nghĩa cho các dự đoán phân đoạn từ mô hình đã huấn luyện.
+   - Phát triển các kỹ thuật kích hoạt điểm thông minh (Medial Axis Skeleton Prompting), bảo vệ ngữ cảnh phi xói mòn (Non-Erosive Context Protection), phân nhánh 3 hình thái cấu trúc (Tripartite Branching), và cổng màu gradient (Color-Gradient Gating).
+
+---
+
+## 3. Bảng tổng hợp các thực nghiệm đã chạy
+
+Dưới đây là danh sách đầy đủ tất cả các thực nghiệm đã được triển khai, phân loại rõ ràng theo **giai đoạn can thiệp (Train / Test)**, kết quả mIoU đạt được và độ chênh lệch ($\Delta$) so với Baseline chuẩn:
+
+| STT | Tên phương pháp | Bước can thiệp | Mô tả tóm tắt cơ chế | mIoU đạt được (%) | $\Delta$ vs Baseline (pp) | Trạng thái |
+| :---: | :--- | :---: | :--- | :---: | :---: | :---: |
+| **0** | **Baseline PCRE (VOC 20k)** | **Train** | Baseline chuẩn từ bài báo gốc CVPR 2025 (ViT-B, 20.000 bước, seed 0). | **Raw: 73.79%<br>CRF: 74.22%** | **0.00** *(Mốc chuẩn)* | Hoàn thành |
+| - | **Baseline PCRE (COCO 80k)** | **Train** | Chạy 80.000 bước phân tán trên MS COCO 2014 (Validation online: Seg 30.78%, CAM1 36.10%; đánh giá chính thức multi-scale + CRF sẽ được thực hiện sau). | **Seg: 30.78%<br>CAM1: 36.10%** | — | Hoàn thành |
+| **I** | **CÁC PHƯƠNG PHÁP CAN THIỆP BƯỚC KIỂM THỬ (TEST-TIME / POST-PROCESSING)** | | | | | |
+| 1 | **SCSR (SAM-CAM Consensus Semantic Refinement)** | **Test** | Peak Point Prompt (EDT) + Box Prompt (padding 8px) + Lọc đồng thuận SAM (Score>0.85, IoU>0.65) + Cắt tỉa biên. | **75.66%** | <span style="color:green">**+1.43**</span> | Hoàn thành |
+| 2 | **HMP-NEP (Hierarchical Multi-Prompt Part-Whole SAM)** | **Test** | Prompt đa điểm trục xương sống (Medial Axis) + Bảo vệ phi xói mòn (NEP) chống mất mát các lớp articulated (person, bike, table). | **75.70%** | <span style="color:green">**+1.48**</span> | Hoàn thành |
+| 3 | **GTBF-CAMR (Geometric-Topological Boundary Fusion)** | **Test** | Phân nhánh 3 hình thái (Hollow: chỉ điểm, Composite: NEP, Solid: Box+Trim) + Lọc biên sai biệt màu RGB + Vá lỗ rỗng tô pô. | **75.85%** | <span style="color:green">**+1.63**</span> | Hoàn thành |
+| 4 | **PEFT-CSL + GTBF Synergy** | **Train + Test** | Mô hình huấn luyện bằng PEFT-CSL kết hợp tinh chỉnh hậu xử lý bằng thuật toán hình học GTBF. | **75.88%** | <span style="color:green">**+1.66**</span> | Hoàn thành |
+| 5 | **SAM Advanced Prompting** | **Test** | Tinh chỉnh trên PEFT-CSL bằng Negative Point Prompts để tách vật thể dính nhau + Giải quyết đa nghĩa mặt nạ SAM. | **75.97%** | <span style="color:green">**+1.75**</span> | Hoàn thành *(Đỉnh cao nhất)* |
+| 6 | **SAM + CLIP Synergy** | **Test** | Lấy kết quả từ SAM Advanced Prompting kết hợp Zero-shot CLIP để xác thực và loại bỏ nhầm lẫn đồng xuất hiện. | **75.89%** | <span style="color:green">**+1.67**</span> | Hoàn thành |
+| 7 | **Two-Model Ensemble** | **Test** | Kết hợp phân phối xác suất dự đoán của mô hình Baseline và Adaptive Consensus. | **74.32%** | <span style="color:green">**+0.10**</span> | Hoàn thành |
+| **II** | **CÁC PHƯƠNG PHÁP CAN THIỆP BƯỚC HUẤN LUYỆN (TRAINING-TIME INNOVATIONS)** | | | | | |
+| 8 | **PCRE + SAT (Self-Adaptive Thresholding)** | **Train** | Chuẩn hóa điểm kích hoạt CAM thích nghi (FreeMatch-style EMA theo từng lớp) áp dụng trước PAR. | **Raw: 72.96%<br>CRF: 73.44%** | <span style="color:red">-0.78</span> | Hoàn thành |
+| 9 | **Adaptive Consensus Repair** | **Train** | Hiệu chỉnh lịch warm-up và sửa cơ chế consensus thresholding cho các lớp yếu. | **Raw: 73.15%<br>CRF: 73.72%** | <span style="color:red">-0.51</span> | Hoàn thành |
+| 10 | **Decoder Self-Training (Raw vs CRF Teacher)** | **Train** | Đóng băng ViT backbone, chỉ fine-tune ASPP decoder 3.000 bước bằng pseudo-label từ teacher và loss KL. | **Raw Teacher: 74.19%<br>CRF Teacher: 74.20%** | <span style="color:red">-0.03</span> | Hoàn thành |
+| 11 | **Representation Consistency & SAM Pseudo-Label** | **Train** | Mở 2 block ViT cuối + decoder, 4.000 bước, học tính bất biến weak/strong view kết hợp nhãn đề xuất từ SAM. | **Last2 Cons: 74.07%<br>Last2 SAM: 74.11%** | <span style="color:red">-0.12</span> | Hoàn thành |
+| 12 | **Precision Residual Head & Negative Filtering** | **Train** | Head residual zero-init đóng băng backbone; chắt lọc negative prototypes phủ định lỗi sai lầm. | **A1 Control: 74.27%<br>Detail Residual: 74.29%** | <span style="color:green">**+0.06**</span> | Hoàn thành |
+| 13 | **FBSD (Frequency Boundary & Semantic Decoupling)** | **Train** | Fine-tune decoder 2.000 bước với cơ chế phân tách tần số biên và ngữ nghĩa. | **Raw: 73.79%<br>CRF: 74.26%** | <span style="color:green">**+0.03**</span> | Hoàn thành |
+| 14 | **USRC (Uncertainty-Guided Selective Rectification)** | **Train** | Đánh giá class risk profile, áp dụng loss chọn lọc dựa trên độ bất định. | **Raw: 73.73%<br>CRF: 74.17%** | <span style="color:red">-0.05</span> | Hoàn thành |
+| 15 | **CSL-SoftMask (Confidence-Stratified Learning)** | **Train** | Phân tầng độ tin cậy của nhãn giả và huấn luyện mềm (soft-mask supervision). | **Raw: 73.87%<br>CRF: 74.32%** | <span style="color:green">**+0.10**</span> | Hoàn thành |
+| 16 | **PEFT-CSL (LoRA ViT + CSL)** | **Train** | Gắn LoRA adapters vào các tầng Attention của ViT backbone, kết hợp hàm mất mát CSL. | **Raw: 73.89%<br>CRF: 74.36%** | <span style="color:green">**+0.13**</span> | Hoàn thành *(Mô hình train tốt nhất)* |
+| 17 | **VOC SAM-PCRE (Full Retraining 20k iters)** | **Train** | Tái huấn luyện toàn bộ mô hình end-to-end 20.000 bước sử dụng SAM pseudo-label thay thế CAM target. | **Raw Seg: 74.28%<br>CAM1: 76.99%** | <span style="color:green">**+0.49**</span> *(so với raw baseline)* | Hoàn thành |
+| 18 | **Paradigm 2 - Stage 1: SAT-CR** | **Train** | Làm sạch ma trận patch-token affinity (aff_mask) trong ViT Backbone dựa trên độ thuần khiết của SAM patch. | *Đang chờ GPU* | — | Đang trong hàng đợi |
+| 19 | **Paradigm 2 - Stage 2: SBF-Distill** | **Train** | Trọng số hóa hàm mất mát phân đoạn CE bằng dải Gaussian làm mịn quanh đường biên của SAM (alpha=2.0). | *Đang chờ GPU* | — | Đang trong hàng đợi |
+
+---
+
+## 4. Chi tiết các nghiên cứu nổi bật
+
+### 4.1. Hướng Đột Phá Test-Time Refinement với Foundation Model (SAM / CLIP)
+Các phương pháp can thiệp ở bước kiểm thử đem lại mức tăng mIoU vượt bậc mà không làm biến dạng biểu diễn đặc trưng của mô hình đã hội tụ:
+- **SAM Advanced Prompting (75.97% mIoU, +1.75 pp):** Đạt kết quả cao nhất toàn dự án. Sử dụng các điểm âm (negative points) đặt vào các vùng biên tranh chấp để ngăn SAM mở rộng sai lớp, kết hợp cơ chế giải quyết đa nghĩa mặt nạ (Multi-mask Ambiguity Resolution).
+- **GTBF-CAMR (75.85% mIoU, +1.63 pp):** Giải quyết triệt để vấn đề xói mòn đối tượng rỗng (nan hoa xe đạp, chân ghế) nhờ nhánh Slender chỉ dùng điểm, bảo toàn vật thể phức tạp (người, bàn) bằng cơ chế NEP, và tự động bịt kín các lỗ rỗng nội bộ (cửa sổ xe bus, kính tàu hỏa).
+- **HMP-NEP (75.70% mIoU, +1.48 pp):** Đột phá với cơ chế Non-Erosive Context Protection, đảo ngược hiện tượng sụt giảm recall của các lớp phức tạp.
+- **SCSR (75.66% mIoU, +1.43 pp):** Vượt qua mốc công bố 75.5% trong bài báo gốc CVPR 2025 với tốc độ xử lý nhanh (~11 ảnh/giây).
+
+### 4.2. Hướng Đột Phá Training-Time (PEFT-CSL & End-to-End SAM-PCRE)
+- **PEFT-CSL (74.36% CRF mIoU):** Bằng cách giữ phần lớn trọng số ViT đã được huấn luyện tốt và chỉ cập nhật các adapter LoRA kết hợp hàm mất mát phân tầng độ tin cậy CSL, mô hình hạn chế hiện tượng trôi kiến thức (catastrophic forgetting) và cải thiện độ chuẩn xác của nhãn giả.
+- **VOC SAM-PCRE Full Training (74.28% Raw mIoU):** Huấn luyện lại từ đầu 20.000 bước với SAM pseudo-labels giúp mô hình đạt raw mIoU (trước khi áp dụng DenseCRF) lên tới **74.28%**, vượt trội so với raw baseline (73.79%) tới **+0.49 điểm phần trăm**, đồng thời CAM1 đạt đỉnh **76.99%**.
+
+---
+
+## 5. Tiến trình hiện tại (Current Status)
+
+```mermaid
+flowchart TD
+    A["Baseline PCRE (VOC 20k / COCO 80k)"] -->|Hoàn thành 100%| B["Test-Time Post-Processing (SCSR / HMP-NEP / GTBF / AdvPrompt)"]
+    A -->|Hoàn thành 100%| C["Training-Time Inventions (CSL / PEFT / Full SAM-PCRE 20k)"]
+    B -->|Đạt đỉnh 75.97% mIoU| D["Đã hoàn tất đánh giá trên toàn bộ 1.449 ảnh VOC Val"]
+    C -->|Hoàn tất 20k iters sáng 23/11| E["Mô hình VOC SAM-PCRE (Raw: 74.28%)"]
+    C -->|Đang trong hàng đợi supervisor| F["Paradigm 2 Ablation Queue (SAT-CR & SBF-Distill)"]
+```
+
+1. **Các tác vụ đã hoàn thành 100%:**
+   - Baseline Pascal VOC 2012 (20.000 iters) và Baseline MS COCO 2014 (80.000 iters).
+   - Toàn bộ chuỗi thực nghiệm hậu xử lý Test-time (SCSR, HMP-NEP, GTBF-CAMR, SAM Advanced Prompting, SAM-CLIP Synergy) trên 1.449 ảnh VOC Val.
+   - Các biến thể huấn luyện tự giám sát: Decoder self-training, Representation consistency, Residual negative learning, FBSD, USRC, CSL, PEFT-CSL.
+   - Huấn luyện End-to-End VOC SAM-PCRE (20.000 iters) đã hoàn thành vào rạng sáng ngày **23/11/2026** (kết quả ghi nhận tại `experiments/voc_sam_pcre/live_run.log`).
+2. **Tiến trình đang chạy ngầm (Active Queue):**
+   - Bộ điều phối hàng đợi độc lập `scripts/run_independent_queue.py` (PID `342111`) đang chạy để thực thi tuần tự 2 nhánh nghiên cứu của **Paradigm 2**:
+     - **Giai đoạn 1:** `train_voc_sam_sat_cr.sh` (SAT-CR đơn lẻ) $\rightarrow$ lưu vào `experiments/voc_sam_sat_cr/`.
+     - **Giai đoạn 2:** `train_voc_sam_sbf_distill.sh` (SBF-Distill đơn lẻ) $\rightarrow$ lưu vào `experiments/voc_sam_sbf_distill/`.
+   - **Tình trạng tài nguyên:** Tiến trình supervisor đang thăm dò và chờ GPU có tối thiểu 16.000 MiB VRAM trống để tự động kích hoạt quá trình huấn luyện mà không xung đột với các tiến trình khác trên hệ thống.
+3. **Kế hoạch tiếp theo (Planned Work):**
+   - Đánh giá chính thức checkpoint MS COCO 80.000 iters bằng `tools/infer_seg_coco.py` (Multi-scale + Horizontal Flip + DenseCRF trên toàn bộ tập Val COCO) để chuẩn hóa số liệu so với mốc 47.2% công bố trong bài báo gốc.
+   - Hoàn tất kiểm thử và phân tích kết quả của hai nhánh độc lập thuộc Paradigm 2 (SAT-CR và SBF-Distill).
+
+---
+
+## 6. Hướng dẫn tái lập & Thực thi
+
+### 6.1. Đánh giá kiểm thử hậu xử lý (Test-Time Refinement)
+Để chạy phương pháp tối ưu biên hình học SAM trên tập VOC 2012 Val:
 ```bash
-git clone [https://github.com/xxf011/WSSS-PCRE](https://github.com/xxf011/WSSS-PCRE)
-cd PCRE
-pip install -r ./requirements.txt
+# Phương pháp GTBF-CAMR (75.85% mIoU)
+python experiments/gtbf_camr_refinement_20261121/run_gtbf_camr.py
+
+# Phương pháp SAM Advanced Prompting (75.97% mIoU)
+bash run_two_directions.sh
 ```
 
-### Using the Regularized Loss
-To utilize the regularized loss, you need to download and build the required Python extension module. Please refer to the official instructions [here](https://github.com/meng-tang/rloss/tree/master/pytorch#build-python-extension-module).
+### 6.2. Kiểm tra trạng thái hàng đợi thực nghiệm
+```bash
+# Kiểm tra log tiến trình hàng đợi độc lập đang chạy
+tail -f experiments/independent_ablation_queue.log
 
----
-
-## 📂 Dataset Preparation
-
-### PASCAL VOC Dataset
-To prepare the PASCAL VOC dataset, follow these steps:
-
-1. **Download the Dataset**:
-   ```bash
-   wget [http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar](http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar)
-   tar -xvf VOCtrainval_11-May-2012.tar
-   ```
-
-2. **Augment the Annotations**:
-   Download the additional segmentation annotations from the [SBD Dataset](http://home.bharathh.info/pubs/codes/SBD/download.html). After unzipping `SegmentationClassAug.zip`, move the folder to `VOCdevkit/VOC2012`. Ensure the folder structure looks like this:
-
-   ```text
-   VOCdevkit/
-   └── VOC2012
-       ├── Annotations
-       ├── ImageSets
-       ├── JPEGImages
-       ├── SegmentationClass
-       ├── SegmentationClassAug
-       └── SegmentationObject
-   ```
-
-### MS COCO Dataset
-To use the COCO dataset:
-
-1. **Download the Images**:
-   ```bash
-   wget [http://images.cocodataset.org/zips/train2014.zip](http://images.cocodataset.org/zips/train2014.zip)
-   wget [http://images.cocodataset.org/zips/val2014.zip](http://images.cocodataset.org/zips/val2014.zip)
-   ```
-
-2. **Generate VOC-style Labels**:
-   Use the [coco2voc](https://github.com/alicranck/coco2voc) script to convert COCO annotations into a VOC-compatible format:
-
-   ```text
-   MSCOCO/
-   ├── coco2014
-   │   ├── train2014
-   │   └── val2014
-   └── SegmentationClass
-       ├── train2014
-       └── val2014
-   ```
-
----
-
-## 🚀 Training
-
-Start the training process using the following commands:
-
-- **For PASCAL VOC**:
-  ```bash
-  CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 --master_port=11402 scripts/train_voc.py
-  ```
-
-- **For COCO**:
-  ```bash
-  CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 --master_port=11402 scripts/train_coco.py
-  ```
-
----
-
-## 🔍 Evaluation
-
-Run evaluation with the following commands:
-
-- **For PASCAL VOC**:
-  ```bash
-  python tools/infer_seg_voc.py --model_path $MODEL_PATH  --infer val
-  ```
-
-- **For COCO**:
-  ```bash
-  CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch \
-      --nproc_per_node=4 --master_port=29501 \
-      tools/infer_seg_voc.py --model_path $MODEL_PATH --backbone vit_base_patch16_224 --infer val
-  ```
-
----
-
-## 🎓 Citation
-
-If you find our work or this codebase helpful, please consider citing:
-
-```bibtex
-@InProceedings{Xu_2025_CVPR,
-    author    = {Xu, Xiangfeng and Zhang, Pinyi and Huang, Wenxuan and Shen, Yunhang and Chen, Haosheng and Lin, Jingzhong and Li, Wei and He, Gaoqi and Xie, Jiao and Lin, Shaohui},
-    title     = {Weakly Supervised Semantic Segmentation via Progressive Confidence Region Expansion},
-    booktitle = {Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR)},
-    month     = {June},
-    year      = {2025},
-    pages     = {9829-9838}
-}
+# Kiểm tra log huấn luyện của run VOC SAM-PCRE gần nhất
+tail -n 50 experiments/voc_sam_pcre/live_run.log
 ```
 
----
-
-## 🙏 Acknowledgements
-
-This project is built upon and inspired by the following excellent works. We sincerely thank the authors for their outstanding open-source contributions:
-- [ToCo](https://github.com/rulixiang/ToCo): Token Contrast for Weakly-Supervised Semantic Segmentation (CVPR 2023)
-- [SeCo](https://github.com/zwyang6/SeCo): Separate and Conquer: Decoupling Co-occurrence via Decomposition and Representation for Weakly Supervised Semantic Segmentation (CVPR 2024)
-- [rloss](https://github.com/meng-tang/rloss): The PyTorch implementation of the regularized loss.
-
----
-
-## 📄 License
-
-This project is licensed under the [MIT License](LICENSE).
+### 6.3. Chạy kiểm thử đơn vị (Unit Tests)
+Trước khi khởi động các nhánh huấn luyện mới, kiểm tra tính hợp lệ toán học của các module:
+```bash
+python -m unittest tests/test_sam_innovations.py
+```

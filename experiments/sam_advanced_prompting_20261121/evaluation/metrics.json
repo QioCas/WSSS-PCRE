@@ -1,0 +1,159 @@
+{
+  "method": "SAM Advanced Prompting: Negative Points + MMD",
+  "dataset": "Pascal VOC 2012 Val",
+  "num_images": 1449,
+  "true_baseline_crf_miou": 74.22428373329858,
+  "peft_csl_crf_miou": 74.35922244723349,
+  "adv_prompt_miou": 75.97366589458946,
+  "net_gain_vs_baseline": 1.7493821612908818,
+  "gain_vs_peft_csl": 1.6144434473559732,
+  "per_class": {
+    "_background_": {
+      "peft_csl_iou": 91.95766651698783,
+      "adv_prompt_iou": 92.73253520668281,
+      "delta_vs_peft": 0.7748686896949835,
+      "precision": 96.4682124754628,
+      "recall": 95.99146566166775
+    },
+    "aeroplane": {
+      "peft_csl_iou": 83.85897143341089,
+      "adv_prompt_iou": 84.8411659428661,
+      "delta_vs_peft": 0.982194509455212,
+      "precision": 90.23843046832476,
+      "recall": 93.414484671847
+    },
+    "bicycle": {
+      "peft_csl_iou": 44.64866415537668,
+      "adv_prompt_iou": 44.261956757792106,
+      "delta_vs_peft": -0.38670739758457273,
+      "precision": 49.487204042344786,
+      "recall": 80.73943484364024
+    },
+    "bird": {
+      "peft_csl_iou": 87.4068452600274,
+      "adv_prompt_iou": 88.75325513061544,
+      "delta_vs_peft": 1.3464098705880474,
+      "precision": 93.0892304526243,
+      "recall": 95.01358111609125
+    },
+    "boat": {
+      "peft_csl_iou": 67.94033797463125,
+      "adv_prompt_iou": 70.51583260498272,
+      "delta_vs_peft": 2.5754946303514714,
+      "precision": 75.60287999508742,
+      "recall": 91.2891603696429
+    },
+    "bottle": {
+      "peft_csl_iou": 79.17539405107718,
+      "adv_prompt_iou": 80.4378366334117,
+      "delta_vs_peft": 1.262442582334529,
+      "precision": 90.24223323403514,
+      "recall": 88.10049240884868
+    },
+    "bus": {
+      "peft_csl_iou": 89.05134783131902,
+      "adv_prompt_iou": 93.20462596031449,
+      "delta_vs_peft": 4.153278128995467,
+      "precision": 95.93799326606724,
+      "recall": 97.03384966320677
+    },
+    "car": {
+      "peft_csl_iou": 82.55024292472527,
+      "adv_prompt_iou": 85.24904509768871,
+      "delta_vs_peft": 2.6988021729634397,
+      "precision": 91.70749308999201,
+      "recall": 92.36934715179324
+    },
+    "cat": {
+      "peft_csl_iou": 91.8174783451016,
+      "adv_prompt_iou": 92.86993206956427,
+      "delta_vs_peft": 1.0524537244626657,
+      "precision": 97.17999273133454,
+      "recall": 95.44203402546185
+    },
+    "chair": {
+      "peft_csl_iou": 43.747478059815144,
+      "adv_prompt_iou": 43.71602484644096,
+      "delta_vs_peft": -0.03145321337418494,
+      "precision": 51.337629509008345,
+      "recall": 74.64905048876805
+    },
+    "cow": {
+      "peft_csl_iou": 86.0173898285685,
+      "adv_prompt_iou": 87.51966703714459,
+      "delta_vs_peft": 1.5022772085760892,
+      "precision": 98.89548853493264,
+      "recall": 88.38358201509753
+    },
+    "diningtable": {
+      "peft_csl_iou": 49.96115175290608,
+      "adv_prompt_iou": 50.64351077736905,
+      "delta_vs_peft": 0.6823590244629685,
+      "precision": 79.69016923822467,
+      "recall": 58.148773889519155
+    },
+    "dog": {
+      "peft_csl_iou": 86.86951341521252,
+      "adv_prompt_iou": 87.74156984343028,
+      "delta_vs_peft": 0.8720564282177605,
+      "precision": 94.14125865249292,
+      "recall": 92.8093955393594
+    },
+    "horse": {
+      "peft_csl_iou": 86.92615643937425,
+      "adv_prompt_iou": 88.96738699522773,
+      "delta_vs_peft": 2.041230555853474,
+      "precision": 94.03592285419836,
+      "recall": 94.28767604980739
+    },
+    "motorbike": {
+      "peft_csl_iou": 75.9804429059298,
+      "adv_prompt_iou": 77.97722172622639,
+      "delta_vs_peft": 1.9967788202965835,
+      "precision": 87.82581957427446,
+      "recall": 87.42722536561234
+    },
+    "person": {
+      "peft_csl_iou": 80.05570485650681,
+      "adv_prompt_iou": 82.24416433957946,
+      "delta_vs_peft": 2.1884594830726485,
+      "precision": 95.49166535891513,
+      "recall": 85.56662758604615
+    },
+    "pottedplant": {
+      "peft_csl_iou": 66.72356720297206,
+      "adv_prompt_iou": 68.23094337333269,
+      "delta_vs_peft": 1.5073761703606294,
+      "precision": 78.58975011412308,
+      "recall": 83.80964261009167
+    },
+    "sheep": {
+      "peft_csl_iou": 90.21599875477436,
+      "adv_prompt_iou": 92.73161862015044,
+      "delta_vs_peft": 2.515619865376081,
+      "precision": 97.89205880888824,
+      "recall": 94.62103005735189
+    },
+    "sofa": {
+      "peft_csl_iou": 52.41347074623782,
+      "adv_prompt_iou": 52.46591785060618,
+      "delta_vs_peft": 0.05244710436836186,
+      "precision": 70.98849955274001,
+      "recall": 66.78597450301574
+    },
+    "train": {
+      "peft_csl_iou": 59.99278097356521,
+      "adv_prompt_iou": 63.805578034453035,
+      "delta_vs_peft": 3.8127970608878243,
+      "precision": 67.3148963257407,
+      "recall": 92.44657763896703
+    },
+    "tvmonitor": {
+      "peft_csl_iou": 64.23306796338365,
+      "adv_prompt_iou": 66.5371949384995,
+      "delta_vs_peft": 2.3041269751158495,
+      "precision": 73.52531217231333,
+      "recall": 87.50108649394893
+    }
+  }
+}

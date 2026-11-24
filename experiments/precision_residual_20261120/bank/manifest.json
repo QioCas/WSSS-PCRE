@@ -1,0 +1,193 @@
+{
+  "format": "precision_bank_v1",
+  "images": 10582,
+  "partial_bank": false,
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "tags_sha256": "974731980539a6d6ed516c5dccc745bf9930f0915ac0d0802cd1c6b7627479e1",
+  "reliable_manifest_sha256": "d686015de1479cfaea966d36a96d84a2662d797beb6979d8a41d249038cebde3",
+  "bank_sha256": "be41c7929bc32845cea42745ffa5add90a146318ba25d96aee8f988af5f85f23",
+  "training_pixel_gt_read": false,
+  "negative_mining_before_tag_filter": true,
+  "negative_requires_teacher_background": 0.8,
+  "class_diagnostics": [
+    {
+      "class_id": 0,
+      "positive_candidates": 167763,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 0,
+      "gmm_converged": true
+    },
+    {
+      "class_id": 1,
+      "positive_candidates": 7431,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 2,
+      "positive_candidates": 4382,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 3,
+      "positive_candidates": 7188,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 4,
+      "positive_candidates": 4773,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 5,
+      "positive_candidates": 2926,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 6,
+      "positive_candidates": 5526,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 7,
+      "positive_candidates": 10724,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 8,
+      "positive_candidates": 14937,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 9,
+      "positive_candidates": 10270,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 10,
+      "positive_candidates": 3291,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 11,
+      "positive_candidates": 5858,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 12,
+      "positive_candidates": 16196,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 13,
+      "positive_candidates": 6253,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 14,
+      "positive_candidates": 6433,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 15,
+      "positive_candidates": 43232,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 16,
+      "positive_candidates": 2962,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 17,
+      "positive_candidates": 3660,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 18,
+      "positive_candidates": 6188,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 19,
+      "positive_candidates": 7710,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    },
+    {
+      "class_id": 20,
+      "positive_candidates": 5377,
+      "positive_samples": 2048,
+      "negative_candidates_retained": 512,
+      "gmm_converged": true,
+      "negative_source_images": 8
+    }
+  ],
+  "parameters": {
+    "bank_positive_samples": 2048,
+    "bank_negative_samples": 512,
+    "bank_positive_per_image": 16,
+    "bank_negative_per_image": 2,
+    "bank_positive_prototypes": 4,
+    "bank_negative_prototypes": 8,
+    "bank_background_confidence": 0.8,
+    "projection_dim": 32,
+    "gmm_components": 2,
+    "gmm_lower_quantile": 0.02
+  }
+}

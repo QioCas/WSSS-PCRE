@@ -1,0 +1,37 @@
+{
+  "mode": "D1_clip_region_filter",
+  "checkpoint": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/train/D1_clip_region_filter/checkpoints/adapter_step_00004000_ema.pth",
+  "checkpoint_sha256": "52ca61d5060e817beb0c9f3a2da4a6f567c868ccca0bdfa2b3f8eeba4d5c39f4",
+  "training_run": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/train/D1_clip_region_filter",
+  "validation_images": 1449,
+  "partial_validation": false,
+  "scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "horizontal_flip": true,
+  "input_base_size": 448,
+  "precision": "float32",
+  "tf32": false,
+  "crf": {
+    "iter_max": 10,
+    "pos_xy_std": 2,
+    "pos_w": 3,
+    "bi_xy_std": 140,
+    "bi_rgb_std": 1,
+    "bi_w": 7
+  },
+  "fusion": "max(first_scale_flip_sum, mean(all_scale_flip_sums))",
+  "strict_load": true,
+  "image_labels_used_for_prediction": false,
+  "torch_version": "2.10.0+cu128",
+  "densecrf_distribution": "pydensecrf2==1.1",
+  "model_provenance": {
+    "architecture": "frozen_pcre_bounded_residual",
+    "baseline_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+    "external_image_text_prior": true,
+    "adapter_steps": 4000,
+    "detail": false
+  }
+}

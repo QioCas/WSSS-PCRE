@@ -1,0 +1,75 @@
+2026-11-21 22:34:39,991 - train_coco.py - INFO: Pytorch version: 2.10.0+cu128
+2026-11-21 22:34:40,023 - train_coco.py - INFO: GPU type: NVIDIA GeForce RTX 5090
+2026-11-21 22:34:40,023 - train_coco.py - INFO: 
+args: Namespace(w_ptc=0.2, w_seg=0.12, w_reg=0.05, w_cpe=0.5, wsddn_topk=300, mil=True, ot_loss=False, ot_n=4, logit_scale=4, max_iters=20005, log_iters=200, eval_iters=5000, warmup_iters=1500, update_prototype=600, cam2mask=10000, backbone='vit_base_patch16_224', high_thre=0.7, low_thre=0.25, bkg_thre=0.5, tag_threshold=0.2, cam_scales=[1.0, 0.5, 0.75, 1.5], ignore_index=255, pooling='gmp', decoder='LargeFOV', ema=True, mask_exp=True, cls_sc_t=0.0, proto_m=0.9, temp_lil=0.08, base_temp_lil=0.08, temp_lig=0.1, base_temp_lig=0.1, momentum=0.999, ctc_dim=768, moco_queue=4608, aux_layer=-3, pretrained=True, save_ckpt=False, seed=0, weight='', work_dir='experiments/coco_baseline/2026-11/train_coco_21-22-34-39', log_tag='train_coco', img_folder='dataset/COCO2014/coco', label_folder='dataset/COCO2014/coco/SegmentationClass', list_folder='datasets/coco', num_classes=81, crop_size=448, local_crop_size=64, ncrops=12, train_set='train', val_set='val_part', spg=2, grad_accum_steps=4, amp=False, mask_decoder_layers=1, scales=(0.5, 2), optimizer='PolyWarmupAdamW', lr=6e-05, warmup_lr=7e-07, wt_decay=0.01, betas=(0.9, 0.999), power=0.9, local_rank=0, num_workers=10, backend='nccl', debug=False, lamda=100, seg_t=0.3, seg_iter=32000, resume='experiments/coco_baseline/2026-11/train_coco_21-18-20-09/checkpoints/model_iter_20000.pth', ckpt_dir='experiments/coco_baseline/2026-11/train_coco_21-22-34-39/checkpoints', pred_dir='experiments/coco_baseline/2026-11/train_coco_21-22-34-39/predictions')
+2026-11-21 22:34:40,150 - train_coco.py - INFO: Total gpus: 1, samples per gpu: 2...
+2026-11-21 22:34:42,954 - train_coco.py - INFO: Resuming training from experiments/coco_baseline/2026-11/train_coco_21-18-20-09/checkpoints/model_iter_20000.pth...
+2026-11-21 22:34:43,790 - train_coco.py - INFO: Resumed from iteration 20000
+2026-11-21 22:34:43,940 - train_coco.py - INFO: 
+Optimizer: 
+PolyWarmupAdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 5.661488254394143e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 5.661488254394143e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 2
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0005661488254394143
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 3
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0005661488254394143
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 4
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 5.661488254394143e-05
+    maximize: False
+    weight_decay: 0.01
+)

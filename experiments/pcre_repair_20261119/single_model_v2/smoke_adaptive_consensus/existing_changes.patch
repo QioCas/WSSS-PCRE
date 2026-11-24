@@ -1,0 +1,283 @@
+diff --git a/.gitignore b/.gitignore
+index aee822d..be4b140 100644
+--- a/.gitignore
++++ b/.gitignore
+@@ -16,4 +16,6 @@ wandb
+ *.npy*
+ tt*
+ pretrained
+-*.pt
+\ No newline at end of file
++*.pt
++!train.sh
++!requirements.txt
+diff --git a/README.md b/README.md
+index 0261a07..cdf4d08 100644
+--- a/README.md
++++ b/README.md
+@@ -89,18 +89,50 @@ To use the COCO dataset:
+ 
+ ---
+ 
++## Python 3.12 compatibility
++
++Use `python -m pip install -r requirements.txt` with the Python used for training.
++Build the local bilateral filter extension with
++`python -m pip install ../git/rloss/pytorch/wrapper/bilateralfilter`.
++Its build uses setuptools (replacing distutils), SWIG and OpenMP.
++
++`bash train.sh` uses PyTorch's torchrun launcher through
++`python -m torch.distributed.run` and detects the visible GPUs automatically.
++Use `CUDA_VISIBLE_DEVICES=0 bash train.sh` to select one GPU. Arguments are
++forwarded to the training script, for example:
++
++```bash
++bash train.sh --data_folder /path/to/VOC2012 --list_folder /path/to/voc_lists
++```
++
++To recreate the split files and class tags from existing VOC masks, run:
++
++```bash
++python scripts/prepare_voc.py --data_folder /path/to/VOC2012 \
++    --train_list /path/to/train_aug.txt --output datasets/voc
++```
++
++The dataset needs `JPEGImages/` and `SegmentationClassAug/`; the list folder
++needs `train_aug.txt`, `val.txt`, and `cls_labels_onehot.npy`. The default ViT
++backbone downloads its pretrained `.pth` checkpoint on first use; the supplied
++`ViT-B_16.npz` is a different format. Set `WANDB_MODE=offline` for local experiment
++logging without a W&B login, or `WANDB_MODE=disabled` to disable logging.
++
+ ## 🚀 Training
+ 
++To rerun only the VOC baseline with full resumable checkpoints and a detached
++GPU wait queue, see [BASELINE_ONLY.md](BASELINE_ONLY.md).
++
+ Start the training process using the following commands:
+ 
+ - **For PASCAL VOC**:
+   ```bash
+-  CUDA_VISIBLE_DEVICES=0,1 python -m torch.distributed.launch --nproc_per_node=2 --master_port=11402 scripts/train_voc.py
++  bash train.sh
+   ```
+ 
+ - **For COCO**:
+   ```bash
+-  CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.launch --nproc_per_node=4 --master_port=11402 scripts/train_coco.py
++  CUDA_VISIBLE_DEVICES=0,1,2,3 python -m torch.distributed.run --standalone --nproc_per_node=4 scripts/train_coco.py
+   ```
+ 
+ ---
+@@ -151,4 +183,4 @@ This project is built upon and inspired by the following excellent works. We sin
+ 
+ ## 📄 License
+ 
+-This project is licensed under the [MIT License](LICENSE).
+\ No newline at end of file
++This project is licensed under the [MIT License](LICENSE).
+diff --git a/engine/dataloader_engine.py b/engine/dataloader_engine.py
+index 5ec592b..a98914a 100644
+--- a/engine/dataloader_engine.py
++++ b/engine/dataloader_engine.py
+@@ -36,7 +36,7 @@ def build_dataloader(args):
+         pin_memory=False,
+         drop_last=True,
+         sampler=train_sampler,
+-        prefetch_factor=4)
++        prefetch_factor=4 if args.num_workers > 0 else None)
+ 
+     val_loader = DataLoader(val_dataset,
+                             batch_size=1,
+diff --git a/engine/network_engine.py b/engine/network_engine.py
+index 01c2c70..20a09de 100644
+--- a/engine/network_engine.py
++++ b/engine/network_engine.py
+@@ -1,7 +1,6 @@
+-from model.model_baseline import network_baseline
+-from model.model_seco import network
+ from model.model_wsddn import network as network_wsddn
+ def build_network_baseline(args):
++    from model.model_baseline import network_baseline
+ 
+     model = network_baseline(args,
+     backbone=args.backbone,
+@@ -13,6 +12,7 @@ def build_network_baseline(args):
+ 
+     return model, param_groups
+ def build_network(args):
++    from model.model_seco import network
+ 
+     model = network(args,
+     backbone=args.backbone,
+diff --git a/model/backbone/clip.py b/model/backbone/clip.py
+index c0a26d4..46cbc6a 100644
+--- a/model/backbone/clip.py
++++ b/model/backbone/clip.py
+@@ -3,7 +3,7 @@ import os
+ import urllib
+ import warnings
+ from typing import Any, Union, List
+-from pkg_resources import packaging
++import packaging.version
+ 
+ import torch
+ from PIL import Image
+diff --git a/model/model_wsddn.py b/model/model_wsddn.py
+index 7e21b19..8b9ded8 100644
+--- a/model/model_wsddn.py
++++ b/model/model_wsddn.py
+@@ -23,6 +23,8 @@ def concat_all_gather(tensor):
+     Performs all_gather operation on the provided tensors.
+     *** Warning ***: torch.distributed.all_gather has no gradient.
+     """
++    if not torch.distributed.is_initialized() or torch.distributed.get_world_size() == 1:
++        return tensor.detach()
+     tensors_gather = [torch.ones_like(tensor)
+         for _ in range(torch.distributed.get_world_size())]
+     torch.distributed.all_gather(tensors_gather, tensor, async_op=False)
+@@ -618,4 +620,4 @@ def show_mask(sim_feat):
+         axes[i].set_title(f'Image {i+1}')
+         axes[i].axis('off')
+ 
+-    plt.savefig("111.png")
+\ No newline at end of file
++    plt.savefig("111.png")
+diff --git a/scripts/train_coco.py b/scripts/train_coco.py
+index 3e02251..0f4d001 100644
+--- a/scripts/train_coco.py
++++ b/scripts/train_coco.py
+@@ -105,7 +105,8 @@ parser.add_argument("--wt_decay", default=1e-2, type=float, help="weights decay"
+ parser.add_argument("--betas", default=(0.9, 0.999), help="betas for Adam")
+ parser.add_argument("--power", default=0.9, type=float, help="poweer factor for poly scheduler")
+ 
+-parser.add_argument("--local_rank", default=-1, type=int, help="local_rank")
++parser.add_argument("--local-rank", "--local_rank", dest="local_rank",
++                    default=int(os.environ.get("LOCAL_RANK", "0")), type=int, help="local_rank")
+ parser.add_argument("--num_workers", default=10, type=int, help="num_workers")
+ parser.add_argument('--backend', default='nccl')
+ parser.add_argument('--debug', default=False, type=bool,)
+@@ -200,7 +201,7 @@ def train(args=None):
+         pin_memory=False,
+         drop_last=True,
+         sampler=train_sampler,
+-        prefetch_factor=4)
++        prefetch_factor=4 if args.num_workers > 0 else None)
+ 
+     val_loader = DataLoader(val_dataset,
+                             batch_size=1,
+@@ -358,7 +359,7 @@ def train(args=None):
+             'cls_loss_aux': cls_loss_aux.item(),
+             'seg_loss': seg_loss.item(),
+             'cpe_loss': cpe_loss.item(),
+-            'cls_score': cls_score.item(),
++            'cls_score': float(cls_score),
+             'cls_loss_wsddn':cls_loss_wsddn.item(),
+             'crme_loss': crme_loss.item() if isinstance(crme_loss,torch.Tensor) else crme_loss,
+ 
+diff --git a/scripts/train_voc.py b/scripts/train_voc.py
+index b397918..1c215f6 100644
+--- a/scripts/train_voc.py
++++ b/scripts/train_voc.py
+@@ -125,7 +125,8 @@ parser.add_argument("--wt_decay", default=1e-2, type=float, help="weights decay"
+ parser.add_argument("--betas", default=(0.9, 0.999), help="betas for Adam")
+ parser.add_argument("--power", default=0.9, type=float, help="poweer factor for poly scheduler")
+ 
+-parser.add_argument("--local_rank", default=-1, type=int, help="local_rank")
++parser.add_argument("--local-rank", "--local_rank", dest="local_rank",
++                    default=int(os.environ.get("LOCAL_RANK", "0")), type=int, help="local_rank")
+ parser.add_argument("--num_workers", default=2, type=int, help="num_workers")
+ parser.add_argument('--backend', default='nccl')
+ parser.add_argument('--debug',  default=False,action="store_true")
+@@ -245,7 +246,7 @@ def train(args=None):
+         pin_memory=False,
+         drop_last=True,
+         sampler=train_sampler,
+-        prefetch_factor=4)
++        prefetch_factor=4 if args.num_workers > 0 else None)
+ 
+     val_loader = DataLoader(val_dataset,
+                             batch_size=1,
+@@ -284,7 +285,7 @@ def train(args=None):
+             n_iter = n_iter + 6000
+         try:
+             img_name, inputs, cls_label, label_idx, img_box, raw_image, w_image, s_image,seg_mask = next(train_loader_iter)
+-        except:
++        except StopIteration:
+             train_sampler.set_epoch(np.random.randint(args.max_iters))
+             train_loader_iter = iter(train_loader)
+             img_name, inputs, cls_label, label_idx, img_box, raw_image, w_image, s_image,seg_mask = next(train_loader_iter)
+@@ -408,7 +409,7 @@ def train(args=None):
+             'seg_loss': seg_loss.item(),
+             'cpe_loss': cpe_loss.item(),
+             'crme_loss': crme_loss.item() if isinstance(crme_loss,torch.Tensor) else crme_loss,
+-            'cls_score': cls_score.item(),
++            'cls_score': float(cls_score),
+             'cls_loss_wsddn':cls_loss_wsddn.item(),
+         })
+ 
+@@ -471,6 +472,17 @@ if __name__ == "__main__":
+ 
+ 
+     args = parser.parse_args()
++    required_paths = [
++        os.path.join(args.data_folder, "JPEGImages"),
++        os.path.join(args.data_folder, "SegmentationClassAug"),
++        os.path.join(args.list_folder, args.train_set + ".txt"),
++        os.path.join(args.list_folder, args.val_set + ".txt"),
++        os.path.join(args.list_folder, "cls_labels_onehot.npy"),
++    ]
++    missing_paths = [path for path in required_paths if not os.path.exists(path)]
++    if missing_paths:
++        parser.error("Missing VOC training inputs: " + ", ".join(missing_paths)
++                     + ". Set --data_folder and --list_folder to the prepared dataset.")
+     timestamp_1 = "{0:%Y-%m}".format(datetime.datetime.now())
+     timestamp_2 = "{0:%d-%H-%M-%S}".format(datetime.datetime.now())
+     exp_tag = f'{args.log_tag}_{timestamp_2}'
+@@ -489,4 +501,8 @@ if __name__ == "__main__":
+ 
+     ## fix random seed
+     setup_seed(args.seed)
+-    train(args=args)
++    try:
++        train(args=args)
++    finally:
++        if dist.is_initialized():
++            dist.destroy_process_group()
+diff --git a/utils/camutils.py b/utils/camutils.py
+index 6295fd6..06c069c 100644
+--- a/utils/camutils.py
++++ b/utils/camutils.py
+@@ -363,7 +363,7 @@ def label_to_aff_mask(cam_label, ignore_index=255):
+     return aff_label
+ 
+ 
+-def refine_cams_with_bkg_v2(ref_mod=None, images=None, cams=None, cls_labels=None, high_thre=None, low_thre=None, ignore_index=False,  img_box=None, down_scale=2, gumbel_sofmax = False):
++def refine_cams_with_bkg_v2(ref_mod=None, images=None, cams=None, cls_labels=None, high_thre=None, low_thre=None, ignore_index=False,  img_box=None, down_scale=2, gumbel_sofmax = False, return_details=False):
+ 
+     b,_,h,w = images.shape
+     _images = F.interpolate(images, size=[h//down_scale, w//down_scale], mode="bilinear", align_corners=False)
+@@ -403,6 +403,8 @@ def refine_cams_with_bkg_v2(ref_mod=None, images=None, cams=None, cls_labels=Non
+     refined_label[refined_label_h == 0] = ignore_index
+     refined_label[(refined_label_h + refined_label_l) == 0] = 0
+ 
++    if return_details:
++        return refined_label, refined_label_h, refined_label_l
+     return refined_label
+ 
+ def _refine_cams(ref_mod, images, cams, valid_key, orig_size):
+diff --git a/utils/optimizer.py b/utils/optimizer.py
+index f372ace..53ec39c 100644
+--- a/utils/optimizer.py
++++ b/utils/optimizer.py
+@@ -8,9 +8,9 @@ class CosWarmupAdamW(torch.optim.AdamW):
+         super().__init__(params, lr=lr, betas=betas, weight_decay=weight_decay, eps=1e-8,)
+ 
+         self.global_step = 0
+-        self.warmup_iter = np.float(warmup_iter)
++        self.warmup_iter = float(warmup_iter)
+         self.warmup_ratio = warmup_ratio
+-        self.max_iter = np.float(max_iter)
++        self.max_iter = float(max_iter)
+         self.power = power
+ 
+         self.__init_lr = [group['lr'] for group in self.param_groups]

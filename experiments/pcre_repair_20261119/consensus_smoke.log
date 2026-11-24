@@ -1,0 +1,166 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+2026-11-19 04:11:06,032 - train_voc_adaptive.py - INFO: Pytorch version: 2.10.0+cu128
+2026-11-19 04:11:06,032 - train_voc_adaptive.py - INFO: GPU type: NVIDIA GeForce RTX 5090
+2026-11-19 04:11:06,032 - train_voc_adaptive.py - INFO: 
+args: Namespace(w_ptc=0.3, w_seg=0.12, w_reg=0.05, wsddn=2.0, bin_t=0.7, w_cpe=0.02, w_seg2=2.0, wsddn_topk=300, ot_loss=False, seg_aux=False, reg_aux=False, ot_n=4, cls_sc_t=0.0, seg_warmup=0, ptc_eps=1, max_iters=4, log_iters=1, eval_iters=4, warmup_iters=1500, update_prototype=0, cam2mask=10000, backbone='vit_base_patch16_224', high_thre=0.7, low_thre=0.25, pro_high_thre=0.7, pro_low_thre=0.25, bkg_thre=0.5, tag_threshold=0.2, ignore_index=255, pooling='gmp', decoder='ASSP', proto_m=0.99, momentum=0.999, aux_layer=-3, pretrained=True, save_ckpt=True, color_aug=True, seed=0, weight='', work_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_repair_20261119/consensus_smoke', log_tag='train_voc', wandb_name='test', data_folder='./dataset/VOC2012', list_folder='datasets/voc', num_classes=21, crop_size=448, local_crop_size=64, cnt_t=5, ncrops=12, train_set='train_aug', val_set='val', spg=1, scales=(0.5, 2), aux_aug=True, optimizer='PolyWarmupAdamW', lr=3e-05, warmup_lr=1e-06, wt_decay=0.01, betas=(0.9, 0.999), power=0.9, local_rank=0, num_workers=2, backend='nccl', debug=False, lamda=100, seg_t=0.3, grad_t='none', seg_iter=2, cam_scales=[1.0, 0.5, 0.75, 1.5], prog_high_t=0.5, prog_low_t=0.3, ema=True, pro=True, pre_mask=True, mask_exp=True, ctmd=True, mygo_sup=False, mask_stop=True, pro_fuse=False, wsddn_loss='sum', mil=True, clstoken_loss='cos', experiment_mode='adaptive_consensus', adaptive_momentum=0.99, adaptive_min=0.55, adaptive_max=0.85, adaptive_warmup=2000, adaptive_ramp=1000, consensus_max_shift=0.05, consensus_warmup=0, consensus_ramp=0, consensus_proto_thre=0.7, checkpoint_iters=4, resume='', run_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_repair_20261119/consensus_smoke', allow_low_disk=False, val_limit=2, ckpt_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_repair_20261119/consensus_smoke/checkpoints', pred_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_repair_20261119/consensus_smoke/predictions')
+2026-11-19 04:11:06,368 - train_voc_adaptive.py - INFO: Total gpus: 1, samples per gpu: 1...
+scripts/train_voc_adaptive.py:296: FutureWarning: `torch.cuda.amp.GradScaler(args...)` is deprecated. Please use `torch.amp.GradScaler('cuda', args...)` instead.
+  scaler = GradScaler()
+2026-11-19 04:11:08,929 - train_voc_adaptive.py - INFO: 
+Optimizer: 
+PolyWarmupAdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 2
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.00030000000000000003
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 3
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.00030000000000000003
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 4
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3e-05
+    maximize: False
+    weight_decay: 0.01
+)
+/home/jupyter-iec2024iot08/.local/lib/python3.12/site-packages/torch/autograd/graph.py:865: UserWarning: Grad strides do not match bucket view strides. This may indicate grad was not created according to the gradient layout contract, or that the param's strides changed since DDP was constructed.  This is not an error, but may impair performance.
+grad.sizes() = [1, 20, 768], strides() = [617472, 768, 1]
+bucket_view.sizes() = [1, 20, 768], strides() = [15360, 768, 1] (Triggered internally at /pytorch/torch/csrc/distributed/c10d/reducer.cpp:330.)
+  return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+2026-11-19 04:11:14,271 - train_voc_adaptive.py - INFO: Iter: 1; Elapsed: 0:00:08; ETA: 0:00:23; LR: 3.000e-11; cls_loss: 0.8365, cls_loss_aux: 18.9368, ptc_loss: 0.5000, seg_loss: 2.3777, cpe_loss: 0.5000, crme_loss: 0.2807, cls_loss_wsddn: 0.2389
+2026-11-19 04:11:14,290 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.7000 max=0.7000
+2026-11-19 04:11:17,464 - train_voc_adaptive.py - INFO: Iter: 2; Elapsed: 0:00:11; ETA: 0:00:05; LR: 2.003e-08; cls_loss: 0.9328, cls_loss_aux: 20.0185, ptc_loss: 0.3956, seg_loss: 4.0418, cpe_loss: 0.5578, crme_loss: 0.7507, cls_loss_wsddn: 0.4505
+2026-11-19 04:11:17,493 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.6995 max=0.7005
+2026-11-19 04:11:22,744 - train_voc_adaptive.py - INFO: Iter: 3; Elapsed: 0:00:16; ETA: 0:00:04; LR: 4.003e-08; cls_loss: 0.8011, cls_loss_aux: 23.2669, ptc_loss: 0.3526, seg_loss: 1.4343, cpe_loss: 0.6416, crme_loss: 2.4115, cls_loss_wsddn: 0.4275
+2026-11-19 04:11:22,775 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.6993 max=0.7009
+2026-11-19 04:11:25,694 - train_voc_adaptive.py - INFO: Iter: 4; Elapsed: 0:00:19; ETA: 0:00:00; LR: 6.003e-08; cls_loss: 1.0068, cls_loss_aux: 18.0606, ptc_loss: 0.5000, seg_loss: 4.4594, cpe_loss: 0.5000, crme_loss: 0.1606, cls_loss_wsddn: 0.0653
+2026-11-19 04:11:25,725 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.6993 max=0.7009
+2026-11-19 04:11:26,210 - train_voc_adaptive.py - INFO: Validating iteration 4...
+  0%|                                                                         | 0/2 [00:00<?, ?it/s] 50%|================================>                                | 1/2 [00:01<00:01,  1.81s/it]100%|=================================================================| 2/2 [00:04<00:00,  2.55s/it]100%|=================================================================| 2/2 [00:04<00:00,  2.45s/it]
+2026-11-19 04:11:31,148 - validation_adaptive.py - INFO: val cls score: 0.153846
+2026-11-19 04:11:31,149 - validation_adaptive.py - INFO: 
++------------------+--------+--------+--------+----------+
+|      Class       |  CAM0  |  CAM1  |  CAM2  | Seg_Pred |
++==================+========+========+========+==========+
+| _background_     | 64.579 | 57.833 | 35.908 | 0.063    |
++------------------+--------+--------+--------+----------+
+| aeroplane        | 0      | 13.567 | 4.003  | 0.387    |
++------------------+--------+--------+--------+----------+
+| bicycle          | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| bird             | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| boat             | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| bottle           | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| bus              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| car              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| cat              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| chair            | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| cow              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| diningtable      | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| dog              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| horse            | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| motorbike        | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| person           | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| pottedplant      | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| sheep            | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| sofa             | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| train            | 30.585 | 11.224 | 0.010  | 0.080    |
++------------------+--------+--------+--------+----------+
+| tvmonitor        | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| m-Precision      | nan    | nan    | nan    | 5.256    |
++------------------+--------+--------+--------+----------+
+| m-Recall         | nan    | nan    | nan    | nan      |
++------------------+--------+--------+--------+----------+
+| m-ConfutionRatio | nan    | nan    | nan    | inf      |
++------------------+--------+--------+--------+----------+
+| m-IoU            | nan    | nan    | nan    | 0.025    |
++------------------+--------+--------+--------+----------+
+2026-11-19 04:11:31,150 - train_voc_adaptive.py - INFO: Segmentation mIoU=0.1766% best=0.1766%
+2026-11-19 04:11:31,867 - train_voc_adaptive.py - INFO: Saved full training checkpoint: /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_repair_20261119/consensus_smoke/checkpoints/training_iter_00000004.pth

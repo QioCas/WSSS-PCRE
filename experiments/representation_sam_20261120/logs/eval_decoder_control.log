@@ -1,0 +1,90 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{"stage": "decoder_control", "processed": 25, "total": 1449, "crf_completed": 18, "seconds": 6.718968740955461, "peak_gpu_allocated_gib": 2.003972053527832}
+{"stage": "decoder_control", "processed": 50, "total": 1449, "crf_completed": 43, "seconds": 15.526629003987182, "peak_gpu_allocated_gib": 2.003972053527832}
+{"stage": "decoder_control", "processed": 75, "total": 1449, "crf_completed": 68, "seconds": 24.094964946969412, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 100, "total": 1449, "crf_completed": 93, "seconds": 33.151202804001514, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 125, "total": 1449, "crf_completed": 118, "seconds": 41.1304570150096, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 150, "total": 1449, "crf_completed": 143, "seconds": 49.10584618296707, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 175, "total": 1449, "crf_completed": 168, "seconds": 57.488680631970055, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 200, "total": 1449, "crf_completed": 193, "seconds": 65.81850654201116, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 225, "total": 1449, "crf_completed": 218, "seconds": 75.51348206098191, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 250, "total": 1449, "crf_completed": 243, "seconds": 83.15638651396148, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 275, "total": 1449, "crf_completed": 268, "seconds": 92.24494262697408, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 300, "total": 1449, "crf_completed": 293, "seconds": 100.66180906095542, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 325, "total": 1449, "crf_completed": 318, "seconds": 110.16801150300307, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 350, "total": 1449, "crf_completed": 343, "seconds": 118.02304638299393, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 375, "total": 1449, "crf_completed": 368, "seconds": 126.30857885000296, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 400, "total": 1449, "crf_completed": 393, "seconds": 135.88645063299919, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 425, "total": 1449, "crf_completed": 418, "seconds": 145.25278019800317, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 450, "total": 1449, "crf_completed": 443, "seconds": 154.53923426399706, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 475, "total": 1449, "crf_completed": 468, "seconds": 163.7586919699679, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 500, "total": 1449, "crf_completed": 493, "seconds": 171.31257121596718, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 525, "total": 1449, "crf_completed": 518, "seconds": 178.64907116099494, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 550, "total": 1449, "crf_completed": 543, "seconds": 188.47346230200492, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 575, "total": 1449, "crf_completed": 568, "seconds": 197.45186079398263, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 600, "total": 1449, "crf_completed": 593, "seconds": 206.03209220001008, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 625, "total": 1449, "crf_completed": 618, "seconds": 215.3348764909897, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 650, "total": 1449, "crf_completed": 643, "seconds": 224.34382608399028, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 675, "total": 1449, "crf_completed": 668, "seconds": 234.03914174600504, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 700, "total": 1449, "crf_completed": 693, "seconds": 243.15547584695742, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 725, "total": 1449, "crf_completed": 718, "seconds": 252.3986085159704, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 750, "total": 1449, "crf_completed": 743, "seconds": 261.0919322309783, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 775, "total": 1449, "crf_completed": 768, "seconds": 271.2757132719853, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 800, "total": 1449, "crf_completed": 793, "seconds": 280.4112443359918, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 825, "total": 1449, "crf_completed": 818, "seconds": 288.94822120299796, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 850, "total": 1449, "crf_completed": 843, "seconds": 298.7164221639978, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 875, "total": 1449, "crf_completed": 868, "seconds": 307.5650130090071, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 900, "total": 1449, "crf_completed": 893, "seconds": 317.6219340739772, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 925, "total": 1449, "crf_completed": 918, "seconds": 326.8137211590074, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 950, "total": 1449, "crf_completed": 943, "seconds": 335.4775785629754, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 975, "total": 1449, "crf_completed": 968, "seconds": 343.59637585800374, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1000, "total": 1449, "crf_completed": 993, "seconds": 353.2649017779622, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1025, "total": 1449, "crf_completed": 1018, "seconds": 363.1415725069819, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1050, "total": 1449, "crf_completed": 1043, "seconds": 372.2848929729662, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1075, "total": 1449, "crf_completed": 1068, "seconds": 381.17244793998543, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1100, "total": 1449, "crf_completed": 1093, "seconds": 391.0485188390012, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1125, "total": 1449, "crf_completed": 1118, "seconds": 400.3348737699562, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1150, "total": 1449, "crf_completed": 1143, "seconds": 410.34553912095726, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1175, "total": 1449, "crf_completed": 1168, "seconds": 418.318649636989, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1200, "total": 1449, "crf_completed": 1193, "seconds": 427.15963955398183, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1225, "total": 1449, "crf_completed": 1218, "seconds": 437.82871440501185, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1250, "total": 1449, "crf_completed": 1243, "seconds": 446.521698720986, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1275, "total": 1449, "crf_completed": 1268, "seconds": 456.1332932949881, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1300, "total": 1449, "crf_completed": 1293, "seconds": 466.6543339359923, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1325, "total": 1449, "crf_completed": 1318, "seconds": 475.6149222209933, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1350, "total": 1449, "crf_completed": 1343, "seconds": 485.7110366949928, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1375, "total": 1449, "crf_completed": 1368, "seconds": 493.8175525550032, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1400, "total": 1449, "crf_completed": 1393, "seconds": 503.3270903779776, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1425, "total": 1449, "crf_completed": 1418, "seconds": 512.5055951419636, "peak_gpu_allocated_gib": 2.0132036209106445}
+{"stage": "decoder_control", "processed": 1449, "total": 1449, "crf_completed": 1442, "seconds": 520.2610030079959, "peak_gpu_allocated_gib": 2.0132036209106445}
+FINISHED decoder_control: raw=73.388694% CRF=74.042696%
+{
+  "mode": "decoder_control",
+  "partial_evaluation": false,
+  "refinement_steps": 4000,
+  "raw": 73.38869402055961,
+  "crf": 74.04269636849912,
+  "delta_vs_baseline_pp": {
+    "raw": -0.40079401338408616,
+    "crf": -0.18158736479945503
+  }
+}

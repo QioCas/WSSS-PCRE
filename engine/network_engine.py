@@ -1,7 +1,6 @@
-from model.model_baseline import network_baseline
-from model.model_seco import network
 from model.model_wsddn import network as network_wsddn
 def build_network_baseline(args):
+    from model.model_baseline import network_baseline
 
     model = network_baseline(args,
     backbone=args.backbone,
@@ -13,6 +12,7 @@ def build_network_baseline(args):
 
     return model, param_groups
 def build_network(args):
+    from model.model_seco import network
 
     model = network(args,
     backbone=args.backbone,

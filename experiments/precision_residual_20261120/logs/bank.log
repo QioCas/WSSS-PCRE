@@ -1,0 +1,127 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{"stage": "bank", "completed": 100, "total": 10582, "seconds": 9.673736941011157}
+{"stage": "bank", "completed": 200, "total": 10582, "seconds": 19.258961569983512}
+{"stage": "bank", "completed": 300, "total": 10582, "seconds": 25.590464556007646}
+{"stage": "bank", "completed": 400, "total": 10582, "seconds": 35.66344901401317}
+{"stage": "bank", "completed": 500, "total": 10582, "seconds": 45.43648935796227}
+{"stage": "bank", "completed": 600, "total": 10582, "seconds": 51.80742724199081}
+{"stage": "bank", "completed": 700, "total": 10582, "seconds": 58.06559122801991}
+{"stage": "bank", "completed": 800, "total": 10582, "seconds": 64.00918919901596}
+{"stage": "bank", "completed": 900, "total": 10582, "seconds": 70.4742233119905}
+{"stage": "bank", "completed": 1000, "total": 10582, "seconds": 77.0624892989872}
+{"stage": "bank", "completed": 1100, "total": 10582, "seconds": 83.37283265800215}
+{"stage": "bank", "completed": 1200, "total": 10582, "seconds": 88.99691768799676}
+{"stage": "bank", "completed": 1300, "total": 10582, "seconds": 94.59435771498829}
+{"stage": "bank", "completed": 1400, "total": 10582, "seconds": 100.53556033596396}
+{"stage": "bank", "completed": 1500, "total": 10582, "seconds": 106.70661832997575}
+{"stage": "bank", "completed": 1600, "total": 10582, "seconds": 113.39953584596515}
+{"stage": "bank", "completed": 1700, "total": 10582, "seconds": 119.33588730898919}
+{"stage": "bank", "completed": 1800, "total": 10582, "seconds": 126.57793807698181}
+{"stage": "bank", "completed": 1900, "total": 10582, "seconds": 136.67487558699213}
+{"stage": "bank", "completed": 2000, "total": 10582, "seconds": 146.82093055499718}
+{"stage": "bank", "completed": 2100, "total": 10582, "seconds": 156.68598751100944}
+{"stage": "bank", "completed": 2200, "total": 10582, "seconds": 166.68558815296274}
+{"stage": "bank", "completed": 2300, "total": 10582, "seconds": 175.82658380799694}
+{"stage": "bank", "completed": 2400, "total": 10582, "seconds": 182.4922454850166}
+{"stage": "bank", "completed": 2500, "total": 10582, "seconds": 191.4895362489624}
+{"stage": "bank", "completed": 2600, "total": 10582, "seconds": 201.6291388410027}
+{"stage": "bank", "completed": 2700, "total": 10582, "seconds": 207.88278684596298}
+{"stage": "bank", "completed": 2800, "total": 10582, "seconds": 213.67985573998885}
+{"stage": "bank", "completed": 2900, "total": 10582, "seconds": 219.28470122098224}
+{"stage": "bank", "completed": 3000, "total": 10582, "seconds": 225.31585833599092}
+{"stage": "bank", "completed": 3100, "total": 10582, "seconds": 231.5580360100139}
+{"stage": "bank", "completed": 3200, "total": 10582, "seconds": 237.29281308798818}
+{"stage": "bank", "completed": 3300, "total": 10582, "seconds": 243.11837667098735}
+{"stage": "bank", "completed": 3400, "total": 10582, "seconds": 248.87907721899683}
+{"stage": "bank", "completed": 3500, "total": 10582, "seconds": 255.15229811600875}
+{"stage": "bank", "completed": 3600, "total": 10582, "seconds": 261.6755781790125}
+{"stage": "bank", "completed": 3700, "total": 10582, "seconds": 267.71204284898704}
+{"stage": "bank", "completed": 3800, "total": 10582, "seconds": 273.5864579320187}
+{"stage": "bank", "completed": 3900, "total": 10582, "seconds": 279.6463983809808}
+{"stage": "bank", "completed": 4000, "total": 10582, "seconds": 289.31811547500547}
+{"stage": "bank", "completed": 4100, "total": 10582, "seconds": 299.1240616639843}
+{"stage": "bank", "completed": 4200, "total": 10582, "seconds": 308.6666145590134}
+{"stage": "bank", "completed": 4300, "total": 10582, "seconds": 318.3077642520075}
+{"stage": "bank", "completed": 4400, "total": 10582, "seconds": 328.2950853939983}
+{"stage": "bank", "completed": 4500, "total": 10582, "seconds": 334.84479573898716}
+{"stage": "bank", "completed": 4600, "total": 10582, "seconds": 344.80980596801965}
+{"stage": "bank", "completed": 4700, "total": 10582, "seconds": 354.4619900039979}
+{"stage": "bank", "completed": 4800, "total": 10582, "seconds": 360.99767026497284}
+{"stage": "bank", "completed": 4900, "total": 10582, "seconds": 366.80514826398576}
+{"stage": "bank", "completed": 5000, "total": 10582, "seconds": 373.1242894710158}
+{"stage": "bank", "completed": 5100, "total": 10582, "seconds": 379.2122574140085}
+{"stage": "bank", "completed": 5200, "total": 10582, "seconds": 385.33710909896763}
+{"stage": "bank", "completed": 5300, "total": 10582, "seconds": 391.4431343660108}
+{"stage": "bank", "completed": 5400, "total": 10582, "seconds": 397.73762790398905}
+{"stage": "bank", "completed": 5500, "total": 10582, "seconds": 403.8120124170091}
+{"stage": "bank", "completed": 5600, "total": 10582, "seconds": 409.91190346801886}
+{"stage": "bank", "completed": 5700, "total": 10582, "seconds": 416.0459905230091}
+{"stage": "bank", "completed": 5800, "total": 10582, "seconds": 422.2136667720042}
+{"stage": "bank", "completed": 5900, "total": 10582, "seconds": 428.5435301429825}
+{"stage": "bank", "completed": 6000, "total": 10582, "seconds": 433.24545811099233}
+{"stage": "bank", "completed": 6100, "total": 10582, "seconds": 442.94182960898615}
+{"stage": "bank", "completed": 6200, "total": 10582, "seconds": 452.8334790999652}
+{"stage": "bank", "completed": 6300, "total": 10582, "seconds": 462.684673568001}
+{"stage": "bank", "completed": 6400, "total": 10582, "seconds": 472.7891845579725}
+{"stage": "bank", "completed": 6500, "total": 10582, "seconds": 482.2964062889805}
+{"stage": "bank", "completed": 6600, "total": 10582, "seconds": 489.0651928440202}
+{"stage": "bank", "completed": 6700, "total": 10582, "seconds": 499.3737241429626}
+{"stage": "bank", "completed": 6800, "total": 10582, "seconds": 509.596537497011}
+{"stage": "bank", "completed": 6900, "total": 10582, "seconds": 519.2653487169882}
+{"stage": "bank", "completed": 7000, "total": 10582, "seconds": 529.5009963589837}
+{"stage": "bank", "completed": 7100, "total": 10582, "seconds": 539.6890715869959}
+{"stage": "bank", "completed": 7200, "total": 10582, "seconds": 549.6104946570122}
+{"stage": "bank", "completed": 7300, "total": 10582, "seconds": 559.7492596619995}
+{"stage": "bank", "completed": 7400, "total": 10582, "seconds": 568.869905155967}
+{"stage": "bank", "completed": 7500, "total": 10582, "seconds": 577.4220790470135}
+{"stage": "bank", "completed": 7600, "total": 10582, "seconds": 587.6778128530132}
+{"stage": "bank", "completed": 7700, "total": 10582, "seconds": 595.6577623799676}
+{"stage": "bank", "completed": 7800, "total": 10582, "seconds": 601.9030623199651}
+{"stage": "bank", "completed": 7900, "total": 10582, "seconds": 608.2570393519709}
+{"stage": "bank", "completed": 8000, "total": 10582, "seconds": 614.3769980269717}
+{"stage": "bank", "completed": 8100, "total": 10582, "seconds": 620.6321456540027}
+{"stage": "bank", "completed": 8200, "total": 10582, "seconds": 626.7336319879978}
+{"stage": "bank", "completed": 8300, "total": 10582, "seconds": 632.8451192789944}
+{"stage": "bank", "completed": 8400, "total": 10582, "seconds": 639.1378056299873}
+{"stage": "bank", "completed": 8500, "total": 10582, "seconds": 645.4404553819913}
+{"stage": "bank", "completed": 8600, "total": 10582, "seconds": 651.4455409439979}
+{"stage": "bank", "completed": 8700, "total": 10582, "seconds": 657.3756339169922}
+{"stage": "bank", "completed": 8800, "total": 10582, "seconds": 663.4499665509793}
+{"stage": "bank", "completed": 8900, "total": 10582, "seconds": 668.9384770930046}
+{"stage": "bank", "completed": 9000, "total": 10582, "seconds": 677.4396349299932}
+{"stage": "bank", "completed": 9100, "total": 10582, "seconds": 687.3470864499686}
+{"stage": "bank", "completed": 9200, "total": 10582, "seconds": 697.4450479379739}
+{"stage": "bank", "completed": 9300, "total": 10582, "seconds": 707.7280839009909}
+{"stage": "bank", "completed": 9400, "total": 10582, "seconds": 717.2390276829829}
+{"stage": "bank", "completed": 9500, "total": 10582, "seconds": 724.9375570460106}
+{"stage": "bank", "completed": 9600, "total": 10582, "seconds": 733.977658232965}
+{"stage": "bank", "completed": 9700, "total": 10582, "seconds": 743.4712526049698}
+{"stage": "bank", "completed": 9800, "total": 10582, "seconds": 751.6145377649809}
+{"stage": "bank", "completed": 9900, "total": 10582, "seconds": 757.4189885620144}
+{"stage": "bank", "completed": 10000, "total": 10582, "seconds": 763.2024347750121}
+{"stage": "bank", "completed": 10100, "total": 10582, "seconds": 768.8213696330204}
+{"stage": "bank", "completed": 10200, "total": 10582, "seconds": 774.8596832460025}
+{"stage": "bank", "completed": 10300, "total": 10582, "seconds": 780.9957774899667}
+{"stage": "bank", "completed": 10400, "total": 10582, "seconds": 786.9549104009639}
+{"stage": "bank", "completed": 10500, "total": 10582, "seconds": 793.0958303610096}
+{"stage": "bank", "completed": 10582, "total": 10582, "seconds": 798.070508883975}
+{"completed": 10582, "valid_positive_classes": 21, "valid_negative_classes": 20}

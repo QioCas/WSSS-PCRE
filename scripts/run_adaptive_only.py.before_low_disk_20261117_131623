@@ -1,0 +1,120 @@
+"""Run only fresh adaptive after the result disk and GPU have enough space."""
+import argparse
+from datetime import datetime, timezone
+import json
+import os
+from pathlib import Path
+import shutil
+import subprocess
+import sys
+import time
+import uuid
+
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
+from scripts.run_pcre_experiments import event, preflight, worker
+
+
+def validate_config(config):
+    if config.get('modes') != ['adaptive']:
+        raise ValueError('Only modes=[adaptive] is accepted by this launcher')
+    common = config['common']
+    if common.get('max_iters') != 20000:
+        raise ValueError('Expected a fresh 20000-iteration experiment')
+    if any(common.get(key) for key in ('resume', 'weight', 'warm_start', 'start_iter')):
+        raise ValueError('Fresh adaptive must not load previous experiment weights')
+    if float(config.get('min_disk_free_gib', 10)) < 10:
+        raise ValueError('The run plan requires at least 10 GiB free disk')
+
+
+def wait_disk(config, directory):
+    deadline = time.monotonic() + config.get('max_disk_wait_hours', 24) * 3600
+    minimum = float(config.get('min_disk_free_gib', 10))
+    last_report = -float('inf')
+    while time.monotonic() < deadline:
+        if (directory / 'STOP').exists():
+            event(directory, 'stopped_by_user', note='STOP file found before training')
+            return None
+        available = shutil.disk_usage(directory).free / 1024 ** 3
+        if available >= minimum:
+            event(directory, 'preflight_running', disk_free_gib=available)
+            try:
+                return preflight(config)
+            except RuntimeError as error:
+                if not str(error).startswith('Checkpoint budget '):
+                    raise
+                event(directory, 'waiting_for_disk',
+                      disk_free_gib=shutil.disk_usage(directory).free / 1024 ** 3,
+                      required_disk_gib=minimum, note=str(error))
+                last_report = time.monotonic()
+        elif time.monotonic() - last_report >= 60:
+            event(directory, 'waiting_for_disk', disk_free_gib=available,
+                  required_disk_gib=minimum, modes=config['modes'], start_iteration=0)
+            last_report = time.monotonic()
+        time.sleep(20)
+    raise TimeoutError('Disk did not become available in the configured wait window; training never started')
+
+
+def run_worker(config, directory):
+    validate_config(config)
+    try:
+        report = wait_disk(config, directory)
+        if report is None:
+            return
+        with (directory / 'preflight.json').open('x') as stream:
+            json.dump(report, stream, indent=2)
+        freeze = subprocess.run([sys.executable, '-m', 'pip', 'freeze'], text=True, capture_output=True)
+        with (directory / 'environment_freeze.txt').open('x') as stream:
+            stream.write(freeze.stdout)
+        event(directory, 'preflight_completed', preflight=report)
+    except Exception as error:
+        event(directory, 'failed', error=str(error))
+        raise
+    # This tested pipeline runs smoke, then the modes list containing only adaptive.
+    worker(config, directory)
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--config', default='configs/pcre_adaptive_only.json')
+    parser.add_argument('--detach', action='store_true')
+    parser.add_argument('--worker', action='store_true', help=argparse.SUPPRESS)
+    parser.add_argument('--job_dir', help=argparse.SUPPRESS)
+    args = parser.parse_args()
+    os.chdir(ROOT)
+    config = json.loads(Path(args.config).read_text())
+    validate_config(config)
+    if args.worker:
+        run_worker(config, Path(args.job_dir))
+        return
+    import psutil
+    supervisors = {str(Path(__file__).resolve()), str(ROOT / 'scripts/run_pcre_experiments.py')}
+    for process in psutil.process_iter(['pid', 'cmdline']):
+        if process.pid == os.getpid():
+            continue
+        command = process.info['cmdline'] or []
+        if '--worker' in command and supervisors.intersection(command):
+            raise RuntimeError(f'An experiment supervisor already exists: PID {process.pid}')
+    identifier = datetime.now(timezone.utc).strftime('%Y%m%d_%H%M%S') + '_' + uuid.uuid4().hex[:6]
+    directory = ROOT / 'experiments' / ('pcre_sat_' + identifier)
+    directory.mkdir(parents=True, exist_ok=False)
+    with (directory / 'queue_config.json').open('x') as stream:
+        json.dump(config, stream, indent=2)
+    event(directory, 'created', job_dir=str(directory), modes=config['modes'],
+          start_iteration=0, note='Fresh start; old files preserved; wait for disk then GPU')
+    if args.detach:
+        with (directory / 'supervisor.log').open('x') as stream:
+            child = subprocess.Popen([sys.executable, '-u', str(Path(__file__).resolve()),
+                                      '--worker', '--config', str(directory / 'queue_config.json'),
+                                      '--job_dir', str(directory)], cwd=ROOT,
+                                     stdin=subprocess.DEVNULL, stdout=stream,
+                                     stderr=subprocess.STDOUT, start_new_session=True)
+        with (directory / 'supervisor.pid').open('x') as stream:
+            stream.write(str(child.pid) + '\n')
+        print(json.dumps({'job_dir': str(directory), 'supervisor_pid': child.pid}), flush=True)
+    else:
+        run_worker(config, directory)
+
+
+if __name__ == '__main__':
+    main()

@@ -1,0 +1,70 @@
+2026-11-21 15:51:01,959 - root - INFO: ======================================================================
+2026-11-21 15:51:01,959 - root - INFO: PEFT-CSL: Parameter-Efficient LoRA ViT + CSL Soft-Distillation
+2026-11-21 15:51:01,959 - root - INFO: Target steps: 2500 | Batch size: 4
+2026-11-21 15:51:01,959 - root - INFO: LR Decoder: 3e-05 | LR LoRA: 0.0001 | Rank: 8
+2026-11-21 15:51:01,959 - root - INFO: Adapted Blocks: [8, 9, 10, 11] | CSL Alpha: 8.0
+2026-11-21 15:51:01,959 - root - INFO: Work dir: /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/peft_csl_training_20261121
+2026-11-21 15:51:01,959 - root - INFO: ======================================================================
+2026-11-21 15:51:01,959 - root - INFO: Building model and loading baseline checkpoint...
+2026-11-21 15:51:03,744 - root - INFO: Trainable LoRA Parameters (ViT Blocks [8, 9, 10, 11]): 98,304
+2026-11-21 15:51:03,744 - root - INFO: Trainable Decoder Parameters: 580,692
+2026-11-21 15:51:03,744 - root - INFO: Total Trainable Parameters: 678,996
+2026-11-21 15:51:03,744 - root - INFO: Frozen Base Parameters (86M ViT etc.): 165,002,081
+2026-11-21 15:51:03,744 - root - INFO: Loaded 10582 training image names from /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/datasets/voc/train_aug.txt
+2026-11-21 15:51:03,745 - root - INFO: Starting PEFT-CSL training loop...
+2026-11-21 15:51:10,611 - root - INFO: [0050/2500] Loss: 0.0333 | SoftCE: 0.0324 | Anchor KL: 0.0018 | AvgWeight: 0.997 | LR Dec: 1.50e-05 | LR LoRA: 5.00e-05 | Speed: 7.28 it/s | ETA: 5.6m
+2026-11-21 15:51:17,276 - root - INFO: [0100/2500] Loss: 0.0410 | SoftCE: 0.0373 | Anchor KL: 0.0073 | AvgWeight: 0.996 | LR Dec: 3.00e-05 | LR LoRA: 1.00e-04 | Speed: 7.39 it/s | ETA: 5.4m
+2026-11-21 15:51:23,626 - root - INFO: [0150/2500] Loss: 0.0348 | SoftCE: 0.0338 | Anchor KL: 0.0020 | AvgWeight: 0.997 | LR Dec: 3.00e-05 | LR LoRA: 9.99e-05 | Speed: 7.54 it/s | ETA: 5.2m
+2026-11-21 15:51:29,986 - root - INFO: [0200/2500] Loss: 0.0378 | SoftCE: 0.0367 | Anchor KL: 0.0021 | AvgWeight: 0.997 | LR Dec: 2.99e-05 | LR LoRA: 9.96e-05 | Speed: 7.62 it/s | ETA: 5.0m
+2026-11-21 15:51:36,534 - root - INFO: [0250/2500] Loss: 0.0480 | SoftCE: 0.0420 | Anchor KL: 0.0121 | AvgWeight: 0.996 | LR Dec: 2.97e-05 | LR LoRA: 9.90e-05 | Speed: 7.62 it/s | ETA: 4.9m
+2026-11-21 15:51:42,729 - root - INFO: [0300/2500] Loss: 0.1926 | SoftCE: 0.1897 | Anchor KL: 0.0059 | AvgWeight: 0.991 | LR Dec: 2.95e-05 | LR LoRA: 9.83e-05 | Speed: 7.70 it/s | ETA: 4.8m
+2026-11-21 15:51:49,243 - root - INFO: [0350/2500] Loss: 0.0497 | SoftCE: 0.0472 | Anchor KL: 0.0050 | AvgWeight: 0.994 | LR Dec: 2.92e-05 | LR LoRA: 9.73e-05 | Speed: 7.69 it/s | ETA: 4.7m
+2026-11-21 15:51:55,642 - root - INFO: [0400/2500] Loss: 0.0380 | SoftCE: 0.0338 | Anchor KL: 0.0084 | AvgWeight: 0.992 | LR Dec: 2.89e-05 | LR LoRA: 9.62e-05 | Speed: 7.71 it/s | ETA: 4.5m
+2026-11-21 15:52:02,132 - root - INFO: [0450/2500] Loss: 0.0201 | SoftCE: 0.0187 | Anchor KL: 0.0027 | AvgWeight: 0.994 | LR Dec: 2.85e-05 | LR LoRA: 9.48e-05 | Speed: 7.71 it/s | ETA: 4.4m
+2026-11-21 15:52:08,417 - root - INFO: [0500/2500] Loss: 0.2749 | SoftCE: 0.2673 | Anchor KL: 0.0151 | AvgWeight: 0.970 | LR Dec: 2.80e-05 | LR LoRA: 9.33e-05 | Speed: 7.73 it/s | ETA: 4.3m
+2026-11-21 15:52:09,081 - root - INFO: Saved merged checkpoints at step 500
+2026-11-21 15:52:15,502 - root - INFO: [0550/2500] Loss: 0.2220 | SoftCE: 0.2175 | Anchor KL: 0.0091 | AvgWeight: 0.959 | LR Dec: 2.75e-05 | LR LoRA: 9.16e-05 | Speed: 7.66 it/s | ETA: 4.2m
+2026-11-21 15:52:21,978 - root - INFO: [0600/2500] Loss: 0.0349 | SoftCE: 0.0329 | Anchor KL: 0.0041 | AvgWeight: 0.998 | LR Dec: 2.69e-05 | LR LoRA: 8.97e-05 | Speed: 7.67 it/s | ETA: 4.1m
+2026-11-21 15:52:28,558 - root - INFO: [0650/2500] Loss: 0.0746 | SoftCE: 0.0697 | Anchor KL: 0.0099 | AvgWeight: 0.998 | LR Dec: 2.63e-05 | LR LoRA: 8.76e-05 | Speed: 7.66 it/s | ETA: 4.0m
+2026-11-21 15:52:34,993 - root - INFO: [0700/2500] Loss: 0.0450 | SoftCE: 0.0382 | Anchor KL: 0.0137 | AvgWeight: 0.990 | LR Dec: 2.56e-05 | LR LoRA: 8.54e-05 | Speed: 7.67 it/s | ETA: 3.9m
+2026-11-21 15:52:41,427 - root - INFO: [0750/2500] Loss: 0.0493 | SoftCE: 0.0452 | Anchor KL: 0.0082 | AvgWeight: 0.995 | LR Dec: 2.49e-05 | LR LoRA: 8.30e-05 | Speed: 7.68 it/s | ETA: 3.8m
+2026-11-21 15:52:47,715 - root - INFO: [0800/2500] Loss: 0.5262 | SoftCE: 0.5215 | Anchor KL: 0.0092 | AvgWeight: 0.965 | LR Dec: 2.41e-05 | LR LoRA: 8.04e-05 | Speed: 7.69 it/s | ETA: 3.7m
+2026-11-21 15:52:53,892 - root - INFO: [0850/2500] Loss: 0.0362 | SoftCE: 0.0343 | Anchor KL: 0.0037 | AvgWeight: 0.998 | LR Dec: 2.33e-05 | LR LoRA: 7.78e-05 | Speed: 7.72 it/s | ETA: 3.6m
+2026-11-21 15:53:00,651 - root - INFO: [0900/2500] Loss: 0.0521 | SoftCE: 0.0505 | Anchor KL: 0.0032 | AvgWeight: 0.996 | LR Dec: 2.25e-05 | LR LoRA: 7.50e-05 | Speed: 7.70 it/s | ETA: 3.5m
+2026-11-21 15:53:06,914 - root - INFO: [0950/2500] Loss: 0.0802 | SoftCE: 0.0776 | Anchor KL: 0.0050 | AvgWeight: 0.993 | LR Dec: 2.16e-05 | LR LoRA: 7.21e-05 | Speed: 7.71 it/s | ETA: 3.3m
+2026-11-21 15:53:13,218 - root - INFO: [1000/2500] Loss: 0.1244 | SoftCE: 0.1126 | Anchor KL: 0.0236 | AvgWeight: 0.966 | LR Dec: 2.07e-05 | LR LoRA: 6.91e-05 | Speed: 7.72 it/s | ETA: 3.2m
+2026-11-21 15:53:13,873 - root - INFO: Saved merged checkpoints at step 1000
+2026-11-21 15:53:20,643 - root - INFO: [1050/2500] Loss: 0.0319 | SoftCE: 0.0287 | Anchor KL: 0.0064 | AvgWeight: 0.997 | LR Dec: 1.98e-05 | LR LoRA: 6.61e-05 | Speed: 7.67 it/s | ETA: 3.2m
+2026-11-21 15:53:26,946 - root - INFO: [1100/2500] Loss: 0.1357 | SoftCE: 0.1335 | Anchor KL: 0.0045 | AvgWeight: 0.987 | LR Dec: 1.89e-05 | LR LoRA: 6.29e-05 | Speed: 7.68 it/s | ETA: 3.0m
+2026-11-21 15:53:33,176 - root - INFO: [1150/2500] Loss: 0.0635 | SoftCE: 0.0571 | Anchor KL: 0.0128 | AvgWeight: 0.992 | LR Dec: 1.79e-05 | LR LoRA: 5.98e-05 | Speed: 7.70 it/s | ETA: 2.9m
+2026-11-21 15:53:39,412 - root - INFO: [1200/2500] Loss: 0.1484 | SoftCE: 0.1449 | Anchor KL: 0.0069 | AvgWeight: 0.994 | LR Dec: 1.70e-05 | LR LoRA: 5.65e-05 | Speed: 7.71 it/s | ETA: 2.8m
+2026-11-21 15:53:45,855 - root - INFO: [1250/2500] Loss: 0.0383 | SoftCE: 0.0342 | Anchor KL: 0.0082 | AvgWeight: 0.996 | LR Dec: 1.60e-05 | LR LoRA: 5.33e-05 | Speed: 7.71 it/s | ETA: 2.7m
+2026-11-21 15:53:52,132 - root - INFO: [1300/2500] Loss: 0.6241 | SoftCE: 0.6186 | Anchor KL: 0.0110 | AvgWeight: 0.994 | LR Dec: 1.50e-05 | LR LoRA: 5.00e-05 | Speed: 7.72 it/s | ETA: 2.6m
+2026-11-21 15:53:58,347 - root - INFO: [1350/2500] Loss: 0.1486 | SoftCE: 0.1440 | Anchor KL: 0.0092 | AvgWeight: 0.994 | LR Dec: 1.40e-05 | LR LoRA: 4.67e-05 | Speed: 7.73 it/s | ETA: 2.5m
+2026-11-21 15:54:04,770 - root - INFO: [1400/2500] Loss: 0.1322 | SoftCE: 0.1300 | Anchor KL: 0.0045 | AvgWeight: 0.984 | LR Dec: 1.30e-05 | LR LoRA: 4.35e-05 | Speed: 7.73 it/s | ETA: 2.4m
+2026-11-21 15:54:10,967 - root - INFO: [1450/2500] Loss: 0.2380 | SoftCE: 0.2340 | Anchor KL: 0.0080 | AvgWeight: 0.956 | LR Dec: 1.21e-05 | LR LoRA: 4.02e-05 | Speed: 7.74 it/s | ETA: 2.3m
+2026-11-21 15:54:17,342 - root - INFO: [1500/2500] Loss: 0.0864 | SoftCE: 0.0839 | Anchor KL: 0.0050 | AvgWeight: 0.995 | LR Dec: 1.11e-05 | LR LoRA: 3.71e-05 | Speed: 7.75 it/s | ETA: 2.2m
+2026-11-21 15:54:18,013 - root - INFO: Saved merged checkpoints at step 1500
+2026-11-21 15:54:24,372 - root - INFO: [1550/2500] Loss: 0.0502 | SoftCE: 0.0454 | Anchor KL: 0.0097 | AvgWeight: 0.994 | LR Dec: 1.02e-05 | LR LoRA: 3.39e-05 | Speed: 7.73 it/s | ETA: 2.0m
+2026-11-21 15:54:30,624 - root - INFO: [1600/2500] Loss: 0.0829 | SoftCE: 0.0807 | Anchor KL: 0.0043 | AvgWeight: 0.998 | LR Dec: 9.26e-06 | LR LoRA: 3.09e-05 | Speed: 7.73 it/s | ETA: 1.9m
+2026-11-21 15:54:36,995 - root - INFO: [1650/2500] Loss: 0.0892 | SoftCE: 0.0857 | Anchor KL: 0.0071 | AvgWeight: 0.985 | LR Dec: 8.37e-06 | LR LoRA: 2.79e-05 | Speed: 7.74 it/s | ETA: 1.8m
+2026-11-21 15:54:43,292 - root - INFO: [1700/2500] Loss: 0.0881 | SoftCE: 0.0810 | Anchor KL: 0.0143 | AvgWeight: 0.981 | LR Dec: 7.50e-06 | LR LoRA: 2.50e-05 | Speed: 7.74 it/s | ETA: 1.7m
+2026-11-21 15:54:49,696 - root - INFO: [1750/2500] Loss: 0.0672 | SoftCE: 0.0622 | Anchor KL: 0.0098 | AvgWeight: 0.984 | LR Dec: 6.67e-06 | LR LoRA: 2.22e-05 | Speed: 7.75 it/s | ETA: 1.6m
+2026-11-21 15:54:56,007 - root - INFO: [1800/2500] Loss: 0.0457 | SoftCE: 0.0433 | Anchor KL: 0.0050 | AvgWeight: 0.994 | LR Dec: 5.87e-06 | LR LoRA: 1.96e-05 | Speed: 7.75 it/s | ETA: 1.5m
+2026-11-21 15:55:02,368 - root - INFO: [1850/2500] Loss: 0.0738 | SoftCE: 0.0706 | Anchor KL: 0.0064 | AvgWeight: 0.991 | LR Dec: 5.11e-06 | LR LoRA: 1.70e-05 | Speed: 7.75 it/s | ETA: 1.4m
+2026-11-21 15:55:08,679 - root - INFO: [1900/2500] Loss: 0.0242 | SoftCE: 0.0214 | Anchor KL: 0.0056 | AvgWeight: 0.995 | LR Dec: 4.39e-06 | LR LoRA: 1.46e-05 | Speed: 7.76 it/s | ETA: 1.3m
+2026-11-21 15:55:15,059 - root - INFO: [1950/2500] Loss: 0.0498 | SoftCE: 0.0470 | Anchor KL: 0.0054 | AvgWeight: 0.994 | LR Dec: 3.72e-06 | LR LoRA: 1.24e-05 | Speed: 7.76 it/s | ETA: 1.2m
+2026-11-21 15:55:21,294 - root - INFO: [2000/2500] Loss: 0.2124 | SoftCE: 0.2082 | Anchor KL: 0.0085 | AvgWeight: 0.960 | LR Dec: 3.10e-06 | LR LoRA: 1.03e-05 | Speed: 7.77 it/s | ETA: 1.1m
+2026-11-21 15:55:21,966 - root - INFO: Saved merged checkpoints at step 2000
+2026-11-21 15:55:28,242 - root - INFO: [2050/2500] Loss: 0.0486 | SoftCE: 0.0436 | Anchor KL: 0.0100 | AvgWeight: 0.986 | LR Dec: 2.53e-06 | LR LoRA: 8.43e-06 | Speed: 7.75 it/s | ETA: 1.0m
+2026-11-21 15:55:34,505 - root - INFO: [2100/2500] Loss: 0.1205 | SoftCE: 0.1161 | Anchor KL: 0.0088 | AvgWeight: 0.980 | LR Dec: 2.01e-06 | LR LoRA: 6.70e-06 | Speed: 7.76 it/s | ETA: 0.9m
+2026-11-21 15:55:40,733 - root - INFO: [2150/2500] Loss: 0.0322 | SoftCE: 0.0295 | Anchor KL: 0.0053 | AvgWeight: 0.996 | LR Dec: 1.55e-06 | LR LoRA: 5.16e-06 | Speed: 7.76 it/s | ETA: 0.8m
+2026-11-21 15:55:47,058 - root - INFO: [2200/2500] Loss: 0.0674 | SoftCE: 0.0633 | Anchor KL: 0.0084 | AvgWeight: 0.986 | LR Dec: 1.14e-06 | LR LoRA: 3.81e-06 | Speed: 7.77 it/s | ETA: 0.6m
+2026-11-21 15:55:53,317 - root - INFO: [2250/2500] Loss: 0.0178 | SoftCE: 0.0152 | Anchor KL: 0.0053 | AvgWeight: 0.998 | LR Dec: 7.96e-07 | LR LoRA: 2.65e-06 | Speed: 7.77 it/s | ETA: 0.5m
+2026-11-21 15:55:59,611 - root - INFO: [2300/2500] Loss: 0.0292 | SoftCE: 0.0266 | Anchor KL: 0.0051 | AvgWeight: 0.994 | LR Dec: 5.11e-07 | LR LoRA: 1.70e-06 | Speed: 7.77 it/s | ETA: 0.4m
+2026-11-21 15:56:05,832 - root - INFO: [2350/2500] Loss: 0.0255 | SoftCE: 0.0212 | Anchor KL: 0.0086 | AvgWeight: 0.993 | LR Dec: 2.88e-07 | LR LoRA: 9.61e-07 | Speed: 7.78 it/s | ETA: 0.3m
+2026-11-21 15:56:12,260 - root - INFO: [2400/2500] Loss: 0.0590 | SoftCE: 0.0527 | Anchor KL: 0.0125 | AvgWeight: 0.990 | LR Dec: 1.28e-07 | LR LoRA: 4.28e-07 | Speed: 7.78 it/s | ETA: 0.2m
+2026-11-21 15:56:18,486 - root - INFO: [2450/2500] Loss: 0.1265 | SoftCE: 0.1166 | Anchor KL: 0.0198 | AvgWeight: 0.960 | LR Dec: 3.21e-08 | LR LoRA: 1.07e-07 | Speed: 7.78 it/s | ETA: 0.1m
+2026-11-21 15:56:24,871 - root - INFO: [2500/2500] Loss: 0.1898 | SoftCE: 0.1846 | Anchor KL: 0.0103 | AvgWeight: 0.985 | LR Dec: 0.00e+00 | LR LoRA: 0.00e+00 | Speed: 7.79 it/s | ETA: 0.0m
+2026-11-21 15:56:25,571 - root - INFO: Saved merged checkpoints at step 2500
+2026-11-21 15:56:26,279 - root - INFO: PEFT-CSL Training Complete! Merged models saved: /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/peft_csl_training_20261121/checkpoints/model_peft_csl_final_student.pth and /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/peft_csl_training_20261121/checkpoints/model_peft_csl_final_ema.pth

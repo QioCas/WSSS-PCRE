@@ -1,0 +1,10 @@
+{
+  "mode": "A2_negative_filter",
+  "partial_evaluation": false,
+  "raw": 73.76244997341492,
+  "crf": 74.27742117234115,
+  "delta_vs_baseline_pp": {
+    "raw": -0.027038060528783436,
+    "crf": 0.053137439042572066
+  }
+}

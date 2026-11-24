@@ -1,0 +1,11 @@
+{
+  "unit_tests_passed": 28,
+  "reliable_cache_passed": true,
+  "sam_cache_passed": true,
+  "decoder_training_passed": true,
+  "partial_backbone_training_passed": true,
+  "strict_checkpoint_inference_passed": true,
+  "frozen_student_unchanged": true,
+  "teacher_unchanged": true,
+  "last2_trainable_parameters": 14757972
+}

@@ -1,0 +1,10 @@
+{
+  "processed": 1449,
+  "total": 1449,
+  "elapsed_seconds": 132.88720297813416,
+  "baseline_crf_miou": 74.22428373329858,
+  "sam_refined_miou": 75.65512242026772,
+  "delta_pp": 1.430838686969138,
+  "refined_components": 2007,
+  "total_components": 3103
+}

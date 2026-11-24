@@ -1,0 +1,138 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{"stage": "reliable_cache", "completed": 100, "total": 10582, "seconds": 12.311844459036365}
+{"stage": "reliable_cache", "completed": 200, "total": 10582, "seconds": 24.494480539986398}
+{"stage": "reliable_cache", "completed": 300, "total": 10582, "seconds": 36.67619572003605}
+{"stage": "reliable_cache", "completed": 400, "total": 10582, "seconds": 48.890776221989654}
+{"stage": "reliable_cache", "completed": 500, "total": 10582, "seconds": 61.091388848028146}
+{"stage": "reliable_cache", "completed": 600, "total": 10582, "seconds": 73.29605346499011}
+{"stage": "reliable_cache", "completed": 700, "total": 10582, "seconds": 85.48764163203305}
+{"stage": "reliable_cache", "completed": 800, "total": 10582, "seconds": 97.7258972870186}
+{"stage": "reliable_cache", "completed": 900, "total": 10582, "seconds": 109.9682795869885}
+{"stage": "reliable_cache", "completed": 1000, "total": 10582, "seconds": 122.20121532003395}
+{"stage": "reliable_cache", "completed": 1100, "total": 10582, "seconds": 134.45020160003332}
+{"stage": "reliable_cache", "completed": 1200, "total": 10582, "seconds": 146.67418979702052}
+{"stage": "reliable_cache", "completed": 1300, "total": 10582, "seconds": 158.9117308559944}
+{"stage": "reliable_cache", "completed": 1400, "total": 10582, "seconds": 171.15076413704082}
+{"stage": "reliable_cache", "completed": 1500, "total": 10582, "seconds": 183.38539097004104}
+{"stage": "reliable_cache", "completed": 1600, "total": 10582, "seconds": 195.63694787101122}
+{"stage": "reliable_cache", "completed": 1700, "total": 10582, "seconds": 207.87955066899303}
+{"stage": "reliable_cache", "completed": 1800, "total": 10582, "seconds": 220.12256502598757}
+{"stage": "reliable_cache", "completed": 1900, "total": 10582, "seconds": 232.36757140303962}
+{"stage": "reliable_cache", "completed": 2000, "total": 10582, "seconds": 244.58870222698897}
+{"stage": "reliable_cache", "completed": 2100, "total": 10582, "seconds": 256.8309344740119}
+{"stage": "reliable_cache", "completed": 2200, "total": 10582, "seconds": 269.0647556160111}
+{"stage": "reliable_cache", "completed": 2300, "total": 10582, "seconds": 281.3012663309928}
+{"stage": "reliable_cache", "completed": 2400, "total": 10582, "seconds": 293.5368028189987}
+{"stage": "reliable_cache", "completed": 2500, "total": 10582, "seconds": 305.76913365203654}
+{"stage": "reliable_cache", "completed": 2600, "total": 10582, "seconds": 318.00935014203424}
+{"stage": "reliable_cache", "completed": 2700, "total": 10582, "seconds": 330.23548596998444}
+{"stage": "reliable_cache", "completed": 2800, "total": 10582, "seconds": 342.4470487310318}
+{"stage": "reliable_cache", "completed": 2900, "total": 10582, "seconds": 354.6683672190411}
+{"stage": "reliable_cache", "completed": 3000, "total": 10582, "seconds": 366.9045837810263}
+{"stage": "reliable_cache", "completed": 3100, "total": 10582, "seconds": 379.1441858630278}
+{"stage": "reliable_cache", "completed": 3200, "total": 10582, "seconds": 391.36642948299414}
+{"stage": "reliable_cache", "completed": 3300, "total": 10582, "seconds": 403.5674271120224}
+{"stage": "reliable_cache", "completed": 3400, "total": 10582, "seconds": 415.783689784992}
+{"stage": "reliable_cache", "completed": 3500, "total": 10582, "seconds": 428.0044034810271}
+{"stage": "reliable_cache", "completed": 3600, "total": 10582, "seconds": 440.2319129059906}
+{"stage": "reliable_cache", "completed": 3700, "total": 10582, "seconds": 452.44109625899}
+{"stage": "reliable_cache", "completed": 3800, "total": 10582, "seconds": 464.66184872499434}
+{"stage": "reliable_cache", "completed": 3900, "total": 10582, "seconds": 476.9051627970184}
+{"stage": "reliable_cache", "completed": 4000, "total": 10582, "seconds": 489.1335441310075}
+{"stage": "reliable_cache", "completed": 4100, "total": 10582, "seconds": 501.3523859530105}
+{"stage": "reliable_cache", "completed": 4200, "total": 10582, "seconds": 513.5907789780176}
+{"stage": "reliable_cache", "completed": 4300, "total": 10582, "seconds": 525.8204473170335}
+{"stage": "reliable_cache", "completed": 4400, "total": 10582, "seconds": 538.0637002210133}
+{"stage": "reliable_cache", "completed": 4500, "total": 10582, "seconds": 550.2937057040399}
+{"stage": "reliable_cache", "completed": 4600, "total": 10582, "seconds": 562.519125175022}
+{"stage": "reliable_cache", "completed": 4700, "total": 10582, "seconds": 574.7483105270076}
+{"stage": "reliable_cache", "completed": 4800, "total": 10582, "seconds": 586.9863020430203}
+{"stage": "reliable_cache", "completed": 4900, "total": 10582, "seconds": 599.2182702680002}
+{"stage": "reliable_cache", "completed": 5000, "total": 10582, "seconds": 611.4442114980193}
+{"stage": "reliable_cache", "completed": 5100, "total": 10582, "seconds": 623.6639362440328}
+{"stage": "reliable_cache", "completed": 5200, "total": 10582, "seconds": 635.8852682280121}
+{"stage": "reliable_cache", "completed": 5300, "total": 10582, "seconds": 648.1424400089891}
+{"stage": "reliable_cache", "completed": 5400, "total": 10582, "seconds": 660.3801071190392}
+{"stage": "reliable_cache", "completed": 5500, "total": 10582, "seconds": 672.6151524570305}
+{"stage": "reliable_cache", "completed": 5600, "total": 10582, "seconds": 684.8728959960281}
+{"stage": "reliable_cache", "completed": 5700, "total": 10582, "seconds": 697.1160763340304}
+{"stage": "reliable_cache", "completed": 5800, "total": 10582, "seconds": 709.369298537029}
+{"stage": "reliable_cache", "completed": 5900, "total": 10582, "seconds": 721.6187942550168}
+{"stage": "reliable_cache", "completed": 6000, "total": 10582, "seconds": 733.8657441420364}
+{"stage": "reliable_cache", "completed": 6100, "total": 10582, "seconds": 746.1114585740143}
+{"stage": "reliable_cache", "completed": 6200, "total": 10582, "seconds": 758.3731145409984}
+{"stage": "reliable_cache", "completed": 6300, "total": 10582, "seconds": 770.6338829789893}
+{"stage": "reliable_cache", "completed": 6400, "total": 10582, "seconds": 782.8749054860091}
+{"stage": "reliable_cache", "completed": 6500, "total": 10582, "seconds": 795.1381622310146}
+{"stage": "reliable_cache", "completed": 6600, "total": 10582, "seconds": 807.4092161910376}
+{"stage": "reliable_cache", "completed": 6700, "total": 10582, "seconds": 819.66256096703}
+{"stage": "reliable_cache", "completed": 6800, "total": 10582, "seconds": 831.9142612669966}
+{"stage": "reliable_cache", "completed": 6900, "total": 10582, "seconds": 844.1233958349912}
+{"stage": "reliable_cache", "completed": 7000, "total": 10582, "seconds": 856.3758980070124}
+{"stage": "reliable_cache", "completed": 7100, "total": 10582, "seconds": 868.6150361410109}
+{"stage": "reliable_cache", "completed": 7200, "total": 10582, "seconds": 880.8460498910281}
+{"stage": "reliable_cache", "completed": 7300, "total": 10582, "seconds": 893.052092752012}
+{"stage": "reliable_cache", "completed": 7400, "total": 10582, "seconds": 905.3053881690139}
+{"stage": "reliable_cache", "completed": 7500, "total": 10582, "seconds": 917.557969963993}
+{"stage": "reliable_cache", "completed": 7600, "total": 10582, "seconds": 929.7825035370188}
+{"stage": "reliable_cache", "completed": 7700, "total": 10582, "seconds": 942.0242348710308}
+{"stage": "reliable_cache", "completed": 7800, "total": 10582, "seconds": 954.2574377430137}
+{"stage": "reliable_cache", "completed": 7900, "total": 10582, "seconds": 966.4962736309972}
+{"stage": "reliable_cache", "completed": 8000, "total": 10582, "seconds": 978.7427399409935}
+{"stage": "reliable_cache", "completed": 8100, "total": 10582, "seconds": 990.9675430700299}
+{"stage": "reliable_cache", "completed": 8200, "total": 10582, "seconds": 1003.2002092149924}
+{"stage": "reliable_cache", "completed": 8300, "total": 10582, "seconds": 1015.4400912389974}
+{"stage": "reliable_cache", "completed": 8400, "total": 10582, "seconds": 1027.672362902027}
+{"stage": "reliable_cache", "completed": 8500, "total": 10582, "seconds": 1039.9098006470012}
+{"stage": "reliable_cache", "completed": 8600, "total": 10582, "seconds": 1052.1371830840362}
+{"stage": "reliable_cache", "completed": 8700, "total": 10582, "seconds": 1064.3586478900397}
+{"stage": "reliable_cache", "completed": 8800, "total": 10582, "seconds": 1076.6059484120342}
+{"stage": "reliable_cache", "completed": 8900, "total": 10582, "seconds": 1088.8401160670328}
+{"stage": "reliable_cache", "completed": 9000, "total": 10582, "seconds": 1101.073625944031}
+{"stage": "reliable_cache", "completed": 9100, "total": 10582, "seconds": 1113.309146340005}
+{"stage": "reliable_cache", "completed": 9200, "total": 10582, "seconds": 1125.555378477031}
+{"stage": "reliable_cache", "completed": 9300, "total": 10582, "seconds": 1137.791964841017}
+{"stage": "reliable_cache", "completed": 9400, "total": 10582, "seconds": 1150.0349348930176}
+{"stage": "reliable_cache", "completed": 9500, "total": 10582, "seconds": 1162.2672653720365}
+{"stage": "reliable_cache", "completed": 9600, "total": 10582, "seconds": 1174.5128196600126}
+{"stage": "reliable_cache", "completed": 9700, "total": 10582, "seconds": 1186.7897398220375}
+{"stage": "reliable_cache", "completed": 9800, "total": 10582, "seconds": 1199.0515448900405}
+{"stage": "reliable_cache", "completed": 9900, "total": 10582, "seconds": 1211.3076827790355}
+{"stage": "reliable_cache", "completed": 10000, "total": 10582, "seconds": 1223.5372272999957}
+{"stage": "reliable_cache", "completed": 10100, "total": 10582, "seconds": 1235.7678591629956}
+{"stage": "reliable_cache", "completed": 10200, "total": 10582, "seconds": 1248.029387091985}
+{"stage": "reliable_cache", "completed": 10300, "total": 10582, "seconds": 1260.2690021680319}
+{"stage": "reliable_cache", "completed": 10400, "total": 10582, "seconds": 1272.5115572040086}
+{"stage": "reliable_cache", "completed": 10500, "total": 10582, "seconds": 1284.7563322050264}
+{"stage": "reliable_cache", "completed": 10582, "total": 10582, "seconds": 1294.7872455110191}
+{
+  "images": 10582,
+  "pixels": 1896135177,
+  "partial_cache": false,
+  "training_pixel_gt_read": false,
+  "external_segmentation_prior": false,
+  "foreground": 0.2700440539319207,
+  "background": 0.6651858381719163,
+  "ignore": 0.06477010789616293,
+  "confidence_mean": 0.9691181539341011,
+  "agreement_mean": 0.9780946345472499
+}

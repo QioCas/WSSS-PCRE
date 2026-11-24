@@ -1,0 +1,80 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{"stage": "A2_negative_filter", "processed": 25, "total": 1449, "crf_completed": 18, "seconds": 12.304028645041399, "peak_gpu_allocated_gib": 2.0042991638183594}
+{"stage": "A2_negative_filter", "processed": 50, "total": 1449, "crf_completed": 43, "seconds": 25.695507463999093, "peak_gpu_allocated_gib": 2.0042991638183594}
+{"stage": "A2_negative_filter", "processed": 75, "total": 1449, "crf_completed": 68, "seconds": 37.390103202022146, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 100, "total": 1449, "crf_completed": 93, "seconds": 50.39467164198868, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 125, "total": 1449, "crf_completed": 118, "seconds": 61.45096625300357, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 150, "total": 1449, "crf_completed": 143, "seconds": 72.71169515402289, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 175, "total": 1449, "crf_completed": 168, "seconds": 85.88455639500171, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 200, "total": 1449, "crf_completed": 193, "seconds": 96.77163955802098, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 225, "total": 1449, "crf_completed": 218, "seconds": 109.47004952898715, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 250, "total": 1449, "crf_completed": 243, "seconds": 120.3602928170003, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 275, "total": 1449, "crf_completed": 268, "seconds": 134.014514702023, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 300, "total": 1449, "crf_completed": 293, "seconds": 149.7539572879905, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 325, "total": 1449, "crf_completed": 318, "seconds": 165.2605730080395, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 350, "total": 1449, "crf_completed": 343, "seconds": 178.0308666260098, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 375, "total": 1449, "crf_completed": 368, "seconds": 192.2511655309936, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 400, "total": 1449, "crf_completed": 393, "seconds": 206.48968129704008, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 425, "total": 1449, "crf_completed": 418, "seconds": 220.65654500899836, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 450, "total": 1449, "crf_completed": 443, "seconds": 233.55650425102795, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 475, "total": 1449, "crf_completed": 468, "seconds": 247.50149286101805, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 500, "total": 1449, "crf_completed": 493, "seconds": 257.78493687399896, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 525, "total": 1449, "crf_completed": 518, "seconds": 268.8425442620064, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 550, "total": 1449, "crf_completed": 543, "seconds": 282.3359172139899, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 575, "total": 1449, "crf_completed": 568, "seconds": 294.1702807910042, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 600, "total": 1449, "crf_completed": 593, "seconds": 305.3763405540376, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 625, "total": 1449, "crf_completed": 618, "seconds": 318.9330999320373, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 650, "total": 1449, "crf_completed": 643, "seconds": 331.0027918019914, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 675, "total": 1449, "crf_completed": 668, "seconds": 345.01715451304335, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 700, "total": 1449, "crf_completed": 693, "seconds": 356.89600520802196, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 725, "total": 1449, "crf_completed": 718, "seconds": 369.5360988859902, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 750, "total": 1449, "crf_completed": 743, "seconds": 381.4380069129984, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 775, "total": 1449, "crf_completed": 768, "seconds": 395.13739843299845, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 800, "total": 1449, "crf_completed": 793, "seconds": 407.93144397600554, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 825, "total": 1449, "crf_completed": 818, "seconds": 419.40140245400835, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 850, "total": 1449, "crf_completed": 843, "seconds": 435.6850839300314, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 875, "total": 1449, "crf_completed": 868, "seconds": 452.31299945601495, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 900, "total": 1449, "crf_completed": 893, "seconds": 469.0215322030126, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 925, "total": 1449, "crf_completed": 918, "seconds": 482.09940683003515, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 950, "total": 1449, "crf_completed": 943, "seconds": 496.95605535502546, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 975, "total": 1449, "crf_completed": 968, "seconds": 510.46415266301483, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1000, "total": 1449, "crf_completed": 993, "seconds": 527.4438697270234, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1025, "total": 1449, "crf_completed": 1018, "seconds": 546.1879447849933, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1050, "total": 1449, "crf_completed": 1043, "seconds": 563.3246174450032, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1075, "total": 1449, "crf_completed": 1068, "seconds": 578.1096181950415, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1100, "total": 1449, "crf_completed": 1093, "seconds": 592.5534487490077, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1125, "total": 1449, "crf_completed": 1118, "seconds": 606.9926562940236, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1150, "total": 1449, "crf_completed": 1143, "seconds": 620.8319711470394, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1175, "total": 1449, "crf_completed": 1168, "seconds": 631.3036837370018, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1200, "total": 1449, "crf_completed": 1193, "seconds": 645.2276452910155, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1225, "total": 1449, "crf_completed": 1218, "seconds": 659.8359631010098, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1250, "total": 1449, "crf_completed": 1243, "seconds": 672.1041472840006, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1275, "total": 1449, "crf_completed": 1268, "seconds": 686.2305522420211, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1300, "total": 1449, "crf_completed": 1293, "seconds": 699.8159887930378, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1325, "total": 1449, "crf_completed": 1318, "seconds": 712.791590701032, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1350, "total": 1449, "crf_completed": 1343, "seconds": 730.0699396040291, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1375, "total": 1449, "crf_completed": 1368, "seconds": 744.4879753200221, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1400, "total": 1449, "crf_completed": 1393, "seconds": 760.2099390270305, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1425, "total": 1449, "crf_completed": 1418, "seconds": 776.0991473119939, "peak_gpu_allocated_gib": 2.013530731201172}
+{"stage": "A2_negative_filter", "processed": 1449, "total": 1449, "crf_completed": 1442, "seconds": 790.238764395006, "peak_gpu_allocated_gib": 2.013530731201172}
+FINISHED A2_negative_filter: raw=73.762450% CRF=74.277421%
+{"mode": "A2_negative_filter", "partial_evaluation": false, "raw": 73.76244997341492, "crf": 74.27742117234115, "delta_vs_baseline_pp": {"raw": -0.027038060528783436, "crf": 0.053137439042572066}}

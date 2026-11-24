@@ -8,9 +8,9 @@ class CosWarmupAdamW(torch.optim.AdamW):
         super().__init__(params, lr=lr, betas=betas, weight_decay=weight_decay, eps=1e-8,)
 
         self.global_step = 0
-        self.warmup_iter = np.float(warmup_iter)
+        self.warmup_iter = float(warmup_iter)
         self.warmup_ratio = warmup_ratio
-        self.max_iter = np.float(max_iter)
+        self.max_iter = float(max_iter)
         self.power = power
 
         self.__init_lr = [group['lr'] for group in self.param_groups]
@@ -34,6 +34,9 @@ class CosWarmupAdamW(torch.optim.AdamW):
         super().step(closure)
 
         self.global_step += 1
+
+    def resume(self, step):
+        self.global_step = step
 
 class PolyWarmupAdamW(torch.optim.AdamW):
 
@@ -67,6 +70,9 @@ class PolyWarmupAdamW(torch.optim.AdamW):
 
         self.global_step += 1
 
+    def resume(self, step):
+        self.global_step = step
+
 class PolyWarmupSGD(torch.optim.SGD):
 
     def __init__(self, params, lr, weight_decay, warmup_iter=None, max_iter=None, warmup_ratio=None, power=None, **kwargs):
@@ -98,3 +104,6 @@ class PolyWarmupSGD(torch.optim.SGD):
         super().step(closure)
 
         self.global_step += 1
+
+    def resume(self, step):
+        self.global_step = step

@@ -1,0 +1,9 @@
+{
+  "model": "ViT-B/16",
+  "checkpoint": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_clip_weights/ViT-B-16.pt",
+  "sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "bytes": 350837078,
+  "source": "https://github.com/openai/CLIP",
+  "source_commit": "d05afc436d78f1c48dc0dbf8e5980a9d471f35f6",
+  "supervision": "External image-text pretraining; no segmentation masks added by this pipeline."
+}

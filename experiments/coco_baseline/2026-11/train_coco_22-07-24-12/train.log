@@ -1,0 +1,918 @@
+2026-11-22 07:24:12,712 - train_coco.py - INFO: Pytorch version: 2.10.0+cu128
+2026-11-22 07:24:12,768 - train_coco.py - INFO: GPU type: NVIDIA GeForce RTX 5090
+2026-11-22 07:24:12,768 - train_coco.py - INFO: 
+args: Namespace(w_ptc=0.2, w_seg=0.12, w_reg=0.05, w_cpe=0.5, wsddn_topk=300, mil=True, ot_loss=False, ot_n=4, logit_scale=4, max_iters=80000, log_iters=200, eval_iters=5000, warmup_iters=1500, update_prototype=600, cam2mask=10000, backbone='vit_base_patch16_224', high_thre=0.7, low_thre=0.25, bkg_thre=0.5, tag_threshold=0.2, cam_scales=[1.0, 0.5, 0.75, 1.5], ignore_index=255, pooling='gmp', decoder='LargeFOV', ema=True, mask_exp=True, cls_sc_t=0.0, proto_m=0.9, temp_lil=0.08, base_temp_lil=0.08, temp_lig=0.1, base_temp_lig=0.1, momentum=0.999, ctc_dim=768, moco_queue=4608, aux_layer=-3, pretrained=True, save_ckpt=True, save_interval=10000, seed=0, weight='', work_dir='experiments/coco_baseline/2026-11/train_coco_22-07-24-12', log_tag='train_coco', img_folder='dataset/COCO2014/coco', label_folder='dataset/COCO2014/coco/SegmentationClass', list_folder='datasets/coco', num_classes=81, crop_size=448, local_crop_size=64, ncrops=12, train_set='train', val_set='val_part', spg=2, grad_accum_steps=4, amp=False, mask_decoder_layers=1, scales=(0.5, 2), optimizer='PolyWarmupAdamW', lr=6e-05, warmup_lr=7e-07, wt_decay=0.01, betas=(0.9, 0.999), power=0.9, local_rank=0, num_workers=10, backend='nccl', debug=False, lamda=100, seg_t=0.3, grad_t='none', seg_iter=32000, resume='experiments/coco_baseline/2026-11/train_coco_22-01-03-00/checkpoints/model_iter_40000.pth', ckpt_dir='experiments/coco_baseline/2026-11/train_coco_22-07-24-12/checkpoints', pred_dir='experiments/coco_baseline/2026-11/train_coco_22-07-24-12/predictions')
+2026-11-22 07:24:12,848 - train_coco.py - INFO: Total gpus: 1, samples per gpu: 2...
+2026-11-22 07:24:14,008 - train_coco.py - INFO: Resuming training from experiments/coco_baseline/2026-11/train_coco_22-01-03-00/checkpoints/model_iter_40000.pth...
+2026-11-22 07:24:14,612 - train_coco.py - INFO: Resumed from iteration 40000
+2026-11-22 07:24:14,747 - train_coco.py - INFO: 
+Optimizer: 
+PolyWarmupAdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3.753208916462752e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3.753208916462752e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 2
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0003753208916462752
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 3
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0003753208916462752
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 4
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3.753208916462752e-05
+    maximize: False
+    weight_decay: 0.01
+)
+2026-11-22 07:26:03,160 - train_coco.py - INFO: Iter: 40200; Elapsed: 0:01:51; ETA: 6:08:08; LR: 3.212e-05; cls_loss: 0.0441, cls_loss_aux: 0.0403, ptc_loss: 0.1298, seg_loss: 0.2612, cpe_loss: 0.2012, crme_loss: 0.0000, cls_loss_wsddn: 0.0460, 
+2026-11-22 07:27:50,524 - train_coco.py - INFO: Iter: 40400; Elapsed: 0:03:38; ETA: 5:53:05; LR: 3.208e-05; cls_loss: 0.0412, cls_loss_aux: 0.0386, ptc_loss: 0.1543, seg_loss: 0.1925, cpe_loss: 0.2148, crme_loss: 0.0000, cls_loss_wsddn: 0.0421, 
+2026-11-22 07:29:37,673 - train_coco.py - INFO: Iter: 40600; Elapsed: 0:05:25; ETA: 5:51:18; LR: 3.205e-05; cls_loss: 0.0392, cls_loss_aux: 0.0364, ptc_loss: 0.1359, seg_loss: 0.1879, cpe_loss: 0.2012, crme_loss: 0.0000, cls_loss_wsddn: 0.0394, 
+2026-11-22 07:31:26,116 - train_coco.py - INFO: Iter: 40800; Elapsed: 0:07:14; ETA: 5:56:03; LR: 3.201e-05; cls_loss: 0.0460, cls_loss_aux: 0.0413, ptc_loss: 0.1547, seg_loss: 0.1781, cpe_loss: 0.2284, crme_loss: 0.0001, cls_loss_wsddn: 0.0476, 
+2026-11-22 07:33:14,474 - train_coco.py - INFO: Iter: 41000; Elapsed: 0:09:02; ETA: 5:50:59; LR: 3.197e-05; cls_loss: 0.0457, cls_loss_aux: 0.0418, ptc_loss: 0.1366, seg_loss: 0.2104, cpe_loss: 0.2043, crme_loss: 0.0036, cls_loss_wsddn: 0.0472, 
+2026-11-22 07:34:59,336 - train_coco.py - INFO: Iter: 41200; Elapsed: 0:10:47; ETA: 5:39:29; LR: 3.194e-05; cls_loss: 0.0438, cls_loss_aux: 0.0385, ptc_loss: 0.1519, seg_loss: 0.2927, cpe_loss: 0.2262, crme_loss: 0.0001, cls_loss_wsddn: 0.0464, 
+2026-11-22 07:36:44,781 - train_coco.py - INFO: Iter: 41400; Elapsed: 0:12:32; ETA: 5:37:44; LR: 3.190e-05; cls_loss: 0.0452, cls_loss_aux: 0.0404, ptc_loss: 0.1520, seg_loss: 0.2323, cpe_loss: 0.2227, crme_loss: 0.0000, cls_loss_wsddn: 0.0476, 
+2026-11-22 07:38:28,884 - train_coco.py - INFO: Iter: 41600; Elapsed: 0:14:16; ETA: 5:32:47; LR: 3.186e-05; cls_loss: 0.0439, cls_loss_aux: 0.0366, ptc_loss: 0.1330, seg_loss: 0.1894, cpe_loss: 0.2019, crme_loss: 0.0005, cls_loss_wsddn: 0.0457, 
+2026-11-22 07:40:13,452 - train_coco.py - INFO: Iter: 41800; Elapsed: 0:16:01; ETA: 5:34:14; LR: 3.183e-05; cls_loss: 0.0383, cls_loss_aux: 0.0330, ptc_loss: 0.1407, seg_loss: 0.1700, cpe_loss: 0.2103, crme_loss: 0.0000, cls_loss_wsddn: 0.0397, 
+2026-11-22 07:41:56,837 - train_coco.py - INFO: Iter: 42000; Elapsed: 0:17:44; ETA: 5:26:09; LR: 3.179e-05; cls_loss: 0.0360, cls_loss_aux: 0.0308, ptc_loss: 0.1309, seg_loss: 0.2010, cpe_loss: 0.1919, crme_loss: 0.0476, cls_loss_wsddn: 0.0374, 
+2026-11-22 07:43:40,641 - train_coco.py - INFO: Iter: 42200; Elapsed: 0:19:28; ETA: 5:27:35; LR: 3.176e-05; cls_loss: 0.0413, cls_loss_aux: 0.0357, ptc_loss: 0.1346, seg_loss: 0.1698, cpe_loss: 0.1982, crme_loss: 0.0000, cls_loss_wsddn: 0.0434, 
+2026-11-22 07:45:23,531 - train_coco.py - INFO: Iter: 42400; Elapsed: 0:21:11; ETA: 5:22:43; LR: 3.172e-05; cls_loss: 0.0433, cls_loss_aux: 0.0387, ptc_loss: 0.1223, seg_loss: 0.1993, cpe_loss: 0.1921, crme_loss: 0.0003, cls_loss_wsddn: 0.0455, 
+2026-11-22 07:47:05,778 - train_coco.py - INFO: Iter: 42600; Elapsed: 0:22:53; ETA: 5:17:53; LR: 3.168e-05; cls_loss: 0.0429, cls_loss_aux: 0.0368, ptc_loss: 0.1464, seg_loss: 0.1637, cpe_loss: 0.2077, crme_loss: 0.0003, cls_loss_wsddn: 0.0437, 
+2026-11-22 07:48:47,763 - train_coco.py - INFO: Iter: 42800; Elapsed: 0:24:35; ETA: 5:16:11; LR: 3.165e-05; cls_loss: 0.0415, cls_loss_aux: 0.0355, ptc_loss: 0.1405, seg_loss: 0.2019, cpe_loss: 0.2037, crme_loss: 0.0005, cls_loss_wsddn: 0.0418, 
+2026-11-22 07:50:30,139 - train_coco.py - INFO: Iter: 43000; Elapsed: 0:26:18; ETA: 5:17:34; LR: 3.161e-05; cls_loss: 0.0471, cls_loss_aux: 0.0442, ptc_loss: 0.1562, seg_loss: 0.2482, cpe_loss: 0.2378, crme_loss: 0.0019, cls_loss_wsddn: 0.0482, 
+2026-11-22 07:52:12,457 - train_coco.py - INFO: Iter: 43200; Elapsed: 0:28:00; ETA: 5:12:47; LR: 3.157e-05; cls_loss: 0.0428, cls_loss_aux: 0.0391, ptc_loss: 0.1254, seg_loss: 0.2243, cpe_loss: 0.1918, crme_loss: 0.0000, cls_loss_wsddn: 0.0436, 
+2026-11-22 07:53:54,886 - train_coco.py - INFO: Iter: 43400; Elapsed: 0:29:42; ETA: 5:11:05; LR: 3.154e-05; cls_loss: 0.0447, cls_loss_aux: 0.0405, ptc_loss: 0.1141, seg_loss: 0.1836, cpe_loss: 0.1785, crme_loss: 0.0015, cls_loss_wsddn: 0.0455, 
+2026-11-22 07:55:38,226 - train_coco.py - INFO: Iter: 43600; Elapsed: 0:31:26; ETA: 5:15:27; LR: 3.150e-05; cls_loss: 0.0458, cls_loss_aux: 0.0388, ptc_loss: 0.1366, seg_loss: 0.2258, cpe_loss: 0.2010, crme_loss: 0.0000, cls_loss_wsddn: 0.0481, 
+2026-11-22 07:57:21,635 - train_coco.py - INFO: Iter: 43800; Elapsed: 0:33:09; ETA: 5:10:42; LR: 3.147e-05; cls_loss: 0.0423, cls_loss_aux: 0.0364, ptc_loss: 0.1185, seg_loss: 0.2174, cpe_loss: 0.1860, crme_loss: 0.0026, cls_loss_wsddn: 0.0437, 
+2026-11-22 07:59:06,844 - train_coco.py - INFO: Iter: 44000; Elapsed: 0:34:54; ETA: 5:14:59; LR: 3.143e-05; cls_loss: 0.0423, cls_loss_aux: 0.0372, ptc_loss: 0.1285, seg_loss: 0.2358, cpe_loss: 0.1889, crme_loss: 0.0000, cls_loss_wsddn: 0.0447, 
+2026-11-22 08:00:53,110 - train_coco.py - INFO: Iter: 44200; Elapsed: 0:36:41; ETA: 5:19:12; LR: 3.139e-05; cls_loss: 0.0424, cls_loss_aux: 0.0353, ptc_loss: 0.1393, seg_loss: 0.1950, cpe_loss: 0.2030, crme_loss: 0.0000, cls_loss_wsddn: 0.0425, 
+2026-11-22 08:02:38,782 - train_coco.py - INFO: Iter: 44400; Elapsed: 0:38:26; ETA: 5:11:29; LR: 3.136e-05; cls_loss: 0.0441, cls_loss_aux: 0.0366, ptc_loss: 0.1326, seg_loss: 0.2011, cpe_loss: 0.2021, crme_loss: 0.0000, cls_loss_wsddn: 0.0451, 
+2026-11-22 08:04:25,210 - train_coco.py - INFO: Iter: 44600; Elapsed: 0:40:13; ETA: 5:15:38; LR: 3.132e-05; cls_loss: 0.0404, cls_loss_aux: 0.0338, ptc_loss: 0.1273, seg_loss: 0.2239, cpe_loss: 0.1949, crme_loss: 0.0000, cls_loss_wsddn: 0.0417, 
+2026-11-22 08:06:13,872 - train_coco.py - INFO: Iter: 44800; Elapsed: 0:42:01; ETA: 5:16:47; LR: 3.128e-05; cls_loss: 0.0474, cls_loss_aux: 0.0393, ptc_loss: 0.1369, seg_loss: 0.2610, cpe_loss: 0.2055, crme_loss: 0.0002, cls_loss_wsddn: 0.0491, 
+2026-11-22 08:08:00,551 - train_coco.py - INFO: Iter: 45000; Elapsed: 0:43:48; ETA: 5:12:04; LR: 3.125e-05; cls_loss: 0.0396, cls_loss_aux: 0.0337, ptc_loss: 0.1393, seg_loss: 0.2025, cpe_loss: 0.1981, crme_loss: 0.0001, cls_loss_wsddn: 0.0409, 
+2026-11-22 08:09:47,915 - train_coco.py - INFO: Iter: 45200; Elapsed: 0:45:35; ETA: 5:10:17; LR: 3.121e-05; cls_loss: 0.0381, cls_loss_aux: 0.0323, ptc_loss: 0.1438, seg_loss: 0.2729, cpe_loss: 0.2128, crme_loss: 0.0000, cls_loss_wsddn: 0.0401, 
+2026-11-22 08:11:36,999 - train_coco.py - INFO: Iter: 45400; Elapsed: 0:47:24; ETA: 5:14:16; LR: 3.118e-05; cls_loss: 0.0462, cls_loss_aux: 0.0396, ptc_loss: 0.1588, seg_loss: 0.2841, cpe_loss: 0.2253, crme_loss: 0.0000, cls_loss_wsddn: 0.0477, 
+2026-11-22 08:13:25,532 - train_coco.py - INFO: Iter: 45600; Elapsed: 0:49:13; ETA: 5:12:27; LR: 3.114e-05; cls_loss: 0.0407, cls_loss_aux: 0.0346, ptc_loss: 0.1555, seg_loss: 0.2536, cpe_loss: 0.2165, crme_loss: 0.0000, cls_loss_wsddn: 0.0421, 
+2026-11-22 08:15:14,377 - train_coco.py - INFO: Iter: 45800; Elapsed: 0:51:02; ETA: 5:10:38; LR: 3.110e-05; cls_loss: 0.0447, cls_loss_aux: 0.0372, ptc_loss: 0.1523, seg_loss: 0.1880, cpe_loss: 0.2216, crme_loss: 0.0000, cls_loss_wsddn: 0.0455, 
+2026-11-22 08:17:03,489 - train_coco.py - INFO: Iter: 46000; Elapsed: 0:52:51; ETA: 5:08:49; LR: 3.107e-05; cls_loss: 0.0433, cls_loss_aux: 0.0351, ptc_loss: 0.1556, seg_loss: 0.2409, cpe_loss: 0.2075, crme_loss: 0.0000, cls_loss_wsddn: 0.0452, 
+2026-11-22 08:18:52,372 - train_coco.py - INFO: Iter: 46200; Elapsed: 0:54:40; ETA: 5:07:00; LR: 3.103e-05; cls_loss: 0.0394, cls_loss_aux: 0.0333, ptc_loss: 0.1396, seg_loss: 0.1871, cpe_loss: 0.2015, crme_loss: 0.0000, cls_loss_wsddn: 0.0404, 
+2026-11-22 08:20:40,890 - train_coco.py - INFO: Iter: 46400; Elapsed: 0:56:28; ETA: 5:02:23; LR: 3.099e-05; cls_loss: 0.0417, cls_loss_aux: 0.0336, ptc_loss: 0.1411, seg_loss: 0.1797, cpe_loss: 0.2108, crme_loss: 0.0000, cls_loss_wsddn: 0.0428, 
+2026-11-22 08:22:30,099 - train_coco.py - INFO: Iter: 46600; Elapsed: 0:58:18; ETA: 5:06:09; LR: 3.096e-05; cls_loss: 0.0399, cls_loss_aux: 0.0329, ptc_loss: 0.1424, seg_loss: 0.2139, cpe_loss: 0.1993, crme_loss: 0.0001, cls_loss_wsddn: 0.0416, 
+2026-11-22 08:24:21,649 - train_coco.py - INFO: Iter: 46800; Elapsed: 1:00:09; ETA: 5:07:05; LR: 3.092e-05; cls_loss: 0.0404, cls_loss_aux: 0.0318, ptc_loss: 0.1292, seg_loss: 0.1793, cpe_loss: 0.1837, crme_loss: 0.0000, cls_loss_wsddn: 0.0416, 
+2026-11-22 08:26:26,399 - train_coco.py - INFO: Iter: 47000; Elapsed: 1:02:14; ETA: 5:43:44; LR: 3.089e-05; cls_loss: 0.0448, cls_loss_aux: 0.0347, ptc_loss: 0.1328, seg_loss: 0.2099, cpe_loss: 0.1958, crme_loss: 0.0005, cls_loss_wsddn: 0.0472, 
+2026-11-22 08:28:30,110 - train_coco.py - INFO: Iter: 47200; Elapsed: 1:04:18; ETA: 5:38:55; LR: 3.085e-05; cls_loss: 0.0428, cls_loss_aux: 0.0343, ptc_loss: 0.1459, seg_loss: 0.2110, cpe_loss: 0.2085, crme_loss: 0.0000, cls_loss_wsddn: 0.0444, 
+2026-11-22 08:30:34,442 - train_coco.py - INFO: Iter: 47400; Elapsed: 1:06:22; ETA: 5:36:51; LR: 3.081e-05; cls_loss: 0.0376, cls_loss_aux: 0.0285, ptc_loss: 0.1407, seg_loss: 0.1740, cpe_loss: 0.2049, crme_loss: 0.0000, cls_loss_wsddn: 0.0392, 
+2026-11-22 08:32:38,789 - train_coco.py - INFO: Iter: 47600; Elapsed: 1:08:26; ETA: 5:34:47; LR: 3.078e-05; cls_loss: 0.0385, cls_loss_aux: 0.0295, ptc_loss: 0.1362, seg_loss: 0.2331, cpe_loss: 0.1942, crme_loss: 0.0004, cls_loss_wsddn: 0.0401, 
+2026-11-22 08:34:41,941 - train_coco.py - INFO: Iter: 47800; Elapsed: 1:10:29; ETA: 5:30:02; LR: 3.074e-05; cls_loss: 0.0376, cls_loss_aux: 0.0296, ptc_loss: 0.1325, seg_loss: 0.2119, cpe_loss: 0.2041, crme_loss: 0.0000, cls_loss_wsddn: 0.0392, 
+2026-11-22 08:36:46,407 - train_coco.py - INFO: Iter: 48000; Elapsed: 1:12:34; ETA: 5:33:19; LR: 3.070e-05; cls_loss: 0.0420, cls_loss_aux: 0.0329, ptc_loss: 0.1428, seg_loss: 0.2139, cpe_loss: 0.2120, crme_loss: 0.0007, cls_loss_wsddn: 0.0439, 
+2026-11-22 08:39:25,329 - train_coco.py - INFO: Iter: 48200; Elapsed: 1:15:13; ETA: 7:01:20; LR: 3.067e-05; cls_loss: 0.0440, cls_loss_aux: 0.0337, ptc_loss: 0.1513, seg_loss: 0.2446, cpe_loss: 0.2175, crme_loss: 0.0001, cls_loss_wsddn: 0.0454, 
+2026-11-22 08:41:57,565 - train_coco.py - INFO: Iter: 48400; Elapsed: 1:17:45; ETA: 6:40:15; LR: 3.063e-05; cls_loss: 0.0408, cls_loss_aux: 0.0325, ptc_loss: 0.1484, seg_loss: 0.2160, cpe_loss: 0.2173, crme_loss: 0.0000, cls_loss_wsddn: 0.0425, 
+2026-11-22 08:44:30,855 - train_coco.py - INFO: Iter: 48600; Elapsed: 1:20:18; ETA: 6:40:20; LR: 3.059e-05; cls_loss: 0.0415, cls_loss_aux: 0.0308, ptc_loss: 0.1276, seg_loss: 0.2288, cpe_loss: 0.1890, crme_loss: 0.0000, cls_loss_wsddn: 0.0429, 
+2026-11-22 08:47:05,205 - train_coco.py - INFO: Iter: 48800; Elapsed: 1:22:53; ETA: 6:42:59; LR: 3.056e-05; cls_loss: 0.0406, cls_loss_aux: 0.0325, ptc_loss: 0.1447, seg_loss: 0.2133, cpe_loss: 0.2126, crme_loss: 0.0008, cls_loss_wsddn: 0.0419, 
+2026-11-22 08:49:40,735 - train_coco.py - INFO: Iter: 49000; Elapsed: 1:25:28; ETA: 6:40:24; LR: 3.052e-05; cls_loss: 0.0403, cls_loss_aux: 0.0296, ptc_loss: 0.1492, seg_loss: 0.1926, cpe_loss: 0.2108, crme_loss: 0.0000, cls_loss_wsddn: 0.0425, 
+2026-11-22 08:52:17,507 - train_coco.py - INFO: Iter: 49200; Elapsed: 1:28:05; ETA: 6:42:57; LR: 3.049e-05; cls_loss: 0.0425, cls_loss_aux: 0.0326, ptc_loss: 0.1346, seg_loss: 0.1869, cpe_loss: 0.1853, crme_loss: 0.0023, cls_loss_wsddn: 0.0448, 
+2026-11-22 08:54:53,461 - train_coco.py - INFO: Iter: 49400; Elapsed: 1:30:41; ETA: 6:37:47; LR: 3.045e-05; cls_loss: 0.0414, cls_loss_aux: 0.0334, ptc_loss: 0.1491, seg_loss: 0.1868, cpe_loss: 0.2123, crme_loss: 0.0042, cls_loss_wsddn: 0.0445, 
+2026-11-22 08:57:28,796 - train_coco.py - INFO: Iter: 49600; Elapsed: 1:33:16; ETA: 6:32:39; LR: 3.041e-05; cls_loss: 0.0420, cls_loss_aux: 0.0317, ptc_loss: 0.1470, seg_loss: 0.1772, cpe_loss: 0.2196, crme_loss: 0.0004, cls_loss_wsddn: 0.0439, 
+2026-11-22 08:59:59,427 - train_coco.py - INFO: Iter: 49800; Elapsed: 1:35:47; ETA: 6:20:00; LR: 3.038e-05; cls_loss: 0.0412, cls_loss_aux: 0.0324, ptc_loss: 0.1341, seg_loss: 0.2199, cpe_loss: 0.2035, crme_loss: 0.0013, cls_loss_wsddn: 0.0434, 
+2026-11-22 09:02:02,297 - train_coco.py - INFO: Iter: 50000; Elapsed: 1:37:50; ETA: 5:07:29; LR: 3.034e-05; cls_loss: 0.0395, cls_loss_aux: 0.0297, ptc_loss: 0.1395, seg_loss: 0.1923, cpe_loss: 0.2056, crme_loss: 0.0000, cls_loss_wsddn: 0.0409, 
+2026-11-22 09:02:02,297 - train_coco.py - INFO: saving experiments/coco_baseline/2026-11/train_coco_22-07-24-12/checkpoints/model_iter_50000.pth
+2026-11-22 09:04:40,434 - train_coco.py - INFO: Iter: 50200; Elapsed: 1:40:28; ETA: 6:32:21; LR: 3.030e-05; cls_loss: 0.0542, cls_loss_aux: 0.0637, ptc_loss: 0.1758, seg_loss: 0.2377, cpe_loss: 0.2444, crme_loss: 0.0000, cls_loss_wsddn: 0.0546, 
+2026-11-22 09:06:37,182 - train_coco.py - INFO: Iter: 50400; Elapsed: 1:42:25; ETA: 4:48:35; LR: 3.027e-05; cls_loss: 0.0567, cls_loss_aux: 0.0657, ptc_loss: 0.1689, seg_loss: 0.2471, cpe_loss: 0.2310, crme_loss: 0.0006, cls_loss_wsddn: 0.0565, 
+2026-11-22 09:08:26,802 - train_coco.py - INFO: Iter: 50600; Elapsed: 1:44:14; ETA: 4:27:02; LR: 3.023e-05; cls_loss: 0.0577, cls_loss_aux: 0.0659, ptc_loss: 0.1532, seg_loss: 0.2524, cpe_loss: 0.2281, crme_loss: 0.0007, cls_loss_wsddn: 0.0563, 
+2026-11-22 09:10:13,850 - train_coco.py - INFO: Iter: 50800; Elapsed: 1:46:01; ETA: 4:20:21; LR: 3.019e-05; cls_loss: 0.0527, cls_loss_aux: 0.0614, ptc_loss: 0.1575, seg_loss: 0.2329, cpe_loss: 0.2271, crme_loss: 0.0000, cls_loss_wsddn: 0.0529, 
+2026-11-22 09:12:01,292 - train_coco.py - INFO: Iter: 51000; Elapsed: 1:47:49; ETA: 4:20:59; LR: 3.016e-05; cls_loss: 0.0547, cls_loss_aux: 0.0632, ptc_loss: 0.1654, seg_loss: 0.2813, cpe_loss: 0.2275, crme_loss: 0.0004, cls_loss_wsddn: 0.0548, 
+2026-11-22 09:13:48,698 - train_coco.py - INFO: Iter: 51200; Elapsed: 1:49:36; ETA: 4:16:47; LR: 3.012e-05; cls_loss: 0.0541, cls_loss_aux: 0.0605, ptc_loss: 0.1623, seg_loss: 0.2993, cpe_loss: 0.2247, crme_loss: 0.0000, cls_loss_wsddn: 0.0538, 
+2026-11-22 09:15:37,389 - train_coco.py - INFO: Iter: 51400; Elapsed: 1:51:25; ETA: 4:19:46; LR: 3.008e-05; cls_loss: 0.0566, cls_loss_aux: 0.0643, ptc_loss: 0.1618, seg_loss: 0.2693, cpe_loss: 0.2248, crme_loss: 0.0003, cls_loss_wsddn: 0.0563, 
+2026-11-22 09:17:25,149 - train_coco.py - INFO: Iter: 51600; Elapsed: 1:53:13; ETA: 4:15:35; LR: 3.005e-05; cls_loss: 0.0546, cls_loss_aux: 0.0636, ptc_loss: 0.1706, seg_loss: 0.2888, cpe_loss: 0.2286, crme_loss: 0.0133, cls_loss_wsddn: 0.0545, 
+2026-11-22 09:19:14,392 - train_coco.py - INFO: Iter: 51800; Elapsed: 1:55:02; ETA: 4:16:08; LR: 3.001e-05; cls_loss: 0.0501, cls_loss_aux: 0.0579, ptc_loss: 0.1455, seg_loss: 0.2339, cpe_loss: 0.2171, crme_loss: 0.0000, cls_loss_wsddn: 0.0513, 
+2026-11-22 09:21:04,020 - train_coco.py - INFO: Iter: 52000; Elapsed: 1:56:52; ETA: 4:16:39; LR: 2.998e-05; cls_loss: 0.0528, cls_loss_aux: 0.0606, ptc_loss: 0.1332, seg_loss: 0.2567, cpe_loss: 0.2034, crme_loss: 0.0017, cls_loss_wsddn: 0.0536, 
+2026-11-22 09:22:53,864 - train_coco.py - INFO: Iter: 52200; Elapsed: 1:58:41; ETA: 4:12:30; LR: 2.994e-05; cls_loss: 0.0507, cls_loss_aux: 0.0579, ptc_loss: 0.1643, seg_loss: 0.2775, cpe_loss: 0.2231, crme_loss: 0.0002, cls_loss_wsddn: 0.0510, 
+2026-11-22 09:24:43,925 - train_coco.py - INFO: Iter: 52400; Elapsed: 2:00:31; ETA: 4:12:59; LR: 2.990e-05; cls_loss: 0.0545, cls_loss_aux: 0.0628, ptc_loss: 0.1373, seg_loss: 0.2656, cpe_loss: 0.2034, crme_loss: 0.0009, cls_loss_wsddn: 0.0548, 
+2026-11-22 09:26:33,499 - train_coco.py - INFO: Iter: 52600; Elapsed: 2:02:21; ETA: 4:11:09; LR: 2.987e-05; cls_loss: 0.0498, cls_loss_aux: 0.0563, ptc_loss: 0.1489, seg_loss: 0.2496, cpe_loss: 0.2102, crme_loss: 0.0000, cls_loss_wsddn: 0.0495, 
+2026-11-22 09:28:23,109 - train_coco.py - INFO: Iter: 52800; Elapsed: 2:04:11; ETA: 4:09:19; LR: 2.983e-05; cls_loss: 0.0545, cls_loss_aux: 0.0618, ptc_loss: 0.1561, seg_loss: 0.3081, cpe_loss: 0.2208, crme_loss: 0.0000, cls_loss_wsddn: 0.0532, 
+2026-11-22 09:30:12,941 - train_coco.py - INFO: Iter: 53000; Elapsed: 2:06:00; ETA: 4:05:14; LR: 2.979e-05; cls_loss: 0.0491, cls_loss_aux: 0.0550, ptc_loss: 0.1464, seg_loss: 0.2143, cpe_loss: 0.2029, crme_loss: 0.0004, cls_loss_wsddn: 0.0488, 
+2026-11-22 09:32:02,461 - train_coco.py - INFO: Iter: 53200; Elapsed: 2:07:50; ETA: 4:05:39; LR: 2.976e-05; cls_loss: 0.0506, cls_loss_aux: 0.0550, ptc_loss: 0.1488, seg_loss: 0.2487, cpe_loss: 0.2053, crme_loss: 0.0002, cls_loss_wsddn: 0.0501, 
+2026-11-22 09:33:52,091 - train_coco.py - INFO: Iter: 53400; Elapsed: 2:09:40; ETA: 4:03:49; LR: 2.972e-05; cls_loss: 0.0517, cls_loss_aux: 0.0576, ptc_loss: 0.1336, seg_loss: 0.2366, cpe_loss: 0.1909, crme_loss: 0.0039, cls_loss_wsddn: 0.0509, 
+2026-11-22 09:35:42,587 - train_coco.py - INFO: Iter: 53600; Elapsed: 2:11:30; ETA: 4:01:59; LR: 2.968e-05; cls_loss: 0.0514, cls_loss_aux: 0.0566, ptc_loss: 0.1456, seg_loss: 0.3159, cpe_loss: 0.2133, crme_loss: 0.0013, cls_loss_wsddn: 0.0513, 
+2026-11-22 09:37:32,149 - train_coco.py - INFO: Iter: 53800; Elapsed: 2:13:20; ETA: 4:00:09; LR: 2.965e-05; cls_loss: 0.0487, cls_loss_aux: 0.0541, ptc_loss: 0.1441, seg_loss: 0.2006, cpe_loss: 0.2102, crme_loss: 0.0003, cls_loss_wsddn: 0.0488, 
+2026-11-22 09:39:22,471 - train_coco.py - INFO: Iter: 54000; Elapsed: 2:15:10; ETA: 3:58:19; LR: 2.961e-05; cls_loss: 0.0522, cls_loss_aux: 0.0579, ptc_loss: 0.1573, seg_loss: 0.3569, cpe_loss: 0.2265, crme_loss: 0.0000, cls_loss_wsddn: 0.0515, 
+2026-11-22 09:41:12,046 - train_coco.py - INFO: Iter: 54200; Elapsed: 2:17:00; ETA: 3:56:29; LR: 2.957e-05; cls_loss: 0.0555, cls_loss_aux: 0.0624, ptc_loss: 0.1486, seg_loss: 0.2874, cpe_loss: 0.2163, crme_loss: 0.0021, cls_loss_wsddn: 0.0545, 
+2026-11-22 09:43:10,920 - train_coco.py - INFO: Iter: 54400; Elapsed: 2:18:58; ETA: 4:11:43; LR: 2.954e-05; cls_loss: 0.0536, cls_loss_aux: 0.0570, ptc_loss: 0.1537, seg_loss: 0.2103, cpe_loss: 0.2035, crme_loss: 0.0000, cls_loss_wsddn: 0.0534, 
+2026-11-22 09:45:02,169 - train_coco.py - INFO: Iter: 54600; Elapsed: 2:20:50; ETA: 3:57:03; LR: 2.950e-05; cls_loss: 0.0531, cls_loss_aux: 0.0593, ptc_loss: 0.1650, seg_loss: 0.2796, cpe_loss: 0.2130, crme_loss: 0.0001, cls_loss_wsddn: 0.0537, 
+2026-11-22 09:46:52,899 - train_coco.py - INFO: Iter: 54800; Elapsed: 2:22:40; ETA: 3:50:59; LR: 2.946e-05; cls_loss: 0.0523, cls_loss_aux: 0.0573, ptc_loss: 0.1572, seg_loss: 0.2588, cpe_loss: 0.2167, crme_loss: 0.0013, cls_loss_wsddn: 0.0525, 
+2026-11-22 09:48:43,444 - train_coco.py - INFO: Iter: 55000; Elapsed: 2:24:31; ETA: 3:51:14; LR: 2.943e-05; cls_loss: 0.0500, cls_loss_aux: 0.0545, ptc_loss: 0.1599, seg_loss: 0.2437, cpe_loss: 0.2168, crme_loss: 0.0000, cls_loss_wsddn: 0.0507, 
+2026-11-22 09:50:32,696 - train_coco.py - INFO: Iter: 55200; Elapsed: 2:26:20; ETA: 3:45:15; LR: 2.939e-05; cls_loss: 0.0508, cls_loss_aux: 0.0570, ptc_loss: 0.1440, seg_loss: 0.2900, cpe_loss: 0.2061, crme_loss: 0.0010, cls_loss_wsddn: 0.0506, 
+2026-11-22 09:52:22,147 - train_coco.py - INFO: Iter: 55400; Elapsed: 2:28:10; ETA: 3:45:29; LR: 2.935e-05; cls_loss: 0.0489, cls_loss_aux: 0.0541, ptc_loss: 0.1575, seg_loss: 0.2453, cpe_loss: 0.2163, crme_loss: 0.0021, cls_loss_wsddn: 0.0487, 
+2026-11-22 09:54:12,453 - train_coco.py - INFO: Iter: 55600; Elapsed: 2:30:00; ETA: 3:43:39; LR: 2.932e-05; cls_loss: 0.0522, cls_loss_aux: 0.0571, ptc_loss: 0.1678, seg_loss: 0.2971, cpe_loss: 0.2259, crme_loss: 0.0015, cls_loss_wsddn: 0.0526, 
+2026-11-22 09:56:03,586 - train_coco.py - INFO: Iter: 55800; Elapsed: 2:31:51; ETA: 3:43:50; LR: 2.928e-05; cls_loss: 0.0519, cls_loss_aux: 0.0551, ptc_loss: 0.1539, seg_loss: 0.2925, cpe_loss: 0.2049, crme_loss: 0.0004, cls_loss_wsddn: 0.0514, 
+2026-11-22 09:57:54,514 - train_coco.py - INFO: Iter: 56000; Elapsed: 2:33:42; ETA: 3:41:59; LR: 2.925e-05; cls_loss: 0.0522, cls_loss_aux: 0.0564, ptc_loss: 0.1363, seg_loss: 0.2608, cpe_loss: 0.2017, crme_loss: 0.0007, cls_loss_wsddn: 0.0529, 
+2026-11-22 09:59:44,067 - train_coco.py - INFO: Iter: 56200; Elapsed: 2:35:32; ETA: 3:38:09; LR: 2.921e-05; cls_loss: 0.0518, cls_loss_aux: 0.0565, ptc_loss: 0.1550, seg_loss: 0.3069, cpe_loss: 0.2146, crme_loss: 0.0000, cls_loss_wsddn: 0.0518, 
+2026-11-22 10:01:34,287 - train_coco.py - INFO: Iter: 56400; Elapsed: 2:37:22; ETA: 3:36:19; LR: 2.917e-05; cls_loss: 0.0505, cls_loss_aux: 0.0543, ptc_loss: 0.1332, seg_loss: 0.3114, cpe_loss: 0.1896, crme_loss: 0.0000, cls_loss_wsddn: 0.0502, 
+2026-11-22 10:03:23,319 - train_coco.py - INFO: Iter: 56600; Elapsed: 2:39:11; ETA: 3:32:32; LR: 2.914e-05; cls_loss: 0.0453, cls_loss_aux: 0.0498, ptc_loss: 0.1252, seg_loss: 0.2523, cpe_loss: 0.1883, crme_loss: 0.0000, cls_loss_wsddn: 0.0452, 
+2026-11-22 10:05:14,180 - train_coco.py - INFO: Iter: 56800; Elapsed: 2:41:02; ETA: 3:34:35; LR: 2.910e-05; cls_loss: 0.0505, cls_loss_aux: 0.0548, ptc_loss: 0.1300, seg_loss: 0.3022, cpe_loss: 0.1998, crme_loss: 0.0001, cls_loss_wsddn: 0.0503, 
+2026-11-22 10:07:03,729 - train_coco.py - INFO: Iter: 57000; Elapsed: 2:42:51; ETA: 3:28:54; LR: 2.906e-05; cls_loss: 0.0470, cls_loss_aux: 0.0511, ptc_loss: 0.1435, seg_loss: 0.2424, cpe_loss: 0.1949, crme_loss: 0.0010, cls_loss_wsddn: 0.0466, 
+2026-11-22 10:08:53,097 - train_coco.py - INFO: Iter: 57200; Elapsed: 2:44:41; ETA: 3:28:59; LR: 2.903e-05; cls_loss: 0.0473, cls_loss_aux: 0.0531, ptc_loss: 0.1370, seg_loss: 0.2586, cpe_loss: 0.2000, crme_loss: 0.0003, cls_loss_wsddn: 0.0473, 
+2026-11-22 10:10:43,746 - train_coco.py - INFO: Iter: 57400; Elapsed: 2:46:31; ETA: 3:27:09; LR: 2.899e-05; cls_loss: 0.0510, cls_loss_aux: 0.0556, ptc_loss: 0.1509, seg_loss: 0.2809, cpe_loss: 0.2109, crme_loss: 0.0010, cls_loss_wsddn: 0.0515, 
+2026-11-22 10:12:34,702 - train_coco.py - INFO: Iter: 57600; Elapsed: 2:48:22; ETA: 3:27:11; LR: 2.895e-05; cls_loss: 0.0493, cls_loss_aux: 0.0536, ptc_loss: 0.1450, seg_loss: 0.2552, cpe_loss: 0.2124, crme_loss: 0.0002, cls_loss_wsddn: 0.0489, 
+2026-11-22 10:14:25,476 - train_coco.py - INFO: Iter: 57800; Elapsed: 2:50:13; ETA: 3:25:20; LR: 2.892e-05; cls_loss: 0.0565, cls_loss_aux: 0.0615, ptc_loss: 0.1401, seg_loss: 0.2913, cpe_loss: 0.2090, crme_loss: 0.0000, cls_loss_wsddn: 0.0564, 
+2026-11-22 10:16:15,306 - train_coco.py - INFO: Iter: 58000; Elapsed: 2:52:03; ETA: 3:21:39; LR: 2.888e-05; cls_loss: 0.0523, cls_loss_aux: 0.0567, ptc_loss: 0.1360, seg_loss: 0.3498, cpe_loss: 0.2028, crme_loss: 0.0012, cls_loss_wsddn: 0.0522, 
+2026-11-22 10:18:05,698 - train_coco.py - INFO: Iter: 58200; Elapsed: 2:53:53; ETA: 3:19:49; LR: 2.884e-05; cls_loss: 0.0463, cls_loss_aux: 0.0497, ptc_loss: 0.1532, seg_loss: 0.2585, cpe_loss: 0.2063, crme_loss: 0.0004, cls_loss_wsddn: 0.0469, 
+2026-11-22 10:19:56,025 - train_coco.py - INFO: Iter: 58400; Elapsed: 2:55:44; ETA: 3:19:47; LR: 2.881e-05; cls_loss: 0.0512, cls_loss_aux: 0.0563, ptc_loss: 0.1453, seg_loss: 0.2550, cpe_loss: 0.1921, crme_loss: 0.0000, cls_loss_wsddn: 0.0511, 
+2026-11-22 10:21:46,015 - train_coco.py - INFO: Iter: 58600; Elapsed: 2:57:34; ETA: 3:16:09; LR: 2.877e-05; cls_loss: 0.0476, cls_loss_aux: 0.0523, ptc_loss: 0.1272, seg_loss: 0.2141, cpe_loss: 0.1831, crme_loss: 0.0000, cls_loss_wsddn: 0.0469, 
+2026-11-22 10:23:36,547 - train_coco.py - INFO: Iter: 58800; Elapsed: 2:59:24; ETA: 3:14:19; LR: 2.873e-05; cls_loss: 0.0484, cls_loss_aux: 0.0521, ptc_loss: 0.1244, seg_loss: 0.2269, cpe_loss: 0.1859, crme_loss: 0.0020, cls_loss_wsddn: 0.0478, 
+2026-11-22 10:25:26,383 - train_coco.py - INFO: Iter: 59000; Elapsed: 3:01:14; ETA: 3:12:29; LR: 2.870e-05; cls_loss: 0.0443, cls_loss_aux: 0.0474, ptc_loss: 0.1255, seg_loss: 0.2045, cpe_loss: 0.1915, crme_loss: 0.0004, cls_loss_wsddn: 0.0434, 
+2026-11-22 10:27:17,659 - train_coco.py - INFO: Iter: 59200; Elapsed: 3:03:05; ETA: 3:12:23; LR: 2.866e-05; cls_loss: 0.0528, cls_loss_aux: 0.0579, ptc_loss: 0.1354, seg_loss: 0.2629, cpe_loss: 0.1890, crme_loss: 0.0000, cls_loss_wsddn: 0.0514, 
+2026-11-22 10:29:08,376 - train_coco.py - INFO: Iter: 59400; Elapsed: 3:04:56; ETA: 3:10:32; LR: 2.862e-05; cls_loss: 0.0505, cls_loss_aux: 0.0538, ptc_loss: 0.1507, seg_loss: 0.2810, cpe_loss: 0.2124, crme_loss: 0.0010, cls_loss_wsddn: 0.0501, 
+2026-11-22 10:30:59,089 - train_coco.py - INFO: Iter: 59600; Elapsed: 3:06:47; ETA: 3:08:41; LR: 2.859e-05; cls_loss: 0.0510, cls_loss_aux: 0.0554, ptc_loss: 0.1432, seg_loss: 0.2814, cpe_loss: 0.2066, crme_loss: 0.0003, cls_loss_wsddn: 0.0495, 
+2026-11-22 10:32:49,521 - train_coco.py - INFO: Iter: 59800; Elapsed: 3:08:37; ETA: 3:05:09; LR: 2.855e-05; cls_loss: 0.0498, cls_loss_aux: 0.0539, ptc_loss: 0.1448, seg_loss: 0.2267, cpe_loss: 0.2192, crme_loss: 0.0004, cls_loss_wsddn: 0.0503, 
+2026-11-22 10:34:40,008 - train_coco.py - INFO: Iter: 60000; Elapsed: 3:10:28; ETA: 3:04:59; LR: 2.851e-05; cls_loss: 0.0490, cls_loss_aux: 0.0540, ptc_loss: 0.1398, seg_loss: 0.2372, cpe_loss: 0.1949, crme_loss: 0.0000, cls_loss_wsddn: 0.0489, 
+2026-11-22 10:34:40,008 - train_coco.py - INFO: saving experiments/coco_baseline/2026-11/train_coco_22-07-24-12/checkpoints/model_iter_60000.pth
+2026-11-22 10:34:40,620 - train_coco.py - INFO: miou1:0.0  miou2:0.0 miou3:0.0
+2026-11-22 10:34:40,620 - train_coco.py - INFO: Validating...
+2026-11-22 10:54:28,181 - validatation_engine.py - INFO: val cls score: 0.782505
+2026-11-22 10:54:28,183 - validatation_engine.py - INFO: 
++------------------+--------+--------+--------+----------+
+|      Class       |  CAM0  |  CAM1  |  CAM2  | Seg_Pred |
++==================+========+========+========+==========+
+| _background_     | 76.818 | 78.798 | 76.690 | 78.078   |
++------------------+--------+--------+--------+----------+
+| person           | 54.516 | 60.266 | 63.076 | 61.207   |
++------------------+--------+--------+--------+----------+
+| bicycle          | 38.241 | 44.544 | 45.388 | 21.203   |
++------------------+--------+--------+--------+----------+
+| car              | 25.172 | 38.322 | 42.203 | 28.924   |
++------------------+--------+--------+--------+----------+
+| motorcycle       | 38.570 | 51.495 | 52.012 | 44.927   |
++------------------+--------+--------+--------+----------+
+| airplane         | 38.307 | 61.188 | 59.205 | 59.879   |
++------------------+--------+--------+--------+----------+
+| bus              | 36.690 | 53.486 | 50.457 | 38.297   |
++------------------+--------+--------+--------+----------+
+| train            | 38.280 | 49.073 | 47.072 | 46.519   |
++------------------+--------+--------+--------+----------+
+| truck            | 27.329 | 38.030 | 31.275 | 28.832   |
++------------------+--------+--------+--------+----------+
+| boat             | 28.772 | 42.853 | 41.648 | 39.182   |
++------------------+--------+--------+--------+----------+
+| traffic light    | 31.700 | 34.335 | 19.566 | 47.992   |
++------------------+--------+--------+--------+----------+
+| fire hydrant     | 51.763 | 68.443 | 69.827 | 63.242   |
++------------------+--------+--------+--------+----------+
+| stop sign        | 64.624 | 61.104 | 66.458 | 67.692   |
++------------------+--------+--------+--------+----------+
+| parking meter    | 57.018 | 65.156 | 46.723 | 55.748   |
++------------------+--------+--------+--------+----------+
+| bench            | 27.070 | 33.259 | 27.029 | 21.512   |
++------------------+--------+--------+--------+----------+
+| bird             | 48.931 | 53.197 | 47.918 | 53.684   |
++------------------+--------+--------+--------+----------+
+| cat              | 52.627 | 61.256 | 63.854 | 62.318   |
++------------------+--------+--------+--------+----------+
+| dog              | 45.548 | 56.243 | 52.592 | 55.969   |
++------------------+--------+--------+--------+----------+
+| horse            | 48.525 | 53.997 | 57.016 | 51.106   |
++------------------+--------+--------+--------+----------+
+| sheep            | 60.118 | 68.871 | 68.136 | 65.472   |
++------------------+--------+--------+--------+----------+
+| cow              | 37.864 | 60.576 | 61.643 | 60.073   |
++------------------+--------+--------+--------+----------+
+| elephant         | 50.369 | 66.684 | 63.546 | 71.915   |
++------------------+--------+--------+--------+----------+
+| bear             | 59.891 | 74.024 | 73.407 | 74.059   |
++------------------+--------+--------+--------+----------+
+| zebra            | 51.786 | 61.894 | 60.928 | 66.689   |
++------------------+--------+--------+--------+----------+
+| giraffe          | 41.434 | 49.221 | 50.897 | 34.526   |
++------------------+--------+--------+--------+----------+
+| backpack         | 20.560 | 17.290 | 6.753  | 3.330    |
++------------------+--------+--------+--------+----------+
+| umbrella         | 40.569 | 57.954 | 58.931 | 53.183   |
++------------------+--------+--------+--------+----------+
+| handbag          | 7.111  | 8.355  | 11.669 | 1.437    |
++------------------+--------+--------+--------+----------+
+| tie              | 2.034  | 1.064  | 1.778  | 1.552    |
++------------------+--------+--------+--------+----------+
+| suitcase         | 34.469 | 44.785 | 26.520 | 46.194   |
++------------------+--------+--------+--------+----------+
+| frisbee          | 24.611 | 29.997 | 27.392 | 24.900   |
++------------------+--------+--------+--------+----------+
+| skis             | 9.950  | 7.492  | 7.135  | 5.926    |
++------------------+--------+--------+--------+----------+
+| snowboard        | 25.503 | 26.752 | 15.500 | 17.900   |
++------------------+--------+--------+--------+----------+
+| sports ball      | 11.588 | 8.713  | 13.053 | 2.875    |
++------------------+--------+--------+--------+----------+
+| kite             | 35.406 | 24.992 | 25.958 | 15.665   |
++------------------+--------+--------+--------+----------+
+| baseball bat     | 1.851  | 2.595  | 1.057  | 0.819    |
++------------------+--------+--------+--------+----------+
+| baseball glove   | 5.240  | 8.445  | 3.445  | 0        |
++------------------+--------+--------+--------+----------+
+| skateboard       | 13.469 | 10.785 | 10.840 | 9.721    |
++------------------+--------+--------+--------+----------+
+| surfboard        | 24.957 | 21.933 | 18.046 | 18.755   |
++------------------+--------+--------+--------+----------+
+| tennis racket    | 3.577  | 5.329  | 1.597  | 1.508    |
++------------------+--------+--------+--------+----------+
+| bottle           | 19.172 | 20.890 | 15.318 | 13.633   |
++------------------+--------+--------+--------+----------+
+| wine glass       | 16.994 | 19.676 | 17.776 | 4.430    |
++------------------+--------+--------+--------+----------+
+| cup              | 19.575 | 18.083 | 24.353 | 10.117   |
++------------------+--------+--------+--------+----------+
+| fork             | 6.307  | 9.210  | 6.574  | 0        |
++------------------+--------+--------+--------+----------+
+| knife            | 8.573  | 15.698 | 6.836  | 14.971   |
++------------------+--------+--------+--------+----------+
+| spoon            | 3.421  | 3.325  | 3.612  | 0.819    |
++------------------+--------+--------+--------+----------+
+| bowl             | 12.053 | 9.224  | 10.050 | 2.615    |
++------------------+--------+--------+--------+----------+
+| banana           | 48.126 | 58.665 | 60.580 | 60.153   |
++------------------+--------+--------+--------+----------+
+| apple            | 30.161 | 44.413 | 3.218  | 40.887   |
++------------------+--------+--------+--------+----------+
+| sandwich         | 28.858 | 41.620 | 43.028 | 35.939   |
++------------------+--------+--------+--------+----------+
+| orange           | 40.403 | 57.031 | 56.189 | 57.530   |
++------------------+--------+--------+--------+----------+
+| broccoli         | 45.692 | 43.526 | 44.250 | 42.232   |
++------------------+--------+--------+--------+----------+
+| carrot           | 35.254 | 40.196 | 40.267 | 40.551   |
++------------------+--------+--------+--------+----------+
+| hot dog          | 30.691 | 51.115 | 52.427 | 46.319   |
++------------------+--------+--------+--------+----------+
+| pizza            | 31.454 | 53.834 | 54.517 | 51.969   |
++------------------+--------+--------+--------+----------+
+| donut            | 48.710 | 63.994 | 66.618 | 60.895   |
++------------------+--------+--------+--------+----------+
+| cake             | 33.437 | 43.076 | 45.132 | 41.040   |
++------------------+--------+--------+--------+----------+
+| chair            | 18.282 | 16.916 | 18.013 | 7.400    |
++------------------+--------+--------+--------+----------+
+| couch            | 34.663 | 24.253 | 25.907 | 12.319   |
++------------------+--------+--------+--------+----------+
+| potted plant     | 26.400 | 27.050 | 37.471 | 6.579    |
++------------------+--------+--------+--------+----------+
+| bed              | 33.286 | 41.190 | 43.148 | 36.383   |
++------------------+--------+--------+--------+----------+
+| dining table     | 11.261 | 6.939  | 7.661  | 2.953    |
++------------------+--------+--------+--------+----------+
+| toilet           | 49.727 | 61.095 | 64.030 | 56.830   |
++------------------+--------+--------+--------+----------+
+| tv               | 34.780 | 34.614 | 38.555 | 25.544   |
++------------------+--------+--------+--------+----------+
+| laptop           | 41.650 | 47.358 | 50.375 | 41.122   |
++------------------+--------+--------+--------+----------+
+| mouse            | 9.779  | 14.855 | 13.140 | 1.554    |
++------------------+--------+--------+--------+----------+
+| remote           | 17.028 | 28.749 | 12.341 | 41.090   |
++------------------+--------+--------+--------+----------+
+| keyboard         | 30.555 | 35.508 | 34.053 | 32.039   |
++------------------+--------+--------+--------+----------+
+| cell phone       | 17.313 | 34.647 | 37.259 | 48.608   |
++------------------+--------+--------+--------+----------+
+| microwave        | 26.525 | 37.025 | 22.481 | 35.192   |
++------------------+--------+--------+--------+----------+
+| oven             | 20.253 | 21.197 | 6.235  | 13.536   |
++------------------+--------+--------+--------+----------+
+| toaster          | 14.503 | 9.845  | 5.434  | 0        |
++------------------+--------+--------+--------+----------+
+| sink             | 34.738 | 29.825 | 31.003 | 21.745   |
++------------------+--------+--------+--------+----------+
+| refrigerator     | 35.363 | 31.667 | 36.465 | 27.049   |
++------------------+--------+--------+--------+----------+
+| book             | 18.507 | 18.142 | 22.121 | 12.657   |
++------------------+--------+--------+--------+----------+
+| clock            | 36.574 | 36.655 | 21.749 | 38.987   |
++------------------+--------+--------+--------+----------+
+| vase             | 17.831 | 23.154 | 22.434 | 22.396   |
++------------------+--------+--------+--------+----------+
+| scissors         | 26.446 | 43.986 | 43.171 | 36.163   |
++------------------+--------+--------+--------+----------+
+| teddy bear       | 39.736 | 44.132 | 44.279 | 46.680   |
++------------------+--------+--------+--------+----------+
+| hair drier       | 14.413 | 27.042 | 32.418 | 0        |
++------------------+--------+--------+--------+----------+
+| toothbrush       | 15.310 | 26.021 | 24.241 | 31.502   |
++------------------+--------+--------+--------+----------+
+| m-Precision      | 51.962 | 55.685 | 50.239 | nan      |
++------------------+--------+--------+--------+----------+
+| m-Recall         | 47.847 | 53.835 | 54.739 | 42.134   |
++------------------+--------+--------+--------+----------+
+| m-ConfutionRatio | 3.731  | 3.569  | 5.392  | nan      |
++------------------+--------+--------+--------+----------+
+| m-IoU            | 30.576 | 36.768 | 34.728 | 32.410   |
++------------------+--------+--------+--------+----------+
+2026-11-22 10:54:28,185 - train_coco.py - INFO: val cls score: 0.782505
+2026-11-22 10:54:28,185 - train_coco.py - INFO: 
++------------------+--------+--------+--------+----------+
+|      Class       |  CAM0  |  CAM1  |  CAM2  | Seg_Pred |
++==================+========+========+========+==========+
+| _background_     | 76.818 | 78.798 | 76.690 | 78.078   |
++------------------+--------+--------+--------+----------+
+| person           | 54.516 | 60.266 | 63.076 | 61.207   |
++------------------+--------+--------+--------+----------+
+| bicycle          | 38.241 | 44.544 | 45.388 | 21.203   |
++------------------+--------+--------+--------+----------+
+| car              | 25.172 | 38.322 | 42.203 | 28.924   |
++------------------+--------+--------+--------+----------+
+| motorcycle       | 38.570 | 51.495 | 52.012 | 44.927   |
++------------------+--------+--------+--------+----------+
+| airplane         | 38.307 | 61.188 | 59.205 | 59.879   |
++------------------+--------+--------+--------+----------+
+| bus              | 36.690 | 53.486 | 50.457 | 38.297   |
++------------------+--------+--------+--------+----------+
+| train            | 38.280 | 49.073 | 47.072 | 46.519   |
++------------------+--------+--------+--------+----------+
+| truck            | 27.329 | 38.030 | 31.275 | 28.832   |
++------------------+--------+--------+--------+----------+
+| boat             | 28.772 | 42.853 | 41.648 | 39.182   |
++------------------+--------+--------+--------+----------+
+| traffic light    | 31.700 | 34.335 | 19.566 | 47.992   |
++------------------+--------+--------+--------+----------+
+| fire hydrant     | 51.763 | 68.443 | 69.827 | 63.242   |
++------------------+--------+--------+--------+----------+
+| stop sign        | 64.624 | 61.104 | 66.458 | 67.692   |
++------------------+--------+--------+--------+----------+
+| parking meter    | 57.018 | 65.156 | 46.723 | 55.748   |
++------------------+--------+--------+--------+----------+
+| bench            | 27.070 | 33.259 | 27.029 | 21.512   |
++------------------+--------+--------+--------+----------+
+| bird             | 48.931 | 53.197 | 47.918 | 53.684   |
++------------------+--------+--------+--------+----------+
+| cat              | 52.627 | 61.256 | 63.854 | 62.318   |
++------------------+--------+--------+--------+----------+
+| dog              | 45.548 | 56.243 | 52.592 | 55.969   |
++------------------+--------+--------+--------+----------+
+| horse            | 48.525 | 53.997 | 57.016 | 51.106   |
++------------------+--------+--------+--------+----------+
+| sheep            | 60.118 | 68.871 | 68.136 | 65.472   |
++------------------+--------+--------+--------+----------+
+| cow              | 37.864 | 60.576 | 61.643 | 60.073   |
++------------------+--------+--------+--------+----------+
+| elephant         | 50.369 | 66.684 | 63.546 | 71.915   |
++------------------+--------+--------+--------+----------+
+| bear             | 59.891 | 74.024 | 73.407 | 74.059   |
++------------------+--------+--------+--------+----------+
+| zebra            | 51.786 | 61.894 | 60.928 | 66.689   |
++------------------+--------+--------+--------+----------+
+| giraffe          | 41.434 | 49.221 | 50.897 | 34.526   |
++------------------+--------+--------+--------+----------+
+| backpack         | 20.560 | 17.290 | 6.753  | 3.330    |
++------------------+--------+--------+--------+----------+
+| umbrella         | 40.569 | 57.954 | 58.931 | 53.183   |
++------------------+--------+--------+--------+----------+
+| handbag          | 7.111  | 8.355  | 11.669 | 1.437    |
++------------------+--------+--------+--------+----------+
+| tie              | 2.034  | 1.064  | 1.778  | 1.552    |
++------------------+--------+--------+--------+----------+
+| suitcase         | 34.469 | 44.785 | 26.520 | 46.194   |
++------------------+--------+--------+--------+----------+
+| frisbee          | 24.611 | 29.997 | 27.392 | 24.900   |
++------------------+--------+--------+--------+----------+
+| skis             | 9.950  | 7.492  | 7.135  | 5.926    |
++------------------+--------+--------+--------+----------+
+| snowboard        | 25.503 | 26.752 | 15.500 | 17.900   |
++------------------+--------+--------+--------+----------+
+| sports ball      | 11.588 | 8.713  | 13.053 | 2.875    |
++------------------+--------+--------+--------+----------+
+| kite             | 35.406 | 24.992 | 25.958 | 15.665   |
++------------------+--------+--------+--------+----------+
+| baseball bat     | 1.851  | 2.595  | 1.057  | 0.819    |
++------------------+--------+--------+--------+----------+
+| baseball glove   | 5.240  | 8.445  | 3.445  | 0        |
++------------------+--------+--------+--------+----------+
+| skateboard       | 13.469 | 10.785 | 10.840 | 9.721    |
++------------------+--------+--------+--------+----------+
+| surfboard        | 24.957 | 21.933 | 18.046 | 18.755   |
++------------------+--------+--------+--------+----------+
+| tennis racket    | 3.577  | 5.329  | 1.597  | 1.508    |
++------------------+--------+--------+--------+----------+
+| bottle           | 19.172 | 20.890 | 15.318 | 13.633   |
++------------------+--------+--------+--------+----------+
+| wine glass       | 16.994 | 19.676 | 17.776 | 4.430    |
++------------------+--------+--------+--------+----------+
+| cup              | 19.575 | 18.083 | 24.353 | 10.117   |
++------------------+--------+--------+--------+----------+
+| fork             | 6.307  | 9.210  | 6.574  | 0        |
++------------------+--------+--------+--------+----------+
+| knife            | 8.573  | 15.698 | 6.836  | 14.971   |
++------------------+--------+--------+--------+----------+
+| spoon            | 3.421  | 3.325  | 3.612  | 0.819    |
++------------------+--------+--------+--------+----------+
+| bowl             | 12.053 | 9.224  | 10.050 | 2.615    |
++------------------+--------+--------+--------+----------+
+| banana           | 48.126 | 58.665 | 60.580 | 60.153   |
++------------------+--------+--------+--------+----------+
+| apple            | 30.161 | 44.413 | 3.218  | 40.887   |
++------------------+--------+--------+--------+----------+
+| sandwich         | 28.858 | 41.620 | 43.028 | 35.939   |
++------------------+--------+--------+--------+----------+
+| orange           | 40.403 | 57.031 | 56.189 | 57.530   |
++------------------+--------+--------+--------+----------+
+| broccoli         | 45.692 | 43.526 | 44.250 | 42.232   |
++------------------+--------+--------+--------+----------+
+| carrot           | 35.254 | 40.196 | 40.267 | 40.551   |
++------------------+--------+--------+--------+----------+
+| hot dog          | 30.691 | 51.115 | 52.427 | 46.319   |
++------------------+--------+--------+--------+----------+
+| pizza            | 31.454 | 53.834 | 54.517 | 51.969   |
++------------------+--------+--------+--------+----------+
+| donut            | 48.710 | 63.994 | 66.618 | 60.895   |
++------------------+--------+--------+--------+----------+
+| cake             | 33.437 | 43.076 | 45.132 | 41.040   |
++------------------+--------+--------+--------+----------+
+| chair            | 18.282 | 16.916 | 18.013 | 7.400    |
++------------------+--------+--------+--------+----------+
+| couch            | 34.663 | 24.253 | 25.907 | 12.319   |
++------------------+--------+--------+--------+----------+
+| potted plant     | 26.400 | 27.050 | 37.471 | 6.579    |
++------------------+--------+--------+--------+----------+
+| bed              | 33.286 | 41.190 | 43.148 | 36.383   |
++------------------+--------+--------+--------+----------+
+| dining table     | 11.261 | 6.939  | 7.661  | 2.953    |
++------------------+--------+--------+--------+----------+
+| toilet           | 49.727 | 61.095 | 64.030 | 56.830   |
++------------------+--------+--------+--------+----------+
+| tv               | 34.780 | 34.614 | 38.555 | 25.544   |
++------------------+--------+--------+--------+----------+
+| laptop           | 41.650 | 47.358 | 50.375 | 41.122   |
++------------------+--------+--------+--------+----------+
+| mouse            | 9.779  | 14.855 | 13.140 | 1.554    |
++------------------+--------+--------+--------+----------+
+| remote           | 17.028 | 28.749 | 12.341 | 41.090   |
++------------------+--------+--------+--------+----------+
+| keyboard         | 30.555 | 35.508 | 34.053 | 32.039   |
++------------------+--------+--------+--------+----------+
+| cell phone       | 17.313 | 34.647 | 37.259 | 48.608   |
++------------------+--------+--------+--------+----------+
+| microwave        | 26.525 | 37.025 | 22.481 | 35.192   |
++------------------+--------+--------+--------+----------+
+| oven             | 20.253 | 21.197 | 6.235  | 13.536   |
++------------------+--------+--------+--------+----------+
+| toaster          | 14.503 | 9.845  | 5.434  | 0        |
++------------------+--------+--------+--------+----------+
+| sink             | 34.738 | 29.825 | 31.003 | 21.745   |
++------------------+--------+--------+--------+----------+
+| refrigerator     | 35.363 | 31.667 | 36.465 | 27.049   |
++------------------+--------+--------+--------+----------+
+| book             | 18.507 | 18.142 | 22.121 | 12.657   |
++------------------+--------+--------+--------+----------+
+| clock            | 36.574 | 36.655 | 21.749 | 38.987   |
++------------------+--------+--------+--------+----------+
+| vase             | 17.831 | 23.154 | 22.434 | 22.396   |
++------------------+--------+--------+--------+----------+
+| scissors         | 26.446 | 43.986 | 43.171 | 36.163   |
++------------------+--------+--------+--------+----------+
+| teddy bear       | 39.736 | 44.132 | 44.279 | 46.680   |
++------------------+--------+--------+--------+----------+
+| hair drier       | 14.413 | 27.042 | 32.418 | 0        |
++------------------+--------+--------+--------+----------+
+| toothbrush       | 15.310 | 26.021 | 24.241 | 31.502   |
++------------------+--------+--------+--------+----------+
+| m-Precision      | 51.962 | 55.685 | 50.239 | nan      |
++------------------+--------+--------+--------+----------+
+| m-Recall         | 47.847 | 53.835 | 54.739 | 42.134   |
++------------------+--------+--------+--------+----------+
+| m-ConfutionRatio | 3.731  | 3.569  | 5.392  | nan      |
++------------------+--------+--------+--------+----------+
+| m-IoU            | 30.576 | 36.768 | 34.728 | 32.410   |
++------------------+--------+--------+--------+----------+
+2026-11-22 10:56:18,148 - train_coco.py - INFO: Iter: 60200; Elapsed: 3:32:06; ETA: 1 day, 11:41:41; LR: 2.848e-05; cls_loss: 0.0497, cls_loss_aux: 0.0554, ptc_loss: 0.1551, seg_loss: 0.2405, cpe_loss: 0.2166, crme_loss: 0.0008, cls_loss_wsddn: 0.0487, 
+2026-11-22 10:58:07,936 - train_coco.py - INFO: Iter: 60400; Elapsed: 3:33:55; ETA: 2:58:01; LR: 2.844e-05; cls_loss: 0.0555, cls_loss_aux: 0.0617, ptc_loss: 0.1299, seg_loss: 0.2745, cpe_loss: 0.1899, crme_loss: 0.0000, cls_loss_wsddn: 0.0547, 
+2026-11-22 10:59:59,670 - train_coco.py - INFO: Iter: 60600; Elapsed: 3:35:47; ETA: 3:01:03; LR: 2.840e-05; cls_loss: 0.0559, cls_loss_aux: 0.0654, ptc_loss: 0.1573, seg_loss: 0.2903, cpe_loss: 0.2148, crme_loss: 0.0000, cls_loss_wsddn: 0.0553, 
+2026-11-22 11:01:51,455 - train_coco.py - INFO: Iter: 60800; Elapsed: 3:37:39; ETA: 2:59:11; LR: 2.837e-05; cls_loss: 0.0540, cls_loss_aux: 0.0630, ptc_loss: 0.1611, seg_loss: 0.3070, cpe_loss: 0.2267, crme_loss: 0.0001, cls_loss_wsddn: 0.0534, 
+2026-11-22 11:03:43,449 - train_coco.py - INFO: Iter: 61000; Elapsed: 3:39:31; ETA: 2:57:19; LR: 2.833e-05; cls_loss: 0.0542, cls_loss_aux: 0.0611, ptc_loss: 0.1399, seg_loss: 0.2176, cpe_loss: 0.2010, crme_loss: 0.0000, cls_loss_wsddn: 0.0519, 
+2026-11-22 11:05:35,031 - train_coco.py - INFO: Iter: 61200; Elapsed: 3:41:23; ETA: 2:55:27; LR: 2.829e-05; cls_loss: 0.0495, cls_loss_aux: 0.0571, ptc_loss: 0.1309, seg_loss: 0.2861, cpe_loss: 0.1967, crme_loss: 0.0010, cls_loss_wsddn: 0.0482, 
+2026-11-22 11:07:27,662 - train_coco.py - INFO: Iter: 61400; Elapsed: 3:43:15; ETA: 2:53:35; LR: 2.826e-05; cls_loss: 0.0570, cls_loss_aux: 0.0654, ptc_loss: 0.1351, seg_loss: 0.3636, cpe_loss: 0.1999, crme_loss: 0.0000, cls_loss_wsddn: 0.0555, 
+2026-11-22 11:09:20,290 - train_coco.py - INFO: Iter: 61600; Elapsed: 3:45:08; ETA: 2:53:15; LR: 2.822e-05; cls_loss: 0.0595, cls_loss_aux: 0.0687, ptc_loss: 0.1390, seg_loss: 0.2620, cpe_loss: 0.2067, crme_loss: 0.0007, cls_loss_wsddn: 0.0584, 
+2026-11-22 11:11:12,644 - train_coco.py - INFO: Iter: 61800; Elapsed: 3:47:00; ETA: 2:49:51; LR: 2.818e-05; cls_loss: 0.0597, cls_loss_aux: 0.0694, ptc_loss: 0.1450, seg_loss: 0.3147, cpe_loss: 0.2055, crme_loss: 0.0007, cls_loss_wsddn: 0.0584, 
+2026-11-22 11:13:05,468 - train_coco.py - INFO: Iter: 62000; Elapsed: 3:48:53; ETA: 2:49:29; LR: 2.815e-05; cls_loss: 0.0564, cls_loss_aux: 0.0645, ptc_loss: 0.1289, seg_loss: 0.3136, cpe_loss: 0.1883, crme_loss: 0.0002, cls_loss_wsddn: 0.0553, 
+2026-11-22 11:14:57,851 - train_coco.py - INFO: Iter: 62200; Elapsed: 3:50:45; ETA: 2:46:07; LR: 2.811e-05; cls_loss: 0.0574, cls_loss_aux: 0.0654, ptc_loss: 0.1425, seg_loss: 0.3788, cpe_loss: 0.2080, crme_loss: 0.0000, cls_loss_wsddn: 0.0572, 
+2026-11-22 11:16:51,208 - train_coco.py - INFO: Iter: 62400; Elapsed: 3:52:39; ETA: 2:47:11; LR: 2.807e-05; cls_loss: 0.0564, cls_loss_aux: 0.0650, ptc_loss: 0.1496, seg_loss: 0.3203, cpe_loss: 0.2149, crme_loss: 0.0011, cls_loss_wsddn: 0.0551, 
+2026-11-22 11:18:44,283 - train_coco.py - INFO: Iter: 62600; Elapsed: 3:54:32; ETA: 2:43:50; LR: 2.804e-05; cls_loss: 0.0530, cls_loss_aux: 0.0609, ptc_loss: 0.1388, seg_loss: 0.3374, cpe_loss: 0.1930, crme_loss: 0.0000, cls_loss_wsddn: 0.0534, 
+2026-11-22 11:20:36,427 - train_coco.py - INFO: Iter: 62800; Elapsed: 3:56:24; ETA: 2:40:31; LR: 2.800e-05; cls_loss: 0.0599, cls_loss_aux: 0.0681, ptc_loss: 0.1528, seg_loss: 0.3069, cpe_loss: 0.2159, crme_loss: 0.0001, cls_loss_wsddn: 0.0592, 
+2026-11-22 11:22:28,131 - train_coco.py - INFO: Iter: 63000; Elapsed: 3:58:16; ETA: 2:38:39; LR: 2.796e-05; cls_loss: 0.0540, cls_loss_aux: 0.0613, ptc_loss: 0.1212, seg_loss: 0.2667, cpe_loss: 0.1878, crme_loss: 0.0004, cls_loss_wsddn: 0.0529, 
+2026-11-22 11:24:20,920 - train_coco.py - INFO: Iter: 63200; Elapsed: 4:00:08; ETA: 2:36:47; LR: 2.793e-05; cls_loss: 0.0581, cls_loss_aux: 0.0655, ptc_loss: 0.1522, seg_loss: 0.3043, cpe_loss: 0.2189, crme_loss: 0.0000, cls_loss_wsddn: 0.0576, 
+2026-11-22 11:26:13,135 - train_coco.py - INFO: Iter: 63400; Elapsed: 4:02:01; ETA: 2:36:18; LR: 2.789e-05; cls_loss: 0.0545, cls_loss_aux: 0.0626, ptc_loss: 0.1394, seg_loss: 0.2777, cpe_loss: 0.2039, crme_loss: 0.0001, cls_loss_wsddn: 0.0535, 
+2026-11-22 11:28:06,255 - train_coco.py - INFO: Iter: 63600; Elapsed: 4:03:54; ETA: 2:34:25; LR: 2.785e-05; cls_loss: 0.0554, cls_loss_aux: 0.0646, ptc_loss: 0.1413, seg_loss: 0.2764, cpe_loss: 0.2051, crme_loss: 0.0014, cls_loss_wsddn: 0.0550, 
+2026-11-22 11:29:58,154 - train_coco.py - INFO: Iter: 63800; Elapsed: 4:05:46; ETA: 2:31:11; LR: 2.782e-05; cls_loss: 0.0497, cls_loss_aux: 0.0560, ptc_loss: 0.1399, seg_loss: 0.2532, cpe_loss: 0.1977, crme_loss: 0.0149, cls_loss_wsddn: 0.0482, 
+2026-11-22 11:31:49,914 - train_coco.py - INFO: Iter: 64000; Elapsed: 4:07:37; ETA: 2:27:59; LR: 2.778e-05; cls_loss: 0.0533, cls_loss_aux: 0.0602, ptc_loss: 0.1345, seg_loss: 0.2488, cpe_loss: 0.1964, crme_loss: 0.0000, cls_loss_wsddn: 0.0535, 
+2026-11-22 11:33:42,453 - train_coco.py - INFO: Iter: 64200; Elapsed: 4:09:30; ETA: 2:28:46; LR: 2.774e-05; cls_loss: 0.0577, cls_loss_aux: 0.0656, ptc_loss: 0.1574, seg_loss: 0.3733, cpe_loss: 0.2036, crme_loss: 0.0038, cls_loss_wsddn: 0.0570, 
+2026-11-22 11:35:33,187 - train_coco.py - INFO: Iter: 64400; Elapsed: 4:11:21; ETA: 2:24:17; LR: 2.771e-05; cls_loss: 0.0539, cls_loss_aux: 0.0626, ptc_loss: 0.1378, seg_loss: 0.2753, cpe_loss: 0.1907, crme_loss: 0.0000, cls_loss_wsddn: 0.0536, 
+2026-11-22 11:37:23,805 - train_coco.py - INFO: Iter: 64600; Elapsed: 4:13:11; ETA: 2:21:09; LR: 2.767e-05; cls_loss: 0.0514, cls_loss_aux: 0.0581, ptc_loss: 0.1384, seg_loss: 0.2524, cpe_loss: 0.1890, crme_loss: 0.0000, cls_loss_wsddn: 0.0513, 
+2026-11-22 11:39:14,797 - train_coco.py - INFO: Iter: 64800; Elapsed: 4:15:02; ETA: 2:20:35; LR: 2.763e-05; cls_loss: 0.0524, cls_loss_aux: 0.0579, ptc_loss: 0.1325, seg_loss: 0.2707, cpe_loss: 0.1867, crme_loss: 0.0001, cls_loss_wsddn: 0.0515, 
+2026-11-22 11:41:05,476 - train_coco.py - INFO: Iter: 65000; Elapsed: 4:16:53; ETA: 2:18:44; LR: 2.759e-05; cls_loss: 0.0496, cls_loss_aux: 0.0575, ptc_loss: 0.1491, seg_loss: 0.2719, cpe_loss: 0.2039, crme_loss: 0.0002, cls_loss_wsddn: 0.0487, 
+2026-11-22 11:41:05,477 - train_coco.py - INFO: miou1:0.0  miou2:0.0 miou3:0.0
+2026-11-22 11:41:05,477 - train_coco.py - INFO: Validating...
+2026-11-22 12:00:35,969 - validatation_engine.py - INFO: val cls score: 0.776103
+2026-11-22 12:00:35,971 - validatation_engine.py - INFO: 
++------------------+--------+--------+--------+----------+
+|      Class       |  CAM0  |  CAM1  |  CAM2  | Seg_Pred |
++==================+========+========+========+==========+
+| _background_     | 75.886 | 76.453 | 74.994 | 75.726   |
++------------------+--------+--------+--------+----------+
+| person           | 51.928 | 54.746 | 58.079 | 56.424   |
++------------------+--------+--------+--------+----------+
+| bicycle          | 33.543 | 39.721 | 31.471 | 22.476   |
++------------------+--------+--------+--------+----------+
+| car              | 31.741 | 43.106 | 45.907 | 30.313   |
++------------------+--------+--------+--------+----------+
+| motorcycle       | 33.583 | 53.931 | 51.262 | 44.038   |
++------------------+--------+--------+--------+----------+
+| airplane         | 40.606 | 54.132 | 61.030 | 55.710   |
++------------------+--------+--------+--------+----------+
+| bus              | 36.264 | 52.111 | 24.614 | 31.108   |
++------------------+--------+--------+--------+----------+
+| train            | 42.970 | 45.600 | 46.121 | 41.909   |
++------------------+--------+--------+--------+----------+
+| truck            | 23.462 | 40.812 | 37.744 | 32.948   |
++------------------+--------+--------+--------+----------+
+| boat             | 42.624 | 46.915 | 45.573 | 41.101   |
++------------------+--------+--------+--------+----------+
+| traffic light    | 28.126 | 28.694 | 26.147 | 42.211   |
++------------------+--------+--------+--------+----------+
+| fire hydrant     | 47.870 | 61.264 | 60.265 | 55.891   |
++------------------+--------+--------+--------+----------+
+| stop sign        | 64.562 | 59.004 | 68.743 | 63.073   |
++------------------+--------+--------+--------+----------+
+| parking meter    | 51.807 | 62.617 | 61.995 | 58.275   |
++------------------+--------+--------+--------+----------+
+| bench            | 29.441 | 39.019 | 34.303 | 15.420   |
++------------------+--------+--------+--------+----------+
+| bird             | 38.327 | 46.980 | 41.711 | 47.178   |
++------------------+--------+--------+--------+----------+
+| cat              | 65.371 | 70.257 | 70.556 | 63.280   |
++------------------+--------+--------+--------+----------+
+| dog              | 32.359 | 56.728 | 58.396 | 53.068   |
++------------------+--------+--------+--------+----------+
+| horse            | 46.279 | 54.573 | 57.306 | 50.532   |
++------------------+--------+--------+--------+----------+
+| sheep            | 60.736 | 66.962 | 67.629 | 60.310   |
++------------------+--------+--------+--------+----------+
+| cow              | 43.438 | 57.694 | 59.308 | 55.458   |
++------------------+--------+--------+--------+----------+
+| elephant         | 46.456 | 65.560 | 65.468 | 69.547   |
++------------------+--------+--------+--------+----------+
+| bear             | 63.738 | 74.131 | 74.682 | 72.242   |
++------------------+--------+--------+--------+----------+
+| zebra            | 53.193 | 64.247 | 64.404 | 71.145   |
++------------------+--------+--------+--------+----------+
+| giraffe          | 45.885 | 45.375 | 58.430 | 43.050   |
++------------------+--------+--------+--------+----------+
+| backpack         | 12.400 | 17.452 | 17.904 | 8.299    |
++------------------+--------+--------+--------+----------+
+| umbrella         | 45.521 | 60.540 | 63.427 | 55.295   |
++------------------+--------+--------+--------+----------+
+| handbag          | 9.464  | 11.140 | 13.997 | 0.323    |
++------------------+--------+--------+--------+----------+
+| tie              | 1.591  | 0.664  | 1.455  | 0.851    |
++------------------+--------+--------+--------+----------+
+| suitcase         | 38.591 | 46.884 | 38.602 | 32.986   |
++------------------+--------+--------+--------+----------+
+| frisbee          | 20.480 | 24.202 | 14.287 | 25.791   |
++------------------+--------+--------+--------+----------+
+| skis             | 10.947 | 8.393  | 6.645  | 10.366   |
++------------------+--------+--------+--------+----------+
+| snowboard        | 17.661 | 19.140 | 11.742 | 12.362   |
++------------------+--------+--------+--------+----------+
+| sports ball      | 9.324  | 6.512  | 5.414  | 2.858    |
++------------------+--------+--------+--------+----------+
+| kite             | 42.715 | 16.208 | 13.461 | 12.766   |
++------------------+--------+--------+--------+----------+
+| baseball bat     | 1.764  | 1.782  | 1.138  | 0.136    |
++------------------+--------+--------+--------+----------+
+| baseball glove   | 5.150  | 5.261  | 1.148  | 0.198    |
++------------------+--------+--------+--------+----------+
+| skateboard       | 9.948  | 8.650  | 7.958  | 5.394    |
++------------------+--------+--------+--------+----------+
+| surfboard        | 16.255 | 14.213 | 12.931 | 11.768   |
++------------------+--------+--------+--------+----------+
+| tennis racket    | 3.732  | 4.289  | 3.285  | 0.618    |
++------------------+--------+--------+--------+----------+
+| bottle           | 17.294 | 20.099 | 16.587 | 11.050   |
++------------------+--------+--------+--------+----------+
+| wine glass       | 17.730 | 20.093 | 19.209 | 5.524    |
++------------------+--------+--------+--------+----------+
+| cup              | 15.615 | 16.557 | 20.681 | 6.655    |
++------------------+--------+--------+--------+----------+
+| fork             | 5.454  | 9.067  | 4.958  | 3.405    |
++------------------+--------+--------+--------+----------+
+| knife            | 13.231 | 14.680 | 10.495 | 18.202   |
++------------------+--------+--------+--------+----------+
+| spoon            | 4.639  | 4.189  | 1.134  | 0.444    |
++------------------+--------+--------+--------+----------+
+| bowl             | 13.067 | 14.738 | 12.154 | 14.739   |
++------------------+--------+--------+--------+----------+
+| banana           | 44.483 | 57.158 | 59.102 | 51.077   |
++------------------+--------+--------+--------+----------+
+| apple            | 33.037 | 43.649 | 31.648 | 33.174   |
++------------------+--------+--------+--------+----------+
+| sandwich         | 32.820 | 44.077 | 44.126 | 37.902   |
++------------------+--------+--------+--------+----------+
+| orange           | 39.897 | 55.688 | 57.220 | 55.486   |
++------------------+--------+--------+--------+----------+
+| broccoli         | 41.781 | 42.988 | 41.705 | 42.188   |
++------------------+--------+--------+--------+----------+
+| carrot           | 35.679 | 37.986 | 37.797 | 28.328   |
++------------------+--------+--------+--------+----------+
+| hot dog          | 26.726 | 44.067 | 47.346 | 40.217   |
++------------------+--------+--------+--------+----------+
+| pizza            | 38.906 | 62.703 | 64.431 | 60.353   |
++------------------+--------+--------+--------+----------+
+| donut            | 45.474 | 58.713 | 60.794 | 52.597   |
++------------------+--------+--------+--------+----------+
+| cake             | 29.494 | 37.799 | 38.187 | 22.650   |
++------------------+--------+--------+--------+----------+
+| chair            | 21.181 | 21.796 | 17.961 | 10.766   |
++------------------+--------+--------+--------+----------+
+| couch            | 33.053 | 35.671 | 43.852 | 9.314    |
++------------------+--------+--------+--------+----------+
+| potted plant     | 11.135 | 25.143 | 12.380 | 8.382    |
++------------------+--------+--------+--------+----------+
+| bed              | 33.971 | 45.025 | 44.446 | 39.468   |
++------------------+--------+--------+--------+----------+
+| dining table     | 14.259 | 10.796 | 12.281 | 4.011    |
++------------------+--------+--------+--------+----------+
+| toilet           | 50.288 | 53.490 | 60.001 | 54.852   |
++------------------+--------+--------+--------+----------+
+| tv               | 33.939 | 38.336 | 11.736 | 28.332   |
++------------------+--------+--------+--------+----------+
+| laptop           | 38.171 | 46.575 | 47.065 | 36.973   |
++------------------+--------+--------+--------+----------+
+| mouse            | 9.551  | 9.875  | 8.157  | 2.452    |
++------------------+--------+--------+--------+----------+
+| remote           | 20.151 | 29.204 | 22.447 | 39.992   |
++------------------+--------+--------+--------+----------+
+| keyboard         | 25.648 | 30.954 | 22.811 | 30.008   |
++------------------+--------+--------+--------+----------+
+| cell phone       | 17.336 | 31.767 | 31.689 | 37.406   |
++------------------+--------+--------+--------+----------+
+| microwave        | 30.893 | 34.984 | 29.360 | 27.563   |
++------------------+--------+--------+--------+----------+
+| oven             | 22.700 | 24.466 | 20.509 | 16.262   |
++------------------+--------+--------+--------+----------+
+| toaster          | 7.922  | 18.216 | 16.055 | 0        |
++------------------+--------+--------+--------+----------+
+| sink             | 30.883 | 26.594 | 23.349 | 18.052   |
++------------------+--------+--------+--------+----------+
+| refrigerator     | 35.441 | 40.931 | 26.624 | 32.966   |
++------------------+--------+--------+--------+----------+
+| book             | 18.317 | 22.753 | 17.537 | 16.065   |
++------------------+--------+--------+--------+----------+
+| clock            | 44.170 | 30.829 | 21.956 | 33.379   |
++------------------+--------+--------+--------+----------+
+| vase             | 15.836 | 24.104 | 17.253 | 22.706   |
++------------------+--------+--------+--------+----------+
+| scissors         | 23.119 | 37.511 | 28.879 | 34.397   |
++------------------+--------+--------+--------+----------+
+| teddy bear       | 42.662 | 46.110 | 48.266 | 42.096   |
++------------------+--------+--------+--------+----------+
+| hair drier       | 11.689 | 21.704 | 12.726 | 0        |
++------------------+--------+--------+--------+----------+
+| toothbrush       | 11.506 | 21.805 | 16.743 | 23.389   |
++------------------+--------+--------+--------+----------+
+| m-Precision      | 51.234 | 50.842 | 46.031 | nan      |
++------------------+--------+--------+--------+----------+
+| m-Recall         | 47.744 | 58.523 | 58.536 | 43.916   |
++------------------+--------+--------+--------+----------+
+| m-ConfutionRatio | 3.991  | 4.927  | 6.555  | nan      |
++------------------+--------+--------+--------+----------+
+| m-IoU            | 30.060 | 36.035 | 33.842 | 30.682   |
++------------------+--------+--------+--------+----------+
+2026-11-22 12:00:35,973 - train_coco.py - INFO: val cls score: 0.776103
+2026-11-22 12:00:35,973 - train_coco.py - INFO: 
++------------------+--------+--------+--------+----------+
+|      Class       |  CAM0  |  CAM1  |  CAM2  | Seg_Pred |
++==================+========+========+========+==========+
+| _background_     | 75.886 | 76.453 | 74.994 | 75.726   |
++------------------+--------+--------+--------+----------+
+| person           | 51.928 | 54.746 | 58.079 | 56.424   |
++------------------+--------+--------+--------+----------+
+| bicycle          | 33.543 | 39.721 | 31.471 | 22.476   |
++------------------+--------+--------+--------+----------+
+| car              | 31.741 | 43.106 | 45.907 | 30.313   |
++------------------+--------+--------+--------+----------+
+| motorcycle       | 33.583 | 53.931 | 51.262 | 44.038   |
++------------------+--------+--------+--------+----------+
+| airplane         | 40.606 | 54.132 | 61.030 | 55.710   |
++------------------+--------+--------+--------+----------+
+| bus              | 36.264 | 52.111 | 24.614 | 31.108   |
++------------------+--------+--------+--------+----------+
+| train            | 42.970 | 45.600 | 46.121 | 41.909   |
++------------------+--------+--------+--------+----------+
+| truck            | 23.462 | 40.812 | 37.744 | 32.948   |
++------------------+--------+--------+--------+----------+
+| boat             | 42.624 | 46.915 | 45.573 | 41.101   |
++------------------+--------+--------+--------+----------+
+| traffic light    | 28.126 | 28.694 | 26.147 | 42.211   |
++------------------+--------+--------+--------+----------+
+| fire hydrant     | 47.870 | 61.264 | 60.265 | 55.891   |
++------------------+--------+--------+--------+----------+
+| stop sign        | 64.562 | 59.004 | 68.743 | 63.073   |
++------------------+--------+--------+--------+----------+
+| parking meter    | 51.807 | 62.617 | 61.995 | 58.275   |
++------------------+--------+--------+--------+----------+
+| bench            | 29.441 | 39.019 | 34.303 | 15.420   |
++------------------+--------+--------+--------+----------+
+| bird             | 38.327 | 46.980 | 41.711 | 47.178   |
++------------------+--------+--------+--------+----------+
+| cat              | 65.371 | 70.257 | 70.556 | 63.280   |
++------------------+--------+--------+--------+----------+
+| dog              | 32.359 | 56.728 | 58.396 | 53.068   |
++------------------+--------+--------+--------+----------+
+| horse            | 46.279 | 54.573 | 57.306 | 50.532   |
++------------------+--------+--------+--------+----------+
+| sheep            | 60.736 | 66.962 | 67.629 | 60.310   |
++------------------+--------+--------+--------+----------+
+| cow              | 43.438 | 57.694 | 59.308 | 55.458   |
++------------------+--------+--------+--------+----------+
+| elephant         | 46.456 | 65.560 | 65.468 | 69.547   |
++------------------+--------+--------+--------+----------+
+| bear             | 63.738 | 74.131 | 74.682 | 72.242   |
++------------------+--------+--------+--------+----------+
+| zebra            | 53.193 | 64.247 | 64.404 | 71.145   |
++------------------+--------+--------+--------+----------+
+| giraffe          | 45.885 | 45.375 | 58.430 | 43.050   |
++------------------+--------+--------+--------+----------+
+| backpack         | 12.400 | 17.452 | 17.904 | 8.299    |
++------------------+--------+--------+--------+----------+
+| umbrella         | 45.521 | 60.540 | 63.427 | 55.295   |
++------------------+--------+--------+--------+----------+
+| handbag          | 9.464  | 11.140 | 13.997 | 0.323    |
++------------------+--------+--------+--------+----------+
+| tie              | 1.591  | 0.664  | 1.455  | 0.851    |
++------------------+--------+--------+--------+----------+
+| suitcase         | 38.591 | 46.884 | 38.602 | 32.986   |
++------------------+--------+--------+--------+----------+
+| frisbee          | 20.480 | 24.202 | 14.287 | 25.791   |
++------------------+--------+--------+--------+----------+
+| skis             | 10.947 | 8.393  | 6.645  | 10.366   |
++------------------+--------+--------+--------+----------+
+| snowboard        | 17.661 | 19.140 | 11.742 | 12.362   |
++------------------+--------+--------+--------+----------+
+| sports ball      | 9.324  | 6.512  | 5.414  | 2.858    |
++------------------+--------+--------+--------+----------+
+| kite             | 42.715 | 16.208 | 13.461 | 12.766   |
++------------------+--------+--------+--------+----------+
+| baseball bat     | 1.764  | 1.782  | 1.138  | 0.136    |
++------------------+--------+--------+--------+----------+
+| baseball glove   | 5.150  | 5.261  | 1.148  | 0.198    |
++------------------+--------+--------+--------+----------+
+| skateboard       | 9.948  | 8.650  | 7.958  | 5.394    |
++------------------+--------+--------+--------+----------+
+| surfboard        | 16.255 | 14.213 | 12.931 | 11.768   |
++------------------+--------+--------+--------+----------+
+| tennis racket    | 3.732  | 4.289  | 3.285  | 0.618    |
++------------------+--------+--------+--------+----------+
+| bottle           | 17.294 | 20.099 | 16.587 | 11.050   |
++------------------+--------+--------+--------+----------+
+| wine glass       | 17.730 | 20.093 | 19.209 | 5.524    |
++------------------+--------+--------+--------+----------+
+| cup              | 15.615 | 16.557 | 20.681 | 6.655    |
++------------------+--------+--------+--------+----------+
+| fork             | 5.454  | 9.067  | 4.958  | 3.405    |
++------------------+--------+--------+--------+----------+
+| knife            | 13.231 | 14.680 | 10.495 | 18.202   |
++------------------+--------+--------+--------+----------+
+| spoon            | 4.639  | 4.189  | 1.134  | 0.444    |
++------------------+--------+--------+--------+----------+
+| bowl             | 13.067 | 14.738 | 12.154 | 14.739   |
++------------------+--------+--------+--------+----------+
+| banana           | 44.483 | 57.158 | 59.102 | 51.077   |
++------------------+--------+--------+--------+----------+
+| apple            | 33.037 | 43.649 | 31.648 | 33.174   |
++------------------+--------+--------+--------+----------+
+| sandwich         | 32.820 | 44.077 | 44.126 | 37.902   |
++------------------+--------+--------+--------+----------+
+| orange           | 39.897 | 55.688 | 57.220 | 55.486   |
++------------------+--------+--------+--------+----------+
+| broccoli         | 41.781 | 42.988 | 41.705 | 42.188   |
++------------------+--------+--------+--------+----------+
+| carrot           | 35.679 | 37.986 | 37.797 | 28.328   |
++------------------+--------+--------+--------+----------+
+| hot dog          | 26.726 | 44.067 | 47.346 | 40.217   |
++------------------+--------+--------+--------+----------+
+| pizza            | 38.906 | 62.703 | 64.431 | 60.353   |
++------------------+--------+--------+--------+----------+
+| donut            | 45.474 | 58.713 | 60.794 | 52.597   |
++------------------+--------+--------+--------+----------+
+| cake             | 29.494 | 37.799 | 38.187 | 22.650   |
++------------------+--------+--------+--------+----------+
+| chair            | 21.181 | 21.796 | 17.961 | 10.766   |
++------------------+--------+--------+--------+----------+
+| couch            | 33.053 | 35.671 | 43.852 | 9.314    |
++------------------+--------+--------+--------+----------+
+| potted plant     | 11.135 | 25.143 | 12.380 | 8.382    |
++------------------+--------+--------+--------+----------+
+| bed              | 33.971 | 45.025 | 44.446 | 39.468   |
++------------------+--------+--------+--------+----------+
+| dining table     | 14.259 | 10.796 | 12.281 | 4.011    |
++------------------+--------+--------+--------+----------+
+| toilet           | 50.288 | 53.490 | 60.001 | 54.852   |
++------------------+--------+--------+--------+----------+
+| tv               | 33.939 | 38.336 | 11.736 | 28.332   |
++------------------+--------+--------+--------+----------+
+| laptop           | 38.171 | 46.575 | 47.065 | 36.973   |
++------------------+--------+--------+--------+----------+
+| mouse            | 9.551  | 9.875  | 8.157  | 2.452    |
++------------------+--------+--------+--------+----------+
+| remote           | 20.151 | 29.204 | 22.447 | 39.992   |
++------------------+--------+--------+--------+----------+
+| keyboard         | 25.648 | 30.954 | 22.811 | 30.008   |
++------------------+--------+--------+--------+----------+
+| cell phone       | 17.336 | 31.767 | 31.689 | 37.406   |
++------------------+--------+--------+--------+----------+
+| microwave        | 30.893 | 34.984 | 29.360 | 27.563   |
++------------------+--------+--------+--------+----------+
+| oven             | 22.700 | 24.466 | 20.509 | 16.262   |
++------------------+--------+--------+--------+----------+
+| toaster          | 7.922  | 18.216 | 16.055 | 0        |
++------------------+--------+--------+--------+----------+
+| sink             | 30.883 | 26.594 | 23.349 | 18.052   |
++------------------+--------+--------+--------+----------+
+| refrigerator     | 35.441 | 40.931 | 26.624 | 32.966   |
++------------------+--------+--------+--------+----------+
+| book             | 18.317 | 22.753 | 17.537 | 16.065   |
++------------------+--------+--------+--------+----------+
+| clock            | 44.170 | 30.829 | 21.956 | 33.379   |
++------------------+--------+--------+--------+----------+
+| vase             | 15.836 | 24.104 | 17.253 | 22.706   |
++------------------+--------+--------+--------+----------+
+| scissors         | 23.119 | 37.511 | 28.879 | 34.397   |
++------------------+--------+--------+--------+----------+
+| teddy bear       | 42.662 | 46.110 | 48.266 | 42.096   |
++------------------+--------+--------+--------+----------+
+| hair drier       | 11.689 | 21.704 | 12.726 | 0        |
++------------------+--------+--------+--------+----------+
+| toothbrush       | 11.506 | 21.805 | 16.743 | 23.389   |
++------------------+--------+--------+--------+----------+
+| m-Precision      | 51.234 | 50.842 | 46.031 | nan      |
++------------------+--------+--------+--------+----------+
+| m-Recall         | 47.744 | 58.523 | 58.536 | 43.916   |
++------------------+--------+--------+--------+----------+
+| m-ConfutionRatio | 3.991  | 4.927  | 6.555  | nan      |
++------------------+--------+--------+--------+----------+
+| m-IoU            | 30.060 | 36.035 | 33.842 | 30.682   |
++------------------+--------+--------+--------+----------+
+2026-11-22 12:02:26,857 - train_coco.py - INFO: Iter: 65200; Elapsed: 4:38:14; ETA: 1 day, 2:19:53; LR: 2.756e-05; cls_loss: 0.0525, cls_loss_aux: 0.0583, ptc_loss: 0.1347, seg_loss: 0.2646, cpe_loss: 0.1914, crme_loss: 0.0006, cls_loss_wsddn: 0.0516, 
+2026-11-22 12:04:17,196 - train_coco.py - INFO: Iter: 65400; Elapsed: 4:40:05; ETA: 2:15:02; LR: 2.752e-05; cls_loss: 0.0552, cls_loss_aux: 0.0633, ptc_loss: 0.1375, seg_loss: 0.2317, cpe_loss: 0.1919, crme_loss: 0.0000, cls_loss_wsddn: 0.0550, 
+2026-11-22 12:06:07,685 - train_coco.py - INFO: Iter: 65600; Elapsed: 4:41:55; ETA: 2:11:59; LR: 2.748e-05; cls_loss: 0.0530, cls_loss_aux: 0.0600, ptc_loss: 0.1311, seg_loss: 0.2711, cpe_loss: 0.1893, crme_loss: 0.0001, cls_loss_wsddn: 0.0522, 
+2026-11-22 12:07:58,567 - train_coco.py - INFO: Iter: 65800; Elapsed: 4:43:46; ETA: 2:11:20; LR: 2.745e-05; cls_loss: 0.0531, cls_loss_aux: 0.0613, ptc_loss: 0.1337, seg_loss: 0.2615, cpe_loss: 0.1900, crme_loss: 0.0004, cls_loss_wsddn: 0.0523, 
+2026-11-22 12:09:49,464 - train_coco.py - INFO: Iter: 66000; Elapsed: 4:45:37; ETA: 2:09:29; LR: 2.741e-05; cls_loss: 0.0539, cls_loss_aux: 0.0595, ptc_loss: 0.1372, seg_loss: 0.2533, cpe_loss: 0.1972, crme_loss: 0.0000, cls_loss_wsddn: 0.0531, 
+2026-11-22 12:11:40,181 - train_coco.py - INFO: Iter: 66200; Elapsed: 4:47:28; ETA: 2:07:38; LR: 2.737e-05; cls_loss: 0.0523, cls_loss_aux: 0.0592, ptc_loss: 0.1384, seg_loss: 0.2241, cpe_loss: 0.1838, crme_loss: 0.0000, cls_loss_wsddn: 0.0520, 
+2026-11-22 12:13:30,035 - train_coco.py - INFO: Iter: 66400; Elapsed: 4:49:18; ETA: 2:04:39; LR: 2.734e-05; cls_loss: 0.0519, cls_loss_aux: 0.0585, ptc_loss: 0.1235, seg_loss: 0.2412, cpe_loss: 0.1689, crme_loss: 0.0000, cls_loss_wsddn: 0.0513, 
+2026-11-22 12:15:20,167 - train_coco.py - INFO: Iter: 66600; Elapsed: 4:51:08; ETA: 2:02:49; LR: 2.730e-05; cls_loss: 0.0546, cls_loss_aux: 0.0603, ptc_loss: 0.1245, seg_loss: 0.2056, cpe_loss: 0.1788, crme_loss: 0.0000, cls_loss_wsddn: 0.0536, 
+2026-11-22 12:17:10,546 - train_coco.py - INFO: Iter: 66800; Elapsed: 4:52:58; ETA: 2:00:59; LR: 2.726e-05; cls_loss: 0.0554, cls_loss_aux: 0.0631, ptc_loss: 0.1253, seg_loss: 0.2424, cpe_loss: 0.1776, crme_loss: 0.0009, cls_loss_wsddn: 0.0544, 
+2026-11-22 12:19:00,480 - train_coco.py - INFO: Iter: 67000; Elapsed: 4:54:48; ETA: 1:59:09; LR: 2.723e-05; cls_loss: 0.0511, cls_loss_aux: 0.0572, ptc_loss: 0.1384, seg_loss: 0.2061, cpe_loss: 0.1851, crme_loss: 0.0041, cls_loss_wsddn: 0.0510, 
+2026-11-22 12:20:51,236 - train_coco.py - INFO: Iter: 67200; Elapsed: 4:56:39; ETA: 1:58:23; LR: 2.719e-05; cls_loss: 0.0550, cls_loss_aux: 0.0629, ptc_loss: 0.1380, seg_loss: 0.2904, cpe_loss: 0.1948, crme_loss: 0.0005, cls_loss_wsddn: 0.0544, 
+2026-11-22 12:22:40,857 - train_coco.py - INFO: Iter: 67400; Elapsed: 4:58:28; ETA: 1:54:26; LR: 2.715e-05; cls_loss: 0.0516, cls_loss_aux: 0.0590, ptc_loss: 0.1504, seg_loss: 0.2822, cpe_loss: 0.1928, crme_loss: 0.0003, cls_loss_wsddn: 0.0516, 

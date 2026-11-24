@@ -1,0 +1,234 @@
+{
+  "threshold_tau": 0.19482629127540696,
+  "sample_size": 3000,
+  "low_risk_classes": [
+    "aeroplane",
+    "bird",
+    "boat",
+    "bottle",
+    "bus",
+    "car",
+    "cat",
+    "cow",
+    "dog",
+    "horse",
+    "motorbike",
+    "person",
+    "sheep",
+    "train",
+    "tvmonitor"
+  ],
+  "low_risk_ids": [
+    1,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    10,
+    12,
+    13,
+    14,
+    15,
+    17,
+    19,
+    20
+  ],
+  "high_risk_classes": [
+    "bicycle",
+    "chair",
+    "diningtable",
+    "pottedplant",
+    "sofa"
+  ],
+  "high_risk_ids": [
+    2,
+    9,
+    11,
+    16,
+    18
+  ],
+  "per_class": {
+    "aeroplane": {
+      "class_id": 1,
+      "sam_area_pixels": 3212720,
+      "teacher_area_pixels": 3538683,
+      "agreement_iou": 0.8670553943922545,
+      "area_ratio": 0.9078857868873815,
+      "risk_score": 0.1812629524371486,
+      "cluster": "low_risk"
+    },
+    "bicycle": {
+      "class_id": 2,
+      "sam_area_pixels": 1993969,
+      "teacher_area_pixels": 2309980,
+      "agreement_iou": 0.7773580729311848,
+      "area_ratio": 0.8631975168616178,
+      "risk_score": 0.2961977979231587,
+      "cluster": "high_risk"
+    },
+    "bird": {
+      "class_id": 3,
+      "sam_area_pixels": 4445255,
+      "teacher_area_pixels": 4771621,
+      "agreement_iou": 0.8857687910375571,
+      "area_ratio": 0.9316026985378764,
+      "risk_score": 0.1496556311154601,
+      "cluster": "low_risk"
+    },
+    "boat": {
+      "class_id": 4,
+      "sam_area_pixels": 3963822,
+      "teacher_area_pixels": 4438607,
+      "agreement_iou": 0.867360812938314,
+      "area_ratio": 0.8930328817126635,
+      "risk_score": 0.18920512564009329,
+      "cluster": "low_risk"
+    },
+    "bottle": {
+      "class_id": 5,
+      "sam_area_pixels": 1480126,
+      "teacher_area_pixels": 1600136,
+      "agreement_iou": 0.8647550114055182,
+      "area_ratio": 0.9250001249893759,
+      "risk_score": 0.17422569176751745,
+      "cluster": "low_risk"
+    },
+    "bus": {
+      "class_id": 6,
+      "sam_area_pixels": 3554258,
+      "teacher_area_pixels": 3736967,
+      "agreement_iou": 0.9111496189220778,
+      "area_ratio": 0.9511076763589296,
+      "risk_score": 0.1139143803248988,
+      "cluster": "low_risk"
+    },
+    "car": {
+      "class_id": 7,
+      "sam_area_pixels": 9977126,
+      "teacher_area_pixels": 10713020,
+      "agreement_iou": 0.9033742198658614,
+      "area_ratio": 0.9313084452376641,
+      "risk_score": 0.13220815576960857,
+      "cluster": "low_risk"
+    },
+    "cat": {
+      "class_id": 8,
+      "sam_area_pixels": 12071118,
+      "teacher_area_pixels": 12360147,
+      "agreement_iou": 0.9116942367789674,
+      "area_ratio": 0.9766160548090569,
+      "risk_score": 0.10013660721928579,
+      "cluster": "low_risk"
+    },
+    "chair": {
+      "class_id": 9,
+      "sam_area_pixels": 5650135,
+      "teacher_area_pixels": 6718477,
+      "agreement_iou": 0.8041915913486526,
+      "area_ratio": 0.8409844969328614,
+      "risk_score": 0.28239943528438,
+      "cluster": "high_risk"
+    },
+    "cow": {
+      "class_id": 10,
+      "sam_area_pixels": 1228066,
+      "teacher_area_pixels": 1328671,
+      "agreement_iou": 0.8926217172737818,
+      "area_ratio": 0.9242814812696296,
+      "risk_score": 0.14674759288776737,
+      "cluster": "low_risk"
+    },
+    "diningtable": {
+      "class_id": 11,
+      "sam_area_pixels": 2576124,
+      "teacher_area_pixels": 2994138,
+      "agreement_iou": 0.8458768629389882,
+      "area_ratio": 0.8603892004977727,
+      "risk_score": 0.22930835375603903,
+      "cluster": "high_risk"
+    },
+    "dog": {
+      "class_id": 12,
+      "sam_area_pixels": 9116850,
+      "teacher_area_pixels": 9503740,
+      "agreement_iou": 0.8926475918499607,
+      "area_ratio": 0.9592907634257671,
+      "risk_score": 0.12813293597845332,
+      "cluster": "low_risk"
+    },
+    "horse": {
+      "class_id": 13,
+      "sam_area_pixels": 4315333,
+      "teacher_area_pixels": 4682771,
+      "agreement_iou": 0.877059254975881,
+      "area_ratio": 0.9215340660476458,
+      "risk_score": 0.16379851228255793,
+      "cluster": "low_risk"
+    },
+    "motorbike": {
+      "class_id": 14,
+      "sam_area_pixels": 4518282,
+      "teacher_area_pixels": 4821287,
+      "agreement_iou": 0.8872292135548916,
+      "area_ratio": 0.9371526731347875,
+      "risk_score": 0.14522532233137772,
+      "cluster": "low_risk"
+    },
+    "person": {
+      "class_id": 15,
+      "sam_area_pixels": 58700495,
+      "teacher_area_pixels": 62564586,
+      "agreement_iou": 0.8847899611147411,
+      "area_ratio": 0.9382383669892741,
+      "risk_score": 0.14708565872013096,
+      "cluster": "low_risk"
+    },
+    "pottedplant": {
+      "class_id": 16,
+      "sam_area_pixels": 2261422,
+      "teacher_area_pixels": 2551322,
+      "agreement_iou": 0.8473542813647581,
+      "area_ratio": 0.8863726334817793,
+      "risk_score": 0.21295463725789376,
+      "cluster": "high_risk"
+    },
+    "sheep": {
+      "class_id": 17,
+      "sam_area_pixels": 1275711,
+      "teacher_area_pixels": 1351891,
+      "agreement_iou": 0.8848260001922412,
+      "area_ratio": 0.9436493030873051,
+      "risk_score": 0.14417434122128567,
+      "cluster": "low_risk"
+    },
+    "sofa": {
+      "class_id": 18,
+      "sam_area_pixels": 3051859,
+      "teacher_area_pixels": 3385862,
+      "agreement_iou": 0.8514813499316234,
+      "area_ratio": 0.9013536287066631,
+      "risk_score": 0.20044745691072063,
+      "cluster": "high_risk"
+    },
+    "train": {
+      "class_id": 19,
+      "sam_area_pixels": 6098710,
+      "teacher_area_pixels": 6417991,
+      "agreement_iou": 0.9275533993709777,
+      "area_ratio": 0.950252189509147,
+      "risk_score": 0.09796053411668008,
+      "cluster": "low_risk"
+    },
+    "tvmonitor": {
+      "class_id": 20,
+      "sam_area_pixels": 4776509,
+      "teacher_area_pixels": 4917662,
+      "agreement_iou": 0.8764802620754427,
+      "area_ratio": 0.9712967259644929,
+      "risk_score": 0.13808137260272457,
+      "cluster": "low_risk"
+    }
+  }
+}

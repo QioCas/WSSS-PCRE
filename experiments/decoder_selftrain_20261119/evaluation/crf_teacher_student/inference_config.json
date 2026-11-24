@@ -1,0 +1,30 @@
+{
+  "mode": "crf_teacher_student",
+  "checkpoint": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/train/crf_teacher/checkpoints/model_refined_step_00003000_student.pth",
+  "checkpoint_sha256": "d7b110e09fb100cda83a9ecf1d8dee6888b18332079b3223cc6ea5cf27ac53fc",
+  "training_run": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/train/crf_teacher",
+  "validation_images": 1449,
+  "partial_validation": false,
+  "scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "horizontal_flip": true,
+  "input_base_size": 448,
+  "precision": "float32",
+  "tf32": false,
+  "crf": {
+    "iter_max": 10,
+    "pos_xy_std": 2,
+    "pos_w": 3,
+    "bi_xy_std": 140,
+    "bi_rgb_std": 1,
+    "bi_w": 7
+  },
+  "fusion": "max(first_scale_flip_sum, mean(all_scale_flip_sums))",
+  "strict_load": true,
+  "image_labels_used_for_prediction": false,
+  "torch_version": "2.10.0+cu128",
+  "densecrf_distribution": "pydensecrf2==1.1"
+}

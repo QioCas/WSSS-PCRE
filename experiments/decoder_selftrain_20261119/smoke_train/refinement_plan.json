@@ -1,0 +1,55 @@
+{
+  "teacher_run": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/baseline",
+  "teacher_checkpoint": "model_iter_00020000.pth",
+  "data_folder": "/home/jupyter-iec2024iot08/Workspace/2024_IoT_08-Contrastive-Learning-for-SSS/data/VOC2012",
+  "list_folder": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/datasets/voc",
+  "reference_baseline_metrics": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/inference_voc_val_20261119/full/baseline/metrics.json",
+  "historical_metrics": {
+    "Adaptive c\u0169": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/inference_voc_val_20261119/full/adaptive/metrics.json",
+    "Adaptive consensus": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_repair_20261119/single_model_v2/inference/adaptive_consensus/metrics.json",
+    "Ensemble hai model": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_repair_20261119/ensemble_full/metrics.json"
+  },
+  "deps_folder": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_inference",
+  "train_split": "train_aug",
+  "val_split": "val",
+  "seed": 0,
+  "teacher_scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "horizontal_flip": true,
+  "confidence": 0.7,
+  "margin": 0.5,
+  "crf_workers": 4,
+  "refinement_steps": 3000,
+  "batch_size": 4,
+  "crop_size": 448,
+  "lr": 2e-05,
+  "weight_decay": 0.01,
+  "warmup_steps": 100,
+  "anchor_weight": 1.0,
+  "anchor_temperature": 2.0,
+  "ema_decay": 0.99,
+  "resize_short_range": [
+    336,
+    672
+  ],
+  "color_jitter": 0.2,
+  "checkpoint_interval": 1000,
+  "log_interval": 20,
+  "modes": [
+    "raw_teacher",
+    "crf_teacher"
+  ],
+  "primary_checkpoint": "ema",
+  "primary_metric": "crf_miou",
+  "target_gain_pp": 0.2,
+  "max_allowed_class_drop_pp": 2.0,
+  "gpu": 0,
+  "min_free_gpu_mb": 8000,
+  "gpu_memory_gib": 8.0,
+  "max_gpu_wait_hours": 24,
+  "minimum_disk_free_gib": 8.0,
+  "qualification": "One-seed development-set experiment with extra decoder training; no independent-test or multi-seed claim."
+}

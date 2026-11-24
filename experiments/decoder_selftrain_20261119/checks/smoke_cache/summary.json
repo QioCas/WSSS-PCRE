@@ -1,0 +1,17 @@
+{
+  "raw_teacher": {
+    "foreground": 0.2743371266002845,
+    "background": 0.7079032716927454,
+    "ignore": 0.017759601706970128
+  },
+  "crf_teacher": {
+    "foreground": 0.27579658605974394,
+    "background": 0.7225604551920342,
+    "ignore": 0.001642958748221906
+  },
+  "images": 4,
+  "pixels": 703000,
+  "partial_cache": true,
+  "training_pixel_gt_read": false,
+  "elapsed_seconds": 2.932935905002523
+}

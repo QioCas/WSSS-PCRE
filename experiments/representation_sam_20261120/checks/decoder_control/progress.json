@@ -1,0 +1,15 @@
+{
+  "stage": "complete",
+  "completed_steps": 4,
+  "partial_training": true,
+  "frozen_weights_unchanged": true,
+  "teacher_unchanged": true,
+  "train_last_blocks": 0,
+  "trainable_parameters": 580692,
+  "checkpoints": {
+    "ema": "model_refined_step_00000004_ema.pth"
+  },
+  "training_pixel_gt_read": false,
+  "external_segmentation_prior": false,
+  "seconds": 1.8856411969754845
+}

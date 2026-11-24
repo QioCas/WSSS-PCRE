@@ -1,0 +1,37 @@
+{
+  "description": "Two full VOC runs, adaptive first, then baseline with matching settings and checkpoints",
+  "modes": [
+    "adaptive",
+    "baseline"
+  ],
+  "gpu": 0,
+  "min_free_gpu_mb": 16000,
+  "max_gpu_utilization": 25,
+  "gpu_poll_seconds": 20,
+  "gpu_stable_checks": 3,
+  "max_gpu_wait_hours": 24,
+  "common": {
+    "data_folder": "./dataset/VOC2012",
+    "list_folder": "datasets/voc",
+    "max_iters": 20000,
+    "spg": 4,
+    "crop_size": 448,
+    "seed": 0,
+    "lr": 3e-05,
+    "eval_iters": 5000,
+    "checkpoint_iters": 10000,
+    "log_iters": 100,
+    "num_workers": 2,
+    "cam_scales": [
+      1.0,
+      0.5,
+      0.75,
+      1.5
+    ],
+    "adaptive_momentum": 0.99,
+    "adaptive_min": 0.55,
+    "adaptive_max": 0.85,
+    "adaptive_warmup": 2000,
+    "adaptive_ramp": 1000
+  }
+}

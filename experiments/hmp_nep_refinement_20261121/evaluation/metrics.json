@@ -1,0 +1,157 @@
+{
+  "method": "Hierarchical Multi-Prompt Part-Whole SAM with Non-Erosive Context Protection (HMP-NEP)",
+  "dataset": "Pascal VOC 2012 Val",
+  "num_images": 1449,
+  "baseline_crf_miou": 74.22428373329858,
+  "hmp_nep_refined_miou": 75.70484997793024,
+  "gain_pp": 1.4805662446316536,
+  "per_class": {
+    "_background_": {
+      "baseline_iou": 91.91909638596326,
+      "refined_iou": 92.62788813600709,
+      "delta": 0.7087917500438294,
+      "precision": 96.2983824460911,
+      "recall": 96.04769241618806
+    },
+    "aeroplane": {
+      "baseline_iou": 83.84990077231144,
+      "refined_iou": 85.935837329148,
+      "delta": 2.0859365568365575,
+      "precision": 91.89639051856115,
+      "recall": 92.98201020577363
+    },
+    "bicycle": {
+      "baseline_iou": 45.290718005765,
+      "refined_iou": 43.091998562674206,
+      "delta": -2.198719443090795,
+      "precision": 47.633705464015875,
+      "recall": 81.88246844078209
+    },
+    "bird": {
+      "baseline_iou": 87.46929514676702,
+      "refined_iou": 88.89563138607684,
+      "delta": 1.4263362393098191,
+      "precision": 93.6884285785324,
+      "recall": 94.55844527007716
+    },
+    "boat": {
+      "baseline_iou": 68.40210582567798,
+      "refined_iou": 69.71531560865685,
+      "delta": 1.3132097829788734,
+      "precision": 75.44698802655252,
+      "recall": 90.17367699474957
+    },
+    "bottle": {
+      "baseline_iou": 79.41494639654962,
+      "refined_iou": 80.57677835317429,
+      "delta": 1.1618319566246669,
+      "precision": 90.31766788481809,
+      "recall": 88.19514438980173
+    },
+    "bus": {
+      "baseline_iou": 88.67418734946726,
+      "refined_iou": 92.97208018734005,
+      "delta": 4.297892837872794,
+      "precision": 95.93562427104372,
+      "recall": 96.78424033594152
+    },
+    "car": {
+      "baseline_iou": 82.36850483468949,
+      "refined_iou": 84.04936486626046,
+      "delta": 1.6808600315709725,
+      "precision": 90.28718351978047,
+      "recall": 92.40435525263437
+    },
+    "cat": {
+      "baseline_iou": 91.24370773919487,
+      "refined_iou": 93.30735693976908,
+      "delta": 2.063649200574204,
+      "precision": 97.4862695507962,
+      "recall": 95.60765334294945
+    },
+    "chair": {
+      "baseline_iou": 43.28132625411366,
+      "refined_iou": 42.247581107784285,
+      "delta": -1.0337451463293732,
+      "precision": 50.51767597651271,
+      "recall": 72.072369930276
+    },
+    "cow": {
+      "baseline_iou": 85.85045087780614,
+      "refined_iou": 87.06702117783463,
+      "delta": 1.2165703000284935,
+      "precision": 98.94867633865206,
+      "recall": 87.87998290439269
+    },
+    "diningtable": {
+      "baseline_iou": 48.98052231498081,
+      "refined_iou": 49.396794429270344,
+      "delta": 0.4162721142895336,
+      "precision": 77.8979818744045,
+      "recall": 57.44839863862467
+    },
+    "dog": {
+      "baseline_iou": 86.24997162325666,
+      "refined_iou": 87.74803980117855,
+      "delta": 1.498068177921894,
+      "precision": 94.35888707027044,
+      "recall": 92.60605408124005
+    },
+    "horse": {
+      "baseline_iou": 86.95642981953256,
+      "refined_iou": 89.785786151622,
+      "delta": 2.8293563320894464,
+      "precision": 94.75936080617508,
+      "recall": 94.4771203855353
+    },
+    "motorbike": {
+      "baseline_iou": 75.6573944871117,
+      "refined_iou": 77.94007981208358,
+      "delta": 2.2826853249718795,
+      "precision": 89.00911070867272,
+      "recall": 86.2398741613332
+    },
+    "person": {
+      "baseline_iou": 78.74575689865361,
+      "refined_iou": 81.8996564115215,
+      "delta": 3.153899512867895,
+      "precision": 96.0076426174789,
+      "recall": 84.7872511379753
+    },
+    "pottedplant": {
+      "baseline_iou": 67.1878809827156,
+      "refined_iou": 68.59482837087525,
+      "delta": 1.4069473881596508,
+      "precision": 79.79059572549963,
+      "recall": 83.01818782693782
+    },
+    "sheep": {
+      "baseline_iou": 89.82222559046087,
+      "refined_iou": 92.16791725197854,
+      "delta": 2.3456916615176624,
+      "precision": 98.11682430582682,
+      "recall": 93.82772705989481
+    },
+    "sofa": {
+      "baseline_iou": 52.55935298002892,
+      "refined_iou": 53.27844776769074,
+      "delta": 0.7190947876618239,
+      "precision": 71.29587333352669,
+      "recall": 67.827611529546
+    },
+    "train": {
+      "baseline_iou": 60.348125141984454,
+      "refined_iou": 63.70350754182953,
+      "delta": 3.3553823998450767,
+      "precision": 67.63242967593787,
+      "recall": 91.64292977426668
+    },
+    "tvmonitor": {
+      "baseline_iou": 64.43805897223915,
+      "refined_iou": 64.79993834375924,
+      "delta": 0.3618793715200894,
+      "precision": 72.85882231737176,
+      "recall": 85.41942052903508
+    }
+  }
+}

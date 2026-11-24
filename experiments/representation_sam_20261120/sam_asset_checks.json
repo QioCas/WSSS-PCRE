@@ -1,0 +1,19 @@
+{
+  "repository_commit": "dca509fe793f601edb92606367a655c15ac00fdf",
+  "checkpoint_sha256": "ec2df62732614e57411cdcf32a23ffdf28910380d03139ee0f4fcbe91eb8c912",
+  "import_passed": true,
+  "gpu_forward_passed": true,
+  "sample": "2007_000032",
+  "masks_shape": [
+    3,
+    281,
+    500
+  ],
+  "predicted_mask_scores": [
+    0.9456304311752319,
+    0.9482137560844421,
+    0.946361780166626
+  ],
+  "external_mask_pretraining": true,
+  "note": "SAM mask quality predictions are internal model scores, not measured VOC IoU."
+}

@@ -1,0 +1,19 @@
+[2026-11-21 15:29:27] ======================================================================
+[2026-11-21 15:29:27] CSL-SD: Confidence Separable Soft-Distilled Training & Evaluation
+[2026-11-21 15:29:27] ======================================================================
+[2026-11-21 15:29:27] --- STARTING: CSL-SD Softmask Decoder Training (2500 steps) ---
+[2026-11-21 15:29:27] Command: python3 experiments/csl_softmask_training_20261121/train_csl_softmask.py --steps 2500 --batch_size 4 --lr 3e-5 --anchor_weight 0.5 --csl_alpha 8.0 --work_dir experiments/csl_softmask_training_20261121
+[2026-11-21 15:33:10] --- COMPLETED: CSL-SD Softmask Decoder Training (2500 steps) in 3.72 minutes ---
+
+[2026-11-21 15:33:10] --- STARTING: Full VOC Val Evaluation: CSL-SD EMA Model ---
+[2026-11-21 15:33:10] Command: python3 experiments/usrc_decoder_training_20261121/evaluate_usrc.py --checkpoint /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/csl_softmask_training_20261121/checkpoints/model_csl_final_ema.pth --output_dir /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/csl_softmask_training_20261121/eval_results_ema --crf_workers 4 --limit 0
+[2026-11-21 15:43:09] --- COMPLETED: Full VOC Val Evaluation: CSL-SD EMA Model in 9.98 minutes ---
+
+[2026-11-21 15:43:09] Compiling Multi-Method Comparison Report...
+[2026-11-21 15:43:09] ======================================================================
+[2026-11-21 15:43:09] CSL-SD EXPERIMENT COMPLETED SUCCESSFULLY!
+[2026-11-21 15:43:09] Baseline CRF: 74.22%
+[2026-11-21 15:43:09] FBSD     CRF: 74.26% (Delta: +0.03%)
+[2026-11-21 15:43:09] USRC     CRF: 74.17% (Delta: -0.05%)
+[2026-11-21 15:43:09] CSL-SD   CRF: 74.32% (Delta: +0.10%)
+[2026-11-21 15:43:09] ======================================================================

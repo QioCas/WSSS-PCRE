@@ -1,0 +1,15 @@
+{
+  "python": "/opt/tljh/user/bin/python",
+  "packages": {
+    "torch": "2.10.0+cu128",
+    "torchvision": "0.25.0+cu128",
+    "numpy": "1.26.4",
+    "scipy": "1.15.2",
+    "pillow": "11.2.1",
+    "imageio": "2.37.2",
+    "timm": "0.9.12",
+    "scikit-learn": "1.8.0",
+    "matplotlib": "3.10.8",
+    "pydensecrf2": "1.1"
+  }
+}

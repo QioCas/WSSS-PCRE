@@ -1,0 +1,40 @@
+{
+  "method": "fixed_equal_probability_ensemble",
+  "weights": [
+    0.5,
+    0.5
+  ],
+  "sources": [
+    {
+      "mode": "baseline",
+      "checkpoint": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/baseline/checkpoints/model_iter_00020000.pth",
+      "sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b"
+    },
+    {
+      "mode": "adaptive",
+      "checkpoint": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_130748_9e5320/adaptive/checkpoints/model_iter_00020000.pth",
+      "sha256": "5b0b23d74bf514e8a145c930e156b0aea97000cb5fec503353bf40bb265eb37a"
+    }
+  ],
+  "scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "horizontal_flip": true,
+  "validation_images": 1449,
+  "partial_validation": false,
+  "crf": {
+    "iter_max": 10,
+    "pos_xy_std": 2,
+    "pos_w": 3,
+    "bi_xy_std": 140,
+    "bi_rgb_std": 1,
+    "bi_w": 7
+  },
+  "val_fitted_parameters": false,
+  "image_labels_used_for_prediction": false,
+  "precision": "float32",
+  "tf32": false,
+  "runner_sha256": "09f3b01364a854e0012dc66288e09423b4316cdef23b2d73d4d9a3acfaed0f3e"
+}

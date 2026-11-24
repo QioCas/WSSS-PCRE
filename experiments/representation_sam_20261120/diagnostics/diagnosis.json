@@ -1,0 +1,110 @@
+{
+  "metric": "Global dataset CRF mIoU, 21 classes including background",
+  "validation_images": 1449,
+  "decomposition": {
+    "decoder_control": {
+      "positive_class_contribution_pp": 0.3083704410188724,
+      "negative_class_contribution_pp": -0.48995780581834286,
+      "total_delta_pp": -0.18158736479947052,
+      "improved_classes": 10,
+      "predicted_foreground_area_relative_change_percent": 2.7039374286216944
+    },
+    "last2_consistency": {
+      "positive_class_contribution_pp": 0.3570929060337743,
+      "negative_class_contribution_pp": -0.5069864283860507,
+      "total_delta_pp": -0.14989352235227638,
+      "improved_classes": 8,
+      "predicted_foreground_area_relative_change_percent": 3.2329947172946127
+    },
+    "last2_sam": {
+      "positive_class_contribution_pp": 0.4776066523953248,
+      "negative_class_contribution_pp": -0.5943400482955988,
+      "total_delta_pp": -0.116733395900274,
+      "improved_classes": 8,
+      "predicted_foreground_area_relative_change_percent": 4.341535998969048
+    }
+  },
+  "training_masks": {
+    "decoder_control": {
+      "logged_batches": 204,
+      "logged_batch_means": {
+        "ce": 0.18669806823463125,
+        "consistency": 0.25275345672579375,
+        "labeled_fraction": 0.8474891416582406,
+        "consistency_fraction": 0.8736040329231936
+      },
+      "mean_lower_bound_KL_on_cache_ignored_pixels_fraction": 0.028443385280814824,
+      "qualification": "Logged batches only, not every training step; KL-on-ignore value is a lower bound, not measured overlap."
+    },
+    "last2_consistency": {
+      "logged_batches": 204,
+      "logged_batch_means": {
+        "ce": 0.18022140865122863,
+        "consistency": 0.24579566512622086,
+        "labeled_fraction": 0.8474891416582406,
+        "consistency_fraction": 0.8736040329231936
+      },
+      "mean_lower_bound_KL_on_cache_ignored_pixels_fraction": 0.028443385280814824,
+      "qualification": "Logged batches only, not every training step; KL-on-ignore value is a lower bound, not measured overlap."
+    },
+    "last2_sam": {
+      "logged_batches": 204,
+      "logged_batch_means": {
+        "ce": 0.21676121716497138,
+        "consistency": 0.2492988297314036,
+        "labeled_fraction": 0.853357358306062,
+        "consistency_fraction": 0.866250540988118
+      },
+      "mean_lower_bound_KL_on_cache_ignored_pixels_fraction": 0.018708515693159664,
+      "qualification": "Logged batches only, not every training step; KL-on-ignore value is a lower bound, not measured overlap."
+    }
+  },
+  "paired_pixel_corrections": {
+    "decoder_control": {
+      "baseline_errors_corrected": 1495975,
+      "baseline_correct_pixels_broken": 1615463
+    },
+    "last2_consistency": {
+      "baseline_errors_corrected": 1662965,
+      "baseline_correct_pixels_broken": 1717591
+    },
+    "last2_sam": {
+      "baseline_errors_corrected": 1991047,
+      "baseline_correct_pixels_broken": 2022924
+    }
+  },
+  "bootstrap_95_percentile_ci_pp": {
+    "decoder_control": [
+      -0.6632765312005742,
+      0.2993440203937762
+    ],
+    "last2_consistency": [
+      -0.649533703904012,
+      0.3268191304880122
+    ],
+    "last2_sam": [
+      -0.6436119235677612,
+      0.4095657174925737
+    ],
+    "last2_minus_decoder": [
+      -0.08116400374902852,
+      0.14985490460112133
+    ],
+    "sam_minus_last2": [
+      -0.0715135711427127,
+      0.1417351143541257
+    ]
+  },
+  "bootstrap_resamples": 1000,
+  "bootstrap_seed": 0,
+  "saved_confusions_reproduced_from_masks": true,
+  "bootstrap_qualification": "Fixed-model whole-image resampling on development val; excludes training-seed variation and does not establish causal effects.",
+  "source_metrics": {
+    "baseline": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/inference_voc_val_20261119/full/baseline/metrics.json",
+    "decoder_control": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/evaluation/decoder_control/metrics.json",
+    "last2_consistency": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/evaluation/last2_consistency/metrics.json",
+    "last2_sam": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/evaluation/last2_sam/metrics.json"
+  },
+  "training_pixel_gt_read": false,
+  "validation_pixel_gt_read": true
+}

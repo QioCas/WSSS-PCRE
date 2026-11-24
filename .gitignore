@@ -17,3 +17,5 @@ wandb
 tt*
 pretrained
 *.pt
+!train.sh
+!requirements.txt

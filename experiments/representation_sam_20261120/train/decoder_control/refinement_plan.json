@@ -1,0 +1,91 @@
+{
+  "teacher_run": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/baseline",
+  "teacher_checkpoint": "model_iter_00020000.pth",
+  "data_folder": "/home/jupyter-iec2024iot08/Workspace/2024_IoT_08-Contrastive-Learning-for-SSS/data/VOC2012",
+  "reference_baseline_metrics": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/inference_voc_val_20261119/full/baseline/metrics.json",
+  "deps_folder": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_inference",
+  "train_split": "train_aug",
+  "val_split": "val",
+  "seed": 0,
+  "teacher_scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "crop_size": 448,
+  "batch_size": 4,
+  "weight_decay": 0.01,
+  "ema_decay": 0.99,
+  "resize_short_range": [
+    336,
+    672
+  ],
+  "list_folder": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/datasets/voc",
+  "old_teacher_cache": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119/teacher_cache",
+  "old_experiment": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/decoder_selftrain_20261119",
+  "gpu": 0,
+  "gpu_memory_gib": 16.0,
+  "min_free_gpu_mb": 16000,
+  "minimum_disk_free_gib": 8.0,
+  "max_gpu_wait_hours": 24,
+  "refinement_steps": 4000,
+  "lr": 2e-05,
+  "backbone_lr": 2e-06,
+  "warmup_steps": 100,
+  "anchor_weight": 0.25,
+  "anchor_temperature": 2.0,
+  "anchor_confidence": 0.7,
+  "cache_confidence": 0.8,
+  "minimum_view_votes": 5,
+  "strong_jitter": 0.4,
+  "grayscale_probability": 0.1,
+  "blur_probability": 0.2,
+  "cutout_probability": 0.5,
+  "cutout_area": 0.1,
+  "checkpoint_interval": 1000,
+  "log_interval": 20,
+  "target_gain_pp": 0.2,
+  "max_allowed_class_drop_pp": 2.0,
+  "sam_module_dir": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/external",
+  "sam_checkpoint": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_sam/sam_vit_b_01ec64.pth",
+  "sam_min_score": 0.85,
+  "sam_min_teacher_iou": 0.5,
+  "sam_min_core_recall": 0.9,
+  "sam_min_area_ratio": 0.5,
+  "sam_max_area_ratio": 2.0,
+  "sam_boundary_band": 12,
+  "sam_uncertain_radius": 3,
+  "sam_max_components": 2,
+  "sam_min_component_fraction": 0.001,
+  "arms": [
+    {
+      "name": "decoder_control",
+      "last_blocks": 0,
+      "cache": "reliable",
+      "external_segmentation_prior": false
+    },
+    {
+      "name": "last2_consistency",
+      "last_blocks": 2,
+      "cache": "reliable",
+      "external_segmentation_prior": false
+    },
+    {
+      "name": "last2_sam",
+      "last_blocks": 2,
+      "cache": "sam",
+      "external_segmentation_prior": true
+    }
+  ],
+  "primary_checkpoint": "ema",
+  "qualification": "One-seed development VOC val; extra training budget. SAM track uses external mask-supervised pretraining and must be reported separately.",
+  "modes": [
+    "decoder_control",
+    "last2_consistency",
+    "last2_sam"
+  ],
+  "crf_workers": 4,
+  "original_list_folder": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/datasets/voc",
+  "source_snapshot": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot",
+  "original_sam_module_dir": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_sam/segment-anything"
+}

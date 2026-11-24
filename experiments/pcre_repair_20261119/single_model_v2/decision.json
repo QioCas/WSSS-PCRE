@@ -1,0 +1,21 @@
+{
+  "status": "completed",
+  "summary": {
+    "candidate": {
+      "raw": 73.14630486638764,
+      "crf": 73.71885176440787
+    },
+    "partial_validation": false,
+    "baseline": {
+      "raw": 73.7894880339437,
+      "crf": 74.22428373329858
+    },
+    "delta_vs_baseline_pp": {
+      "raw": -0.6431831675560602,
+      "crf": -0.5054319688907043
+    },
+    "better_on_voc_val": false
+  },
+  "single_model_choice": "baseline",
+  "qualification": "VOC val development result, one seed; no independent-test or multi-seed claim."
+}

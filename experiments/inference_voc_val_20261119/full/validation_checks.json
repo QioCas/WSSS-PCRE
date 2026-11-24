@@ -1,0 +1,8 @@
+{
+  "images_per_run": 1449,
+  "comparison_images": 2898,
+  "mask_shapes_and_class_ids_valid": true,
+  "exported_masks_match_saved_confusion_matrices": true,
+  "exported_masks_match_saved_miou": true,
+  "partial_validation": false
+}

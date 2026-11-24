@@ -48,18 +48,66 @@ class CocoDataset(Dataset):
         
 
         if self.stage == "train":
-            img_name = os.path.join(self.img_dir, "train", _img_name+'.jpg')
-            image = np.asarray(robust_read_image(img_name))
-            label_dir = os.path.join(self.label_dir, "train", _img_name[15:]+'.png')
-            label = np.asarray(imageio.imread(label_dir))
+            candidate_paths = [
+                os.path.join(self.img_dir, "train", _img_name + '.jpg'),
+                os.path.join(self.img_dir, "train2014", _img_name + '.jpg'),
+                os.path.join(self.img_dir, _img_name + '.jpg'),
+            ]
+            img_path = None
+            for p in candidate_paths:
+                if os.path.exists(p):
+                    img_path = p
+                    break
+            if img_path is None:
+                img_path = candidate_paths[0]
+            image = np.asarray(robust_read_image(img_path))
+
+            label = None
+            if self.label_dir is not None:
+                short_name = _img_name[15:] if len(_img_name) > 15 else _img_name
+                candidate_lbl_paths = [
+                    os.path.join(self.label_dir, "train", short_name + '.png'),
+                    os.path.join(self.label_dir, "train", _img_name + '.png'),
+                    os.path.join(self.label_dir, short_name + '.png'),
+                    os.path.join(self.label_dir, _img_name + '.png'),
+                ]
+                for lp in candidate_lbl_paths:
+                    if os.path.exists(lp):
+                        label = np.asarray(imageio.imread(lp))
+                        break
+            if label is None:
+                label = np.zeros(image.shape[:2], dtype=np.uint8)
 
         elif self.stage == "val":
-            img_name = os.path.join(self.img_dir, "val", _img_name+'.jpg')
-            image = np.asarray(robust_read_image(img_name))
-            label_dir = os.path.join(self.label_dir, "val", _img_name[13:]+'.png')
-            # label = np.asarray(imageio.imread(label_dir))
-            label = np.asarray(Image.open(label_dir))
+            candidate_paths = [
+                os.path.join(self.img_dir, "val", _img_name + '.jpg'),
+                os.path.join(self.img_dir, "val2014", _img_name + '.jpg'),
+                os.path.join(self.img_dir, _img_name + '.jpg'),
+            ]
+            img_path = None
+            for p in candidate_paths:
+                if os.path.exists(p):
+                    img_path = p
+                    break
+            if img_path is None:
+                img_path = candidate_paths[0]
+            image = np.asarray(robust_read_image(img_path))
 
+            label = None
+            if self.label_dir is not None:
+                short_name = _img_name[13:] if len(_img_name) > 13 else _img_name
+                candidate_lbl_paths = [
+                    os.path.join(self.label_dir, "val", short_name + '.png'),
+                    os.path.join(self.label_dir, "val", _img_name + '.png'),
+                    os.path.join(self.label_dir, short_name + '.png'),
+                    os.path.join(self.label_dir, _img_name + '.png'),
+                ]
+                for lp in candidate_lbl_paths:
+                    if os.path.exists(lp):
+                        label = np.asarray(Image.open(lp))
+                        break
+            if label is None:
+                label = np.zeros(image.shape[:2], dtype=np.uint8)
 
         elif self.stage == "test":
             label = image[:,:,0]
@@ -178,11 +226,10 @@ class CocoClsDataset(CocoDataset):
         cls_label = self.label_list[img_name]
 
         # co-occurence is -1 while one cls is saved
-        label_idx = np.zeros(1,)
-        if cls_label.sum(-1) != 0:
-            label_idx = np.where(cls_label.sum(-1)>1,-1,np.argmax(cls_label,axis=-1)+1)
+        if cls_label.sum(-1) == 0 or cls_label.sum(-1) > 1:
+            label_idx = np.array([-1], dtype=np.int64)
         else:
-            label_idx = np.array([-1])
+            label_idx = np.array([int(np.argmax(cls_label, axis=-1) + 1)], dtype=np.int64)
 
         if self.aug:
 

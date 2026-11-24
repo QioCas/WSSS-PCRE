@@ -1,0 +1,11 @@
+[2026-11-21 12:57:16] Monitoring started. Threshold: 15000 MB free.
+[2026-11-21 12:59:01] Monitoring started. Threshold: 15000 MB free.
+[2026-11-21 12:59:41] Check #3: Free: 10502 MB (10.26 GB) / 32607 MB. Used: 22105 MB. Target: >= 15000 MB (14.6 GB)
+[2026-11-21 13:00:41] Check #6: Free: 10502 MB (10.26 GB) / 32607 MB. Used: 22105 MB. Target: >= 15000 MB (14.6 GB)
+[2026-11-21 13:01:41] Check #9: Free: 10502 MB (10.26 GB) / 32607 MB. Used: 22105 MB. Target: >= 15000 MB (14.6 GB)
+[2026-11-21 13:02:41] Check #12: Free: 10502 MB (10.26 GB) / 32607 MB. Used: 22105 MB. Target: >= 15000 MB (14.6 GB)
+
+>>> TARGET REACHED! Free memory: 20148 MB >= 15000 MB. Launching training! <<<
+[2026-11-21 13:07:14] Monitoring started. Threshold: 15000 MB free.
+
+>>> TARGET REACHED! Free memory: 19160 MB >= 15000 MB. Launching training! <<<

@@ -1,0 +1,22 @@
+[2026-11-21 14:39:10] ======================================================================
+[2026-11-21 14:39:10] USRC: Unsupervised SAM-Reliability Clustered Training & Evaluation
+[2026-11-21 14:39:10] ======================================================================
+[2026-11-21 14:39:10] --- STARTING: USRC Decoder Training (2500 steps) ---
+[2026-11-21 14:39:10] Command: python3 experiments/usrc_decoder_training_20261121/train_usrc.py --steps 2500 --batch_size 4 --lr 3e-5 --anchor_weight 0.5 --work_dir experiments/usrc_decoder_training_20261121
+[2026-11-21 14:45:35] --- COMPLETED: USRC Decoder Training (2500 steps) in 6.42 minutes ---
+
+[2026-11-21 14:45:35] --- STARTING: Full VOC Val Evaluation: USRC EMA Model ---
+[2026-11-21 14:45:35] Command: python3 experiments/usrc_decoder_training_20261121/evaluate_usrc.py --checkpoint /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/usrc_decoder_training_20261121/checkpoints/model_usrc_final_ema.pth --output_dir /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/usrc_decoder_training_20261121/eval_results_ema --crf_workers 4 --limit 0
+[2026-11-21 14:56:18] --- COMPLETED: Full VOC Val Evaluation: USRC EMA Model in 10.72 minutes ---
+
+[2026-11-21 14:56:18] --- STARTING: Full VOC Val Evaluation: USRC Student Model ---
+[2026-11-21 14:56:18] Command: python3 experiments/usrc_decoder_training_20261121/evaluate_usrc.py --checkpoint /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/usrc_decoder_training_20261121/checkpoints/model_usrc_final_student.pth --output_dir /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/usrc_decoder_training_20261121/eval_results_student --crf_workers 4 --limit 0
+[2026-11-21 15:06:10] --- COMPLETED: Full VOC Val Evaluation: USRC Student Model in 9.86 minutes ---
+
+[2026-11-21 15:06:10] Generating Comprehensive Comparison Report...
+[2026-11-21 15:06:10] ======================================================================
+[2026-11-21 15:06:10] ALL EXPERIMENTS COMPLETED SUCCESSFULLY!
+[2026-11-21 15:06:10] Baseline CRF: 74.22%
+[2026-11-21 15:06:10] USRC EMA CRF: 74.17% (Delta: -0.05%)
+[2026-11-21 15:06:10] USRC Stu CRF: 74.15% (Delta: -0.07%)
+[2026-11-21 15:06:10] ======================================================================

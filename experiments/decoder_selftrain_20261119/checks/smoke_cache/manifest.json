@@ -1,0 +1,30 @@
+{
+  "teacher_checkpoint": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/baseline/checkpoints/model_iter_00020000.pth",
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "names": [
+    "2007_000032",
+    "2007_000039",
+    "2007_000063",
+    "2007_000068"
+  ],
+  "train_images": 4,
+  "partial_cache": true,
+  "confidence": 0.7,
+  "margin": 0.5,
+  "scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "crf": {
+    "iter_max": 10,
+    "pos_xy_std": 2,
+    "pos_w": 3,
+    "bi_xy_std": 140,
+    "bi_rgb_std": 1,
+    "bi_w": 7
+  },
+  "training_pixel_gt_read": false,
+  "val_images_cached": 0,
+  "tags_sha256": "974731980539a6d6ed516c5dccc745bf9930f0915ac0d0802cd1c6b7627479e1"
+}

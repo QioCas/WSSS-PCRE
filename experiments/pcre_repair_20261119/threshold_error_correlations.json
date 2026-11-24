@@ -1,0 +1,7 @@
+{
+  "pearson_across_20_classes": {
+    "raw_precision_delta_pp": 0.6732721861342994,
+    "raw_recall_delta_pp": -0.6706517126332983
+  },
+  "caveat": "Exploratory association for one seed, not proof of causation."
+}

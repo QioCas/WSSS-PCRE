@@ -1,0 +1,18 @@
+[2026-11-21 16:19:30] ======================================================================
+[2026-11-21 16:19:30] PEFT-CSL + GTBF-CAMR Synergistic Refinement Pipeline
+[2026-11-21 16:19:30] ======================================================================
+[2026-11-21 16:19:30] --- STARTING: Export PEFT-CSL DenseCRF Masks (1449 images) ---
+[2026-11-21 16:19:30] Command: python3 experiments/peft_csl_gtbf_synergy_20261121/export_peft_csl_crf.py
+[2026-11-21 16:29:23] --- COMPLETED: Export PEFT-CSL DenseCRF Masks (1449 images) in 9.88 minutes ---
+
+[2026-11-21 16:29:23] --- STARTING: GTBF-CAMR Synergy Refinement (1449 images) ---
+[2026-11-21 16:29:23] Command: python3 experiments/peft_csl_gtbf_synergy_20261121/run_peft_gtbf_synergy.py
+[2026-11-21 16:31:45] --- COMPLETED: GTBF-CAMR Synergy Refinement (1449 images) in 2.36 minutes ---
+
+[2026-11-21 16:31:45] ======================================================================
+[2026-11-21 16:31:45] SYNERGY PIPELINE COMPLETED SUCCESSFULLY!
+[2026-11-21 16:31:45] True Baseline CRF:       74.22%
+[2026-11-21 16:31:45] PEFT-CSL CRF:            74.36%
+[2026-11-21 16:31:45] Synergy (PEFT + GTBF):   75.88%
+[2026-11-21 16:31:45] NET GAIN OVER BASELINE:  +1.65%
+[2026-11-21 16:31:45] ======================================================================

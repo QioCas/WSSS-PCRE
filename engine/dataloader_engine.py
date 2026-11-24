@@ -36,7 +36,7 @@ def build_dataloader(args):
         pin_memory=False,
         drop_last=True,
         sampler=train_sampler,
-        prefetch_factor=4)
+        prefetch_factor=4 if args.num_workers > 0 else None)
 
     val_loader = DataLoader(val_dataset,
                             batch_size=1,

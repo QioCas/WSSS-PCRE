@@ -1,0 +1,11 @@
+{
+  "mode": "raw_teacher_student",
+  "partial_evaluation": false,
+  "refinement_steps": 3000,
+  "raw": 73.70321522033521,
+  "crf": 74.19497882285742,
+  "delta_vs_baseline_pp": {
+    "raw": -0.08627281360848826,
+    "crf": -0.02930491044115513
+  }
+}

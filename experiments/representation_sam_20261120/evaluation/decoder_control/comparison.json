@@ -1,0 +1,11 @@
+{
+  "mode": "decoder_control",
+  "partial_evaluation": false,
+  "refinement_steps": 4000,
+  "raw": 73.38869402055961,
+  "crf": 74.04269636849912,
+  "delta_vs_baseline_pp": {
+    "raw": -0.40079401338408616,
+    "crf": -0.18158736479945503
+  }
+}

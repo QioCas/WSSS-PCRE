@@ -1,0 +1,19 @@
+[2026-11-21 15:50:59] ======================================================================
+[2026-11-21 15:50:59] PEFT-CSL: Parameter-Efficient LoRA ViT + CSL Soft-Distillation
+[2026-11-21 15:50:59] ======================================================================
+[2026-11-21 15:50:59] --- STARTING: PEFT-CSL Training (2500 steps) ---
+[2026-11-21 15:50:59] Command: python3 experiments/peft_csl_training_20261121/train_peft_csl.py --steps 2500 --batch_size 4 --lr_decoder 3e-5 --lr_lora 1e-4 --lora_rank 8 --anchor_weight 0.5 --csl_alpha 8.0 --work_dir experiments/peft_csl_training_20261121
+[2026-11-21 15:56:26] --- COMPLETED: PEFT-CSL Training (2500 steps) in 5.46 minutes ---
+
+[2026-11-21 15:56:26] --- STARTING: Full VOC Val Evaluation: PEFT-CSL EMA Model ---
+[2026-11-21 15:56:26] Command: python3 experiments/usrc_decoder_training_20261121/evaluate_usrc.py --checkpoint /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/peft_csl_training_20261121/checkpoints/model_peft_csl_final_ema.pth --output_dir /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/peft_csl_training_20261121/eval_results_ema --crf_workers 4 --limit 0
+[2026-11-21 16:06:23] --- COMPLETED: Full VOC Val Evaluation: PEFT-CSL EMA Model in 9.95 minutes ---
+
+[2026-11-21 16:06:23] Compiling Comprehensive 5-Way Comparison Report...
+[2026-11-21 16:06:23] ======================================================================
+[2026-11-21 16:06:23] PEFT-CSL EXPERIMENT COMPLETED SUCCESSFULLY!
+[2026-11-21 16:06:23] Baseline CRF: 74.22%
+[2026-11-21 16:06:23] FBSD     CRF: 74.26% (Delta: +0.03%)
+[2026-11-21 16:06:23] CSL-SD   CRF: 74.32% (Delta: +0.10%)
+[2026-11-21 16:06:23] PEFT-CSL CRF: 74.36% (Delta: +0.13%)
+[2026-11-21 16:06:23] ======================================================================

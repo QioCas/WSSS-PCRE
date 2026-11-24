@@ -1,0 +1,13 @@
+{
+  "unit_tests_passed": 37,
+  "bank_negative_density_clip_smokes": true,
+  "all_five_training_variants_passed": true,
+  "residual_and_detail_strict_reload_multiscale_passed": true,
+  "label_quality_probe_passed": true,
+  "zero_init_parity": {
+    "zero_residual_logits_bitwise_equal": true,
+    "base_segmentation_max_abs_error": 0.0,
+    "initial_residual_parameters": 87509
+  },
+  "frozen_baseline_unchanged": true
+}

@@ -1,0 +1,35 @@
+2026-11-21 13:07:17,136 - train_pcre_bpd.py - INFO: ============================================================
+2026-11-21 13:07:17,137 - train_pcre_bpd.py - INFO: PCRE-BPD: Boundary-Aware Prototype Distillation Training
+2026-11-21 13:07:17,137 - train_pcre_bpd.py - INFO: Target Max Iterations: 400
+2026-11-21 13:07:17,137 - train_pcre_bpd.py - INFO: Work Directory: experiments/pcre_bpd_training_20261121
+2026-11-21 13:07:17,137 - train_pcre_bpd.py - INFO: Samples per GPU (spg): 4
+2026-11-21 13:07:17,137 - train_pcre_bpd.py - INFO: BAPD Distill Weight: 0.25, Distill Temp: 2.0
+2026-11-21 13:07:17,137 - train_pcre_bpd.py - INFO: ============================================================
+2026-11-21 13:07:17,137 - train_pcre_bpd.py - INFO: Building network with backbone: vit_base_patch16_224...
+2026-11-21 13:07:18,840 - train_pcre_bpd.py - INFO: Loading checkpoint from: /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/baseline/checkpoints/model_iter_00020000.pth
+2026-11-21 13:07:19,102 - train_pcre_bpd.py - INFO: Loaded checkpoint: missing=0, unexpected=0
+2026-11-21 13:07:19,918 - train_pcre_bpd.py - INFO: Starting training loop...
+2026-11-21 13:08:55,137 - train_pcre_bpd.py - INFO: [0020/0400] LR: 3.35e-06 | Loss: 1.6539 | Seg: 0.1071 | BAPD Distill: 13.0720 | Speed: 0.21 it/s | ETA: 30.2m
+2026-11-21 13:09:53,926 - train_pcre_bpd.py - INFO: [0040/0400] LR: 4.89e-06 | Loss: 2.2899 | Seg: 0.0907 | BAPD Distill: 12.1487 | Speed: 0.26 it/s | ETA: 23.1m
+2026-11-21 13:11:04,191 - train_pcre_bpd.py - INFO: [0060/0400] LR: 4.65e-06 | Loss: 2.3585 | Seg: 0.0865 | BAPD Distill: 11.2186 | Speed: 0.27 it/s | ETA: 21.2m
+2026-11-21 13:11:39,200 - train_pcre_bpd.py - INFO: [0080/0400] LR: 4.40e-06 | Loss: 2.2723 | Seg: 0.0926 | BAPD Distill: 10.2396 | Speed: 0.31 it/s | ETA: 17.3m
+2026-11-21 13:12:16,829 - train_pcre_bpd.py - INFO: [0100/0400] LR: 4.15e-06 | Loss: 2.2395 | Seg: 0.0933 | BAPD Distill: 9.7074 | Speed: 0.34 it/s | ETA: 14.8m
+2026-11-21 13:12:41,675 - train_pcre_bpd.py - INFO: [0120/0400] LR: 3.90e-06 | Loss: 2.1970 | Seg: 0.0966 | BAPD Distill: 9.3078 | Speed: 0.37 it/s | ETA: 12.5m
+2026-11-21 13:13:31,860 - train_pcre_bpd.py - INFO: [0140/0400] LR: 3.65e-06 | Loss: 2.1253 | Seg: 0.0953 | BAPD Distill: 8.8572 | Speed: 0.38 it/s | ETA: 11.5m
+2026-11-21 13:14:20,058 - train_pcre_bpd.py - INFO: [0160/0400] LR: 3.40e-06 | Loss: 2.0458 | Seg: 0.1022 | BAPD Distill: 8.4086 | Speed: 0.38 it/s | ETA: 10.5m
+2026-11-21 13:15:03,919 - train_pcre_bpd.py - INFO: [0180/0400] LR: 3.14e-06 | Loss: 1.9798 | Seg: 0.1003 | BAPD Distill: 8.0500 | Speed: 0.39 it/s | ETA: 9.5m
+2026-11-21 13:15:50,236 - train_pcre_bpd.py - INFO: [0200/0400] LR: 2.89e-06 | Loss: 1.9204 | Seg: 0.1055 | BAPD Distill: 7.6976 | Speed: 0.39 it/s | ETA: 8.5m
+2026-11-21 13:16:43,924 - train_pcre_bpd.py - INFO: [0220/0400] LR: 2.63e-06 | Loss: 1.8727 | Seg: 0.1069 | BAPD Distill: 7.4263 | Speed: 0.39 it/s | ETA: 7.7m
+2026-11-21 13:17:17,648 - train_pcre_bpd.py - INFO: [0240/0400] LR: 2.36e-06 | Loss: 1.8315 | Seg: 0.1120 | BAPD Distill: 7.1839 | Speed: 0.40 it/s | ETA: 6.6m
+2026-11-21 13:18:10,250 - train_pcre_bpd.py - INFO: [0260/0400] LR: 2.10e-06 | Loss: 1.7889 | Seg: 0.1273 | BAPD Distill: 6.9142 | Speed: 0.40 it/s | ETA: 5.8m
+2026-11-21 13:18:51,209 - train_pcre_bpd.py - INFO: [0280/0400] LR: 1.83e-06 | Loss: 1.7508 | Seg: 0.1361 | BAPD Distill: 6.6984 | Speed: 0.41 it/s | ETA: 4.9m
+2026-11-21 13:19:49,532 - train_pcre_bpd.py - INFO: [0300/0400] LR: 1.55e-06 | Loss: 1.7230 | Seg: 0.1505 | BAPD Distill: 6.4996 | Speed: 0.40 it/s | ETA: 4.2m
+2026-11-21 13:20:31,660 - train_pcre_bpd.py - INFO: [0320/0400] LR: 1.27e-06 | Loss: 1.6890 | Seg: 0.1595 | BAPD Distill: 6.2895 | Speed: 0.40 it/s | ETA: 3.3m
+2026-11-21 13:21:30,001 - train_pcre_bpd.py - INFO: [0340/0400] LR: 9.87e-07 | Loss: 1.6541 | Seg: 0.1647 | BAPD Distill: 6.0649 | Speed: 0.40 it/s | ETA: 2.5m
+2026-11-21 13:22:24,782 - train_pcre_bpd.py - INFO: [0360/0400] LR: 6.90e-07 | Loss: 1.6229 | Seg: 0.1677 | BAPD Distill: 5.8931 | Speed: 0.40 it/s | ETA: 1.7m
+2026-11-21 13:23:46,977 - train_pcre_bpd.py - INFO: [0380/0400] LR: 3.78e-07 | Loss: 1.5979 | Seg: 0.1696 | BAPD Distill: 5.7429 | Speed: 0.38 it/s | ETA: 0.9m
+2026-11-21 13:24:17,473 - train_pcre_bpd.py - INFO: [0400/0400] LR: 2.44e-08 | Loss: 1.5751 | Seg: 0.1784 | BAPD Distill: 5.6003 | Speed: 0.39 it/s | ETA: 0.0m
+2026-11-21 13:24:18,020 - train_pcre_bpd.py - INFO: Saved checkpoint: experiments/pcre_bpd_training_20261121/checkpoints/model_iter_00000400.pth
+2026-11-21 13:24:18,020 - train_pcre_bpd.py - INFO: Running evaluation on VOC Val (limit=100)...
+2026-11-21 13:24:22,959 - train_pcre_bpd.py - INFO: >>> Validation at Iter 400: Raw Seg mIoU = 50.34% (on 100 images) <<<
+2026-11-21 13:24:22,960 - train_pcre_bpd.py - INFO: PCRE-BPD Training completed successfully.

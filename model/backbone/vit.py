@@ -281,9 +281,9 @@ class VisionTransformer(nn.Module):
         trunc_normal_(self.cls_token, std=.02)
         # self.after_load_state_dict()
         self.apply(self._init_weights)
-    def after_load_state_dict(self,):
-        self.cls_token = nn.Parameter(self.cls_token.repeat(1, 20, 1))
-        cls_token_embed = self.pos_embed[:, 0, :].unsqueeze(1).repeat(1, 20, 1)
+    def after_load_state_dict(self, num_classes=20):
+        self.cls_token = nn.Parameter(self.cls_token.repeat(1, num_classes, 1))
+        cls_token_embed = self.pos_embed[:, 0, :].unsqueeze(1).repeat(1, num_classes, 1)
         # trunc_normal_(cls_token_embed, std=.02)
         self.pos_embed = nn.Parameter(torch.cat([cls_token_embed,self.pos_embed[:,1:]], dim=1))
         # trunc_normal_(self.pos_embed, std=.02)
@@ -338,7 +338,7 @@ class VisionTransformer(nn.Module):
         # cls_tokens = self.cls_token.expand(B, -1, -1)  # stole cls_tokens impl from Phil Wang, thanks
         # x = torch.cat((cls_tokens, x), dim=1)
         # x = x + self.pos_embed
-        num_cls = 20
+        num_cls = self.num_classes
         x = self.prepare_tokens(x,num_cls)
         penultimate_features = None
         x = self.pos_drop(x)
@@ -415,10 +415,10 @@ def dino_base_patch8_224(pretrained=False, **kwargs):
     return model
 
 @register_model
-def vit_base_patch16_224(pretrained=False, **kwargs):
+def vit_base_patch16_224(pretrained=False, num_classes=20, **kwargs):
     model = VisionTransformer(
         patch_size=16, embed_dim=768, depth=12, num_heads=12, mlp_ratio=4, qkv_bias=True,
-        norm_layer=partial(nn.LayerNorm, eps=1e-6), **kwargs)
+        norm_layer=partial(nn.LayerNorm, eps=1e-6), num_classes=num_classes, **kwargs)
     model.default_cfg = default_cfgs['vit_base_patch16_224']
     if pretrained: 
         checkpoint = torch.hub.load_state_dict_from_url(
@@ -426,7 +426,7 @@ def vit_base_patch16_224(pretrained=False, **kwargs):
             map_location="cpu", check_hash=True
         )
         model.load_state_dict(checkpoint,strict=False)
-        model.after_load_state_dict()
+        model.after_load_state_dict(num_classes=num_classes)
         # load_pretrained(
         #     model, num_classes=model.num_classes, in_chans=kwargs.get('in_chans', 3), filter_fn=_conv_filter)
     return model

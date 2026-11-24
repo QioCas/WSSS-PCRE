@@ -1,0 +1,11 @@
+{
+  "processed": 1449,
+  "total": 1449,
+  "elapsed_seconds": 79.83812355995178,
+  "input_mask_miou": 75.97366589458946,
+  "clip_synergy_miou": 75.88539356715265,
+  "delta_pp": -0.08827232743681135,
+  "reassigned_count": 5,
+  "suppressed_bg_count": 1,
+  "total_components": 3506
+}

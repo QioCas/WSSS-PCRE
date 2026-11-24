@@ -1,0 +1,112 @@
+{
+  "teacher_run": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/baseline",
+  "teacher_checkpoint": "model_iter_00020000.pth",
+  "data_folder": "/home/jupyter-iec2024iot08/Workspace/2024_IoT_08-Contrastive-Learning-for-SSS/data/VOC2012",
+  "reference_baseline_metrics": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/inference_voc_val_20261119/full/baseline/metrics.json",
+  "deps_folder": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_inference",
+  "seed": 0,
+  "teacher_scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "crop_size": 448,
+  "batch_size": 4,
+  "resize_short_range": [
+    336,
+    672
+  ],
+  "crf_workers": 4,
+  "list_folder": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/datasets/voc",
+  "train_split": "train_aug",
+  "val_split": "val",
+  "reliable_cache": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/cache/reliable",
+  "gpu": 0,
+  "gpu_memory_gib": 6.0,
+  "min_free_gpu_mb": 8000,
+  "minimum_disk_free_gib": 8.0,
+  "max_gpu_wait_hours": 48,
+  "refinement_steps": 4000,
+  "lr": 0.0001,
+  "weight_decay": 0.01,
+  "warmup_steps": 100,
+  "ema_decay": 0.99,
+  "checkpoint_interval": 1000,
+  "log_interval": 20,
+  "jitter": 0.1,
+  "residual_width": 64,
+  "residual_limit": 2.0,
+  "gate_confidence": 0.95,
+  "keep_weight": 1.0,
+  "negative_weight": 0.1,
+  "bank_positive_samples": 2048,
+  "bank_negative_samples": 512,
+  "bank_positive_per_image": 16,
+  "bank_negative_per_image": 2,
+  "bank_positive_prototypes": 4,
+  "bank_negative_prototypes": 8,
+  "bank_background_confidence": 0.8,
+  "negative_margin": 0.08,
+  "projection_dim": 32,
+  "gmm_components": 2,
+  "gmm_lower_quantile": 0.02,
+  "target_gain_pp": 0.2,
+  "max_allowed_class_drop_pp": 2.0,
+  "clip_module_dir": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_clip",
+  "clip_dependency_dir": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_clip_deps",
+  "clip_download_dir": "/home/jupyter-iec2024iot08/Workspace/.deps/pcre_clip_weights",
+  "clip_model_name": "ViT-B/16",
+  "clip_margin": 0.05,
+  "clip_min_component_pixels": 64,
+  "qualification": "One-seed development val; 4k extra adapter steps; CLIP track uses extra image-text pretraining. FPR/U2PL/GMM/detail/CLIP variants are adaptations, not exact paper reproductions.",
+  "arms": [
+    {
+      "name": "A1_residual_control",
+      "target": "reliable",
+      "negative_loss": false,
+      "detail": false,
+      "external_prior": false,
+      "parent": "baseline"
+    },
+    {
+      "name": "A2_negative_filter",
+      "target": "negative",
+      "negative_loss": false,
+      "detail": false,
+      "external_prior": false,
+      "parent": "A1_residual_control"
+    },
+    {
+      "name": "A3_negative_learning",
+      "target": "negative",
+      "negative_loss": true,
+      "detail": false,
+      "external_prior": false,
+      "parent": "A2_negative_filter"
+    },
+    {
+      "name": "B1_distribution_filter",
+      "target": "density",
+      "negative_loss": false,
+      "detail": false,
+      "external_prior": false,
+      "parent": "A1_residual_control"
+    },
+    {
+      "name": "C1_detail_residual",
+      "target": "reliable",
+      "negative_loss": false,
+      "detail": true,
+      "external_prior": false,
+      "parent": "A1_residual_control"
+    },
+    {
+      "name": "D1_clip_region_filter",
+      "target": "clip",
+      "negative_loss": false,
+      "detail": false,
+      "external_prior": true,
+      "parent": "A1_residual_control"
+    }
+  ]
+}

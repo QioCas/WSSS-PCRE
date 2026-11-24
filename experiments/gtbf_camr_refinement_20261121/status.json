@@ -1,0 +1,14 @@
+{
+  "stage": "completed",
+  "description": "Processed 1449/1449 images (Current Gain: +1.63%)",
+  "progress": {
+    "processed": 1449,
+    "total": 1449,
+    "elapsed_seconds": 339.0684115886688,
+    "baseline_crf_miou": 74.22428373329858,
+    "gtbf_camr_refined_miou": 75.85057204224258,
+    "delta_pp": 1.6262883089440017,
+    "refined_components": 2140,
+    "total_components": 3156
+  }
+}

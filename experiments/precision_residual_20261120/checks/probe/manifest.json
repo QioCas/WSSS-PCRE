@@ -1,0 +1,14 @@
+{
+  "names": [
+    "2009_005087",
+    "2010_005664"
+  ],
+  "images": 2,
+  "purpose": "Development-val pseudo-label precision/recall diagnostic only",
+  "image_labels_used_for_pseudo_labels": true,
+  "used_to_fit_bank": false,
+  "used_for_training": false,
+  "thresholds_changed_from_probe": false,
+  "bank_sha256": "c931b427c166b2e7d94c56008c87301bf7e826f6b32987326119c0da74c44b8b",
+  "qualification": "Not full-val model inference. Val already informs development; this is not an independent test."
+}

@@ -1,0 +1,26 @@
+test_absent_image_class_cannot_admit_pixels (test_adaptive_consensus.ConsensusTests.test_absent_image_class_cannot_admit_pixels) ... ok
+test_admission_preserves_foreground_background_padding_and_rejects_conflicts (test_adaptive_consensus.ConsensusTests.test_admission_preserves_foreground_background_padding_and_rejects_conflicts) ... ok
+test_centered_bounds_and_checkpoint_state (test_adaptive_consensus.ConsensusTests.test_centered_bounds_and_checkpoint_state) ... ok
+test_refinement_details_keep_default_baseline_output (test_adaptive_consensus.ConsensusTests.test_refinement_details_keep_default_baseline_output) ... ok
+test_single_device_checkpoint_and_alternating_unused_heads_match_direct_updates (test_adaptive_consensus.ConsensusTests.test_single_device_checkpoint_and_alternating_unused_heads_match_direct_updates) ... ok
+test_single_rank_tracker_avoids_identity_collectives (test_adaptive_consensus.ConsensusTests.test_single_rank_tracker_avoids_identity_collectives) ... ok
+test_uniform_score_shift_does_not_relax_all_classes (test_adaptive_consensus.ConsensusTests.test_uniform_score_shift_does_not_relax_all_classes) ... ok
+test_warmup_and_unseen_classes_are_exact_baseline (test_adaptive_consensus.ConsensusTests.test_warmup_and_unseen_classes_are_exact_baseline) ... ok
+test_bounds_ramp_and_stronger_classes (test_adaptive_experiment.AdaptiveTests.test_bounds_ramp_and_stronger_classes) ... ok
+test_checkpoint_restores_optimizer_schedule_tracker_and_rng (test_adaptive_experiment.AdaptiveTests.test_checkpoint_restores_optimizer_schedule_tracker_and_rng) ... ok
+test_empty_batch_preserves_state (test_adaptive_experiment.AdaptiveTests.test_empty_batch_preserves_state) ... ok
+test_padding_absent_classes_and_low_scores_do_not_update (test_adaptive_experiment.AdaptiveTests.test_padding_absent_classes_and_low_scores_do_not_update) ... ok
+test_paired_checkpoint_continues_with_same_next_update (test_adaptive_experiment.AdaptiveTests.test_paired_checkpoint_continues_with_same_next_update) ... ok
+test_warmup_is_identity_and_scores_are_detached (test_adaptive_experiment.AdaptiveTests.test_warmup_is_identity_and_scores_are_detached) ... ok
+test_all_ignore_loss_is_finite_and_differentiable (test_decoder_selftraining.DecoderTests.test_all_ignore_loss_is_finite_and_differentiable) ... ok
+test_anchor_has_no_teacher_gradient_and_zero_self_distance (test_decoder_selftraining.DecoderTests.test_anchor_has_no_teacher_gradient_and_zero_self_distance) ... ok
+test_ema_updates_weights_without_updating_teacher (test_decoder_selftraining.DecoderTests.test_ema_updates_weights_without_updating_teacher) ... ok
+test_frozen_parameters_and_teacher_do_not_change (test_decoder_selftraining.DecoderTests.test_frozen_parameters_and_teacher_do_not_change) ... ok
+test_joint_geometry_keeps_rgb_and_labels_aligned (test_decoder_selftraining.DecoderTests.test_joint_geometry_keeps_rgb_and_labels_aligned) ... ok
+test_subset_ids_confidence_and_independent_margin (test_decoder_selftraining.DecoderTests.test_subset_ids_confidence_and_independent_margin) ... ok
+test_training_dataset_works_without_any_pixel_gt_directory (test_decoder_selftraining.DecoderTests.test_training_dataset_works_without_any_pixel_gt_directory) ... ok
+
+----------------------------------------------------------------------
+Ran 21 tests in 0.567s
+
+OK

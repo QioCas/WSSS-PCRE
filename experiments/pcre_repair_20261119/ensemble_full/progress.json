@@ -1,0 +1,22 @@
+{
+  "stage": "complete",
+  "summary": {
+    "baseline": {
+      "raw": 73.7894880339437,
+      "crf": 74.22428373329858
+    },
+    "adaptive": {
+      "raw": 72.95883384616513,
+      "crf": 73.44479371455537
+    },
+    "ensemble": {
+      "raw": 73.87953867319675,
+      "crf": 74.32104039702308
+    },
+    "ensemble_minus_baseline_pp": {
+      "raw": 0.09005063925305024,
+      "crf": 0.09675666372450564
+    },
+    "partial_validation": false
+  }
+}

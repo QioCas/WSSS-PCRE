@@ -1,0 +1,4 @@
+=== Starting SAM-CAM Semantic Refinement (SCSR) Pipeline ===
+Total VOC Val images: 1449
+Loading SAM ViT-B from /home/jupyter-iec2024iot08/Workspace/.deps/pcre_sam/sam_vit_b_01ec64.pth...
+SAM loaded successfully.

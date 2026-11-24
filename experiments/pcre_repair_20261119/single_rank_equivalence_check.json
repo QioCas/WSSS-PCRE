@@ -1,0 +1,15 @@
+{
+  "comparison": "Direct module vs CPU Gloo DDP world_size=1",
+  "optimizer": "AdamW lr=.001 weight_decay=.01",
+  "loss_heads": [
+    "a",
+    "b",
+    "a"
+  ],
+  "parameters_bitwise_equal_after_each_step": [
+    true,
+    true,
+    true
+  ],
+  "qualification": "Checks mathematical single-rank update equivalence on a two-head model; not a performance or full-network equivalence claim."
+}

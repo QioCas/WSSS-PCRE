@@ -1,0 +1,30 @@
+{
+  "mode": "smoke_ema",
+  "checkpoint": "experiments/decoder_selftrain_20261119/smoke_train/checkpoints/model_refined_step_00000004_ema.pth",
+  "checkpoint_sha256": "cf1c4dcb9bc362b7b756c2c8bea9ba03c77baba241533d2df3059d1a9d295414",
+  "training_run": "experiments/decoder_selftrain_20261119/smoke_train",
+  "validation_images": 2,
+  "partial_validation": true,
+  "scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "horizontal_flip": true,
+  "input_base_size": 448,
+  "precision": "float32",
+  "tf32": false,
+  "crf": {
+    "iter_max": 10,
+    "pos_xy_std": 2,
+    "pos_w": 3,
+    "bi_xy_std": 140,
+    "bi_rgb_std": 1,
+    "bi_w": 7
+  },
+  "fusion": "max(first_scale_flip_sum, mean(all_scale_flip_sums))",
+  "strict_load": true,
+  "image_labels_used_for_prediction": false,
+  "torch_version": "2.10.0+cu128",
+  "densecrf_distribution": "pydensecrf2==1.1"
+}

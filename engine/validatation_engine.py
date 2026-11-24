@@ -13,7 +13,7 @@ from utils import evaluate
 from utils.camutils import cam_to_label, multi_scale_cam2_v2
 import numpy as np
 import torch.nn.functional as F
-from datasets import voc
+from datasets import voc, coco
 import matplotlib.patches as mpatches
 from torchvision.utils import make_grid
 def build_validation(model=None, data_loader=None, args=None,n_iter=None,grad_cam =None):
@@ -26,7 +26,8 @@ def build_validation(model=None, data_loader=None, args=None,n_iter=None,grad_ca
     hist_segs = np.zeros((args.num_classes, args.num_classes))
     # target_layers = [model.module.encoder.blocks[-1].mlp.fc2]
     # grad_cam = GradCAM(model=model,target_layers=target_layers)
-    if args.grad_t =='none':
+    grad_t = getattr(args, 'grad_t', 'none')
+    if grad_t == 'none':
         grad_cam = None
     with torch.no_grad():
         # process = psutil.Process(os.getpid())
@@ -54,10 +55,19 @@ def build_validation(model=None, data_loader=None, args=None,n_iter=None,grad_ca
             wsddn_seg,grad_mask, _cams = multi_scale_cam2_v2(model, inputs, args.cam_scales,cls_label=cls_label,args=args,grad_cam=grad_cam)            
             
             resized_cam = [F.interpolate(i, size=labels.shape[1:], mode='bilinear', align_corners=False) for i in _cams]
-            if n_iter > args.seg_iter:
-                cam_label = [cam_to_label(i, cls_label, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index,auxiliaryMasks=[grad_mask,wsddn_seg],seg_ts = (args.grad_t,args.seg_t)) for i in resized_cam]
+            grad_t = getattr(args, 'grad_t', 'none')
+            seg_t = getattr(args, 'seg_t', 0.3)
+            seg_iter = getattr(args, 'seg_iter', 32000)
+            if grad_cam is not None and grad_t != 'none':
+                if n_iter is not None and n_iter > seg_iter:
+                    cam_label = [cam_to_label(i, cls_label, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index,auxiliaryMasks=[grad_mask,wsddn_seg],seg_ts = (grad_t,seg_t)) for i in resized_cam]
+                else:
+                    cam_label = [cam_to_label(i, cls_label, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index,auxiliaryMasks=[grad_mask],seg_ts = (grad_t,)) for i in resized_cam]
             else:
-                cam_label = [cam_to_label(i, cls_label, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index,auxiliaryMasks=[grad_mask],seg_ts = (args.grad_t,)) for i in resized_cam]
+                if n_iter is not None and n_iter > seg_iter:
+                    cam_label = [cam_to_label(i, cls_label, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index,auxiliaryMasks=[wsddn_seg],seg_ts = (seg_t,)) for i in resized_cam]
+                else:
+                    cam_label = [cam_to_label(i, cls_label, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index) for i in resized_cam]
             del wsddn_seg,grad_mask, _cams
             resized_segs = F.interpolate(segs, size=labels.shape[1:], mode='bilinear', align_corners=False)
 
@@ -319,7 +329,8 @@ def build_validation(model=None, data_loader=None, args=None,n_iter=None,grad_ca
         # cam_aux_score = evaluate.scores(gts, cams_aux)
     model.train()
 
-    tab_results = format_tabs(cam_score+[seg_score], name_list=[f'CAM{i}'for i in range(len(cam_score))] + [ "Seg_Pred"], cat_list=voc.class_list)
+    cat_list = coco.class_list if getattr(args, "num_classes", 21) == 81 else voc.class_list
+    tab_results = format_tabs(cam_score+[seg_score], name_list=[f'CAM{i}'for i in range(len(cam_score))] + [ "Seg_Pred"], cat_list=cat_list)
     # if args.local_rank == 0:
     #     logging.info("val cls token loss: %.6f" % (avg_meter.pop('wsddn_score')))
     if args.local_rank == 0:
@@ -329,13 +340,14 @@ def build_validation(model=None, data_loader=None, args=None,n_iter=None,grad_ca
                 headers = tab_results._header
                 data_rows = all_rows
 
-                for row in data_rows:
-                    item_name = row[0]
-                    for header, value in zip(headers[1:], row[1:]): 
-                        key = f"{item_name}_{header}" 
-                        wandb.log({key:float(value)}, step=n_iter)
+                if getattr(wandb, "run", None) is not None:
+                    for row in data_rows:
+                        item_name = row[0]
+                        for header, value in zip(headers[1:], row[1:]): 
+                            key = f"{item_name}_{header}" 
+                            wandb.log({key:float(value)}, step=n_iter)
 
                 logging.info("val cls score: %.6f" % (cls_score))
                 #logging.info("val wsddn score: %.6f" % (wsddn_score))
                 logging.info("\n"+tab_results.draw())
-    return
+    return cls_score, tab_results.draw()

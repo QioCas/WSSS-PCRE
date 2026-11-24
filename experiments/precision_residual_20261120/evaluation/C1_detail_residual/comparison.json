@@ -1,0 +1,10 @@
+{
+  "mode": "C1_detail_residual",
+  "partial_evaluation": false,
+  "raw": 73.77172585919918,
+  "crf": 74.28595021168672,
+  "delta_vs_baseline_pp": {
+    "raw": -0.0177621747445178,
+    "crf": 0.061666478388144874
+  }
+}

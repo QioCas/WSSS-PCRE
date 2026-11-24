@@ -1,0 +1,10 @@
+{
+  "mode": "B1_distribution_filter",
+  "partial_evaluation": false,
+  "raw": 73.77326754261907,
+  "crf": 74.28451408243595,
+  "delta_vs_baseline_pp": {
+    "raw": -0.016220491324625552,
+    "crf": 0.06023034913736902
+  }
+}

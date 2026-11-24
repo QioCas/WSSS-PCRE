@@ -1,0 +1,10 @@
+{
+  "mode": "D1_clip_region_filter",
+  "partial_evaluation": false,
+  "raw": 73.7500917034793,
+  "crf": 74.26655928563468,
+  "delta_vs_baseline_pp": {
+    "raw": -0.03939633046440294,
+    "crf": 0.04227555233610181
+  }
+}

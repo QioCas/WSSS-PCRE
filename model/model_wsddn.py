@@ -23,6 +23,8 @@ def concat_all_gather(tensor):
     Performs all_gather operation on the provided tensors.
     *** Warning ***: torch.distributed.all_gather has no gradient.
     """
+    if not torch.distributed.is_initialized() or torch.distributed.get_world_size() == 1:
+        return tensor.detach()
     tensors_gather = [torch.ones_like(tensor)
         for _ in range(torch.distributed.get_world_size())]
     torch.distributed.all_gather(tensors_gather, tensor, async_op=False)
@@ -101,7 +103,7 @@ class network(nn.Module):
             # self.decoder_embd_dim = 768
             # # self.classifier.weight = nn.Parameter(text_features[:,:,None,None])
         else:
-            self.encoder = getattr(encoder, backbone)(pretrained=pretrained, aux_layer=aux_layer)
+            self.encoder = getattr(encoder, backbone)(pretrained=pretrained, aux_layer=aux_layer, num_classes=self.num_classes-1)
             self.decoder_embd_dim = 768
 
         self.in_channels = [self.encoder.embed_dim] * 4 if hasattr(self.encoder, "embed_dim") else [self.encoder.embed_dims[-1]] * 4 
@@ -137,9 +139,10 @@ class network(nn.Module):
     def update_prototype(self,embeds,label_idx):
         """embeds      : feats from encoder (b,DIM)
            label_idx   : the class index for embeds (b,1)"""
+        proto_m = getattr(self.args, 'proto_m', 0.9)
         for feat, label in zip(concat_all_gather(embeds), concat_all_gather(label_idx)):
             for cls_id in label.nonzero():
-                self.prototypes[cls_id] = self.prototypes[cls_id]*self.args.proto_m + (1-self.args.proto_m)*feat[cls_id]
+                self.prototypes[cls_id] = self.prototypes[cls_id]*proto_m + (1-proto_m)*feat[cls_id]
         self.prototypes = F.normalize(self.prototypes, p=2, dim=1)
 
         prototypes = self.prototypes.clone().detach()
@@ -292,12 +295,13 @@ class network(nn.Module):
                 cam = F.conv2d(_feat, self.classifier.weight).detach()
                 cam_aux = F.conv2d(_x_aux, self.aux_classifier.weight).detach()
                 # cam_wsddn = scores.detach().permute(0,2,1).reshape(scores.shape[0],-1,h,w)
-                _,wsddn_segs = self.get_seg(outputs_seg_masks, scores, cls_label.repeat(2,1), fin_size=img.shape[-2:],topk=args.wsddn_topk,val=True,mask_exp = self.args.mask_exp,)
+                mask_exp = getattr(self.args, 'mask_exp', True)
+                _,wsddn_segs = self.get_seg(outputs_seg_masks, scores, cls_label.repeat(2,1), fin_size=img.shape[-2:],topk=args.wsddn_topk,val=True,mask_exp = mask_exp,)
             else:
                 cam = F.conv2d(_x4, self.classifier.weight).detach()
                 cam_aux = F.conv2d(_x_aux, self.aux_classifier.weight).detach()
                 _x4_expanded = _x.unsqueeze(2)  # [4, 784, 1, 768]
-                if args.ema:
+                if getattr(args, 'ema', True):
                     prototypes_expanded = self.prototypes.unsqueeze(0).unsqueeze(0)  # [1, 1, 20, 768]
 
                     # 计算余弦相似度，dim=-1 表示在最后一个维度 (768) 上进行相似度计算
@@ -314,7 +318,7 @@ class network(nn.Module):
                 else:
                     return cls_token,None,cam_aux, cam,pro_cam
             return penultimate_features,cls_token,wsddn_segs,cam_aux, cam,pro_cam
-        if self.args.debug:
+        if getattr(self.args, 'debug', False):
             feature_map = _x4
             b,dim,_,_ = _x4.shape
             original_image = x
@@ -391,7 +395,7 @@ class network(nn.Module):
         # weight = self.conv(_x4)
         # if n_iter is not None and n_iter >= self.args.seg_iter:
         #     self.args.pro_m = 0.99
-        if n_iter is not None and n_iter >= self.args.update_prototype: 
+        if n_iter is not None and n_iter >= getattr(self.args, 'update_prototype', 600): 
             prototypes = self.update_prototype(cls_token.contiguous(),cls_label.contiguous()).to(x.device)
         else:
             prototypes = self.prototypes
@@ -465,10 +469,12 @@ class Mygo(nn.Module):
         super().__init__()
         self.num_classes = num_classes
         self.in_channels = [emd_dim]
-        self.query_decoder = DetrTransformerDecoder(self.in_channels[-1],num_layers=2,attn_dropout = 0.0,ffn_dropout = 0.0)
+        dec_layers = getattr(args, 'mask_decoder_layers', 1)
+        self.query_decoder = DetrTransformerDecoder(self.in_channels[-1], num_layers=dec_layers, attn_dropout=0.0, ffn_dropout=0.0)
         self.img_size = args.crop_size // 16
         # self.query = nn.Embedding((args.crop_size // 16) ** 2, self.in_channels[-1])
-        self.wsddn = Wsddn_Layer(self.in_channels[-1],num_classes - 1,mil = args.mil)
+        mil = getattr(args, 'mil', True)
+        self.wsddn = Wsddn_Layer(self.in_channels[-1], num_classes - 1, mil=mil)
         self.pos_embed = nn.Parameter(torch.zeros(1, (args.crop_size // 16) ** 2, self.in_channels[-1]))
         trunc_normal_(self.pos_embed, std=.02)
         self.patch_embed = PatchEmbed(img_size=self.img_size, patch_size=16, in_chans=3, embed_dim=self.in_channels[-1])
@@ -487,7 +493,7 @@ class Mygo(nn.Module):
             dropout=0.1,
             dim_feedforward=2048,
             enc_layers=0,
-            dec_layers=6,
+            dec_layers=getattr(args, 'mask_decoder_layers', 6),
             pre_norm=False,
             deep_supervision=False,
             mask_dim=self.in_channels[-1],

@@ -1,0 +1,11 @@
+{
+  "old_cache_raw_ignore_fraction": 0.015084380769335836,
+  "old_cache_crf_ignore_fraction": 0.001849071755288679,
+  "pixels": 1896135177,
+  "both_labeled_pixels": 1864752297,
+  "different_semantic_labels_among_both_labeled": 9472488,
+  "semantic_disagreement_fraction_given_both_labeled": 0.00507975671366072,
+  "decoder_relative_l2_change": 0.0369179073832556,
+  "observed_crf_gain_vs_raw_control_pp": 0.0003174706281328099,
+  "interpretation": "Label similarity, fixed representation and same-view anchoring are candidate limitations; matched new experiments are required for attribution."
+}

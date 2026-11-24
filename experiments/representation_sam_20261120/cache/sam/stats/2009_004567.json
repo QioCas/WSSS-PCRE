@@ -1,0 +1,17 @@
+{
+  "changed_pixels": 5007,
+  "added_foreground": 1724,
+  "trimmed_foreground": 441,
+  "new_ignore": 2234,
+  "foreground_class_reassignments": 0,
+  "attempted_proposals": 1,
+  "accepted_proposals": 1,
+  "sam_quality_scores": [
+    0.994591236114502
+  ],
+  "image": "2009_004567",
+  "pixels": 187500,
+  "foreground": 30331,
+  "background": 151951,
+  "ignore": 5218
+}

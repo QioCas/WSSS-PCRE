@@ -706,7 +706,10 @@ class MyGo_Loss(nn.Module):
         resize_map = resize_map / (max_values + 1e-6)
         cam_list = []
         cls_label = label.nonzero()
-        loss = 0
+        if cls_label.shape[0] == 0:
+            return torch.tensor(0.0, device=score_map.device, requires_grad=True)
+        loss = torch.tensor(0.0, device=score_map.device, requires_grad=True)
+        valid_cnt = 0
         for b,cls_id in cls_label:
             cls_sc = score[b,:,cls_id]
             sorted_original_indices = torch.where(cls_sc > 1e-2)[0][cls_sc[cls_sc > 1e-2].argsort(descending=True)]
@@ -734,8 +737,10 @@ class MyGo_Loss(nn.Module):
             pred = F.interpolate(resize_map[b,fin_list[0]].unsqueeze(1), size=gt.shape[1:], mode='bilinear', align_corners=False).mean(0)
             gt_mask = (gt[b] == cls_id +1)
 
-            loss += self.criterion_logits(pred.squeeze(0), gt_mask.float())
-        loss /= cls_label.shape[0]
+            loss = loss + self.criterion_logits(pred.squeeze(0), gt_mask.float())
+            valid_cnt += 1
+        if valid_cnt > 0:
+            loss = loss / valid_cnt
             
 
             
@@ -807,8 +812,15 @@ class MyGo_Loss2(nn.Module):
 
 
         cls_label = label.nonzero()
-        loss = 0
+        if cls_label.shape[0] == 0:
+            zero_loss = torch.tensor(0.0, device=score_map.device, requires_grad=True)
+            if val:
+                return zero_loss, []
+            return zero_loss
+
+        loss = torch.tensor(0.0, device=score_map.device, requires_grad=True)
         ret_val = []
+        valid_cnt = 0
         for b,cls_id in cls_label:
             cnt_recycle = 0
             cls_sc,sc_id  = score[b].max(dim = -1)
@@ -876,8 +888,10 @@ class MyGo_Loss2(nn.Module):
                 # bce_loss = get_seg_bce_loss(pred,gt_mask)
                 # iou_loss = (1-batch_dice((pred > 0.7).unsqueeze(0),gt_mask.unsqueeze(0)))
                 # dice_loss = (1 - ((2 * (pred * gt_mask.float())).sum() + 1) / (pred.sum() + gt_mask.sum() + 1))
-                loss += bce_loss
-        loss /= cls_label.shape[0]
+                loss = loss + bce_loss
+                valid_cnt += 1
+        if valid_cnt > 0:
+            loss = loss / valid_cnt
         if val:
             return loss,ret_val
         else:

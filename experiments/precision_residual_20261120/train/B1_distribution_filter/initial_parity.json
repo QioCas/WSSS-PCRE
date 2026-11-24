@@ -1,0 +1,5 @@
+{
+  "zero_residual_logits_bitwise_equal": true,
+  "base_segmentation_max_abs_error": 0.0,
+  "initial_residual_parameters": 87509
+}

@@ -39,6 +39,7 @@ parser.add_argument("--w_reg", default=0.05, type=float, help="weight for regres
 parser.add_argument("--w_cpe", default=0.5, type=float, help="weight for cpe loss")
 
 parser.add_argument("--wsddn_topk", default=300, type=int, help="top k proposals for wsddn")
+parser.add_argument('--mil', default=True, type=bool, help="enable MIL")
 parser.add_argument('--ot_loss', default=False, action="store_true", help="enable optimal transport loss")
 parser.add_argument('--ot_n', default=4, type=int, help="number of iterations for Sinkhorn/OT")
 parser.add_argument('--logit_scale', default=4, type=int, help="scaling factor for logits")
@@ -64,6 +65,10 @@ parser.add_argument("--cam_scales",
                         help="multi_scales for cam (provide as space-separated values)")
 parser.add_argument("--ignore_index", default=255, type=int, help="random index")
 parser.add_argument("--pooling", default='gmp', type=str, help="pooling choice for patch tokens")
+parser.add_argument("--decoder", default='LargeFOV', type=str, help="decoder choice")
+parser.add_argument("--ema", default=True, type=bool, help="use ema for prototypes")
+parser.add_argument("--mask_exp", default=True, type=bool, help="use mask expansion")
+parser.add_argument("--cls_sc_t", default=0.0, type=float, help="cls score threshold")
 
 ### knowledge extraction
 parser.add_argument('--proto_m', default=0.9, type=float, help='momentum for computing the momving average of prototypes')
@@ -79,14 +84,15 @@ parser.add_argument("--aux_layer", default=-3, type=int, help="aux_layer")
 ### log utils
 parser.add_argument("--pretrained", default=True, type=bool, help="use imagenet pretrained weights")
 parser.add_argument("--save_ckpt", default=False, action="store_true", help="save_ckpt")
+parser.add_argument("--save_interval", default=10000, type=int, help="iteration interval to save checkpoint")
 parser.add_argument("--seed", default=0, type=int, help="fix random seed")
 parser.add_argument("--weight", default="", type=str, help="model weight")
-parser.add_argument("--work_dir", default="w_outputs", type=str, help="w_outputs")
-parser.add_argument("--log_tag", default="train_voc", type=str, help="train_voc")
+parser.add_argument("--work_dir", default="experiments/coco_baseline", type=str, help="work_dir")
+parser.add_argument("--log_tag", default="train_coco", type=str, help="train_coco")
 
 ### dataset utils
-parser.add_argument("--img_folder", default='/Data/MSCOCO/JPEGImages', type=str, help="dataset folder")
-parser.add_argument("--label_folder", default='/home/data/COCO2014/coco/SegmentationClass', type=str, help="dataset folder")
+parser.add_argument("--img_folder", default='dataset/COCO2014/coco', type=str, help="dataset folder")
+parser.add_argument("--label_folder", default='dataset/COCO2014/coco/SegmentationClass', type=str, help="dataset folder")
 parser.add_argument("--list_folder", default='datasets/coco', type=str, help="train/val/test list file")
 parser.add_argument("--num_classes", default=81, type=int, help="number of classes")
 parser.add_argument("--crop_size", default=448, type=int, help="crop_size in training")
@@ -95,6 +101,9 @@ parser.add_argument('--ncrops', default=12, type=int, help='number of crops')
 parser.add_argument("--train_set", default="train", type=str, help="training split")
 parser.add_argument("--val_set", default="val_part", type=str, help="validation split")
 parser.add_argument("--spg", default=2, type=int, help="samples_per_gpu")
+parser.add_argument("--grad_accum_steps", default=4, type=int, help="gradient accumulation steps")
+parser.add_argument("--amp", action="store_true", default=False, help="enable AMP fp16 mixed precision")
+parser.add_argument("--mask_decoder_layers", default=1, type=int, help="number of mask decoder layers")
 parser.add_argument("--scales", default=(0.5, 2), help="random rescale in training")
 
 ### optimizer utils
@@ -105,30 +114,32 @@ parser.add_argument("--wt_decay", default=1e-2, type=float, help="weights decay"
 parser.add_argument("--betas", default=(0.9, 0.999), help="betas for Adam")
 parser.add_argument("--power", default=0.9, type=float, help="poweer factor for poly scheduler")
 
-parser.add_argument("--local_rank", default=-1, type=int, help="local_rank")
+parser.add_argument("--local-rank", "--local_rank", dest="local_rank",
+                    default=int(os.environ.get("LOCAL_RANK", "0")), type=int, help="local_rank")
 parser.add_argument("--num_workers", default=10, type=int, help="num_workers")
 parser.add_argument('--backend', default='nccl')
 parser.add_argument('--debug', default=False, type=bool,)
 parser.add_argument('--lamda', default=100, type=float)
 parser.add_argument('--seg_t', default=0.3, type=float)
+parser.add_argument('--grad_t', default="none", type=str)
 parser.add_argument('--seg_iter', default=32000, type=int)
 parser.add_argument('--resume', type=str)
 def smart_resume(ckpt, optimizer, model):
     # Resume training from a partially trained checkpoint
-    # best_fitness = 0.0
-    n_iter = ckpt['iter'] + 1
-    if ckpt['optimizer'] is not None:
-        optimizer_stat = ckpt['optimizer']  # optimizer
-        # best_fitness = ckpt['best_fitness']
+    n_iter = ckpt.get('iter', -1) + 1
+    if ckpt.get('optimizer') is not None:
+        optimizer.load_state_dict(ckpt['optimizer'])
     state_dict = ckpt['state_dict']
     from collections import OrderedDict
     new_state_dict = OrderedDict()
     for k, v in state_dict.items():
-        name = k[7:] # remove `module.`
+        if k.startswith('module.'):
+            name = k[7:] # remove `module.`
+        else:
+            name = k
         new_state_dict[name] = v
-    model.load_state_dict(new_state_dict,strict=True)
-    optimizer.load_state_dict(optimizer_stat)
-    return n_iter,model,optimizer
+    model.load_state_dict(new_state_dict, strict=True)
+    return n_iter, model, optimizer
 
 def setup_seed(seed):
     torch.manual_seed(seed)
@@ -147,6 +158,7 @@ def train(args=None):
 
     time0 = datetime.datetime.now()
     time0 = time0.replace(microsecond=0)
+    time1 = None
     device = torch.device(args.local_rank)
 
     ### build model 
@@ -168,7 +180,7 @@ def train(args=None):
 
     ### build dataloader 
     train_dataset = coco.CocoClsDataset(
-        img_dir="/home/data/COCO2014/coco",
+        img_dir=args.img_folder,
         label_dir=args.label_folder,
         name_list_dir=args.list_folder,
         split=args.train_set,
@@ -182,7 +194,7 @@ def train(args=None):
     )
 
     val_dataset = coco.CocoSegDataset(
-        img_dir="/home/data/COCO2014/coco",
+        img_dir=args.img_folder,
         label_dir=args.label_folder,
         name_list_dir=args.list_folder,
         split=args.val_set,
@@ -200,7 +212,7 @@ def train(args=None):
         pin_memory=False,
         drop_last=True,
         sampler=train_sampler,
-        prefetch_factor=4)
+        prefetch_factor=4 if args.num_workers > 0 else None)
 
     val_loader = DataLoader(val_dataset,
                             batch_size=1,
@@ -218,18 +230,26 @@ def train(args=None):
         get_seg_mygo_loss = MyGo_Loss3(topk=args.wsddn_topk)
     else:
         get_seg_mygo_loss = MyGo_Loss2(topk=args.wsddn_topk)
-    get_cls_token_loss = ClsTokenLoss().to(device)
+    get_cls_token_loss = ClsTokenLoss(model.encoder.embed_dim, args.num_classes - 1).to(device)
     ### build optimizer 
     for param in list(get_cls_token_loss.parameters()):
         param_groups[2].append(param)
     optim = build_optimizer(args,param_groups)
     n_iter_resume = 0
     if args.resume:
+        if args.local_rank == 0:
+            logging.info(f"Resuming training from {args.resume}...")
         ckpt = torch.load(args.resume, map_location='cpu')
-        n_iter_resume,model,optim = smart_resume(ckpt,optim,model)
-        optim.resume(n_iter_resume)
+        n_iter_resume, model, optim = smart_resume(ckpt, optim, model)
+        if hasattr(optim, 'resume'):
+            optim.resume(n_iter_resume)
+        elif hasattr(optim, 'global_step'):
+            optim.global_step = n_iter_resume
+        if args.local_rank == 0:
+            logging.info(f"Resumed from iteration {n_iter_resume}")
     model = DistributedDataParallel(model, device_ids=[args.local_rank], find_unused_parameters=True)
-    # scaler = GradScaler()
+    scaler = GradScaler() if args.amp else None
+    optim.zero_grad()
     logging.info('\nOptimizer: \n%s' % optim)
 
     par = PAR(num_iter=10, dilations=[1,2,4,8,12,24]).cuda()
@@ -252,17 +272,17 @@ def train(args=None):
         # cams, cams_aux, auxiliaryMask = multi_scale_cam2(model, inputs=inputs, scales=args.cam_scales, cls_label=cls_label,args=args)
         if n_iter < args.seg_iter:
 
-            auxiliaryMask ,(cams_aux, cams,prototypes_cam) = multi_scale_cam2_v2(model, inputs=inputs, scales=args.cam_scales,cls_label=cls_label, args=args)
+            auxiliaryMask, grad_mask, (cams_aux, cams, prototypes_cam) = multi_scale_cam2_v2(model, inputs=inputs, scales=args.cam_scales, cls_label=cls_label, args=args)
 
             valid_cam, asd = cam_to_label(cams.detach(), cls_label=cls_label, img_box=img_box, ignore_mid=True, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index)
 
             _ , pseudo_label = cam_to_label(F.interpolate(cams.detach(), size=(28,28), mode="bilinear", align_corners=False), cls_label=cls_label, img_box=img_box, ignore_mid=True, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index)
         else:
             # s = time.time()
-            auxiliaryMask ,(cams_aux, cams,prototypes_cam) = multi_scale_cam2_v2(model, inputs=inputs, scales=args.cam_scales,cls_label=cls_label, args=args)
+            auxiliaryMask, grad_mask, (cams_aux, cams, prototypes_cam) = multi_scale_cam2_v2(model, inputs=inputs, scales=args.cam_scales, cls_label=cls_label, args=args)
             # e = time.time()
             # print(e-s)
-            valid_cam, asd = cam_to_label(cams.detach(), cls_label=cls_label, img_box=img_box, ignore_mid=True, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index,auxiliaryMask=auxiliaryMask,seg_t = args.seg_t)
+            valid_cam, asd = cam_to_label(cams.detach(), cls_label=cls_label, img_box=img_box, ignore_mid=True, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index, auxiliaryMasks=[auxiliaryMask], seg_ts=(args.seg_t,))
             _ , pseudo_label = cam_to_label(F.interpolate(cams.detach(), size=(28,28), mode="bilinear", align_corners=False), cls_label=cls_label, img_box=img_box, ignore_mid=True, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index)
         refined_pseudo_label = refine_cams_with_bkg_v2(par, inputs_denorm, cams=valid_cam, cls_labels=cls_label,  high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index, img_box=img_box, )
         # if DEBUG or True:
@@ -283,71 +303,65 @@ def train(args=None):
         # if n_iter==55:
         #     print("233")
         # s = time.time()
-        (   cls, segs, fmap, cls_aux,
-            backbone_feat,cls_token,cls_token_logit,backbone_weight,outputs_seg_masks, cls_wsddn,prototypes
-        ) = model(
-            inputs,
-            label_idx=label_idx,
-            n_iter=n_iter,
-            atten_mask=atten_mask,
-            cls_label=cls_label,
-            aug_img = None
-        )
-        # e = time.time()
-        # print(e-s)
-        ### cls loss & aux cls loss
-        cls_loss = F.multilabel_soft_margin_loss(cls, cls_label)
-        cls_loss_aux = F.multilabel_soft_margin_loss(cls_aux, cls_label)
+        with autocast(enabled=args.amp):
+            (   cls, segs, fmap, cls_aux,
+                backbone_feat,cls_token,cls_token_logit,backbone_weight,outputs_seg_masks, cls_wsddn,prototypes
+            ) = model(
+                inputs,
+                label_idx=label_idx,
+                n_iter=n_iter,
+                atten_mask=atten_mask,
+                cls_label=cls_label,
+                aug_img = None
+            )
+            # e = time.time()
+            # print(e-s)
+            ### cls loss & aux cls loss
+            cls_loss = F.multilabel_soft_margin_loss(cls, cls_label)
+            cls_loss_aux = F.multilabel_soft_margin_loss(cls_aux, cls_label)
 
-        # 使用模型1的特征图监督模型2的特征图
-        # loss_feat = loss_mse(backbone_feat.detach(), backbone_feat)
-        ## wsddn loss
-        cls_loss_wsddn = F.binary_cross_entropy(cls_wsddn.sum(dim = 1), cls_label.float())
-        
-        cls_token_mask = get_token_mask(pseudo_label_aux,args.num_classes,cls_label)
-        cpe_loss = get_masked_ptc_loss(fmap.detach(), cls_token_mask.flatten(-2),cls_token)
-
-
-
-        ### seg_loss & reg_loss
-    
-        
-        # cls_token_loss = get_cls_token_loss(cls_token_logit,cls_label)
-       
+            # 使用模型1的特征图监督模型2的特征图
+            # loss_feat = loss_mse(backbone_feat.detach(), backbone_feat)
+            ## wsddn loss
+            cls_loss_wsddn = F.binary_cross_entropy(cls_wsddn.sum(dim = 1), cls_label.float())
             
+            cls_token_mask = get_token_mask(pseudo_label_aux,args.num_classes,cls_label)
+            cpe_loss = get_masked_ptc_loss(fmap.detach(), cls_token_mask.flatten(-2),cls_token)
 
-        segs = F.interpolate(segs, size=refined_pseudo_label.shape[1:], mode='bilinear', align_corners=False)
 
-        seg_loss = get_seg_loss(segs, refined_pseudo_label.type(torch.long), ignore_index=args.ignore_index)
 
-        ptc_loss = get_masked_ptc_loss(fmap, aff_mask)
+            ### seg_loss & reg_loss
+        
+            
+            # cls_token_loss = get_cls_token_loss(cls_token_logit,cls_label)
+           
+                
 
-        # crme_loss = get_seg_mygo_loss(outputs_seg_masks, cls_wsddn.detach(), cls_label.detach(), refined_pseudo_label.detach(), topk=args.wsddn_topk)
+            segs = F.interpolate(segs, size=refined_pseudo_label.shape[1:], mode='bilinear', align_corners=False)
 
-        w_cpe = args.w_cpe
+            seg_loss = get_seg_loss(segs, refined_pseudo_label.type(torch.long), ignore_index=args.ignore_index)
 
-        if n_iter < 60000 or True: # I channged here, for 72.3 need change to <
-            valid_pro, asd = cam_to_label(prototypes_cam.detach(), cls_label=cls_label, img_box=img_box, ignore_mid=True, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index)
-            refined_pro_label = refine_cams_with_bkg_v2(par, inputs_denorm, cams=valid_pro, cls_labels=cls_label,  high_thre=0.9, low_thre=args.low_thre, ignore_index=args.ignore_index, img_box=img_box, )
-            crme_loss = get_seg_mygo_loss(outputs_seg_masks, cls_wsddn.detach(), cls_label.detach(), refined_pro_label.detach(), topk=args.wsddn_topk,mask_circle = True if n_iter <= args.seg_iter else False,fin_size=refined_pseudo_label.shape[-2:])
-        else:
-            crme_loss = get_seg_mygo_loss(outputs_seg_masks, cls_wsddn.detach(), cls_label.detach(), refined_pseudo_label.detach(), topk=args.wsddn_topk,mask_circle = True if n_iter <= args.seg_iter else False,fin_size=refined_pseudo_label.shape[-2:])
-        reg_loss = get_energy_loss(img=inputs, logit=segs, label=refined_pseudo_label, img_box=img_box, loss_layer=loss_layer)
-        if n_iter <= 8000:
-            loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn 
-        elif n_iter <= 12000:
-            loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn
-        elif n_iter <= 16000:
-            loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn + args.w_ptc * ptc_loss + 1.0 * crme_loss
-        else:
-            loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn + args.w_ptc * ptc_loss + 1.0 * crme_loss + args.w_seg * seg_loss + args.w_reg * reg_loss
-        # if n_iter <= 8000:
-        #     loss =   1.0 * cls_loss + 1.0 * cls_loss_aux  + w_cpe * cls_token_loss + args.w_ptc * ptc_loss + cls_loss_wsddn
-        # elif n_iter <= args.seg_iter:
-        #     loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + w_cpe * cls_token_loss + args.w_seg  * seg_loss+ args.w_ptc * ptc_loss + 2.0 * crme_loss + cls_loss_wsddn
-        # else:
-        #     # crme_loss = get_seg_mygo_loss(outputs_seg_masks, cls_wsddn.detach(), cls_label.detach(), refined_pseudo_label.detach(), topk=args.wsddn_topk,shape=refined_pseudo_label.shape[1:])
-        #     loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + w_cpe * cls_token_loss + args.w_seg  * seg_loss+ args.w_ptc * ptc_loss + 2.0 * crme_loss + cls_loss_wsddn
+            ptc_loss = get_masked_ptc_loss(fmap, aff_mask)
+
+            # crme_loss = get_seg_mygo_loss(outputs_seg_masks, cls_wsddn.detach(), cls_label.detach(), refined_pseudo_label.detach(), topk=args.wsddn_topk)
+
+            w_cpe = args.w_cpe
+
+            if n_iter < 60000 or True: # I channged here, for 72.3 need change to <
+                valid_pro, asd = cam_to_label(prototypes_cam.detach(), cls_label=cls_label, img_box=img_box, ignore_mid=True, bkg_thre=args.bkg_thre, high_thre=args.high_thre, low_thre=args.low_thre, ignore_index=args.ignore_index)
+                refined_pro_label = refine_cams_with_bkg_v2(par, inputs_denorm, cams=valid_pro, cls_labels=cls_label,  high_thre=0.9, low_thre=args.low_thre, ignore_index=args.ignore_index, img_box=img_box, )
+                crme_loss = get_seg_mygo_loss(outputs_seg_masks, cls_wsddn.detach(), cls_label.detach(), refined_pro_label.detach(), topk=args.wsddn_topk,mask_circle = True if n_iter <= args.seg_iter else False,fin_size=refined_pseudo_label.shape[-2:])
+            else:
+                crme_loss = get_seg_mygo_loss(outputs_seg_masks, cls_wsddn.detach(), cls_label.detach(), refined_pseudo_label.detach(), topk=args.wsddn_topk,mask_circle = True if n_iter <= args.seg_iter else False,fin_size=refined_pseudo_label.shape[-2:])
+            reg_loss = get_energy_loss(img=inputs, logit=segs, label=refined_pseudo_label, img_box=img_box, loss_layer=loss_layer)
+            if n_iter <= 8000:
+                loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn 
+            elif n_iter <= 12000:
+                loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn
+            elif n_iter <= 16000:
+                loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn + args.w_ptc * ptc_loss + 1.0 * crme_loss
+            else:
+                loss = 1.0 * cls_loss + 1.0 * cls_loss_aux  + args.w_cpe * cpe_loss + cls_loss_wsddn + args.w_ptc * ptc_loss + 1.0 * crme_loss + args.w_seg * seg_loss + args.w_reg * reg_loss
 
         cls_pred = (cls > 0).type(torch.int16)
         cls_score = evaluate.multilabel_score(cls_label.cpu().numpy()[0], cls_pred.cpu().numpy()[0])
@@ -358,24 +372,30 @@ def train(args=None):
             'cls_loss_aux': cls_loss_aux.item(),
             'seg_loss': seg_loss.item(),
             'cpe_loss': cpe_loss.item(),
-            'cls_score': cls_score.item(),
+            'cls_score': float(cls_score),
             'cls_loss_wsddn':cls_loss_wsddn.item(),
             'crme_loss': crme_loss.item() if isinstance(crme_loss,torch.Tensor) else crme_loss,
 
         })
-        # torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=0.1)
-        optim.zero_grad()
-        # scaler.scale(loss).backward()
-        # scaler.step(optim)
-        # scaler.update()
-        loss.backward()
-        optim.step()
+        scaled_loss = loss / args.grad_accum_steps
+        if args.amp:
+            scaler.scale(scaled_loss).backward()
+            if (n_iter + 1) % args.grad_accum_steps == 0:
+                scaler.step(optim)
+                scaler.update()
+                optim.zero_grad()
+        else:
+            scaled_loss.backward()
+            if (n_iter + 1) % args.grad_accum_steps == 0:
+                optim.step()
+                optim.zero_grad()
         # for name, param in model.named_parameters():
         #     if param.grad is None:
         #         print(f"Parameter {name} was not used in the computation.")
         if (n_iter + 1) % args.log_iters == 0:
 
-            delta, eta = cal_eta(time0, n_iter + 1, args.max_iters)
+            delta, eta = cal_eta(time0, time1 if time1 is not None else time0, n_iter + 1, args.max_iters, args.log_iters)
+            time1 = datetime.datetime.now().replace(microsecond=0)
             cur_lr = optim.param_groups[0]['lr']
 
             if args.local_rank == 0:
@@ -391,7 +411,7 @@ def train(args=None):
 
                 )
 
-        if args.save_ckpt and (n_iter + 1) % 5000 == 0:
+        if args.save_ckpt and ((n_iter + 1) % getattr(args, 'save_interval', 10000) == 0 or (n_iter + 1) == args.max_iters):
             ckpt_name = os.path.join(args.ckpt_dir, "model_iter_%d.pth" % (n_iter + 1))
             logging.info(f'saving {ckpt_name}')
             if args.local_rank == 0:

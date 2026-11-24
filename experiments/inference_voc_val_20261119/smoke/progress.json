@@ -1,0 +1,18 @@
+{
+  "stage": "complete",
+  "partial_validation": true,
+  "summary": {
+    "baseline": {
+      "raw": 79.41126185820157,
+      "crf": 78.97028275268406
+    },
+    "adaptive": {
+      "raw": 79.03054801166881,
+      "crf": 78.60622312476515
+    },
+    "delta_adaptive_minus_baseline_pp": {
+      "raw": -0.38071384653275686,
+      "crf": -0.36405962791890545
+    }
+  }
+}

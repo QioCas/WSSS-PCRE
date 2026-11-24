@@ -1,0 +1,78 @@
+2026-11-21 18:00:09,658 - train_coco.py - INFO: Pytorch version: 2.10.0+cu128
+2026-11-21 18:00:09,684 - train_coco.py - INFO: GPU type: NVIDIA GeForce RTX 5090
+2026-11-21 18:00:09,684 - train_coco.py - INFO: 
+args: Namespace(w_ptc=0.2, w_seg=0.12, w_reg=0.05, w_cpe=0.5, wsddn_topk=300, mil=True, ot_loss=False, ot_n=4, logit_scale=4, max_iters=5, log_iters=1, eval_iters=5000, warmup_iters=1500, update_prototype=600, cam2mask=10000, backbone='vit_base_patch16_224', high_thre=0.7, low_thre=0.25, bkg_thre=0.5, tag_threshold=0.2, cam_scales=[1.0, 0.5, 0.75, 1.5], ignore_index=255, pooling='gmp', decoder='LargeFOV', ema=True, mask_exp=True, cls_sc_t=0.0, proto_m=0.9, temp_lil=0.08, base_temp_lil=0.08, temp_lig=0.1, base_temp_lig=0.1, momentum=0.999, ctc_dim=768, moco_queue=4608, aux_layer=-3, pretrained=True, save_ckpt=True, seed=0, weight='', work_dir='experiments/coco_baseline/2026-11/train_coco_21-18-00-09', log_tag='train_coco', img_folder='dataset/COCO2014/coco', label_folder='dataset/COCO2014/coco/SegmentationClass', list_folder='datasets/coco', num_classes=81, crop_size=448, local_crop_size=64, ncrops=12, train_set='train', val_set='val_part', spg=2, grad_accum_steps=4, amp=False, mask_decoder_layers=1, scales=(0.5, 2), optimizer='PolyWarmupAdamW', lr=6e-05, warmup_lr=7e-07, wt_decay=0.01, betas=(0.9, 0.999), power=0.9, local_rank=0, num_workers=10, backend='nccl', debug=False, lamda=100, seg_t=0.3, seg_iter=32000, resume=None, ckpt_dir='experiments/coco_baseline/2026-11/train_coco_21-18-00-09/checkpoints', pred_dir='experiments/coco_baseline/2026-11/train_coco_21-18-00-09/predictions')
+2026-11-21 18:00:09,821 - train_coco.py - INFO: Total gpus: 1, samples per gpu: 2...
+2026-11-21 18:00:11,798 - train_coco.py - INFO: 
+Optimizer: 
+PolyWarmupAdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 6e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 6e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 2
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0006000000000000001
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 3
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0006000000000000001
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 4
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 6e-05
+    maximize: False
+    weight_decay: 0.01
+)
+2026-11-21 18:00:14,069 - train_coco.py - INFO: Iter: 1; Elapsed: 0:00:05; ETA: 0:00:19; LR: 6.000e-05; cls_loss: 0.8926, cls_loss_aux: 19.5193, ptc_loss: 0.3597, seg_loss: 4.3120, cpe_loss: 0.5764, crme_loss: 0.0000, cls_loss_wsddn: 0.2344, 
+2026-11-21 18:00:15,016 - train_coco.py - INFO: Iter: 2; Elapsed: 0:00:06; ETA: 0:00:02; LR: 6.000e-05; cls_loss: 0.8932, cls_loss_aux: 19.6980, ptc_loss: 0.4669, seg_loss: 4.3395, cpe_loss: 0.4667, crme_loss: 0.0000, cls_loss_wsddn: 0.1510, 
+2026-11-21 18:00:15,547 - train_coco.py - INFO: Iter: 3; Elapsed: 0:00:06; ETA: 0:00:00; LR: 6.000e-05; cls_loss: 0.8859, cls_loss_aux: 19.9065, ptc_loss: 0.4508, seg_loss: 4.3217, cpe_loss: 0.5190, crme_loss: 0.0000, cls_loss_wsddn: 0.1115, 
+2026-11-21 18:00:16,304 - train_coco.py - INFO: Iter: 4; Elapsed: 0:00:07; ETA: 0:00:00; LR: 4.200e-11; cls_loss: 0.9069, cls_loss_aux: 18.2136, ptc_loss: 0.3961, seg_loss: 4.3679, cpe_loss: 0.5286, crme_loss: 0.0000, cls_loss_wsddn: 0.1394, 
+2026-11-21 18:00:17,110 - train_coco.py - INFO: Iter: 5; Elapsed: 0:00:08; ETA: 0:00:00; LR: 4.200e-11; cls_loss: 0.8601, cls_loss_aux: 20.1051, ptc_loss: 0.4401, seg_loss: 4.3198, cpe_loss: 0.3854, crme_loss: 0.0000, cls_loss_wsddn: 0.2077, 

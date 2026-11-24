@@ -1,0 +1,14 @@
+{
+  "stage": "complete",
+  "completed_steps": 3000,
+  "partial_training": false,
+  "frozen_weights_unchanged": true,
+  "trainable_parameters": 580692,
+  "backbone_frozen": true,
+  "checkpoints": {
+    "student": "model_refined_step_00003000_student.pth",
+    "ema": "model_refined_step_00003000_ema.pth"
+  },
+  "training_pixel_gt_read": false,
+  "seconds": 502.0756448620232
+}

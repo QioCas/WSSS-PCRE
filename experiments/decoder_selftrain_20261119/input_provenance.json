@@ -1,0 +1,8 @@
+{
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "train_images": 10582,
+  "val_images": 1449,
+  "split_overlap": 0,
+  "teacher": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/baseline/checkpoints/model_iter_00020000.pth",
+  "teacher_bytes": 662537733
+}

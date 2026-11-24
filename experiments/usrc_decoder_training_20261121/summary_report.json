@@ -1,0 +1,11 @@
+{
+  "timestamp": "2026-11-21 15:06:10",
+  "baseline_raw_miou": 73.7894880339437,
+  "baseline_crf_miou": 74.22428373329858,
+  "fbsd_raw_miou": null,
+  "fbsd_crf_miou": null,
+  "usrc_ema_raw_miou": 73.7288736761039,
+  "usrc_ema_crf_miou": 74.17033910069918,
+  "usrc_stu_raw_miou": 73.70973600160963,
+  "usrc_stu_crf_miou": 74.1536782737153
+}

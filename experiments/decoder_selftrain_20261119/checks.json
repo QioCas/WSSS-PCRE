@@ -1,0 +1,14 @@
+{
+  "unit_tests_passed": 21,
+  "smoke_cache_passed": true,
+  "smoke_training_passed": true,
+  "smoke_inference_passed": true,
+  "frozen_weights_unchanged": true,
+  "trainable_decoder_parameters": 580692,
+  "segmentation_forward_parity": {
+    "passed": true,
+    "max_abs_error": 0.0,
+    "rtol": 1e-05,
+    "atol": 1e-05
+  }
+}

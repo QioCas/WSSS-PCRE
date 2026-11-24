@@ -1,0 +1,9 @@
+{
+  "train_images": 10582,
+  "val_images": 1449,
+  "split_overlap": 0,
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "sam_sha256": "ec2df62732614e57411cdcf32a23ffdf28910380d03139ee0f4fcbe91eb8c912",
+  "training_pixel_gt_read": false,
+  "sam_external_mask_pretraining": true
+}

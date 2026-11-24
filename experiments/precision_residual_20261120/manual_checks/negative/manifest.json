@@ -1,0 +1,19 @@
+{
+  "names": [
+    "2007_000032",
+    "2007_000039",
+    "2007_000063",
+    "2007_000068"
+  ],
+  "kind": "negative",
+  "partial_cache": true,
+  "training_pixel_gt_read": false,
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "tags_sha256": "974731980539a6d6ed516c5dccc745bf9930f0915ac0d0802cd1c6b7627479e1",
+  "source_manifest_sha256": "d686015de1479cfaea966d36a96d84a2662d797beb6979d8a41d249038cebde3",
+  "bank_sha256": "727da9d205fe573bd988d8a92975233759cc54099fc00b10a3c42ced00d33ffa",
+  "external_prior": false,
+  "negative_margin": 0.08,
+  "gmm_lower_quantile": 0.02,
+  "clip_margin": 0.05
+}

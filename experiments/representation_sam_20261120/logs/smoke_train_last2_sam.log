@@ -1,0 +1,38 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{"step": 1, "total": 4, "ce": 0.07959683239459991, "consistency": 0.11161467432975769, "loss": 0.10750050097703934, "labeled_fraction": 0.8300033807754517, "consistency_fraction": 0.8621863126754761, "head_lr": 2.0000000000000002e-07, "backbone_lr": 2e-08, "gradient_norms": [0.8552671074867249, 0.2894817590713501], "seconds": 0.3385682870284654, "peak_gpu_gib": 2.407625675201416}
+{"step": 2, "total": 4, "ce": 0.4948384761810303, "consistency": 0.45677468180656433, "loss": 0.609032154083252, "labeled_fraction": 0.8803362250328064, "consistency_fraction": 0.8837666511535645, "head_lr": 3.4142135623730956e-07, "backbone_lr": 3.414213562373095e-08, "gradient_norms": [12.788924217224121, 6.238621234893799], "seconds": 0.46294767601648346, "peak_gpu_gib": 2.584007740020752}
+{"step": 3, "total": 4, "ce": 0.07832539081573486, "consistency": 0.2002098262310028, "loss": 0.12837785482406616, "labeled_fraction": 0.8799563050270081, "consistency_fraction": 0.9145869016647339, "head_lr": 3.0000000000000004e-07, "backbone_lr": 3e-08, "gradient_norms": [1.1975058317184448, 0.5994912981987], "seconds": 0.5823016370413825, "peak_gpu_gib": 2.5842366218566895}
+{"step": 4, "total": 4, "ce": 0.10365881025791168, "consistency": 0.20624276995658875, "loss": 0.15521949529647827, "labeled_fraction": 0.9088035225868225, "consistency_fraction": 0.9225363731384277, "head_lr": 1.1715728752538102e-07, "backbone_lr": 1.17157287525381e-08, "gradient_norms": [3.0935733318328857, 1.4526311159133911], "seconds": 0.7069311730447225, "peak_gpu_gib": 2.5846333503723145}
+{
+  "completed_steps": 4,
+  "partial_training": true,
+  "frozen_weights_unchanged": true,
+  "teacher_unchanged": true,
+  "train_last_blocks": 2,
+  "trainable_parameters": 14757972,
+  "checkpoints": {
+    "ema": "model_refined_step_00000004_ema.pth"
+  },
+  "training_pixel_gt_read": false,
+  "external_segmentation_prior": true,
+  "seconds": 2.0218384180334397
+}

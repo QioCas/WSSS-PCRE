@@ -1,0 +1,12 @@
+{
+  "observed_crf_delta_pp": 0.09675666372450564,
+  "paired_image_bootstrap_95_percentile_ci_pp": [
+    -0.3287236414023553,
+    0.5455073193430897
+  ],
+  "resamples": 1000,
+  "seed": 0,
+  "images": 1449,
+  "all_masks_match_saved_metrics": true,
+  "qualification": "Fixed-model image-resampling uncertainty on development val only; excludes training-seed variation and independent-test uncertainty."
+}

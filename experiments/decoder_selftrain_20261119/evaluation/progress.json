@@ -1,0 +1,8 @@
+{
+  "stage": "crf_teacher_ema",
+  "processed": 1449,
+  "total": 1449,
+  "crf_completed": 1442,
+  "seconds": 561.1219737050124,
+  "peak_gpu_allocated_gib": 2.0132036209106445
+}

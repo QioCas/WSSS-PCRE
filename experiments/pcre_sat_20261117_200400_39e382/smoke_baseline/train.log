@@ -1,0 +1,139 @@
+2026-11-18 10:45:06,431 - train_voc_adaptive.py - INFO: Pytorch version: 2.10.0+cu128
+2026-11-18 10:45:06,462 - train_voc_adaptive.py - INFO: GPU type: NVIDIA GeForce RTX 5090
+2026-11-18 10:45:06,462 - train_voc_adaptive.py - INFO: 
+args: Namespace(w_ptc=0.3, w_seg=0.12, w_reg=0.05, wsddn=2.0, bin_t=0.7, w_cpe=0.02, w_seg2=2.0, wsddn_topk=300, ot_loss=False, seg_aux=False, reg_aux=False, ot_n=4, cls_sc_t=0.0, seg_warmup=0, ptc_eps=1, max_iters=4, log_iters=1, eval_iters=4, warmup_iters=1500, update_prototype=0, cam2mask=10000, backbone='vit_base_patch16_224', high_thre=0.7, low_thre=0.25, pro_high_thre=0.7, pro_low_thre=0.25, bkg_thre=0.5, tag_threshold=0.2, ignore_index=255, pooling='gmp', decoder='ASSP', proto_m=0.99, momentum=0.999, aux_layer=-3, pretrained=True, save_ckpt=True, color_aug=True, seed=0, weight='', work_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/smoke_baseline', log_tag='smoke', wandb_name='pcre_sat_20261117_200400_39e382_baseline', data_folder='./dataset/VOC2012', list_folder='datasets/voc', num_classes=21, crop_size=448, local_crop_size=64, cnt_t=5, ncrops=12, train_set='train_aug', val_set='val', spg=4, scales=(0.5, 2), aux_aug=True, optimizer='PolyWarmupAdamW', lr=3e-05, warmup_lr=1e-06, wt_decay=0.01, betas=(0.9, 0.999), power=0.9, local_rank=0, num_workers=2, backend='nccl', debug=False, lamda=100, seg_t=0.3, grad_t='none', seg_iter=2, cam_scales=[1.0, 0.5, 0.75, 1.5], prog_high_t=0.5, prog_low_t=0.3, ema=True, pro=True, pre_mask=True, mask_exp=True, ctmd=True, mygo_sup=False, mask_stop=True, pro_fuse=False, wsddn_loss='sum', mil=True, clstoken_loss='cos', experiment_mode='baseline', adaptive_momentum=0.99, adaptive_min=0.55, adaptive_max=0.85, adaptive_warmup=0, adaptive_ramp=0, checkpoint_iters=4, resume='', run_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/smoke_baseline', allow_low_disk=False, val_limit=2, ckpt_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/smoke_baseline/checkpoints', pred_dir='/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/smoke_baseline/predictions')
+2026-11-18 10:45:06,668 - train_voc_adaptive.py - INFO: Total gpus: 1, samples per gpu: 4...
+2026-11-18 10:45:08,814 - train_voc_adaptive.py - INFO: 
+Optimizer: 
+PolyWarmupAdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 2
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.00030000000000000003
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 3
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.00030000000000000003
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 4
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 3e-05
+    maximize: False
+    weight_decay: 0.01
+)
+2026-11-18 10:45:14,801 - train_voc_adaptive.py - INFO: Iter: 1; Elapsed: 0:00:08; ETA: 0:00:23; LR: 3.000e-11; cls_loss: 0.8799, cls_loss_aux: 19.4203, ptc_loss: 0.3741, seg_loss: 3.8849, cpe_loss: 0.3648, crme_loss: 0.3813, cls_loss_wsddn: 0.3133
+2026-11-18 10:45:14,815 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.7000 max=0.7000
+2026-11-18 10:45:18,685 - train_voc_adaptive.py - INFO: Iter: 2; Elapsed: 0:00:12; ETA: 0:00:07; LR: 2.003e-08; cls_loss: 1.0077, cls_loss_aux: 18.2545, ptc_loss: 0.4112, seg_loss: 3.5357, cpe_loss: 0.5606, crme_loss: 1.3030, cls_loss_wsddn: 0.4023
+2026-11-18 10:45:18,701 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.7000 max=0.7000
+2026-11-18 10:45:24,254 - train_voc_adaptive.py - INFO: Iter: 3; Elapsed: 0:00:18; ETA: 0:00:05; LR: 4.003e-08; cls_loss: 0.8847, cls_loss_aux: 16.8344, ptc_loss: 0.4034, seg_loss: 2.9966, cpe_loss: 0.6252, crme_loss: 1.2763, cls_loss_wsddn: 0.2984
+2026-11-18 10:45:24,270 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.7000 max=0.7000
+2026-11-18 10:45:29,559 - train_voc_adaptive.py - INFO: Iter: 4; Elapsed: 0:00:23; ETA: 0:00:00; LR: 6.003e-08; cls_loss: 0.9877, cls_loss_aux: 16.3389, ptc_loss: 0.4029, seg_loss: 3.4763, cpe_loss: 0.5420, crme_loss: 0.7930, cls_loss_wsddn: 0.3422
+2026-11-18 10:45:29,576 - train_voc_adaptive.py - INFO: Adaptive thresholds: min=0.7000 max=0.7000
+2026-11-18 10:45:30,004 - train_voc_adaptive.py - INFO: Validating iteration 4...
+2026-11-18 10:45:31,870 - validation_adaptive.py - INFO: val cls score: 0.153846
+2026-11-18 10:45:31,871 - validation_adaptive.py - INFO: 
++------------------+--------+--------+--------+----------+
+|      Class       |  CAM0  |  CAM1  |  CAM2  | Seg_Pred |
++==================+========+========+========+==========+
+| _background_     | 64.582 | 57.835 | 35.916 | 0.064    |
++------------------+--------+--------+--------+----------+
+| aeroplane        | 0      | 13.576 | 4.001  | 0.387    |
++------------------+--------+--------+--------+----------+
+| bicycle          | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| bird             | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| boat             | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| bottle           | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| bus              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| car              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| cat              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| chair            | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| cow              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| diningtable      | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| dog              | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| horse            | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| motorbike        | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| person           | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| pottedplant      | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| sheep            | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| sofa             | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| train            | 30.578 | 11.214 | 0.010  | 0.081    |
++------------------+--------+--------+--------+----------+
+| tvmonitor        | nan    | nan    | nan    | 0        |
++------------------+--------+--------+--------+----------+
+| m-Precision      | nan    | nan    | nan    | 5.259    |
++------------------+--------+--------+--------+----------+
+| m-Recall         | nan    | nan    | nan    | nan      |
++------------------+--------+--------+--------+----------+
+| m-ConfutionRatio | nan    | nan    | nan    | inf      |
++------------------+--------+--------+--------+----------+
+| m-IoU            | nan    | nan    | nan    | 0.025    |
++------------------+--------+--------+--------+----------+
+2026-11-18 10:45:31,872 - train_voc_adaptive.py - INFO: Segmentation mIoU=0.1772% best=0.1772%
+2026-11-18 10:45:32,490 - train_voc_adaptive.py - INFO: Saved full training checkpoint: /home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/pcre_sat_20261117_200400_39e382/smoke_baseline/checkpoints/training_iter_00000004.pth

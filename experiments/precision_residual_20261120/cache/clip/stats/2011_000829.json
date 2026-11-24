@@ -1,0 +1,32 @@
+{
+  "regions": 4,
+  "vetoed_regions": 1,
+  "pixels": 199000,
+  "original_foreground": 91218,
+  "removed_pixels": 58048,
+  "foreground": 33170,
+  "ignore": 96312,
+  "removed_per_class": [
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    58048,
+    0,
+    0,
+    0,
+    0,
+    0
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "valid_pixels": 244886857,
+  "baseline_pixel_accuracy": 0.9305802025953561,
+  "adaptive_pixel_accuracy": 0.9294924063646257,
+  "agreement_fraction": 0.9707141204397098,
+  "agreement_accuracy": 0.9440681415608674,
+  "baseline_only_correct_pixels": 3467580,
+  "adaptive_only_correct_pixels": 3201193,
+  "both_wrong_pixels": 13798803,
+  "note": "Pixel-wise diagnostic; does not establish ensemble mIoU or causal explanation."
+}

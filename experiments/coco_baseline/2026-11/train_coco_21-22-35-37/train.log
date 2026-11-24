@@ -1,0 +1,136 @@
+2026-11-21 22:35:37,604 - train_coco.py - INFO: Pytorch version: 2.10.0+cu128
+2026-11-21 22:35:37,626 - train_coco.py - INFO: GPU type: NVIDIA GeForce RTX 5090
+2026-11-21 22:35:37,626 - train_coco.py - INFO: 
+args: Namespace(w_ptc=0.2, w_seg=0.12, w_reg=0.05, w_cpe=0.5, wsddn_topk=300, mil=True, ot_loss=False, ot_n=4, logit_scale=4, max_iters=80000, log_iters=200, eval_iters=5000, warmup_iters=1500, update_prototype=600, cam2mask=10000, backbone='vit_base_patch16_224', high_thre=0.7, low_thre=0.25, bkg_thre=0.5, tag_threshold=0.2, cam_scales=[1.0, 0.5, 0.75, 1.5], ignore_index=255, pooling='gmp', decoder='LargeFOV', ema=True, mask_exp=True, cls_sc_t=0.0, proto_m=0.9, temp_lil=0.08, base_temp_lil=0.08, temp_lig=0.1, base_temp_lig=0.1, momentum=0.999, ctc_dim=768, moco_queue=4608, aux_layer=-3, pretrained=True, save_ckpt=True, save_interval=10000, seed=0, weight='', work_dir='experiments/coco_baseline/2026-11/train_coco_21-22-35-37', log_tag='train_coco', img_folder='dataset/COCO2014/coco', label_folder='dataset/COCO2014/coco/SegmentationClass', list_folder='datasets/coco', num_classes=81, crop_size=448, local_crop_size=64, ncrops=12, train_set='train', val_set='val_part', spg=2, grad_accum_steps=4, amp=False, mask_decoder_layers=1, scales=(0.5, 2), optimizer='PolyWarmupAdamW', lr=6e-05, warmup_lr=7e-07, wt_decay=0.01, betas=(0.9, 0.999), power=0.9, local_rank=0, num_workers=10, backend='nccl', debug=False, lamda=100, seg_t=0.3, seg_iter=32000, resume='experiments/coco_baseline/2026-11/train_coco_21-18-20-09/checkpoints/model_iter_20000.pth', ckpt_dir='experiments/coco_baseline/2026-11/train_coco_21-22-35-37/checkpoints', pred_dir='experiments/coco_baseline/2026-11/train_coco_21-22-35-37/predictions')
+2026-11-21 22:35:37,702 - train_coco.py - INFO: Total gpus: 1, samples per gpu: 2...
+2026-11-21 22:35:39,380 - train_coco.py - INFO: Resuming training from experiments/coco_baseline/2026-11/train_coco_21-18-20-09/checkpoints/model_iter_20000.pth...
+2026-11-21 22:35:40,222 - train_coco.py - INFO: Resumed from iteration 20000
+2026-11-21 22:35:40,367 - train_coco.py - INFO: 
+Optimizer: 
+PolyWarmupAdamW (
+Parameter Group 0
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 5.661488254394143e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 1
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 5.661488254394143e-05
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 2
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0005661488254394143
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 3
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 0.0005661488254394143
+    maximize: False
+    weight_decay: 0.01
+
+Parameter Group 4
+    amsgrad: False
+    betas: (0.9, 0.999)
+    capturable: False
+    decoupled_weight_decay: True
+    differentiable: False
+    eps: 1e-08
+    foreach: None
+    fused: None
+    lr: 5.661488254394143e-05
+    maximize: False
+    weight_decay: 0.01
+)
+2026-11-21 22:38:19,708 - train_coco.py - INFO: Iter: 20200; Elapsed: 0:02:42; ETA: 13:27:17; LR: 4.628e-05; cls_loss: 0.0614, cls_loss_aux: 0.0725, ptc_loss: 0.1846, seg_loss: 0.4479, cpe_loss: 0.2698, crme_loss: 0.0000, cls_loss_wsddn: 0.0601, 
+2026-11-21 22:40:48,225 - train_coco.py - INFO: Iter: 20400; Elapsed: 0:05:11; ETA: 12:20:01; LR: 4.624e-05; cls_loss: 0.0568, cls_loss_aux: 0.0668, ptc_loss: 0.1979, seg_loss: 0.4489, cpe_loss: 0.2779, crme_loss: 0.0000, cls_loss_wsddn: 0.0572, 
+2026-11-21 22:43:08,694 - train_coco.py - INFO: Iter: 20600; Elapsed: 0:07:31; ETA: 11:32:59; LR: 4.621e-05; cls_loss: 0.0543, cls_loss_aux: 0.0632, ptc_loss: 0.1921, seg_loss: 0.4430, cpe_loss: 0.2664, crme_loss: 0.0000, cls_loss_wsddn: 0.0536, 
+2026-11-21 22:45:31,223 - train_coco.py - INFO: Iter: 20800; Elapsed: 0:09:54; ETA: 11:45:27; LR: 4.618e-05; cls_loss: 0.0649, cls_loss_aux: 0.0756, ptc_loss: 0.1890, seg_loss: 0.4701, cpe_loss: 0.2901, crme_loss: 0.0000, cls_loss_wsddn: 0.0648, 
+2026-11-21 22:47:52,522 - train_coco.py - INFO: Iter: 21000; Elapsed: 0:12:15; ETA: 11:33:14; LR: 4.614e-05; cls_loss: 0.0644, cls_loss_aux: 0.0761, ptc_loss: 0.1817, seg_loss: 0.4687, cpe_loss: 0.2718, crme_loss: 0.1408, cls_loss_wsddn: 0.0646, 
+2026-11-21 22:50:10,654 - train_coco.py - INFO: Iter: 21200; Elapsed: 0:14:33; ETA: 11:16:11; LR: 4.611e-05; cls_loss: 0.0600, cls_loss_aux: 0.0692, ptc_loss: 0.1961, seg_loss: 0.4513, cpe_loss: 0.2907, crme_loss: 0.0000, cls_loss_wsddn: 0.0606, 
+2026-11-21 22:52:43,113 - train_coco.py - INFO: Iter: 21400; Elapsed: 0:17:06; ETA: 12:27:08; LR: 4.607e-05; cls_loss: 0.0640, cls_loss_aux: 0.0734, ptc_loss: 0.1901, seg_loss: 0.4339, cpe_loss: 0.2690, crme_loss: 0.0000, cls_loss_wsddn: 0.0644, 
+2026-11-21 22:55:03,771 - train_coco.py - INFO: Iter: 21600; Elapsed: 0:19:26; ETA: 11:21:19; LR: 4.604e-05; cls_loss: 0.0618, cls_loss_aux: 0.0718, ptc_loss: 0.1766, seg_loss: 0.4061, cpe_loss: 0.2625, crme_loss: 0.0000, cls_loss_wsddn: 0.0618, 
+2026-11-21 22:57:25,944 - train_coco.py - INFO: Iter: 21800; Elapsed: 0:21:48; ETA: 11:28:41; LR: 4.600e-05; cls_loss: 0.0578, cls_loss_aux: 0.0654, ptc_loss: 0.1881, seg_loss: 0.4565, cpe_loss: 0.2725, crme_loss: 0.0031, cls_loss_wsddn: 0.0569, 
+2026-11-21 22:59:45,620 - train_coco.py - INFO: Iter: 22000; Elapsed: 0:24:08; ETA: 11:16:39; LR: 4.597e-05; cls_loss: 0.0519, cls_loss_aux: 0.0598, ptc_loss: 0.1779, seg_loss: 0.4134, cpe_loss: 0.2471, crme_loss: 0.0000, cls_loss_wsddn: 0.0515, 
+2026-11-21 23:02:08,374 - train_coco.py - INFO: Iter: 22200; Elapsed: 0:26:31; ETA: 11:28:46; LR: 4.593e-05; cls_loss: 0.0577, cls_loss_aux: 0.0684, ptc_loss: 0.1932, seg_loss: 0.4266, cpe_loss: 0.2700, crme_loss: 0.0000, cls_loss_wsddn: 0.0577, 
+2026-11-21 23:04:29,532 - train_coco.py - INFO: Iter: 22400; Elapsed: 0:28:52; ETA: 11:16:47; LR: 4.590e-05; cls_loss: 0.0623, cls_loss_aux: 0.0720, ptc_loss: 0.1710, seg_loss: 0.4547, cpe_loss: 0.2591, crme_loss: 0.0002, cls_loss_wsddn: 0.0622, 
+2026-11-21 23:06:58,943 - train_coco.py - INFO: Iter: 22600; Elapsed: 0:31:21; ETA: 11:52:42; LR: 4.586e-05; cls_loss: 0.0597, cls_loss_aux: 0.0697, ptc_loss: 0.1916, seg_loss: 0.4375, cpe_loss: 0.2656, crme_loss: 0.0000, cls_loss_wsddn: 0.0597, 
+2026-11-21 23:09:28,940 - train_coco.py - INFO: Iter: 22800; Elapsed: 0:33:51; ETA: 11:54:59; LR: 4.583e-05; cls_loss: 0.0587, cls_loss_aux: 0.0678, ptc_loss: 0.1904, seg_loss: 0.4387, cpe_loss: 0.2690, crme_loss: 0.0000, cls_loss_wsddn: 0.0574, 
+2026-11-21 23:11:50,984 - train_coco.py - INFO: Iter: 23000; Elapsed: 0:36:13; ETA: 11:14:29; LR: 4.579e-05; cls_loss: 0.0635, cls_loss_aux: 0.0738, ptc_loss: 0.1994, seg_loss: 0.4895, cpe_loss: 0.2902, crme_loss: 0.0000, cls_loss_wsddn: 0.0624, 
+2026-11-21 23:14:14,021 - train_coco.py - INFO: Iter: 23200; Elapsed: 0:38:37; ETA: 11:21:35; LR: 4.576e-05; cls_loss: 0.0589, cls_loss_aux: 0.0665, ptc_loss: 0.1714, seg_loss: 0.4670, cpe_loss: 0.2471, crme_loss: 0.0000, cls_loss_wsddn: 0.0579, 
+2026-11-21 23:16:36,087 - train_coco.py - INFO: Iter: 23400; Elapsed: 0:40:59; ETA: 11:09:45; LR: 4.572e-05; cls_loss: 0.0631, cls_loss_aux: 0.0699, ptc_loss: 0.1657, seg_loss: 0.5197, cpe_loss: 0.2449, crme_loss: 0.0000, cls_loss_wsddn: 0.0614, 
+2026-11-21 23:19:00,457 - train_coco.py - INFO: Iter: 23600; Elapsed: 0:43:23; ETA: 11:16:47; LR: 4.569e-05; cls_loss: 0.0620, cls_loss_aux: 0.0718, ptc_loss: 0.1769, seg_loss: 0.4462, cpe_loss: 0.2612, crme_loss: 0.0000, cls_loss_wsddn: 0.0628, 
+2026-11-21 23:21:25,771 - train_coco.py - INFO: Iter: 23800; Elapsed: 0:45:48; ETA: 11:19:04; LR: 4.565e-05; cls_loss: 0.0592, cls_loss_aux: 0.0678, ptc_loss: 0.1592, seg_loss: 0.4314, cpe_loss: 0.2503, crme_loss: 0.0006, cls_loss_wsddn: 0.0590, 
+2026-11-21 23:24:00,633 - train_coco.py - INFO: Iter: 24000; Elapsed: 0:48:23; ETA: 12:03:19; LR: 4.562e-05; cls_loss: 0.0585, cls_loss_aux: 0.0694, ptc_loss: 0.1706, seg_loss: 0.5106, cpe_loss: 0.2511, crme_loss: 0.0000, cls_loss_wsddn: 0.0593, 
+2026-11-21 23:26:22,035 - train_coco.py - INFO: Iter: 24200; Elapsed: 0:50:45; ETA: 11:00:17; LR: 4.558e-05; cls_loss: 0.0597, cls_loss_aux: 0.0669, ptc_loss: 0.1920, seg_loss: 0.4537, cpe_loss: 0.2663, crme_loss: 0.0000, cls_loss_wsddn: 0.0582, 
+2026-11-21 23:28:44,623 - train_coco.py - INFO: Iter: 24400; Elapsed: 0:53:07; ETA: 10:57:55; LR: 4.555e-05; cls_loss: 0.0583, cls_loss_aux: 0.0658, ptc_loss: 0.1881, seg_loss: 0.4327, cpe_loss: 0.2738, crme_loss: 0.0004, cls_loss_wsddn: 0.0576, 
+2026-11-21 23:31:04,993 - train_coco.py - INFO: Iter: 24600; Elapsed: 0:55:27; ETA: 10:46:19; LR: 4.551e-05; cls_loss: 0.0533, cls_loss_aux: 0.0591, ptc_loss: 0.1578, seg_loss: 0.4239, cpe_loss: 0.2299, crme_loss: 0.0000, cls_loss_wsddn: 0.0534, 
+2026-11-21 23:33:27,829 - train_coco.py - INFO: Iter: 24800; Elapsed: 0:57:50; ETA: 10:57:47; LR: 4.548e-05; cls_loss: 0.0646, cls_loss_aux: 0.0724, ptc_loss: 0.1799, seg_loss: 0.4428, cpe_loss: 0.2586, crme_loss: 0.0021, cls_loss_wsddn: 0.0636, 
+2026-11-21 23:35:47,720 - train_coco.py - INFO: Iter: 25000; Elapsed: 1:00:10; ETA: 10:41:39; LR: 4.544e-05; cls_loss: 0.0568, cls_loss_aux: 0.0649, ptc_loss: 0.1737, seg_loss: 0.4365, cpe_loss: 0.2410, crme_loss: 0.0077, cls_loss_wsddn: 0.0568, 
+2026-11-21 23:38:15,329 - train_coco.py - INFO: Iter: 25200; Elapsed: 1:02:38; ETA: 11:15:51; LR: 4.541e-05; cls_loss: 0.0522, cls_loss_aux: 0.0604, ptc_loss: 0.1734, seg_loss: 0.3513, cpe_loss: 0.2442, crme_loss: 0.0000, cls_loss_wsddn: 0.0516, 
+2026-11-21 23:40:36,781 - train_coco.py - INFO: Iter: 25400; Elapsed: 1:04:59; ETA: 10:41:32; LR: 4.538e-05; cls_loss: 0.0634, cls_loss_aux: 0.0718, ptc_loss: 0.1935, seg_loss: 0.4158, cpe_loss: 0.2666, crme_loss: 0.0000, cls_loss_wsddn: 0.0629, 
+2026-11-21 23:42:56,363 - train_coco.py - INFO: Iter: 25600; Elapsed: 1:07:19; ETA: 10:34:39; LR: 4.534e-05; cls_loss: 0.0588, cls_loss_aux: 0.0680, ptc_loss: 0.1959, seg_loss: 0.4240, cpe_loss: 0.2696, crme_loss: 0.0000, cls_loss_wsddn: 0.0575, 
+2026-11-21 23:45:15,005 - train_coco.py - INFO: Iter: 25800; Elapsed: 1:09:38; ETA: 10:27:48; LR: 4.531e-05; cls_loss: 0.0607, cls_loss_aux: 0.0680, ptc_loss: 0.1824, seg_loss: 0.3969, cpe_loss: 0.2726, crme_loss: 0.0001, cls_loss_wsddn: 0.0605, 
+2026-11-21 23:47:33,449 - train_coco.py - INFO: Iter: 26000; Elapsed: 1:11:56; ETA: 10:20:59; LR: 4.527e-05; cls_loss: 0.0601, cls_loss_aux: 0.0672, ptc_loss: 0.1817, seg_loss: 0.4298, cpe_loss: 0.2523, crme_loss: 0.0000, cls_loss_wsddn: 0.0596, 
+2026-11-21 23:49:52,171 - train_coco.py - INFO: Iter: 26200; Elapsed: 1:14:15; ETA: 10:23:10; LR: 4.524e-05; cls_loss: 0.0565, cls_loss_aux: 0.0642, ptc_loss: 0.1790, seg_loss: 0.3901, cpe_loss: 0.2480, crme_loss: 0.0000, cls_loss_wsddn: 0.0562, 
+2026-11-21 23:52:21,590 - train_coco.py - INFO: Iter: 26400; Elapsed: 1:16:44; ETA: 11:05:31; LR: 4.520e-05; cls_loss: 0.0569, cls_loss_aux: 0.0623, ptc_loss: 0.1793, seg_loss: 0.3878, cpe_loss: 0.2588, crme_loss: 0.0023, cls_loss_wsddn: 0.0561, 
+2026-11-21 23:54:40,036 - train_coco.py - INFO: Iter: 26600; Elapsed: 1:19:03; ETA: 10:18:32; LR: 4.517e-05; cls_loss: 0.0540, cls_loss_aux: 0.0622, ptc_loss: 0.1834, seg_loss: 0.4034, cpe_loss: 0.2504, crme_loss: 0.0000, cls_loss_wsddn: 0.0548, 
+2026-11-21 23:56:58,542 - train_coco.py - INFO: Iter: 26800; Elapsed: 1:21:21; ETA: 10:11:47; LR: 4.513e-05; cls_loss: 0.0558, cls_loss_aux: 0.0604, ptc_loss: 0.1691, seg_loss: 0.3454, cpe_loss: 0.2371, crme_loss: 0.0000, cls_loss_wsddn: 0.0550, 
+2026-11-21 23:59:16,568 - train_coco.py - INFO: Iter: 27000; Elapsed: 1:23:39; ETA: 10:09:29; LR: 4.510e-05; cls_loss: 0.0589, cls_loss_aux: 0.0651, ptc_loss: 0.1676, seg_loss: 0.3225, cpe_loss: 0.2383, crme_loss: 0.0000, cls_loss_wsddn: 0.0593, 
+2026-11-22 00:01:35,233 - train_coco.py - INFO: Iter: 27200; Elapsed: 1:25:58; ETA: 10:11:35; LR: 4.506e-05; cls_loss: 0.0587, cls_loss_aux: 0.0654, ptc_loss: 0.1737, seg_loss: 0.3855, cpe_loss: 0.2532, crme_loss: 0.0000, cls_loss_wsddn: 0.0576, 
+2026-11-22 00:03:52,535 - train_coco.py - INFO: Iter: 27400; Elapsed: 1:28:15; ETA: 10:00:30; LR: 4.503e-05; cls_loss: 0.0536, cls_loss_aux: 0.0588, ptc_loss: 0.1632, seg_loss: 0.3389, cpe_loss: 0.2380, crme_loss: 0.0000, cls_loss_wsddn: 0.0533, 
+2026-11-22 00:06:15,320 - train_coco.py - INFO: Iter: 27600; Elapsed: 1:30:38; ETA: 10:24:25; LR: 4.499e-05; cls_loss: 0.0544, cls_loss_aux: 0.0601, ptc_loss: 0.1701, seg_loss: 0.3718, cpe_loss: 0.2475, crme_loss: 0.0000, cls_loss_wsddn: 0.0550, 
+2026-11-22 00:08:40,129 - train_coco.py - INFO: Iter: 27800; Elapsed: 1:33:03; ETA: 10:30:44; LR: 4.496e-05; cls_loss: 0.0527, cls_loss_aux: 0.0595, ptc_loss: 0.1658, seg_loss: 0.4157, cpe_loss: 0.2421, crme_loss: 0.0014, cls_loss_wsddn: 0.0531, 
+2026-11-22 00:10:59,608 - train_coco.py - INFO: Iter: 28000; Elapsed: 1:35:22; ETA: 10:02:19; LR: 4.492e-05; cls_loss: 0.0580, cls_loss_aux: 0.0654, ptc_loss: 0.1831, seg_loss: 0.3739, cpe_loss: 0.2667, crme_loss: 0.0000, cls_loss_wsddn: 0.0572, 
+2026-11-22 00:13:18,003 - train_coco.py - INFO: Iter: 28200; Elapsed: 1:37:41; ETA: 10:00:00; LR: 4.489e-05; cls_loss: 0.0592, cls_loss_aux: 0.0654, ptc_loss: 0.1858, seg_loss: 0.3889, cpe_loss: 0.2493, crme_loss: 0.0000, cls_loss_wsddn: 0.0598, 
+2026-11-22 00:15:38,305 - train_coco.py - INFO: Iter: 28400; Elapsed: 1:40:01; ETA: 10:01:59; LR: 4.485e-05; cls_loss: 0.0605, cls_loss_aux: 0.0682, ptc_loss: 0.1769, seg_loss: 0.4539, cpe_loss: 0.2541, crme_loss: 0.0000, cls_loss_wsddn: 0.0592, 
+2026-11-22 00:17:57,130 - train_coco.py - INFO: Iter: 28600; Elapsed: 1:42:20; ETA: 9:55:22; LR: 4.482e-05; cls_loss: 0.0584, cls_loss_aux: 0.0644, ptc_loss: 0.1702, seg_loss: 0.3889, cpe_loss: 0.2393, crme_loss: 0.0000, cls_loss_wsddn: 0.0580, 
+2026-11-22 00:20:17,066 - train_coco.py - INFO: Iter: 28800; Elapsed: 1:44:40; ETA: 9:57:19; LR: 4.478e-05; cls_loss: 0.0577, cls_loss_aux: 0.0647, ptc_loss: 0.1773, seg_loss: 0.4011, cpe_loss: 0.2588, crme_loss: 0.0002, cls_loss_wsddn: 0.0566, 
+2026-11-22 00:22:46,566 - train_coco.py - INFO: Iter: 29000; Elapsed: 1:47:09; ETA: 10:33:14; LR: 4.475e-05; cls_loss: 0.0565, cls_loss_aux: 0.0619, ptc_loss: 0.1843, seg_loss: 0.3476, cpe_loss: 0.2591, crme_loss: 0.0003, cls_loss_wsddn: 0.0568, 
+2026-11-22 00:25:05,465 - train_coco.py - INFO: Iter: 29200; Elapsed: 1:49:28; ETA: 9:48:25; LR: 4.471e-05; cls_loss: 0.0597, cls_loss_aux: 0.0639, ptc_loss: 0.1581, seg_loss: 0.3280, cpe_loss: 0.2308, crme_loss: 0.0004, cls_loss_wsddn: 0.0592, 
+2026-11-22 00:27:24,548 - train_coco.py - INFO: Iter: 29400; Elapsed: 1:51:47; ETA: 9:46:06; LR: 4.468e-05; cls_loss: 0.0589, cls_loss_aux: 0.0665, ptc_loss: 0.1913, seg_loss: 0.4159, cpe_loss: 0.2585, crme_loss: 0.0000, cls_loss_wsddn: 0.0582, 
+2026-11-22 00:29:44,516 - train_coco.py - INFO: Iter: 29600; Elapsed: 1:54:07; ETA: 9:47:59; LR: 4.464e-05; cls_loss: 0.0609, cls_loss_aux: 0.0665, ptc_loss: 0.1848, seg_loss: 0.4348, cpe_loss: 0.2633, crme_loss: 0.0095, cls_loss_wsddn: 0.0602, 
+2026-11-22 00:32:07,893 - train_coco.py - INFO: Iter: 29800; Elapsed: 1:56:30; ETA: 9:58:12; LR: 4.461e-05; cls_loss: 0.0579, cls_loss_aux: 0.0624, ptc_loss: 0.1651, seg_loss: 0.3433, cpe_loss: 0.2547, crme_loss: 0.0000, cls_loss_wsddn: 0.0578, 
+2026-11-22 00:34:29,406 - train_coco.py - INFO: Iter: 30000; Elapsed: 1:58:52; ETA: 9:51:39; LR: 4.457e-05; cls_loss: 0.0529, cls_loss_aux: 0.0574, ptc_loss: 0.1655, seg_loss: 0.3408, cpe_loss: 0.2447, crme_loss: 0.0000, cls_loss_wsddn: 0.0525, 
+2026-11-22 00:34:29,406 - train_coco.py - INFO: saving experiments/coco_baseline/2026-11/train_coco_21-22-35-37/checkpoints/model_iter_30000.pth
+2026-11-22 00:37:06,207 - train_coco.py - INFO: Iter: 30200; Elapsed: 2:01:29; ETA: 10:51:32; LR: 4.454e-05; cls_loss: 0.0545, cls_loss_aux: 0.0590, ptc_loss: 0.1885, seg_loss: 0.3860, cpe_loss: 0.2611, crme_loss: 0.0000, cls_loss_wsddn: 0.0556, 
+2026-11-22 00:39:27,107 - train_coco.py - INFO: Iter: 30400; Elapsed: 2:03:50; ETA: 9:42:47; LR: 4.450e-05; cls_loss: 0.0579, cls_loss_aux: 0.0621, ptc_loss: 0.1915, seg_loss: 0.3872, cpe_loss: 0.2502, crme_loss: 0.0100, cls_loss_wsddn: 0.0579, 
+2026-11-22 00:41:48,904 - train_coco.py - INFO: Iter: 30600; Elapsed: 2:06:11; ETA: 9:40:26; LR: 4.447e-05; cls_loss: 0.0589, cls_loss_aux: 0.0632, ptc_loss: 0.1723, seg_loss: 0.3600, cpe_loss: 0.2504, crme_loss: 0.0051, cls_loss_wsddn: 0.0586, 
+2026-11-22 00:44:10,628 - train_coco.py - INFO: Iter: 30800; Elapsed: 2:08:33; ETA: 9:42:11; LR: 4.443e-05; cls_loss: 0.0521, cls_loss_aux: 0.0579, ptc_loss: 0.1679, seg_loss: 0.3577, cpe_loss: 0.2466, crme_loss: 0.0000, cls_loss_wsddn: 0.0522, 
+2026-11-22 00:46:32,400 - train_coco.py - INFO: Iter: 31000; Elapsed: 2:10:55; ETA: 9:39:49; LR: 4.440e-05; cls_loss: 0.0544, cls_loss_aux: 0.0590, ptc_loss: 0.1733, seg_loss: 0.3716, cpe_loss: 0.2497, crme_loss: 0.0038, cls_loss_wsddn: 0.0549, 
+2026-11-22 00:48:52,930 - train_coco.py - INFO: Iter: 31200; Elapsed: 2:13:15; ETA: 9:29:19; LR: 4.436e-05; cls_loss: 0.0554, cls_loss_aux: 0.0601, ptc_loss: 0.1772, seg_loss: 0.3985, cpe_loss: 0.2571, crme_loss: 0.0000, cls_loss_wsddn: 0.0547, 
+2026-11-22 00:51:31,277 - train_coco.py - INFO: Iter: 31400; Elapsed: 2:15:54; ETA: 10:43:56; LR: 4.433e-05; cls_loss: 0.0575, cls_loss_aux: 0.0634, ptc_loss: 0.1842, seg_loss: 0.3618, cpe_loss: 0.2615, crme_loss: 0.0000, cls_loss_wsddn: 0.0579, 
+2026-11-22 00:53:52,576 - train_coco.py - INFO: Iter: 31600; Elapsed: 2:18:15; ETA: 9:28:41; LR: 4.429e-05; cls_loss: 0.0552, cls_loss_aux: 0.0591, ptc_loss: 0.1841, seg_loss: 0.3386, cpe_loss: 0.2536, crme_loss: 0.0000, cls_loss_wsddn: 0.0561, 
+2026-11-22 00:56:13,727 - train_coco.py - INFO: Iter: 31800; Elapsed: 2:20:36; ETA: 9:26:20; LR: 4.426e-05; cls_loss: 0.0520, cls_loss_aux: 0.0555, ptc_loss: 0.1681, seg_loss: 0.3657, cpe_loss: 0.2414, crme_loss: 0.0000, cls_loss_wsddn: 0.0526, 
+2026-11-22 00:58:34,272 - train_coco.py - INFO: Iter: 32000; Elapsed: 2:22:57; ETA: 9:23:59; LR: 4.422e-05; cls_loss: 0.0549, cls_loss_aux: 0.0586, ptc_loss: 0.1551, seg_loss: 0.3950, cpe_loss: 0.2247, crme_loss: 0.0005, cls_loss_wsddn: 0.0555, 

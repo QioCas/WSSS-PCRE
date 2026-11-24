@@ -64,23 +64,37 @@ def assign_csc_tags(images, roi_mask=None, crop_num=8, crop_size=96, threshold=0
     return crops, flags
 
 
-def cam_to_label(cam, cls_label, img_box=None, bkg_thre=None, high_thre=None, low_thre=None, ignore_mid=False, ignore_index=None, auxiliaryMasks=None,ret=False,seg_ts = 0.3):
+def cam_to_label(cam, cls_label, img_box=None, bkg_thre=None, high_thre=None, low_thre=None, ignore_mid=False, ignore_index=None, auxiliaryMasks=None,ret=False,seg_ts = 0.3, **kwargs):
+    if auxiliaryMasks is None:
+        auxiliaryMasks = kwargs.get('auxiliaryMask', None)
+    if 'seg_t' in kwargs:
+        seg_ts = kwargs['seg_t']
+
     b, c, h, w = cam.shape
     #pseudo_label = torch.zeros((b,h,w))
     cls_label_rep = cls_label.unsqueeze(-1).unsqueeze(-1).repeat([1,1,h,w])
     valid_cam = cls_label_rep * cam
     if auxiliaryMasks is not None:
+        if not isinstance(auxiliaryMasks, (list, tuple)):
+            auxiliaryMasks = [auxiliaryMasks]
+        if not isinstance(seg_ts, (list, tuple)):
+            seg_ts = [seg_ts] * len(auxiliaryMasks)
         # valid_cam = (0.7 * valid_cam + 0.3 * auxiliaryMask)
         for auxiliaryMask,seg_t in zip(auxiliaryMasks,seg_ts):
             if auxiliaryMask is None:
                 continue
             for idx,(b,cls_idx) in enumerate(cls_label.nonzero()):
+                if idx >= len(auxiliaryMask):
+                    break
                 if auxiliaryMask[idx] is not None:
                     if auxiliaryMask[idx].sum() <= 1e-5:
                         continue
                     mask = valid_cam[b, cls_idx] >= 0
                     if auxiliaryMask.shape[-2:] != valid_cam[b, cls_idx].shape:
-                        aux_mask = F.interpolate(auxiliaryMask[idx].unsqueeze(0),valid_cam[b, cls_idx].shape)
+                        aux_tensor = auxiliaryMask[idx].unsqueeze(0) if auxiliaryMask[idx].dim() == 2 else auxiliaryMask[idx]
+                        if aux_tensor.dim() == 3:
+                            aux_tensor = aux_tensor.unsqueeze(0)
+                        aux_mask = F.interpolate(aux_tensor, size=valid_cam[b, cls_idx].shape, mode='bilinear', align_corners=False)
                         if isinstance(seg_t, float):
                             valid_cam[b, cls_idx] = seg_t * aux_mask[0,0] + (1-seg_t) * valid_cam[b, cls_idx]
                         elif isinstance(seg_t, str):
@@ -90,13 +104,14 @@ def cam_to_label(cam, cls_label, img_box=None, bkg_thre=None, high_thre=None, lo
                                 valid_cam[b, cls_idx] = aux_mask[0, 0] * valid_cam[b, cls_idx]
 
                     else:
+                        aux_slice = auxiliaryMask[idx][0] if auxiliaryMask[idx].dim() == 3 else auxiliaryMask[idx]
                         if isinstance(seg_t, float):
-                            valid_cam[b, cls_idx][mask] = seg_t * auxiliaryMask[idx][0,mask] + (1-seg_t) * valid_cam[b, cls_idx][mask]
+                            valid_cam[b, cls_idx][mask] = seg_t * aux_slice[mask] + (1-seg_t) * valid_cam[b, cls_idx][mask]
                         elif isinstance(seg_t, str):
                             if seg_t == 'max':
-                                valid_cam[b, cls_idx][mask] = torch.max(auxiliaryMask[idx][0,mask] ,valid_cam[b, cls_idx][mask])
+                                valid_cam[b, cls_idx][mask] = torch.max(aux_slice[mask] ,valid_cam[b, cls_idx][mask])
                             elif seg_t == 'x':
-                                valid_cam[b, cls_idx][mask] =auxiliaryMask[idx][0,mask] * valid_cam[b, cls_idx][mask]
+                                valid_cam[b, cls_idx][mask] = aux_slice[mask] * valid_cam[b, cls_idx][mask]
 
 
 
@@ -180,16 +195,22 @@ def multi_scale_cam2_v2(model, inputs, scales,cls_label=None, args=None,mask_cir
         _cam = [F.relu(torch.max(i[:b,...], i[b:,...].flip(-1))) for i in _cam]
         cam_list = [[i] for i in _cam]
         if cls_label is not None:
-            _wsddn_seg = torch.stack(_wsddn_seg)
-            _wsddn_seg = F.interpolate(_wsddn_seg.unsqueeze(1), size=(h,w), mode='bilinear', align_corners=False)
-            _wsddn_seg = torch.max(_wsddn_seg[:m,...],_wsddn_seg[m:,...].flip(-1)) #TODO 可以用mean试试
-            wsddn_seg_list = [_wsddn_seg]
+            if m > 0 and len(_wsddn_seg) > 0:
+                _wsddn_seg = torch.stack(_wsddn_seg)
+                _wsddn_seg = F.interpolate(_wsddn_seg.unsqueeze(1), size=(h,w), mode='bilinear', align_corners=False)
+                _wsddn_seg = torch.max(_wsddn_seg[:m,...],_wsddn_seg[m:,...].flip(-1)) #TODO 可以用mean试试
+                wsddn_seg_list = [_wsddn_seg]
+            else:
+                wsddn_seg_list = [torch.zeros((max(m, 1), 1, h, w), device=inputs.device)]
         if grad_cam is not None:
-            _grad_cam = [torch.from_numpy(x).to(inputs.device) if isinstance(x, np.ndarray) else x for x in _grad_cam]
-            _grad_cam = torch.stack(_grad_cam)
-            _grad_cam = F.interpolate(_grad_cam, size=(h,w), mode='bilinear', align_corners=False)
-            _grad_cam = torch.max(_grad_cam[:m,...],_grad_cam[m:,...].flip(-1)) #TODO 可以用mean试试
-            grad_cam_list = [_grad_cam]
+            if len(_grad_cam) > 0:
+                _grad_cam = [torch.from_numpy(x).to(inputs.device) if isinstance(x, np.ndarray) else x for x in _grad_cam]
+                _grad_cam = torch.stack(_grad_cam)
+                _grad_cam = F.interpolate(_grad_cam, size=(h,w), mode='bilinear', align_corners=False)
+                _grad_cam = torch.max(_grad_cam[:m,...],_grad_cam[m:,...].flip(-1)) #TODO 可以用mean试试
+                grad_cam_list = [_grad_cam]
+            else:
+                grad_cam_list = [torch.zeros((max(m, 1), 1, h, w), device=inputs.device)]
 
 
 
@@ -206,19 +227,25 @@ def multi_scale_cam2_v2(model, inputs, scales,cls_label=None, args=None,mask_cir
                             _grad_cam.append(grad_cam(input_tensor=(penultimate_features[bb,None],_cam[0].shape[-2:],repeat_label[bb,None]),
                                                                                             targets=[OutputTarget(cls_id)],
                                                                                     target_size=None)[0].reshape(1,_cam[0].shape[-2],_cam[0].shape[-1]))
-                    _grad_cam = [torch.from_numpy(x).to(inputs.device) if isinstance(x, np.ndarray) else x for x in _grad_cam]
-                    _grad_cam = torch.stack(_grad_cam)
-                    _grad_cam = F.interpolate(_grad_cam, size=(h,w), mode='bilinear', align_corners=False)
-                    _grad_cam = torch.max(_grad_cam[:m,...],_grad_cam[m:,...].flip(-1)) #TODO 可以用mean试试
-                    grad_cam_list.append(_grad_cam)
+                    if len(_grad_cam) > 0:
+                        _grad_cam = [torch.from_numpy(x).to(inputs.device) if isinstance(x, np.ndarray) else x for x in _grad_cam]
+                        _grad_cam = torch.stack(_grad_cam)
+                        _grad_cam = F.interpolate(_grad_cam, size=(h,w), mode='bilinear', align_corners=False)
+                        _grad_cam = torch.max(_grad_cam[:m,...],_grad_cam[m:,...].flip(-1)) #TODO 可以用mean试试
+                        grad_cam_list.append(_grad_cam)
+                    else:
+                        grad_cam_list.append(torch.zeros((max(m, 1), 1, h, w), device=inputs.device))
 
                 _cam = [F.interpolate(i, size=(h,w), mode='bilinear', align_corners=False) for i in _cam]
                 _cam = [F.relu(torch.max(i[:b,...], i[b:,...].flip(-1))) for i in _cam]
                 if cls_label is not None:
-                    _wsddn_seg = torch.stack(_wsddn_seg)
-                    _wsddn_seg = torch.max(_wsddn_seg[:m,...],_wsddn_seg[m:,...].flip(-1)) #TODO 可以用mean试试
-                    _wsddn_seg = F.interpolate(_wsddn_seg.unsqueeze(1), size=(h,w), mode='bilinear', align_corners=False)
-                    wsddn_seg_list.append(_wsddn_seg)
+                    if m > 0 and len(_wsddn_seg) > 0:
+                        _wsddn_seg = torch.stack(_wsddn_seg)
+                        _wsddn_seg = torch.max(_wsddn_seg[:m,...],_wsddn_seg[m:,...].flip(-1)) #TODO 可以用mean试试
+                        _wsddn_seg = F.interpolate(_wsddn_seg.unsqueeze(1), size=(h,w), mode='bilinear', align_corners=False)
+                        wsddn_seg_list.append(_wsddn_seg)
+                    else:
+                        wsddn_seg_list.append(torch.zeros((max(m, 1), 1, h, w), device=inputs.device))
 
                 for cam_i in range(len(cam_list)):
                     cam_list[cam_i].append(_cam[cam_i])
@@ -230,15 +257,21 @@ def multi_scale_cam2_v2(model, inputs, scales,cls_label=None, args=None,mask_cir
         wsddn_seg = None
         grad_cam_seg = None
         if cls_label is not None:
-            wsddn_seg = torch.sum(torch.stack(wsddn_seg_list, dim=0), dim=0)
-            wsddn_seg = wsddn_seg + F.adaptive_max_pool2d(-wsddn_seg, (1, 1))
-            # print(wsddn_seg.sum(dim=(-2,-1)))
-            wsddn_seg /= F.adaptive_max_pool2d(wsddn_seg, (1, 1)) + 1e-5
+            if len(wsddn_seg_list) > 0 and m > 0:
+                wsddn_seg = torch.sum(torch.stack(wsddn_seg_list, dim=0), dim=0)
+                wsddn_seg = wsddn_seg + F.adaptive_max_pool2d(-wsddn_seg, (1, 1))
+                # print(wsddn_seg.sum(dim=(-2,-1)))
+                wsddn_seg /= F.adaptive_max_pool2d(wsddn_seg, (1, 1)) + 1e-5
+            else:
+                wsddn_seg = torch.zeros((max(m, 1), 1, h, w), device=inputs.device)
         if grad_cam is not None:
-            grad_cam_seg = torch.sum(torch.stack(grad_cam_list, dim=0), dim=0)
-            grad_cam_seg = grad_cam_seg + F.adaptive_max_pool2d(-grad_cam_seg, (1, 1))
-            # print(wsddn_seg.sum(dim=(-2,-1)))
-            grad_cam_seg /= F.adaptive_max_pool2d(grad_cam_seg, (1, 1)) + 1e-5
+            if len(grad_cam_list) > 0 and m > 0:
+                grad_cam_seg = torch.sum(torch.stack(grad_cam_list, dim=0), dim=0)
+                grad_cam_seg = grad_cam_seg + F.adaptive_max_pool2d(-grad_cam_seg, (1, 1))
+                # print(wsddn_seg.sum(dim=(-2,-1)))
+                grad_cam_seg /= F.adaptive_max_pool2d(grad_cam_seg, (1, 1)) + 1e-5
+            else:
+                grad_cam_seg = torch.zeros((max(m, 1), 1, h, w), device=inputs.device)
 
     return wsddn_seg,grad_cam_seg,cam
 def multi_scale_cam2(model, inputs, scales, cls_label=None,args = None):
@@ -363,7 +396,7 @@ def label_to_aff_mask(cam_label, ignore_index=255):
     return aff_label
 
 
-def refine_cams_with_bkg_v2(ref_mod=None, images=None, cams=None, cls_labels=None, high_thre=None, low_thre=None, ignore_index=False,  img_box=None, down_scale=2, gumbel_sofmax = False):
+def refine_cams_with_bkg_v2(ref_mod=None, images=None, cams=None, cls_labels=None, high_thre=None, low_thre=None, ignore_index=False,  img_box=None, down_scale=2, gumbel_sofmax = False, return_details=False):
 
     b,_,h,w = images.shape
     _images = F.interpolate(images, size=[h//down_scale, w//down_scale], mode="bilinear", align_corners=False)
@@ -403,6 +436,8 @@ def refine_cams_with_bkg_v2(ref_mod=None, images=None, cams=None, cls_labels=Non
     refined_label[refined_label_h == 0] = ignore_index
     refined_label[(refined_label_h + refined_label_l) == 0] = 0
 
+    if return_details:
+        return refined_label, refined_label_h, refined_label_l
     return refined_label
 
 def _refine_cams(ref_mod, images, cams, valid_key, orig_size):

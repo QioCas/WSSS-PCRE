@@ -1,0 +1,19 @@
+{
+  "completed_steps": 4000,
+  "partial_training": false,
+  "frozen_weights_unchanged": true,
+  "initial_parity": {
+    "zero_residual_logits_bitwise_equal": true,
+    "base_segmentation_max_abs_error": 0.0,
+    "initial_residual_parameters": 87509
+  },
+  "checkpoints": {
+    "ema": "adapter_step_00004000_ema.pth"
+  },
+  "trainable_parameters": 87509,
+  "training_pixel_gt_read": false,
+  "external_image_text_prior": false,
+  "target_manifest_sha256": "52c0d486ca7d25783f7fe1412b45ec145cd4672a133cb751c7ac82c8c5051cee",
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "seconds": 620.4378871640074
+}

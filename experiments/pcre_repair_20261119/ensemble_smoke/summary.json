@@ -1,0 +1,8 @@
+{
+  "ensemble": {
+    "raw": 79.16168761495564,
+    "crf": 78.71849543625477
+  },
+  "partial_validation": true,
+  "note": "Two-image smoke only; no comparison to full-validation scores is valid."
+}

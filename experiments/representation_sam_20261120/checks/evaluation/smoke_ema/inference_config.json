@@ -1,0 +1,30 @@
+{
+  "mode": "smoke_ema",
+  "checkpoint": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/checks/last2_sam/checkpoints/model_refined_step_00000004_ema.pth",
+  "checkpoint_sha256": "c9c74acfcd5c7b5ccfef5cd96db042b1b439e38ca990c3b5f686da45fdda3857",
+  "training_run": "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/checks/last2_sam",
+  "validation_images": 2,
+  "partial_validation": true,
+  "scales": [
+    1.0,
+    1.25,
+    1.5
+  ],
+  "horizontal_flip": true,
+  "input_base_size": 448,
+  "precision": "float32",
+  "tf32": false,
+  "crf": {
+    "iter_max": 10,
+    "pos_xy_std": 2,
+    "pos_w": 3,
+    "bi_xy_std": 140,
+    "bi_rgb_std": 1,
+    "bi_w": 7
+  },
+  "fusion": "max(first_scale_flip_sum, mean(all_scale_flip_sums))",
+  "strict_load": true,
+  "image_labels_used_for_prediction": false,
+  "torch_version": "2.10.0+cu128",
+  "densecrf_distribution": "pydensecrf2==1.1"
+}

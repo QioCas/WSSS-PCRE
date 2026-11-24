@@ -1,0 +1,10 @@
+{
+  "train_images": 10582,
+  "val_images": 1449,
+  "split_overlap": 0,
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "reliable_manifest_sha256": "d686015de1479cfaea966d36a96d84a2662d797beb6979d8a41d249038cebde3",
+  "clip_sha256": "5806e77cd80f8b59890b7e101eabd078d9fb84e6937f9e85e4ecb61988df416f",
+  "training_pixel_gt_read": false,
+  "probe_reads_val_gt_only": true
+}

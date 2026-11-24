@@ -1,0 +1,171 @@
+{
+  "format": "precision_bank_v1",
+  "images": 4,
+  "partial_bank": true,
+  "teacher_sha256": "f0677382fbad8c54ece58fc86c5e445ffe4a7a4349331a5f3a50cce952c8fc4b",
+  "tags_sha256": "974731980539a6d6ed516c5dccc745bf9930f0915ac0d0802cd1c6b7627479e1",
+  "reliable_manifest_sha256": "d686015de1479cfaea966d36a96d84a2662d797beb6979d8a41d249038cebde3",
+  "bank_sha256": "727da9d205fe573bd988d8a92975233759cc54099fc00b10a3c42ced00d33ffa",
+  "training_pixel_gt_read": false,
+  "negative_mining_before_tag_filter": true,
+  "negative_requires_teacher_background": 0.8,
+  "class_diagnostics": [
+    {
+      "class_id": 0,
+      "positive_candidates": 64,
+      "positive_samples": 64,
+      "negative_candidates_retained": 0,
+      "gmm_converged": true
+    },
+    {
+      "class_id": 1,
+      "positive_candidates": 6,
+      "positive_samples": 6,
+      "negative_candidates_retained": 6
+    },
+    {
+      "class_id": 2,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 3,
+      "positive_candidates": 16,
+      "positive_samples": 16,
+      "negative_candidates_retained": 6,
+      "gmm_converged": true
+    },
+    {
+      "class_id": 4,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 5,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 6,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 7,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 8,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 9,
+      "positive_candidates": 16,
+      "positive_samples": 16,
+      "negative_candidates_retained": 6,
+      "gmm_converged": true
+    },
+    {
+      "class_id": 10,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 11,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 12,
+      "positive_candidates": 16,
+      "positive_samples": 16,
+      "negative_candidates_retained": 6,
+      "gmm_converged": true
+    },
+    {
+      "class_id": 13,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 14,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 15,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 6
+    },
+    {
+      "class_id": 16,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 17,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 18,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 19,
+      "positive_candidates": 0,
+      "positive_samples": 0,
+      "negative_candidates_retained": 8,
+      "negative_source_images": 4
+    },
+    {
+      "class_id": 20,
+      "positive_candidates": 16,
+      "positive_samples": 16,
+      "negative_candidates_retained": 6,
+      "gmm_converged": true
+    }
+  ],
+  "parameters": {
+    "bank_positive_samples": 2048,
+    "bank_negative_samples": 512,
+    "bank_positive_per_image": 16,
+    "bank_negative_per_image": 2,
+    "bank_positive_prototypes": 4,
+    "bank_negative_prototypes": 8,
+    "bank_background_confidence": 0.8,
+    "projection_dim": 32,
+    "gmm_components": 2,
+    "gmm_lower_quantile": 0.02
+  }
+}

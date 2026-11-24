@@ -1,0 +1,19 @@
+# Compatible with Python 3.12 and the installed CUDA 12.8 PyTorch stack.
+# Install the PyTorch wheels for your GPU separately; preserve the current install.
+torch==2.10.0
+torchvision==0.25.0
+numpy>=1.26,<2
+scipy>=1.11,<2
+matplotlib>=3.8,<4
+pillow>=10,<12
+imageio>=2.31,<3
+timm==0.9.12
+scikit-learn>=1.4,<2
+fvcore==0.1.5.post20221221
+texttable==1.7.0
+wandb>=0.23,<1
+tqdm>=4.65,<5
+psutil>=5.9
+packaging>=24
+# Install the local rloss/pytorch/wrapper/bilateralfilter extension separately.
+# pydensecrf is used only by inference through utils/dcrf.py.

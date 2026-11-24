@@ -1,0 +1,14 @@
+{
+  "stage": "completed",
+  "description": "Processed 1449/1449 images (Current AdvPrompt mIoU: 75.97%)",
+  "progress": {
+    "processed": 1449,
+    "total": 1449,
+    "elapsed_seconds": 244.9856481552124,
+    "peft_csl_crf_miou": 74.35922244723349,
+    "adv_prompt_miou": 75.97366589458946,
+    "delta_pp": 1.6144434473559732,
+    "refined_components": 2102,
+    "total_components": 3160
+  }
+}

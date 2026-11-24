@@ -1,0 +1,11 @@
+{
+  "mode": "raw_teacher_ema",
+  "partial_evaluation": false,
+  "refinement_steps": 3000,
+  "raw": 73.70288500101323,
+  "crf": 74.19504459929543,
+  "delta_vs_baseline_pp": {
+    "raw": -0.08660303293046923,
+    "crf": -0.029239134003148592
+  }
+}

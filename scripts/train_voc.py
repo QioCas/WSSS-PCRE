@@ -125,7 +125,8 @@ parser.add_argument("--wt_decay", default=1e-2, type=float, help="weights decay"
 parser.add_argument("--betas", default=(0.9, 0.999), help="betas for Adam")
 parser.add_argument("--power", default=0.9, type=float, help="poweer factor for poly scheduler")
 
-parser.add_argument("--local_rank", default=-1, type=int, help="local_rank")
+parser.add_argument("--local-rank", "--local_rank", dest="local_rank",
+                    default=int(os.environ.get("LOCAL_RANK", "0")), type=int, help="local_rank")
 parser.add_argument("--num_workers", default=2, type=int, help="num_workers")
 parser.add_argument('--backend', default='nccl')
 parser.add_argument('--debug',  default=False,action="store_true")
@@ -245,7 +246,7 @@ def train(args=None):
         pin_memory=False,
         drop_last=True,
         sampler=train_sampler,
-        prefetch_factor=4)
+        prefetch_factor=4 if args.num_workers > 0 else None)
 
     val_loader = DataLoader(val_dataset,
                             batch_size=1,
@@ -284,7 +285,7 @@ def train(args=None):
             n_iter = n_iter + 6000
         try:
             img_name, inputs, cls_label, label_idx, img_box, raw_image, w_image, s_image,seg_mask = next(train_loader_iter)
-        except:
+        except StopIteration:
             train_sampler.set_epoch(np.random.randint(args.max_iters))
             train_loader_iter = iter(train_loader)
             img_name, inputs, cls_label, label_idx, img_box, raw_image, w_image, s_image,seg_mask = next(train_loader_iter)
@@ -408,7 +409,7 @@ def train(args=None):
             'seg_loss': seg_loss.item(),
             'cpe_loss': cpe_loss.item(),
             'crme_loss': crme_loss.item() if isinstance(crme_loss,torch.Tensor) else crme_loss,
-            'cls_score': cls_score.item(),
+            'cls_score': float(cls_score),
             'cls_loss_wsddn':cls_loss_wsddn.item(),
         })
 
@@ -471,6 +472,17 @@ if __name__ == "__main__":
 
 
     args = parser.parse_args()
+    required_paths = [
+        os.path.join(args.data_folder, "JPEGImages"),
+        os.path.join(args.data_folder, "SegmentationClassAug"),
+        os.path.join(args.list_folder, args.train_set + ".txt"),
+        os.path.join(args.list_folder, args.val_set + ".txt"),
+        os.path.join(args.list_folder, "cls_labels_onehot.npy"),
+    ]
+    missing_paths = [path for path in required_paths if not os.path.exists(path)]
+    if missing_paths:
+        parser.error("Missing VOC training inputs: " + ", ".join(missing_paths)
+                     + ". Set --data_folder and --list_folder to the prepared dataset.")
     timestamp_1 = "{0:%Y-%m}".format(datetime.datetime.now())
     timestamp_2 = "{0:%d-%H-%M-%S}".format(datetime.datetime.now())
     exp_tag = f'{args.log_tag}_{timestamp_2}'
@@ -489,4 +501,8 @@ if __name__ == "__main__":
 
     ## fix random seed
     setup_seed(args.seed)
-    train(args=args)
+    try:
+        train(args=args)
+    finally:
+        if dist.is_initialized():
+            dist.destroy_process_group()

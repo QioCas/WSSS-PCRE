@@ -1,0 +1,127 @@
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:394: UserWarning: Overwriting vit_small_patch16_224 in registry with model.backbone.vit.vit_small_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:417: UserWarning: Overwriting vit_base_patch16_224 in registry with model.backbone.vit.vit_base_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:435: UserWarning: Overwriting vit_base_patch16_384 in registry with model.backbone.vit.vit_base_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:446: UserWarning: Overwriting vit_base_patch32_384 in registry with model.backbone.vit.vit_base_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:457: UserWarning: Overwriting vit_large_patch16_224 in registry with model.backbone.vit.vit_large_patch16_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:468: UserWarning: Overwriting vit_large_patch16_384 in registry with model.backbone.vit.vit_large_patch16_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:479: UserWarning: Overwriting vit_large_patch32_384 in registry with model.backbone.vit.vit_large_patch32_384. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:505: UserWarning: Overwriting vit_small_resnet26d_224 in registry with model.backbone.vit.vit_small_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:525: UserWarning: Overwriting vit_base_resnet26d_224 in registry with model.backbone.vit.vit_base_resnet26d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/precision_residual_20261120/code_snapshot/model/backbone/vit.py:535: UserWarning: Overwriting vit_base_resnet50d_224 in registry with model.backbone.vit.vit_base_resnet50d_224. This is because the name being registered conflicts with an existing name. Please check if this is not expected.
+  @register_model
+{"stage": "negative_targets", "completed": 100, "total": 10582, "seconds": 3.4788506909972057}
+{"stage": "negative_targets", "completed": 200, "total": 10582, "seconds": 6.886353079986293}
+{"stage": "negative_targets", "completed": 300, "total": 10582, "seconds": 10.101014144020155}
+{"stage": "negative_targets", "completed": 400, "total": 10582, "seconds": 13.430773856001906}
+{"stage": "negative_targets", "completed": 500, "total": 10582, "seconds": 16.929859454976395}
+{"stage": "negative_targets", "completed": 600, "total": 10582, "seconds": 20.344738003972452}
+{"stage": "negative_targets", "completed": 700, "total": 10582, "seconds": 23.68906160001643}
+{"stage": "negative_targets", "completed": 800, "total": 10582, "seconds": 26.99787058401853}
+{"stage": "negative_targets", "completed": 900, "total": 10582, "seconds": 30.367759431013837}
+{"stage": "negative_targets", "completed": 1000, "total": 10582, "seconds": 33.79853887099307}
+{"stage": "negative_targets", "completed": 1100, "total": 10582, "seconds": 37.23509317799471}
+{"stage": "negative_targets", "completed": 1200, "total": 10582, "seconds": 40.60312915901886}
+{"stage": "negative_targets", "completed": 1300, "total": 10582, "seconds": 43.97769085702021}
+{"stage": "negative_targets", "completed": 1400, "total": 10582, "seconds": 47.37488340202253}
+{"stage": "negative_targets", "completed": 1500, "total": 10582, "seconds": 50.93210078199627}
+{"stage": "negative_targets", "completed": 1600, "total": 10582, "seconds": 53.56431106501259}
+{"stage": "negative_targets", "completed": 1700, "total": 10582, "seconds": 55.500924761989154}
+{"stage": "negative_targets", "completed": 1800, "total": 10582, "seconds": 57.51808288198663}
+{"stage": "negative_targets", "completed": 1900, "total": 10582, "seconds": 59.40806322800927}
+{"stage": "negative_targets", "completed": 2000, "total": 10582, "seconds": 61.25735532102408}
+{"stage": "negative_targets", "completed": 2100, "total": 10582, "seconds": 63.22346719598863}
+{"stage": "negative_targets", "completed": 2200, "total": 10582, "seconds": 65.19828134402633}
+{"stage": "negative_targets", "completed": 2300, "total": 10582, "seconds": 67.32086519600125}
+{"stage": "negative_targets", "completed": 2400, "total": 10582, "seconds": 70.51888375502313}
+{"stage": "negative_targets", "completed": 2500, "total": 10582, "seconds": 74.03281003999291}
+{"stage": "negative_targets", "completed": 2600, "total": 10582, "seconds": 77.48737740400247}
+{"stage": "negative_targets", "completed": 2700, "total": 10582, "seconds": 80.91585873597069}
+{"stage": "negative_targets", "completed": 2800, "total": 10582, "seconds": 84.17496040801052}
+{"stage": "negative_targets", "completed": 2900, "total": 10582, "seconds": 87.47751283698017}
+{"stage": "negative_targets", "completed": 3000, "total": 10582, "seconds": 90.83424647798529}
+{"stage": "negative_targets", "completed": 3100, "total": 10582, "seconds": 94.22630397399189}
+{"stage": "negative_targets", "completed": 3200, "total": 10582, "seconds": 97.4869630250032}
+{"stage": "negative_targets", "completed": 3300, "total": 10582, "seconds": 100.83248756901594}
+{"stage": "negative_targets", "completed": 3400, "total": 10582, "seconds": 104.15702258498641}
+{"stage": "negative_targets", "completed": 3500, "total": 10582, "seconds": 107.49155217601219}
+{"stage": "negative_targets", "completed": 3600, "total": 10582, "seconds": 110.86015602597035}
+{"stage": "negative_targets", "completed": 3700, "total": 10582, "seconds": 114.01116680301493}
+{"stage": "negative_targets", "completed": 3800, "total": 10582, "seconds": 117.41195357398828}
+{"stage": "negative_targets", "completed": 3900, "total": 10582, "seconds": 120.72705271898303}
+{"stage": "negative_targets", "completed": 4000, "total": 10582, "seconds": 124.02671825001016}
+{"stage": "negative_targets", "completed": 4100, "total": 10582, "seconds": 127.31005052098772}
+{"stage": "negative_targets", "completed": 4200, "total": 10582, "seconds": 130.66908686701208}
+{"stage": "negative_targets", "completed": 4300, "total": 10582, "seconds": 133.99695187597536}
+{"stage": "negative_targets", "completed": 4400, "total": 10582, "seconds": 137.2772422329872}
+{"stage": "negative_targets", "completed": 4500, "total": 10582, "seconds": 140.67608177597867}
+{"stage": "negative_targets", "completed": 4600, "total": 10582, "seconds": 143.98082416300895}
+{"stage": "negative_targets", "completed": 4700, "total": 10582, "seconds": 147.2289182380191}
+{"stage": "negative_targets", "completed": 4800, "total": 10582, "seconds": 150.73452674597502}
+{"stage": "negative_targets", "completed": 4900, "total": 10582, "seconds": 152.86235833499813}
+{"stage": "negative_targets", "completed": 5000, "total": 10582, "seconds": 154.75713739800267}
+{"stage": "negative_targets", "completed": 5100, "total": 10582, "seconds": 156.60050451999996}
+{"stage": "negative_targets", "completed": 5200, "total": 10582, "seconds": 158.53357801999664}
+{"stage": "negative_targets", "completed": 5300, "total": 10582, "seconds": 160.45042606600327}
+{"stage": "negative_targets", "completed": 5400, "total": 10582, "seconds": 162.38314973202068}
+{"stage": "negative_targets", "completed": 5500, "total": 10582, "seconds": 164.26313137600664}
+{"stage": "negative_targets", "completed": 5600, "total": 10582, "seconds": 166.1569829119835}
+{"stage": "negative_targets", "completed": 5700, "total": 10582, "seconds": 168.0732931009843}
+{"stage": "negative_targets", "completed": 5800, "total": 10582, "seconds": 170.06785473198397}
+{"stage": "negative_targets", "completed": 5900, "total": 10582, "seconds": 171.9490017700009}
+{"stage": "negative_targets", "completed": 6000, "total": 10582, "seconds": 173.7563422759995}
+{"stage": "negative_targets", "completed": 6100, "total": 10582, "seconds": 175.66657253500307}
+{"stage": "negative_targets", "completed": 6200, "total": 10582, "seconds": 177.5788472549757}
+{"stage": "negative_targets", "completed": 6300, "total": 10582, "seconds": 179.4781737989979}
+{"stage": "negative_targets", "completed": 6400, "total": 10582, "seconds": 181.39400237001246}
+{"stage": "negative_targets", "completed": 6500, "total": 10582, "seconds": 183.28820461698342}
+{"stage": "negative_targets", "completed": 6600, "total": 10582, "seconds": 185.16549186297925}
+{"stage": "negative_targets", "completed": 6700, "total": 10582, "seconds": 187.06220349902287}
+{"stage": "negative_targets", "completed": 6800, "total": 10582, "seconds": 188.94428427401}
+{"stage": "negative_targets", "completed": 6900, "total": 10582, "seconds": 190.81755215500016}
+{"stage": "negative_targets", "completed": 7000, "total": 10582, "seconds": 192.70090462098597}
+{"stage": "negative_targets", "completed": 7100, "total": 10582, "seconds": 194.45268938998925}
+{"stage": "negative_targets", "completed": 7200, "total": 10582, "seconds": 196.3327304510167}
+{"stage": "negative_targets", "completed": 7300, "total": 10582, "seconds": 198.201570160978}
+{"stage": "negative_targets", "completed": 7400, "total": 10582, "seconds": 200.12515641900245}
+{"stage": "negative_targets", "completed": 7500, "total": 10582, "seconds": 202.00556733697886}
+{"stage": "negative_targets", "completed": 7600, "total": 10582, "seconds": 204.01929228001973}
+{"stage": "negative_targets", "completed": 7700, "total": 10582, "seconds": 205.8470223619952}
+{"stage": "negative_targets", "completed": 7800, "total": 10582, "seconds": 207.70993120997446}
+{"stage": "negative_targets", "completed": 7900, "total": 10582, "seconds": 209.68352360802237}
+{"stage": "negative_targets", "completed": 8000, "total": 10582, "seconds": 211.6002008380019}
+{"stage": "negative_targets", "completed": 8100, "total": 10582, "seconds": 213.46198031498352}
+{"stage": "negative_targets", "completed": 8200, "total": 10582, "seconds": 215.43971961701754}
+{"stage": "negative_targets", "completed": 8300, "total": 10582, "seconds": 217.41830113297328}
+{"stage": "negative_targets", "completed": 8400, "total": 10582, "seconds": 219.3105937599903}
+{"stage": "negative_targets", "completed": 8500, "total": 10582, "seconds": 221.17363193898927}
+{"stage": "negative_targets", "completed": 8600, "total": 10582, "seconds": 223.07410213298863}
+{"stage": "negative_targets", "completed": 8700, "total": 10582, "seconds": 224.9194878039998}
+{"stage": "negative_targets", "completed": 8800, "total": 10582, "seconds": 226.90570352197392}
+{"stage": "negative_targets", "completed": 8900, "total": 10582, "seconds": 228.78413714200724}
+{"stage": "negative_targets", "completed": 9000, "total": 10582, "seconds": 230.67655798897613}
+{"stage": "negative_targets", "completed": 9100, "total": 10582, "seconds": 232.56516623700736}
+{"stage": "negative_targets", "completed": 9200, "total": 10582, "seconds": 234.35273495898582}
+{"stage": "negative_targets", "completed": 9300, "total": 10582, "seconds": 236.24785010097548}
+{"stage": "negative_targets", "completed": 9400, "total": 10582, "seconds": 238.17145941400668}
+{"stage": "negative_targets", "completed": 9500, "total": 10582, "seconds": 240.05252882296918}
+{"stage": "negative_targets", "completed": 9600, "total": 10582, "seconds": 241.91710967296967}
+{"stage": "negative_targets", "completed": 9700, "total": 10582, "seconds": 243.8017239579931}
+{"stage": "negative_targets", "completed": 9800, "total": 10582, "seconds": 245.698846890009}
+{"stage": "negative_targets", "completed": 9900, "total": 10582, "seconds": 247.56406389002223}
+{"stage": "negative_targets", "completed": 10000, "total": 10582, "seconds": 249.43520703399554}
+{"stage": "negative_targets", "completed": 10100, "total": 10582, "seconds": 251.31296635098988}
+{"stage": "negative_targets", "completed": 10200, "total": 10582, "seconds": 253.12215286999708}
+{"stage": "negative_targets", "completed": 10300, "total": 10582, "seconds": 255.14567986002658}
+{"stage": "negative_targets", "completed": 10400, "total": 10582, "seconds": 257.02921513997717}
+{"stage": "negative_targets", "completed": 10500, "total": 10582, "seconds": 258.9358868569834}
+{"stage": "negative_targets", "completed": 10582, "total": 10582, "seconds": 260.4689874430187}
+{"images": 10582, "partial_cache": false, "pixels": 1896135177, "removed_pixels": 5412460, "removed_fraction_total": 0.0028544694838494628, "removed_fraction_foreground": 0.010570384506851936, "foreground": 0.2671895844480712, "ignore": 0.0676245773800124, "training_pixel_gt_read": false, "external_prior": false, "removed_per_class": [0, 206340, 42198, 222581, 245871, 40543, 77187, 172041, 5510, 819764, 10036, 403193, 29921, 312636, 62422, 2206634, 156508, 3551, 204987, 71115, 119422]}

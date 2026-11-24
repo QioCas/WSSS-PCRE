@@ -1,0 +1,10 @@
+========================================================================
+STARTING TWO-PHASE ADVANCED FOUNDATION MODEL EVALUATION
+Phase 1: SAM Advanced Prompting (Negative Points + Multi-Mask Disambiguation)
+Phase 2: SAM + CLIP Zero-Shot Co-occurrence Verification
+Timestamp: Sat Nov 21 06:42:11 PM UTC 2026
+========================================================================
+
+>>> [Phase 1/2] Executing SAM Advanced Prompting...
+/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/sam_advanced_prompting_20261121/run_sam_advanced_prompting.py:1: SyntaxWarning: invalid escape sequence '\D'
+  """

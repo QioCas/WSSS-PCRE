@@ -1,0 +1,12 @@
+{
+  "images": 4,
+  "pixels": 703000,
+  "partial_cache": true,
+  "training_pixel_gt_read": false,
+  "external_segmentation_prior": false,
+  "foreground": 0.25161877667140825,
+  "background": 0.6786941678520626,
+  "ignore": 0.06968705547652916,
+  "confidence_mean": 0.9666033739331437,
+  "agreement_mean": 0.977151967757231
+}
