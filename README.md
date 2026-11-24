@@ -263,23 +263,36 @@ flowchart TD
 
 ### 7.1. Cài đặt toàn bộ hệ thống bằng 1 lệnh duy nhất (`ALL.sh`)
 Khuyến nghị tạo môi trường ảo Python 3.10, 3.11 hoặc 3.12 (khuyên dùng **Python 3.12**) để tương thích hoàn toàn với tất cả các thư viện C++ mở rộng như `pydensecrf2`:
+
+**Cách 1: Tự tạo bằng conda thủ công**
 ```bash
 conda create -n wsss python=3.12 -y
 conda activate wsss
-```
-
-Sau đó chỉ cần chạy một lệnh sau, kịch bản sẽ tự động cài đặt các gói Python, thư viện Foundation Models (SAM, CLIP, pydensecrf), tải trọng số tiền huấn luyện ViT-B/SAM, thiết lập thư mục và chạy kiểm thử:
-```bash
 ./ALL.sh
 ```
 
+**Cách 2: Để kịch bản tự động hỗ trợ tạo môi trường**
+```bash
+./ALL.sh --create-env
+conda activate wsss
+./ALL.sh
+```
+
+Sau khi kích hoạt môi trường, kịch bản `./ALL.sh` sẽ tự động:
+1. Cài đặt toàn bộ dependencies (`requirements.txt`).
+2. Cài đặt Foundation Models (SAM, OpenAI CLIP, PyDenseCRF).
+3. Thiết lập cấu trúc thư mục chuẩn.
+4. Tải trọng số tiền huấn luyện (ViT-B ImageNet, SAM ViT-B).
+5. Tự động tải dữ liệu Pascal VOC 2012 kèm nhãn mở rộng SBD và sinh metadata.
+6. Chạy bộ kiểm thử đơn vị tự động để xác nhận toàn bộ hệ thống hoạt động hoàn hảo.
+
 ### 7.2. Huấn luyện các tiến trình còn thiếu bằng 1 lệnh duy nhất (`TRAIN.sh`)
-Kịch bản này tự động phát hiện và thực thi các giai đoạn chưa có kết quả (tự động bỏ qua các giai đoạn đã hoàn thành để tránh ghi đè):
+Kịch bản này tự động phát hiện và thực thi tuần tự các giai đoạn huấn luyện Pascal VOC chưa có kết quả (tự động bỏ qua các giai đoạn đã hoàn thành để tránh ghi đè, mặc định không chạy thực nghiệm full COCO):
 ```bash
 # Kiểm tra trạng thái các tiến trình hiện tại (Đã xong hay Chưa xong)
 ./TRAIN.sh --status
 
-# Chạy tuần tự tất cả các tiến trình chưa hoàn thành
+# Chạy tuần tự tất cả các tiến trình VOC chưa hoàn thành (Stages 1, 2, 3)
 ./TRAIN.sh
 
 # Hoặc chạy kèm chế độ tự động chờ GPU đủ VRAM (>= 16 GB)
@@ -289,7 +302,7 @@ Kịch bản này tự động phát hiện và thực thi các giai đoạn ch�
 ./TRAIN.sh --stage 1       # Stage 1: SAT-CR
 ./TRAIN.sh --stage 2       # Stage 2: SBF-Distill
 ./TRAIN.sh --stage 3       # Stage 3: Full Paradigm 2
-./TRAIN.sh --coco-eval     # Đánh giá chính thức COCO 80k (Multi-scale + DenseCRF)
+./TRAIN.sh --coco-eval     # (Tùy chọn) Đánh giá COCO 80k (Multi-scale + DenseCRF)
 ```
 
 ### 7.3. Đánh giá kiểm thử hậu xử lý (Test-Time Refinement)

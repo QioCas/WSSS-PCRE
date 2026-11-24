@@ -17,27 +17,110 @@ export PYTHONPATH="$ROOT_DIR:${PYTHONPATH:-}"
 
 PYTHON="${PYTHON:-python3}"
 
+# ------------------------------------------------------------------------------
+# HỖ TRỢ THAM SỐ DÒNG LỆNH
+# ------------------------------------------------------------------------------
+show_help() {
+    echo "Cách sử dụng: ./ALL.sh [TÙY CHỌN]"
+    echo ""
+    echo "Tùy chọn:"
+    echo "  --create-env     Tự động tạo môi trường Conda 'wsss' (python=3.12) và hướng dẫn kích hoạt"
+    echo "  --help, -h       Hiển thị hướng dẫn này"
+    echo ""
+    echo "Quy trình thiết lập môi trường chuẩn:"
+    echo "  1️⃣  Tạo môi trường:     conda create -n wsss python=3.12 -y  (hoặc ./ALL.sh --create-env)"
+    echo "  2️⃣  Kích hoạt:          conda activate wsss"
+    echo "  3️⃣  Cài đặt toàn bộ:    ./ALL.sh"
+    exit 0
+}
+
+create_conda_env() {
+    echo "========================================================================"
+    echo "🔧 ĐANG TỰ ĐỘNG TẠO MÔI TRƯỜNG CONDA 'wsss' (Python 3.12)..."
+    echo "========================================================================"
+    if command -v conda &>/dev/null; then
+        conda create -n wsss python=3.12 -y
+        echo ""
+        echo "========================================================================"
+        echo "🎉 ĐÃ TẠO THÀNH CÔNG MÔI TRƯỜNG CONDA 'wsss'!"
+        echo "👉 Bây giờ bạn chỉ cần chạy 2 lệnh sau trên terminal để kích hoạt và cài đặt:"
+        echo ""
+        echo "   conda activate wsss"
+        echo "   ./ALL.sh"
+        echo "========================================================================"
+        exit 0
+    else
+        echo "❌ Không tìm thấy lệnh 'conda' trong biến môi trường PATH."
+        echo "   Vui lòng kiểm tra lại cài đặt Anaconda hoặc Miniconda trên máy của bạn."
+        exit 1
+    fi
+}
+
+# Xử lý tham số
+if [ $# -gt 0 ]; then
+    case "$1" in
+        --help|-h)
+            show_help
+            ;;
+        --create-env)
+            create_conda_env
+            ;;
+        *)
+            echo "Tham số không hợp lệ: $1. Dùng ./ALL.sh --help để xem hướng dẫn."
+            exit 1
+            ;;
+    esac
+fi
+
+CONDA_ENV="${CONDA_DEFAULT_ENV:-}"
+PY_VER=$($PYTHON --version 2>&1 | awk '{print $2}')
+PY_MAJOR=$($PYTHON -c "import sys; print(sys.version_info.major)" 2>/dev/null || echo "0")
+PY_MINOR=$($PYTHON -c "import sys; print(sys.version_info.minor)" 2>/dev/null || echo "0")
+
 echo "========================================================================"
 echo "🚀 BẮT ĐẦU CÀI ĐẶT & THIẾT LẬP HỆ THỐNG WSSS-PCRE TỰ ĐỘNG"
 echo "Thư mục gốc: $ROOT_DIR"
+echo "Môi trường: ${CONDA_ENV:-[Hệ thống / Chưa kích hoạt Conda]}"
 echo "Python thực thi: $($PYTHON --version)"
 echo "Thời gian: $(date)"
 echo "========================================================================"
 
-# Kiểm tra phiên bản Python
-PY_MAJOR=$($PYTHON -c "import sys; print(sys.version_info.major)" 2>/dev/null || echo "0")
-PY_MINOR=$($PYTHON -c "import sys; print(sys.version_info.minor)" 2>/dev/null || echo "0")
+# Hướng dẫn thiết lập môi trường Conda nếu chưa vào môi trường riêng hoặc dùng Python >= 3.13
+if [ -z "$CONDA_ENV" ] || [ "$CONDA_ENV" = "base" ] || { [ "$PY_MAJOR" -eq 3 ] && [ "$PY_MINOR" -ge 13 ]; }; then
+    echo ""
+    echo "┌────────────────────────────────────────────────────────────────────────┐"
+    echo "│ 💡 HƯỚNG DẪN THIẾT LẬP MÔI TRƯỜNG CONDA (QUAN TRỌNG TRƯỚC KHI CÀI ĐẶT) │"
+    echo "├────────────────────────────────────────────────────────────────────────┤"
+    echo "│ Bạn hiện đang ở: ${CONDA_ENV:-[Môi trường hệ thống]} (Python $PY_VER)"
+    if [ "$PY_MAJOR" -eq 3 ] && [ "$PY_MINOR" -ge 13 ]; then
+    echo "│ ⚠️  CẢNH BÁO: Python >= 3.13 đã bỏ C-API cũ, không tương thích pydensecrf2!"
+    fi
+    echo "│ Để tránh xung đột gói và bảo đảm 100% tương thích với các module C++,   │"
+    echo "│ khuyến nghị bạn nên tạo & kích hoạt môi trường Conda riêng trước:     │"
+    echo "│                                                                        │"
+    echo "│   1️⃣  Tạo môi trường:     conda create -n wsss python=3.12 -y          │"
+    echo "│   2️⃣  Kích hoạt môi trường: conda activate wsss                          │"
+    echo "│   3️⃣  Chạy lại script:      ./ALL.sh                                   │"
+    echo "│                                                                        │"
+    echo "│ (Hoặc gõ: ./ALL.sh --create-env để kịch bản tự tạo môi trường giúp bạn)│"
+    echo "└────────────────────────────────────────────────────────────────────────┘"
+    echo ""
 
-if [ "$PY_MAJOR" -eq 3 ] && [ "$PY_MINOR" -ge 13 ]; then
-    echo ""
-    echo "⚠️  CẢNH BÁO PHIÊN BẢN PYTHON: Bạn đang chạy Python 3.$PY_MINOR!"
-    echo "   Python 3.13 đã loại bỏ một số hàm C-API nội bộ (_PyList_Extend, _PyLong_AsByteArray...)"
-    echo "   khiến các thư viện C++ mở rộng cũ như 'pydensecrf2' không thể build wheel."
-    echo "   👉 KHUYẾN NGHỊ: Hãy sử dụng môi trường Python 3.10, 3.11 hoặc 3.12 để tương thích 100%:"
-    echo "      conda create -n wsss python=3.12 -y"
-    echo "      conda activate wsss"
-    echo "   (Quá trình cài đặt vẫn tiếp tục, các module huấn luyện chính vẫn hoạt động)."
-    echo ""
+    if [ -t 0 ]; then
+        ans="y"
+        read -t 7 -p "👉 Bạn có muốn tiếp tục cài đặt vào môi trường hiện tại không? [Y/n] (Tự động tiếp tục sau 7s): " ans || ans="y"
+        echo ""
+        ans=${ans:-y}
+        if [[ "$ans" =~ ^[nN] ]]; then
+            echo "Đã dừng cài đặt."
+            echo "Hãy gõ 2 lệnh sau để thiết lập môi trường Conda rồi chạy lại:"
+            echo "   conda create -n wsss python=3.12 -y"
+            echo "   conda activate wsss && ./ALL.sh"
+            exit 0
+        fi
+    fi
+else
+    echo "✓ Đang chạy trong môi trường Conda cách ly: '$CONDA_ENV' (Python $PY_VER)."
 fi
 
 # ------------------------------------------------------------------------------
@@ -154,20 +237,65 @@ echo ""
 echo ">>> [5/6] Kiểm tra tập dữ liệu & Metadata..."
 
 # Pascal VOC 2012
-if [ -d "dataset/VOC2012" ]; then
-    echo "✓ Đã tìm thấy thư mục dataset/VOC2012."
+VOC_DIR="dataset/VOC2012"
+VOC_READY=true
+if [ ! -d "$VOC_DIR/JPEGImages" ] || [ ! -d "$VOC_DIR/ImageSets/Segmentation" ]; then
+    VOC_READY=false
+fi
+
+if [ "$VOC_READY" = false ]; then
+    echo "Chưa tìm thấy tập dữ liệu Pascal VOC 2012 đầy đủ."
+    echo "Đang tự động tải bộ dữ liệu Pascal VOC 2012 (VOCtrainval ~2 GB)..."
+    mkdir -p dataset
+    VOC_TAR="dataset/VOCtrainval_11-May-2012.tar"
+    if [ ! -f "$VOC_TAR" ]; then
+        wget -c "http://host.robots.ox.ac.uk/pascal/VOC/voc2012/VOCtrainval_11-May-2012.tar" -O "$VOC_TAR" || \
+        wget -c "https://data.pjreddie.com/files/VOCtrainval_11-May-2012.tar" -O "$VOC_TAR" || {
+            echo "⚠️ Tải VOCtrainval_11-May-2012.tar thất bại. Vui lòng tải thủ công hoặc kiểm tra mạng."
+        }
+    fi
+
+    if [ -f "$VOC_TAR" ]; then
+        echo "Đang giải nén VOCtrainval_11-May-2012.tar..."
+        tar -xf "$VOC_TAR" -C dataset/
+        if [ -d "dataset/VOCdevkit/VOC2012" ]; then
+            [ -L "$VOC_DIR" ] && rm -f "$VOC_DIR"
+            [ -d "$VOC_DIR" ] && rm -rf "$VOC_DIR"
+            mv dataset/VOCdevkit/VOC2012 "$VOC_DIR"
+            rm -rf dataset/VOCdevkit "$VOC_TAR"
+            echo "✓ Đã giải nén Pascal VOC 2012 vào $VOC_DIR."
+        fi
+    fi
+else
+    echo "✓ Đã tìm thấy thư mục $VOC_DIR (JPEGImages & ImageSets)."
+fi
+
+# Nhãn mở rộng SegmentationClassAug (SBD Benchmark)
+if [ -d "$VOC_DIR" ] && [ ! -d "$VOC_DIR/SegmentationClassAug" ]; then
+    echo "Đang tự động tải nhãn mở rộng SegmentationClassAug (SBD Benchmark)..."
+    AUG_ZIP="dataset/SegmentationClassAug.zip"
+    wget -c "https://www.dropbox.com/s/g3twnwcrsmhpaze/SegmentationClassAug.zip?dl=1" -O "$AUG_ZIP" || {
+        echo "⚠️ Không thể tải SegmentationClassAug.zip từ Dropbox. Vui lòng xem README.md để tải thủ công."
+    }
+    if [ -f "$AUG_ZIP" ]; then
+        echo "Đang giải nén SegmentationClassAug..."
+        unzip -q -o "$AUG_ZIP" -d "$VOC_DIR/" || true
+        rm -f "$AUG_ZIP"
+        echo "✓ Đã giải nén SegmentationClassAug vào $VOC_DIR."
+    fi
+fi
+
+# Sinh metadata VOC nếu thiếu
+if [ -d "$VOC_DIR/JPEGImages" ] && [ -d "$VOC_DIR/SegmentationClassAug" ]; then
     if [ ! -f "datasets/voc/train_aug.txt" ] || [ ! -f "datasets/voc/cls_labels_onehot.npy" ]; then
         echo "Đang sinh danh sách phân chia và nhãn cấp ảnh cho VOC2012..."
         $PYTHON scripts/prepare_voc.py \
-            --data_folder ./dataset/VOC2012 \
+            --data_folder "$VOC_DIR" \
             --train_list ./datasets/voc/train_aug.txt \
             --output datasets/voc || true
     else
         echo "✓ Metadata datasets/voc đã đầy đủ."
     fi
-else
-    echo "ℹ️ Chưa tìm thấy dataset/VOC2012. Hãy tải hoặc tạo symlink:"
-    echo "   ln -s /path/to/VOC2012 dataset/VOC2012"
 fi
 
 # MS COCO 2014
@@ -180,7 +308,7 @@ if [ -d "dataset/COCO2014" ]; then
         echo "✓ Metadata datasets/coco đã sẵn sàng."
     fi
 else
-    echo "ℹ️ Chưa tìm thấy dataset/COCO2014. Xem README.md để biết cách tải."
+    echo "ℹ️ Bỏ qua dataset/COCO2014 (không bắt buộc tải nếu chỉ huấn luyện VOC/Paradigm 2)."
 fi
 
 # ------------------------------------------------------------------------------
