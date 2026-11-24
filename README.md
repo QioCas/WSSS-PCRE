@@ -41,6 +41,8 @@ WSSS-PCRE/
 ├── tests/                # Bộ kiểm thử đơn vị tự động (Unit tests) bảo đảm tính toàn vẹn thuật toán
 ├── tools/                # Công cụ suy luận độc lập (infer_seg_voc.py) và tiền xử lý
 ├── utils/                # Tiện ích toán học, xử lý ảnh (imutils), CAM (camutils), SAM (sam_innovations)
+├── ALL.sh                # Kịch bản cài đặt tự động toàn diện (môi trường, thư viện, pretrained weights)
+├── TRAIN.sh              # Kịch bản điều phối huấn luyện tự động các tiến trình còn thiếu
 ├── train.sh              # Kịch bản khởi chạy huấn luyện mặc định của tác giả gốc
 ├── train_coco.sh         # Kịch bản phân tán 4 GPU cho COCO
 ├── train_voc_sam_pcre.sh # Kịch bản huấn luyện PCRE tích hợp SAM pseudo-labels
@@ -257,9 +259,34 @@ flowchart TD
 
 ---
 
-## 7. Hướng dẫn tái lập & Thực thi
+## 7. Hướng dẫn Tái lập & Thực thi
 
-### 7.1. Đánh giá kiểm thử hậu xử lý (Test-Time Refinement)
+### 7.1. Cài đặt toàn bộ hệ thống bằng 1 lệnh duy nhất (`ALL.sh`)
+Chỉ cần chạy lệnh sau, kịch bản sẽ tự động cài đặt các gói Python, thư viện Foundation Models (SAM, CLIP, pydensecrf), tải trọng số tiền huấn luyện ViT-B/SAM, thiết lập thư mục và chạy kiểm thử:
+```bash
+./ALL.sh
+```
+
+### 7.2. Huấn luyện các tiến trình còn thiếu bằng 1 lệnh duy nhất (`TRAIN.sh`)
+Kịch bản này tự động phát hiện và thực thi các giai đoạn chưa có kết quả (tự động bỏ qua các giai đoạn đã hoàn thành để tránh ghi đè):
+```bash
+# Kiểm tra trạng thái các tiến trình hiện tại (Đã xong hay Chưa xong)
+./TRAIN.sh --status
+
+# Chạy tuần tự tất cả các tiến trình chưa hoàn thành
+./TRAIN.sh
+
+# Hoặc chạy kèm chế độ tự động chờ GPU đủ VRAM (>= 16 GB)
+./TRAIN.sh --wait
+
+# Hoặc chạy riêng lẻ từng giai đoạn cụ thể:
+./TRAIN.sh --stage 1       # Stage 1: SAT-CR
+./TRAIN.sh --stage 2       # Stage 2: SBF-Distill
+./TRAIN.sh --stage 3       # Stage 3: Full Paradigm 2
+./TRAIN.sh --coco-eval     # Đánh giá chính thức COCO 80k (Multi-scale + DenseCRF)
+```
+
+### 7.3. Đánh giá kiểm thử hậu xử lý (Test-Time Refinement)
 Để chạy phương pháp tối ưu biên hình học SAM trên tập VOC 2012 Val:
 ```bash
 # Phương pháp GTBF-CAMR (75.85% mIoU)
@@ -269,17 +296,14 @@ python experiments/gtbf_camr_refinement_20261121/run_gtbf_camr.py
 bash run_two_directions.sh
 ```
 
-### 7.2. Kiểm tra trạng thái hàng đợi thực nghiệm
+### 7.4. Kiểm tra trạng thái hàng đợi và chạy Unit Tests
 ```bash
 # Kiểm tra log tiến trình hàng đợi độc lập đang chạy
 tail -f experiments/independent_ablation_queue.log
 
-# Kiểm tra log huấn luyện của run VOC SAM-PCRE gần nhất
-tail -n 50 experiments/voc_sam_pcre/live_run.log
-```
+# Kiểm tra log huấn luyện tổng hợp
+tail -f experiments/train_pipeline.log
 
-### 7.3. Chạy kiểm thử đơn vị (Unit Tests)
-Trước khi khởi động các nhánh huấn luyện mới, kiểm tra tính hợp lệ toán học của các module:
-```bash
+# Chạy kiểm thử đơn vị tự động
 python -m unittest tests/test_sam_innovations.py
 ```

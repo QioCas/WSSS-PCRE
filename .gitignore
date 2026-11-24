@@ -18,3 +18,11 @@ pretrained
 *.pt
 !train.sh
 !requirements.txt
+!ALL.sh
+!TRAIN.sh
+!train_coco.sh
+!train_voc_sam_pcre.sh
+!train_voc_sam_pcre_v2.sh
+!train_voc_sam_sat_cr.sh
+!train_voc_sam_sbf_distill.sh
+!run_two_directions.sh
