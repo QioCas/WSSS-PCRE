@@ -13,6 +13,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"
+export PYTHONPATH="$ROOT_DIR:${PYTHONPATH:-}"
 
 PYTHON="${PYTHON:-python3}"
 
@@ -22,6 +23,22 @@ echo "Thư mục gốc: $ROOT_DIR"
 echo "Python thực thi: $($PYTHON --version)"
 echo "Thời gian: $(date)"
 echo "========================================================================"
+
+# Kiểm tra phiên bản Python
+PY_MAJOR=$($PYTHON -c "import sys; print(sys.version_info.major)" 2>/dev/null || echo "0")
+PY_MINOR=$($PYTHON -c "import sys; print(sys.version_info.minor)" 2>/dev/null || echo "0")
+
+if [ "$PY_MAJOR" -eq 3 ] && [ "$PY_MINOR" -ge 13 ]; then
+    echo ""
+    echo "⚠️  CẢNH BÁO PHIÊN BẢN PYTHON: Bạn đang chạy Python 3.$PY_MINOR!"
+    echo "   Python 3.13 đã loại bỏ một số hàm C-API nội bộ (_PyList_Extend, _PyLong_AsByteArray...)"
+    echo "   khiến các thư viện C++ mở rộng cũ như 'pydensecrf2' không thể build wheel."
+    echo "   👉 KHUYẾN NGHỊ: Hãy sử dụng môi trường Python 3.10, 3.11 hoặc 3.12 để tương thích 100%:"
+    echo "      conda create -n wsss python=3.12 -y"
+    echo "      conda activate wsss"
+    echo "   (Quá trình cài đặt vẫn tiếp tục, các module huấn luyện chính vẫn hoạt động)."
+    echo ""
+fi
 
 # ------------------------------------------------------------------------------
 # 1. CÀI ĐẶT CÁC GÓI PYTHON CƠ BẢN TỪ REQUIREMENTS.TXT
@@ -44,8 +61,12 @@ echo ">>> [2/6] Kiểm tra & cài đặt các thư viện Foundation Models (SAM
 
 # PyDenseCRF
 if ! $PYTHON -c "import pydensecrf" &>/dev/null; then
-    echo "Đang cài đặt pydensecrf2..."
-    $PYTHON -m pip install pydensecrf2 --quiet || echo "⚠️ Không thể tự cài pydensecrf2, bỏ qua nếu chỉ chạy train."
+    if [ "$PY_MAJOR" -eq 3 ] && [ "$PY_MINOR" -ge 13 ]; then
+        echo "⚠️ Bỏ qua pydensecrf2 vì Python 3.13 không hỗ trợ C-API cũ của pydensecrf (dùng Python <= 3.12 nếu cần DenseCRF)."
+    else
+        echo "Đang cài đặt pydensecrf2..."
+        $PYTHON -m pip install pydensecrf2 --quiet || echo "⚠️ Không thể tự cài pydensecrf2, bỏ qua nếu chỉ chạy train."
+    fi
 else
     echo "✓ pydensecrf đã sẵn sàng."
 fi
@@ -170,7 +191,7 @@ echo ">>> [6/6] Cấp quyền thực thi và chạy kiểm thử tự động (U
 chmod +x *.sh 2>/dev/null || true
 
 echo "Chạy kiểm thử đơn vị cho các module SAM-PCRE..."
-$PYTHON -m unittest tests/test_sam_innovations.py
+$PYTHON -m unittest discover -s tests -p "test_sam_innovations.py"
 
 echo ""
 echo "========================================================================"

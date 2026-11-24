@@ -12,6 +12,7 @@ set -euo pipefail
 
 ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"
+export PYTHONPATH="$ROOT_DIR:${PYTHONPATH:-}"
 
 PYTHON="${PYTHON:-python3}"
 LOG_FILE="$ROOT_DIR/experiments/train_pipeline.log"

@@ -262,7 +262,13 @@ flowchart TD
 ## 7. Hướng dẫn Tái lập & Thực thi
 
 ### 7.1. Cài đặt toàn bộ hệ thống bằng 1 lệnh duy nhất (`ALL.sh`)
-Chỉ cần chạy lệnh sau, kịch bản sẽ tự động cài đặt các gói Python, thư viện Foundation Models (SAM, CLIP, pydensecrf), tải trọng số tiền huấn luyện ViT-B/SAM, thiết lập thư mục và chạy kiểm thử:
+Khuyến nghị tạo môi trường ảo Python 3.10, 3.11 hoặc 3.12 (khuyên dùng **Python 3.12**) để tương thích hoàn toàn với tất cả các thư viện C++ mở rộng như `pydensecrf2`:
+```bash
+conda create -n wsss python=3.12 -y
+conda activate wsss
+```
+
+Sau đó chỉ cần chạy một lệnh sau, kịch bản sẽ tự động cài đặt các gói Python, thư viện Foundation Models (SAM, CLIP, pydensecrf), tải trọng số tiền huấn luyện ViT-B/SAM, thiết lập thư mục và chạy kiểm thử:
 ```bash
 ./ALL.sh
 ```
@@ -305,5 +311,5 @@ tail -f experiments/independent_ablation_queue.log
 tail -f experiments/train_pipeline.log
 
 # Chạy kiểm thử đơn vị tự động
-python -m unittest tests/test_sam_innovations.py
+python -m unittest discover -s tests -p "test_sam_innovations.py"
 ```
