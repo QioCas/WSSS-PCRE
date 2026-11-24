@@ -29,24 +29,47 @@ def compute_sam_patch_affinity(sam_mask, pseudo_label_aux, purity_thresh=0.85, i
     _, h, w = pseudo_label_aux.shape
     kh, kw = H // h, W // w
 
+    refined_aux = pseudo_label_aux.clone()
+
+    # Kiểm tra những ảnh nào trong batch thực sự có SAM mask hợp lệ (khác ignore_index và có đối tượng)
+    has_sam = ((sam_mask != ignore_index) & (sam_mask > 0)).sum(dim=(-2, -1)) > 0
+    if not has_sam.any():
+        # Fallback an toàn: Khi hoàn toàn không có SAM mask (hoặc cache rỗng / toàn 255),
+        # bảo toàn nguyên vẹn pseudo_label_aux và sinh aff_mask chuẩn từ CAM.
+        aff_mask = label_to_aff_mask(refined_aux, ignore_index=ignore_index)
+        return aff_mask, refined_aux
+
     sam_fg = ((sam_mask > 0) & (sam_mask != ignore_index)).float().unsqueeze(1)
     sam_bg = (sam_mask == 0).float().unsqueeze(1)
 
     # Average pool to obtain patch foreground and background ratios
     fg_ratio = F.avg_pool2d(sam_fg, kernel_size=(kh, kw), stride=(kh, kw)).squeeze(1)
     bg_ratio = F.avg_pool2d(sam_bg, kernel_size=(kh, kw), stride=(kh, kw)).squeeze(1)
+    valid_ratio = fg_ratio + bg_ratio
 
-    # Identify boundary / ambiguous patches where neither fg nor bg dominates
-    boundary_patch = (fg_ratio < purity_thresh) & (bg_ratio < purity_thresh)
-
-    refined_aux = pseudo_label_aux.clone()
+    # Điểm boundary thực sự:
+    # 1. SAM phải có dữ liệu trong patch (valid_ratio >= 0.5)
+    # 2. Cả FG và BG đều xuất hiện trong patch (ranh giới vật thể)
+    # 3. Không có bên nào đạt ngưỡng thuần khiết (purity_thresh)
+    boundary_patch = (
+        (valid_ratio >= 0.5) &
+        (fg_ratio > 0.05) &
+        (bg_ratio > 0.05) &
+        (fg_ratio < purity_thresh) &
+        (bg_ratio < purity_thresh)
+    )
 
     # 1. Boundary patches receive ignore_index (eliminates false affinity pairs in self-attention)
     refined_aux[boundary_patch] = ignore_index
 
     # 2. Pure background patches are anchored to 0
-    pure_bg = bg_ratio >= purity_thresh
+    pure_bg = (bg_ratio >= purity_thresh)
     refined_aux[pure_bg] = 0
+
+    # Đối với những ảnh không có SAM trong batch, bảo toàn pseudo_label_aux gốc
+    no_sam_indices = (~has_sam).nonzero(as_tuple=True)[0]
+    if len(no_sam_indices) > 0:
+        refined_aux[no_sam_indices] = pseudo_label_aux[no_sam_indices]
 
     # Generate purified affinity mask (B, h*w, h*w)
     aff_mask = label_to_aff_mask(refined_aux, ignore_index=ignore_index)

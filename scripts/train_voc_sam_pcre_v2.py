@@ -361,7 +361,7 @@ def train(args=None):
         # INNOVATION 3 (NEW METHOD 1): SAT-CR (SAM-Affinity Token Contrastive Regularization)
         # =========================================================================
         if args.enable_sat_cr:
-            aff_mask, pseudo_label_aux = compute_sam_patch_affinity(
+            aff_mask, _ = compute_sam_patch_affinity(
                 sam_mask=sam_mask_crop,
                 pseudo_label_aux=pseudo_label_aux,
                 purity_thresh=args.sat_cr_purity,
@@ -370,6 +370,7 @@ def train(args=None):
         else:
             aff_mask = label_to_aff_mask(pseudo_label_aux, ignore_index=args.ignore_index)
 
+        # Bảo vệ cls_token_mask: Luôn dùng pseudo_label_aux gốc từ CAM để đảm bảo cpe_loss học đúng
         cls_token_mask = get_token_mask(pseudo_label_aux, args.num_classes, cls_label.detach())
         atten_mask = None
 
