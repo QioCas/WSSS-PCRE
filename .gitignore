@@ -14,7 +14,10 @@ wandb
 *.zip*
 *.npy*
 tt*
-pretrained
+pretrained/*
+!pretrained/checkpoints/
+pretrained/checkpoints/*
+!pretrained/checkpoints/sam_voc_train_aug_cache.tar.gz
 *.pt
 !train.sh
 !requirements.txt
@@ -26,3 +29,4 @@ pretrained
 !train_voc_sam_sat_cr.sh
 !train_voc_sam_sbf_distill.sh
 !run_two_directions.sh
+!pretrained/checkpoints/sam_voc_train_aug_cache.tar.gz

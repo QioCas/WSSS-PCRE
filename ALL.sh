@@ -230,6 +230,36 @@ else
     echo "✓ SAM ViT-B checkpoint đã sẵn sàng tại $SAM_PTH."
 fi
 
+# SAM VOC train_aug offline labels cache (cho SAT-CR và SBF-Distill)
+SAM_CACHE_DIR="experiments/representation_sam_20261120/cache/sam/labels"
+SAM_CACHE_TAR="pretrained/checkpoints/sam_voc_train_aug_cache.tar.gz"
+SAM_CACHE_COUNT=$(ls "$SAM_CACHE_DIR" 2>/dev/null | wc -l || echo "0")
+
+if [ "$SAM_CACHE_COUNT" -lt 1000 ]; then
+    echo "Thư mục SAM cache ($SAM_CACHE_DIR) chưa đầy đủ (hiện có $SAM_CACHE_COUNT mặt nạ)."
+    if [ -f "$SAM_CACHE_TAR" ]; then
+        echo "Đang tự động giải nén SAM VOC train_aug cache từ $SAM_CACHE_TAR..."
+        mkdir -p "experiments/representation_sam_20261120/cache/sam"
+        tar -xzf "$SAM_CACHE_TAR" -C "experiments/representation_sam_20261120/cache/sam/"
+        echo "✓ Đã giải nén thành công SAM offline cache ($(ls "$SAM_CACHE_DIR" | wc -l) mặt nạ)."
+    elif [ -f "/tmp/sam_voc_train_aug_cache.tar.gz" ]; then
+        echo "Đang tự động giải nén SAM VOC train_aug cache từ /tmp/sam_voc_train_aug_cache.tar.gz..."
+        mkdir -p "experiments/representation_sam_20261120/cache/sam"
+        tar -xzf "/tmp/sam_voc_train_aug_cache.tar.gz" -C "experiments/representation_sam_20261120/cache/sam/"
+        echo "✓ Đã giải nén thành công SAM offline cache ($(ls "$SAM_CACHE_DIR" | wc -l) mặt nạ)."
+    elif [ -d "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/cache/sam/labels" ]; then
+        echo "Đang liên kết mềm SAM cache từ máy chủ..."
+        mkdir -p "experiments/representation_sam_20261120/cache/sam"
+        rm -rf "$SAM_CACHE_DIR" 2>/dev/null || true
+        ln -sf "/home/jupyter-iec2024iot08/Workspace/WSSS/WSSS-PCRE/experiments/representation_sam_20261120/cache/sam/labels" "$SAM_CACHE_DIR"
+        echo "✓ Đã liên kết mềm SAM offline cache thành công."
+    else
+        echo "⚠️ Không tìm thấy $SAM_CACHE_TAR. Các module SAT-CR sẽ chạy với cơ chế an toàn fallback sang CAM pseudo-label."
+    fi
+else
+    echo "✓ SAM offline mask cache đã sẵn sàng ($SAM_CACHE_COUNT mặt nạ tại $SAM_CACHE_DIR)."
+fi
+
 # ------------------------------------------------------------------------------
 # 5. KIỂM TRA TẬP DỮ LIỆU & TỰ ĐỘNG SINH METADATA
 # ------------------------------------------------------------------------------
