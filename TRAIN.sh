@@ -1,11 +1,11 @@
 #!/usr/bin/env bash
 # ==============================================================================
 # TRAIN.sh - Kịch bản điều phối huấn luyện tự động cho các tiến trình chưa xong
-# Quản lý và thực thi tuần tự các thực nghiệm:
+# Quản lý và thực thi tuần tự các thực nghiệm Pascal VOC:
 #   - Giai đoạn 1: SAT-CR (SAM-Affinity Token Contrastive Regularization)
 #   - Giai đoạn 2: SBF-Distill (SAM-Guided Boundary-Focal Density Distillation)
 #   - Giai đoạn 3: Paradigm 2 Full Synergy (SAT-CR + SBF-Distill kết hợp)
-#   - Giai đoạn 4: Đánh giá chính thức COCO Baseline 80k (Multi-scale + DenseCRF)
+#   - (Tùy chọn) Giai đoạn 4: Đánh giá COCO Baseline 80k (--coco-eval)
 # ==============================================================================
 
 set -euo pipefail
@@ -28,11 +28,11 @@ show_help() {
     echo "Cách sử dụng: ./TRAIN.sh [TÙY CHỌN]"
     echo ""
     echo "Tùy chọn:"
-    echo "  --all            (Mặc định) Chạy tuần tự tất cả các tiến trình chưa hoàn thành."
+    echo "  --all            (Mặc định) Chạy tuần tự tất cả các tiến trình VOC chưa hoàn thành (Stages 1, 2, 3)."
     echo "  --stage 1        Chỉ chạy Stage 1: SAT-CR (experiments/voc_sam_sat_cr)"
     echo "  --stage 2        Chỉ chạy Stage 2: SBF-Distill (experiments/voc_sam_sbf_distill)"
     echo "  --stage 3        Chỉ chạy Stage 3: Full Paradigm 2 (experiments/voc_sam_pcre_v2)"
-    echo "  --coco-eval      Chỉ chạy đánh giá chính thức COCO 80k (Multi-scale + DenseCRF)"
+    echo "  --coco-eval      (Tùy chọn) Chạy đánh giá COCO 80k (Multi-scale + DenseCRF)"
     echo "  --status         Kiểm tra trạng thái của từng giai đoạn (Đã xong / Chưa xong)"
     echo "  --wait           Tự động chờ GPU có đủ VRAM trống (>= 16 GB) thay vì thoát nếu bận"
     echo "  --help           Hiển thị trợ giúp này"
@@ -281,7 +281,7 @@ case "$MODE" in
         run_coco_eval
         ;;
     all)
-        log "Chạy tuần tự tất cả các giai đoạn còn thiếu..."
+        log "Chạy tuần tự tất cả các giai đoạn VOC còn thiếu..."
         run_stage "Stage 1: SAT-CR" "train_voc_sam_sat_cr.sh" \
             "experiments/voc_sam_sat_cr/checkpoints/model_iter_20000.pth" "experiments/voc_sam_sat_cr"
         
@@ -290,8 +290,6 @@ case "$MODE" in
         
         run_stage "Stage 3: Full Paradigm 2 (SAT-CR + SBF-Distill)" "train_voc_sam_pcre_v2.sh" \
             "experiments/voc_sam_pcre_v2/checkpoints/model_iter_20000.pth" "experiments/voc_sam_pcre_v2"
-        
-        run_coco_eval
         ;;
 esac
 
