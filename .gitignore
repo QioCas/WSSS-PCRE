@@ -10,7 +10,6 @@ wandb
 *.npz
 *.txt*
 *.png
-*.sh*
 *.tar*
 *.zip*
 *.npy*
