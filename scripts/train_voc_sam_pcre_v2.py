@@ -29,8 +29,8 @@ from utils.camutils import (cam_to_label, get_token_mask, label_to_aff_mask, mul
 from utils.vis import get_train_miou
 from utils.wsddnutils import get_atten_mask
 from utils.pyutils import AverageMeter, cal_eta, setup_logger
-from engine import build_network_wsddn, build_optimizer, build_validation
-from torch.cuda.amp import autocast, GradScaler
+from engine import build_network_wsddn, build_validation
+from utils.optimizer import PolyWarmupAdamW
 import scipy.ndimage as ndi
 
 # Import Paradigm 2 Innovations
@@ -79,6 +79,11 @@ parser.add_argument("--scales", default=(0.5, 2.0), type=float, help="random res
 parser.add_argument("--cam_scales", default=(1.0, 0.75, 1.25), type=float, help="multi-scale cam")
 parser.add_argument("--pooling", default="gmp", type=str, help="pooling method")
 parser.add_argument("--pretrained", default=True, type=bool, help="use pretrained backbone")
+parser.add_argument("--momentum", default=0.999, type=float, help="model initialization momentum")
+parser.add_argument("--aux_layer", default=-3, type=int, help="auxiliary CAM layer")
+parser.add_argument("--decoder", default="ASSP", type=str, help="segmentation decoder")
+parser.add_argument("--cls_sc_t", default=0.0, type=float, help="proposal score threshold")
+parser.set_defaults(ot_loss=False, debug=False)
 
 ### train and eval iters
 parser.add_argument("--max_iters", default=20000, type=int, help="max iterations")
@@ -109,7 +114,7 @@ parser.add_argument("--reg_aux", action="store_true", help="auxiliary regulariza
 parser.add_argument("--seg_aux", action="store_true", help="auxiliary segmentation loss")
 parser.add_argument("--pro_scale", default=2, type=float, help="scale for prototype")
 parser.add_argument("--clip", default=1.0, type=float, help="gradient clipping")
-parser.add_argument("--wsddn_topk", default=0.2, type=float, help="topk for wsddn")
+parser.add_argument("--wsddn_topk", default=300, type=int, help="maximum number of WSDDN proposals")
 
 ### SAM offline cache
 parser.add_argument("--sam_cache_dir", default='experiments/representation_sam_20261120/cache/sam/labels', type=str, help="SAM offline cache labels folder")
@@ -156,7 +161,8 @@ class VOC12ClsSamDataset(voc.VOC12ClsDataset):
             sam_path = os.path.join(self.sam_dir, _img_name + '.png')
             if os.path.exists(sam_path):
                 try:
-                    sam_mask = np.asarray(imageio.imread(sam_path))
+                    with Image.open(sam_path) as mask:
+                        sam_mask = np.asarray(mask)
                 except Exception:
                     sam_mask = None
                     
@@ -204,33 +210,43 @@ def train(args=None):
         except Exception:
             pass
 
-    time_str = datetime.datetime.now().strftime("%Y-%m-%d-%H-%M")
     timestamp = datetime.datetime.now().strftime("%y-%m-%d-%H-%M-%S")
     time_stamp_month = datetime.datetime.now().strftime("%Y-%m")
     args.work_dir = os.path.join(args.work_dir, time_stamp_month, f"train_voc_sam_pcre_v2_{timestamp[3:]}")
-    os.makedirs(args.work_dir, exist_ok=True)
-    setup_logger(filename=os.path.join(args.work_dir, 'train.log'))
+    args.pred_dir = os.path.join(args.work_dir, "predictions")
+    if args.local_rank == 0:
+        os.makedirs(args.work_dir, exist_ok=True)
+        setup_logger(filename=os.path.join(args.work_dir, 'train.log'))
     logging.info(f"Initialized SAM-PCRE v2 with Innovations: SAT-CR={args.enable_sat_cr}, SBF-Distill={args.enable_sbf_distill}")
     logging.info(f"Arguments: {args}")
 
     setup_seed(args.seed)
 
-    model, get_seg_crme_loss, get_cls_token_loss = build_network_wsddn(args)
+    device = torch.device("cuda", args.local_rank)
+    get_seg_crme_loss = MyGo_Loss2(iou_score_t=args.bin_t, cls_sc_t=args.cls_sc_t)
+    model, param_groups = build_network_wsddn(args, get_seg_crme_loss)
+    model.to(device)
+    get_cls_token_loss = ClsTokenLoss(model.encoder.embed_dim, args.num_classes - 1).to(device)
+    param_groups[2].extend(get_cls_token_loss.parameters())
+    optimizer = PolyWarmupAdamW(
+        params=[
+            {"params": param_groups[0] + param_groups[1], "lr": args.backbone_lr},
+            {"params": param_groups[2] + param_groups[3] + param_groups[4], "lr": args.decoder_lr},
+        ],
+        lr=args.backbone_lr, weight_decay=1e-2, betas=(0.9, 0.999),
+        warmup_iter=args.warmup_iters, max_iter=args.max_iters,
+        warmup_ratio=args.warmup_lr / args.backbone_lr, power=0.9,
+    )
     loss_layer = DenseEnergyLoss(weight=1e-7, sigma_rgb=15, sigma_xy=100, scale_factor=0.5)
+    par = PAR(num_iter=10, dilations=[1, 2, 4, 8, 12, 24]).to(device)
 
-    optimizer = build_optimizer(model, args)
-    scaler = GradScaler()
-    par = PAR(num_iter=10, dilations=[1, 2, 4, 8, 12, 24])
-    par.to(device=args.local_rank)
-
-    dali_dataset = VOC12ClsSamDataset(
+    train_dataset = VOC12ClsSamDataset(
         root_dir=args.data_folder,
         name_list_dir=args.list_folder,
         split='train_aug',
         stage='train',
         aug=True,
-        resize_range=args.scales,
-        rescale_range=[448, 448],
+        rescale_range=args.scales,
         crop_size=args.crop_size,
         img_fliplr=True,
         ignore_index=args.ignore_index,
@@ -249,11 +265,10 @@ def train(args=None):
         num_classes=args.num_classes,
     )
 
-    sampler = DistributedSampler(dali_dataset, shuffle=True)
-    val_sampler = DistributedSampler(val_dataset, shuffle=False)
+    sampler = DistributedSampler(train_dataset, shuffle=True)
 
     train_loader = DataLoader(
-        dali_dataset,
+        train_dataset,
         batch_size=args.spg,
         num_workers=4,
         drop_last=True,
@@ -268,11 +283,8 @@ def train(args=None):
         shuffle=False,
         num_workers=4,
         pin_memory=False,
-        sampler=val_sampler
     )
 
-    device = torch.device(args.local_rank)
-    model.to(device)
     model = DistributedDataParallel(model, device_ids=[args.local_rank], find_unused_parameters=True)
 
     train_sampler = sampler
@@ -284,12 +296,15 @@ def train(args=None):
 
     if args.resume is not None:
         checkpoint = torch.load(args.resume, map_location='cpu')
-        model.load_state_dict(checkpoint['model'], strict=True)
+        model.module.load_state_dict(checkpoint['model'], strict=True)
         optimizer.load_state_dict(checkpoint['optimizer'])
         n_iter = checkpoint['n_iter']
+        optimizer.resume(n_iter)
         logging.info(f"Resumed from iteration {n_iter}")
 
-    while n_iter <= args.max_iters:
+    start_time = last_log_time = datetime.datetime.now().replace(microsecond=0)
+    while n_iter < args.max_iters:
+        step = n_iter + 1
         try:
             batch = next(train_loader_iter)
         except StopIteration:
@@ -520,12 +535,13 @@ def train(args=None):
         torch.nn.utils.clip_grad_norm_(model.parameters(), max_norm=args.clip)
         optimizer.step()
 
-        if n_iter % args.log_iters == 0 and args.local_rank == 0:
-            delta, eta = cal_eta(start_time, n_iter, args.max_iters)
+        if step % args.log_iters == 0 and args.local_rank == 0:
+            delta, eta = cal_eta(start_time, last_log_time, step, args.max_iters, args.log_iters)
+            last_log_time = datetime.datetime.now().replace(microsecond=0)
             cur_lr = optimizer.param_groups[0]['lr']
             if cur_lr > 0:
                 log_data = {
-                    "Iter": n_iter,
+                    "Iter": step,
                     "Elapsed": delta,
                     "ETA": eta,
                     "LR": f"{cur_lr:.3e}",
@@ -548,36 +564,46 @@ def train(args=None):
                     f"cls_loss_wsddn: {log_data['cls_loss_wsddn']:.4f}"
                 )
 
-        if n_iter % args.checkpoint_step == 0 and args.local_rank == 0 and args.save_ckpt and n_iter > 0:
+        if args.save_ckpt and args.local_rank == 0 and (step % args.checkpoint_step == 0 or step == args.max_iters):
             ckpt_dir = os.path.join(args.work_dir, "checkpoints")
             os.makedirs(ckpt_dir, exist_ok=True)
             torch.save(
                 {
                     "model": model.module.state_dict(),
                     "optimizer": optimizer.state_dict(),
-                    "n_iter": n_iter
+                    "n_iter": step
                 },
-                os.path.join(ckpt_dir, f"model_iter_{n_iter}.pth")
+                os.path.join(ckpt_dir, f"model_iter_{step}.pth")
             )
-            logging.info(f"Saved checkpoint to {os.path.join(ckpt_dir, f'model_iter_{n_iter}.pth')}")
+            logging.info(f"Saved checkpoint to {os.path.join(ckpt_dir, f'model_iter_{step}.pth')}")
 
-        if (n_iter % args.eval_iters == 0 and n_iter > 0) or (n_iter == args.max_iters):
+        if step % args.eval_iters == 0 or step == args.max_iters:
             if args.local_rank == 0:
                 logging.info("Validating on Pascal VOC Val...")
-            val_engine = build_validation(args)
-            val_engine(
-                model=model,
-                val_loader=val_loader,
-                n_iter=n_iter,
-                args=args,
-                save_path=os.path.join(args.work_dir, "predictions")
-            )
+            build_validation(model=model, data_loader=val_loader, n_iter=step, args=args)
 
         n_iter += 1
 
 
 if __name__ == "__main__":
     args = parser.parse_args()
+    required_paths = [
+        os.path.join(args.data_folder, "JPEGImages"),
+        os.path.join(args.data_folder, "SegmentationClassAug"),
+        os.path.join(args.list_folder, "train_aug.txt"),
+        os.path.join(args.list_folder, "val.txt"),
+        os.path.join(args.list_folder, "cls_labels_onehot.npy"),
+    ]
+    if any((args.enable_sam_shrinkage, args.enable_sam_crme_barrier, args.enable_sat_cr, args.enable_sbf_distill)):
+        required_paths.append(args.sam_cache_dir)
+    missing = [path for path in required_paths if not os.path.exists(path)]
+    if missing:
+        parser.error("Missing required training inputs: " + ", ".join(missing))
+
     args.local_rank = int(os.environ.get("LOCAL_RANK", 0))
-    start_time = datetime.datetime.now()
-    train(args)
+    torch.cuda.set_device(args.local_rank)
+    dist.init_process_group(backend="nccl")
+    try:
+        train(args)
+    finally:
+        dist.destroy_process_group()

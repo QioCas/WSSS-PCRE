@@ -201,6 +201,10 @@ def validate(args=None):
         )
 
         trained_state_dict = torch.load(args.model_path, map_location="cpu")
+        if 'model' in trained_state_dict:
+            trained_state_dict = trained_state_dict['model']
+        elif 'state_dict' in trained_state_dict:
+            trained_state_dict = trained_state_dict['state_dict']
 
         new_state_dict = OrderedDict()
         for k, v in trained_state_dict.items():

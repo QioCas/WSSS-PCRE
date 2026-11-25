@@ -42,21 +42,12 @@ class VOC12Dataset(Dataset):
         img_name = os.path.join(self.img_dir, _img_name+'.jpg')
         image = np.asarray(imageio.imread(img_name))
 
-        if self.stage == "train":
-
-            label_dir = os.path.join(self.label_dir, _img_name+'.png')
-            label = np.asarray(imageio.imread(label_dir))
-
-        elif self.stage == "val":
-
-            label_dir = os.path.join(self.label_dir, _img_name+'.png')
-            label = np.asarray(imageio.imread(label_dir))
-
-        elif self.stage == "test":
-            label = image[:,:,0]
+        if self.stage == "test":
+            label = image[:, :, 0]
         else:
-            label_dir = os.path.join(self.label_dir, _img_name+'.png')
-            label = np.asarray(imageio.imread(label_dir))
+            label_path = os.path.join(self.label_dir, _img_name + ".png")
+            with Image.open(label_path) as mask:
+                label = np.array(mask)
 
         return _img_name, image, label
 

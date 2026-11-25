@@ -14,7 +14,16 @@ ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 cd "$ROOT_DIR"
 export PYTHONPATH="$ROOT_DIR:${PYTHONPATH:-}"
 
-PYTHON="${PYTHON:-python3}"
+if [ -z "${PYTHON:-}" ]; then
+    if [ -x "/home/jupyter-iec2024iot06/anaconda3/envs/wsss/bin/python3" ]; then
+        PYTHON="/home/jupyter-iec2024iot06/anaconda3/envs/wsss/bin/python3"
+    elif command -v conda &>/dev/null && conda info --envs | grep -q "/envs/wsss"; then
+        PYTHON="$(conda info --base)/envs/wsss/bin/python3"
+    else
+        PYTHON="python3"
+    fi
+fi
+export PYTHON
 LOG_FILE="$ROOT_DIR/experiments/train_pipeline.log"
 mkdir -p "$ROOT_DIR/experiments"
 
@@ -50,7 +59,9 @@ check_gpu() {
         log "   Hãy kiểm tra bằng lệnh 'nvidia-smi' trên terminal."
         return 1
     fi
-    log "✓ GPU CUDA đã sẵn sàng: $($PYTHON -c 'import torch; print(f\"{torch.cuda.get_device_name(0)} (Tổng {torch.cuda.device_count()} GPU)\")')"
+    local gpu_info
+    gpu_info=$("$PYTHON" -c 'import torch; print(f"{torch.cuda.get_device_name(0)} (Tổng {torch.cuda.device_count()} GPU)")') || return 1
+    log "✓ GPU CUDA đã sẵn sàng: $gpu_info"
     return 0
 }
 
@@ -61,7 +72,7 @@ get_free_vram_mb() {
 }
 
 wait_for_vram() {
-    local min_vram=16000
+    local min_vram=14000
     log "Đang kiểm tra dung lượng VRAM trống (yêu cầu tối thiểu ${min_vram} MiB)..."
     while true; do
         local free_vram

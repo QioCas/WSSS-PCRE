@@ -304,7 +304,7 @@ fi
 if [ -d "$VOC_DIR" ] && [ ! -d "$VOC_DIR/SegmentationClassAug" ]; then
     echo "Đang tự động tải nhãn mở rộng SegmentationClassAug (SBD Benchmark)..."
     AUG_ZIP="dataset/SegmentationClassAug.zip"
-    wget -c "https://www.dropbox.com/s/g3twnwcrsmhpaze/SegmentationClassAug.zip?dl=1" -O "$AUG_ZIP" || {
+    wget -c "https://www.dropbox.com/scl/fi/xccys1fus0utdioi7nj4d/SegmentationClassAug.zip?rlkey=0wl8iz6sc40b3qf6nidun4rez&dl=1" -O "$AUG_ZIP" || {
         echo "⚠️ Không thể tải SegmentationClassAug.zip từ Dropbox. Vui lòng xem README.md để tải thủ công."
     }
     if [ -f "$AUG_ZIP" ]; then
