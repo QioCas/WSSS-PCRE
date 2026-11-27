@@ -1,0 +1,209 @@
+{
+  "method": "Method 2: SAM Advanced Prompting (Unified NP + MMD, No Class Grouping)",
+  "dataset": "Pascal VOC 2012 Val",
+  "num_images": 1449,
+  "base_crf_miou": 74.22428883835788,
+  "delta_init": 0.2,
+  "best_delta": 0.2,
+  "adv_prompt_miou": 75.31433892533653,
+  "gain_vs_base": 1.0900500869786556,
+  "delta_search": [
+    {
+      "delta": 0.0,
+      "is_init": false,
+      "miou_percent": 75.30614925909104,
+      "gain_vs_base_pp": 1.0818604207331717,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.1,
+      "is_init": false,
+      "miou_percent": 75.31070681251988,
+      "gain_vs_base_pp": 1.0864179741620017,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.2,
+      "is_init": true,
+      "miou_percent": 75.31433892533653,
+      "gain_vs_base_pp": 1.0900500869786556,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.3,
+      "is_init": false,
+      "miou_percent": 75.30662978911762,
+      "gain_vs_base_pp": 1.0823409507597415,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.4,
+      "is_init": false,
+      "miou_percent": 75.30128633229215,
+      "gain_vs_base_pp": 1.076997493934273,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.5,
+      "is_init": false,
+      "miou_percent": 75.29094754245276,
+      "gain_vs_base_pp": 1.0666587040948805,
+      "refined_components": 1955,
+      "total_components": 3156
+    }
+  ],
+  "per_class": {
+    "_background_": {
+      "base_iou": 91.9190973691701,
+      "adv_prompt_iou": 92.35697623590495,
+      "delta_vs_base": 0.43787886673484877,
+      "precision": 95.61246811966238,
+      "recall": 96.44442763416244
+    },
+    "aeroplane": {
+      "base_iou": 83.84990077231144,
+      "adv_prompt_iou": 84.78489579570686,
+      "delta_vs_base": 0.9349950233954161,
+      "precision": 91.41815548119149,
+      "recall": 92.11659345269004
+    },
+    "bicycle": {
+      "base_iou": 45.290718005765,
+      "adv_prompt_iou": 44.790022147168706,
+      "delta_vs_base": -0.5006958585962948,
+      "precision": 50.98025928719142,
+      "recall": 78.67223071784379
+    },
+    "bird": {
+      "base_iou": 87.46929514676702,
+      "adv_prompt_iou": 88.85650729351447,
+      "delta_vs_base": 1.3872121467474443,
+      "precision": 93.80903469896344,
+      "recall": 94.39175420619597
+    },
+    "boat": {
+      "base_iou": 68.40210582567798,
+      "adv_prompt_iou": 69.63238078293439,
+      "delta_vs_base": 1.2302749572564124,
+      "precision": 75.09553920766724,
+      "recall": 90.54063573061417
+    },
+    "bottle": {
+      "base_iou": 79.41494639654962,
+      "adv_prompt_iou": 80.55928291301593,
+      "delta_vs_base": 1.1443365164663106,
+      "precision": 90.43234416544837,
+      "recall": 88.06516052590909
+    },
+    "bus": {
+      "base_iou": 88.67422753218784,
+      "adv_prompt_iou": 92.47000388843641,
+      "delta_vs_base": 3.7957763562485667,
+      "precision": 96.13328091622753,
+      "recall": 96.042170436998
+    },
+    "car": {
+      "base_iou": 82.36850483468949,
+      "adv_prompt_iou": 85.09222036906685,
+      "delta_vs_base": 2.7237155343773622,
+      "precision": 91.91767830573053,
+      "recall": 91.9738502287771
+    },
+    "cat": {
+      "base_iou": 91.24372319927237,
+      "adv_prompt_iou": 92.64564683892512,
+      "delta_vs_base": 1.4019236396527504,
+      "precision": 97.44008865046598,
+      "recall": 94.95685245337707
+    },
+    "chair": {
+      "base_iou": 43.28131376303111,
+      "adv_prompt_iou": 43.51264597069678,
+      "delta_vs_base": 0.2313322076656732,
+      "precision": 53.876904826479155,
+      "recall": 69.34333809638004
+    },
+    "cow": {
+      "base_iou": 85.85045087780614,
+      "adv_prompt_iou": 86.86421633540776,
+      "delta_vs_base": 1.0137654576016217,
+      "precision": 99.27132878963188,
+      "recall": 87.42161704491373
+    },
+    "diningtable": {
+      "base_iou": 48.98055267012998,
+      "adv_prompt_iou": 45.3646136581119,
+      "delta_vs_base": -3.6159390120180817,
+      "precision": 78.6630090100228,
+      "recall": 51.72995898420456
+    },
+    "dog": {
+      "base_iou": 86.24997162325666,
+      "adv_prompt_iou": 87.24229451861486,
+      "delta_vs_base": 0.9923228953581997,
+      "precision": 94.29752079561663,
+      "recall": 92.10140495698683
+    },
+    "horse": {
+      "base_iou": 86.95642981953256,
+      "adv_prompt_iou": 88.17789892697053,
+      "delta_vs_base": 1.2214691074379687,
+      "precision": 93.938688662993,
+      "recall": 93.49753608810505
+    },
+    "motorbike": {
+      "base_iou": 75.6573944871117,
+      "adv_prompt_iou": 77.29461164343914,
+      "delta_vs_base": 1.6372171563274378,
+      "precision": 89.05509827824177,
+      "recall": 85.40797081284977
+    },
+    "person": {
+      "base_iou": 78.74574943284087,
+      "adv_prompt_iou": 78.73162521625923,
+      "delta_vs_base": -0.014124216581635096,
+      "precision": 97.43661482311705,
+      "recall": 80.3968776632984
+    },
+    "pottedplant": {
+      "base_iou": 67.1878809827156,
+      "adv_prompt_iou": 69.56165029745713,
+      "delta_vs_base": 2.373769314741537,
+      "precision": 80.76459229303147,
+      "recall": 83.37450853015078
+    },
+    "sheep": {
+      "base_iou": 89.82227577944751,
+      "adv_prompt_iou": 91.32092076787096,
+      "delta_vs_base": 1.4986449884234503,
+      "precision": 97.8401378279497,
+      "recall": 93.19977959494103
+    },
+    "sofa": {
+      "base_iou": 52.55935298002892,
+      "adv_prompt_iou": 53.26913321591154,
+      "delta_vs_base": 0.7097802358826186,
+      "precision": 74.75809124814661,
+      "recall": 64.95143328921445
+    },
+    "train": {
+      "base_iou": 60.34811513498428,
+      "adv_prompt_iou": 63.573170133211185,
+      "delta_vs_base": 3.225054998226902,
+      "precision": 67.71189149918904,
+      "recall": 91.228794043386
+    },
+    "tvmonitor": {
+      "base_iou": 64.43805897223915,
+      "adv_prompt_iou": 65.50040048344228,
+      "delta_vs_base": 1.0623415112031296,
+      "precision": 73.87250663202623,
+      "recall": 85.24970170802493
+    }
+  }
+}

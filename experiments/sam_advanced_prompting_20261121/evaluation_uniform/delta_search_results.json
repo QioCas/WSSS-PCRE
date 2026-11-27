@@ -1,0 +1,61 @@
+{
+  "method": "Method 2: SAM Advanced Prompting (Unified NP + MMD, No Class Grouping)",
+  "dataset": "Pascal VOC 2012 Val",
+  "num_images": 1449,
+  "base_masks_dir": "experiments/inference_voc_val_20261119/full_baseline_rerun/baseline/crf/masks",
+  "base_miou_percent": 74.22428883835788,
+  "delta_init": 0.2,
+  "best_delta": 0.2,
+  "best_miou_percent": 75.31433892533653,
+  "best_gain_vs_base_pp": 1.0900500869786556,
+  "delta_search": [
+    {
+      "delta": 0.0,
+      "is_init": false,
+      "miou_percent": 75.30614925909104,
+      "gain_vs_base_pp": 1.0818604207331717,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.1,
+      "is_init": false,
+      "miou_percent": 75.31070681251988,
+      "gain_vs_base_pp": 1.0864179741620017,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.2,
+      "is_init": true,
+      "miou_percent": 75.31433892533653,
+      "gain_vs_base_pp": 1.0900500869786556,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.3,
+      "is_init": false,
+      "miou_percent": 75.30662978911762,
+      "gain_vs_base_pp": 1.0823409507597415,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.4,
+      "is_init": false,
+      "miou_percent": 75.30128633229215,
+      "gain_vs_base_pp": 1.076997493934273,
+      "refined_components": 1955,
+      "total_components": 3156
+    },
+    {
+      "delta": 0.5,
+      "is_init": false,
+      "miou_percent": 75.29094754245276,
+      "gain_vs_base_pp": 1.0666587040948805,
+      "refined_components": 1955,
+      "total_components": 3156
+    }
+  ]
+}

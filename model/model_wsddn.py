@@ -469,7 +469,7 @@ class Mygo(nn.Module):
         super().__init__()
         self.num_classes = num_classes
         self.in_channels = [emd_dim]
-        dec_layers = getattr(args, 'mask_decoder_layers', 1)
+        dec_layers = getattr(args, 'query_decoder_layers', getattr(args, 'mask_decoder_layers', 1))
         self.query_decoder = DetrTransformerDecoder(self.in_channels[-1], num_layers=dec_layers, attn_dropout=0.0, ffn_dropout=0.0)
         self.img_size = args.crop_size // 16
         # self.query = nn.Embedding((args.crop_size // 16) ** 2, self.in_channels[-1])

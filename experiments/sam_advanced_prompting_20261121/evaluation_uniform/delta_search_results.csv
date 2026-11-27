@@ -1,0 +1,7 @@
+delta,is_init,miou_percent,gain_vs_base_pp,refined_components,total_components
+0.00,False,75.3061,+1.0819,1955,3156
+0.10,False,75.3107,+1.0864,1955,3156
+0.20,True,75.3143,+1.0901,1955,3156
+0.30,False,75.3066,+1.0823,1955,3156
+0.40,False,75.3013,+1.0770,1955,3156
+0.50,False,75.2909,+1.0667,1955,3156

@@ -1,0 +1,16 @@
+{
+  "candidate": {
+    "raw": 73.78948536398731,
+    "crf": 74.22428883835788
+  },
+  "partial_validation": false,
+  "baseline": {
+    "raw": 73.7894880339437,
+    "crf": 74.22428373329858
+  },
+  "delta_vs_baseline_pp": {
+    "raw": -2.6699563875354215e-06,
+    "crf": 5.105059301513393e-06
+  },
+  "better_on_voc_val": true
+}

@@ -152,12 +152,14 @@ def evaluate_one(mode, run_dir, out, opts):
     if model_loader is not None:
         model = model_loader(cfg, checkpoint)
     else:
+        state = torch.load(checkpoint, map_location='cpu', weights_only=True)
+        state = {k.removeprefix('module.'):v for k,v in state.items()}
+        if any(k.startswith('query_decoder.query_decoder.layers.1.') for k in state):
+            cfg.query_decoder_layers = 2
         model = network(cfg, backbone=cfg.backbone, num_classes=cfg.num_classes,
                         pretrained=False, aux_layer=cfg.aux_layer)
         # Training expands the ImageNet encoder from one token to 20 class tokens.
         model.encoder.after_load_state_dict()
-        state = torch.load(checkpoint, map_location='cpu', weights_only=True)
-        state = {k.removeprefix('module.'):v for k,v in state.items()}
         loaded = model.load_state_dict(state, strict=True)
         assert not loaded.missing_keys and not loaded.unexpected_keys
         del state
